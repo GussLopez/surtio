@@ -6,7 +6,6 @@ export async function getUsers() {
   const { data, error } = await supabase
     .from("profiles")
     .select("*")
-    .neq("role", "owner")
     .order("created_at")
 
   if (error) throw error;
