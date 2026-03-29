@@ -10,6 +10,11 @@ import { Badge } from "../ui/badge"
 import { Trash2 } from "lucide-react"
 import { useState } from "react"
 import { DeleteMovement } from "./DeleteMovement"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
+import { getUsers } from "@/lib/services/userService"
+import { DateRange } from "react-day-picker"
+import { Skeleton } from "../ui/skeleton"
+import TableLoadingData from "../ui/TableLoadingData"
 
 type ModalState =
   | { type: "delete"; movementId: number }
@@ -17,19 +22,58 @@ type ModalState =
 
 export default function MovementsHistory() {
   const [modal, setModal] = useState<ModalState>(null);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
+
+  const [selectedUser, setSelectedUser] = useState("ninguno")
   const { data, isLoading, error } = useQuery({
-    queryKey: ["business-movements"],
+    queryKey: ["business-movements", selectedUser, dateRange],
     queryFn: async () => {
-      const data = await getMovements();
+      const data = await getMovements(selectedUser, dateRange);
       return data;
     },
-    retry: 1
+    retry: 1,
+  })
+
+  const { data: profiles, isLoading: loadingProfiles } = useQuery({
+    queryKey: ["business-users"],
+    queryFn: async () => await getUsers(),
+    retry: 1,
+    refetchOnWindowFocus: false,
   })
 
   return (
     <div>
       <div className="flex justify-between items-center mt-6">
-        <RangeDatePicker />
+        <div className="flex gap-4">
+          <RangeDatePicker date={dateRange} setDate={setDateRange} />
+          <Select
+            value={selectedUser}
+            onValueChange={value => setSelectedUser(value)}
+          >
+            <SelectTrigger className="w-50">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent position="popper">
+              <SelectGroup>
+                <SelectLabel>Empleados</SelectLabel>
+                <SelectItem value="ninguno">Todos</SelectItem>
+                {loadingProfiles && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
+                {profiles?.length === 0 ? (
+                  <p className="p-2 text-sm  text-muted-foreground">No hay empleados registrados</p>
+                ) : (
+                  profiles?.map((profile) => (
+                    <SelectItem
+                      key={profile.id}
+                      value={profile.id}
+                    >
+                      {profile.full_name}
+                    </SelectItem>
+                  ))
+                )}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
         <div className="flex gap-2">
           <Button
             variant={'outline'}
@@ -61,37 +105,48 @@ export default function MovementsHistory() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((movement) => {
-              const date = new Date(movement.created_at)
-              return (
-                <TableRow key={movement.id}>
-                  <TableCell>{date.toLocaleDateString()}</TableCell>
-                  <TableCell>{movement.profiles?.full_name}</TableCell>
-                  <TableCell>
-                    <Badge className="capitalize">{movement.type}</Badge>
-                  </TableCell>
-                  <TableCell className="truncate text-muted-foreground">
-                    <span className="font-mono text-accent-foreground">#{movement.products.sku}</span> - {movement.products.name}
-                  </TableCell>
-                  <TableCell className="font-semibold">{movement.quantity}</TableCell>
-                  <TableCell className="truncate max-w-20 text-muted-foreground">{movement.reference || '-'}</TableCell>
-                  <TableCell className="text-end">
-                    <Button
-                      size={'icon-sm'}
-                      variant={'ghost'}
-                      className="text-red-500 bg-red-600/10 hover:text-red-600 hover:bg-red-500/20 dark:text-red-400 dark:hover:bg-red-600/30"
-                      onClick={() => setModal({
-                        type: "delete",
-                        movementId: movement.id
-                      })}
-                    >
-                      <Trash2 />
-                      <span className="sr-only">Eliminar registro</span>
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              )
-            })}
+            {isLoading && (
+              <TableLoadingData variant="dateStart" totalRows={5} />
+            )}
+            {data?.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} className="text-center text-muted-foreground">
+                  No hay movimientos
+                </TableCell>
+              </TableRow>
+            ) : (
+              data?.map((movement) => {
+                const date = new Date(movement.created_at)
+                return (
+                  <TableRow key={movement.id}>
+                    <TableCell>{date.toLocaleDateString()}</TableCell>
+                    <TableCell>{movement.profiles?.full_name}</TableCell>
+                    <TableCell>
+                      <Badge className="capitalize">{movement.type}</Badge>
+                    </TableCell>
+                    <TableCell className="truncate text-muted-foreground">
+                      <span className="font-mono text-accent-foreground">#{movement.products.sku}</span> - {movement.products.name}
+                    </TableCell>
+                    <TableCell className="font-semibold">{movement.quantity}</TableCell>
+                    <TableCell className="truncate max-w-20 text-muted-foreground">{movement.reference || '-'}</TableCell>
+                    <TableCell className="text-end">
+                      <Button
+                        size={'icon-sm'}
+                        variant={'ghost'}
+                        className="text-red-500 bg-red-600/10 hover:text-red-600 hover:bg-red-500/20 dark:text-red-400 dark:hover:bg-red-600/30"
+                        onClick={() => setModal({
+                          type: "delete",
+                          movementId: movement.id
+                        })}
+                      >
+                        <Trash2 />
+                        <span className="sr-only">Eliminar registro</span>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                )
+              })
+            )}
           </TableBody>
         </Table>
       </div>

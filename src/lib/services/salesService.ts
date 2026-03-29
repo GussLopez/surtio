@@ -29,8 +29,8 @@ export async function createSaleFromCart(
   return data;
 }
 
-export async function getSales() {
-  const { data, error } = await supabase
+export async function getSales(dateRange?: { from?: Date; to?: Date }) {
+  let query = supabase
     .from("sales")
     .select(
       `
@@ -52,6 +52,18 @@ export async function getSales() {
     .eq("status", "completed")
     .order("created_at", { ascending: false })
     .limit(10);
+
+  if (dateRange?.from) {
+    query = query.gte("created_at", dateRange.from?.toISOString());
+  }
+
+  if (dateRange?.to) {
+    const endOfDay = new Date(dateRange.to);
+    endOfDay.setHours(23, 59, 59, 999);
+    query = query.lte("created_at", endOfDay.toISOString());
+  }
+
+  const { data, error } = await query;
 
   if (error) throw error;
 
@@ -91,11 +103,10 @@ export async function DeleteSaleById(id: string) {
   if (error) throw error;
 }
 
-
 export async function cancelSale(saleId: string, cancelReason: string) {
   const { error } = await supabase.rpc("cancel_sale", {
     p_sale_id: saleId,
-    p_cancel_reason: cancelReason
+    p_cancel_reason: cancelReason,
   });
 
   if (error) throw error;

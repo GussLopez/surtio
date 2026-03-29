@@ -23,17 +23,36 @@ export async function createMovement(movements: MovementInsert[]) {
   return { success: true };
 }
 
-export async function getMovements() {
-  const { data, error } = await supabase.from("inventory_movements").select(`
-        *,
-        profiles (
-          full_name
-        ),
-        products (
-          name,
-          sku
-        )
-      `);
+export async function getMovements(
+  userId?: string,
+  dateRange?: { from?: Date; to?: Date },
+) {
+  let query = supabase.from("inventory_movements").select(`
+      *,
+      profiles (
+        id,
+        full_name
+      ),
+      products (
+        name,
+        sku
+      )
+    `);
+  if (userId && userId !== "ninguno") {
+    query = query.eq("user_id", userId);
+  }
+
+  if (dateRange?.from) {
+    query = query.gte("created_at", dateRange.from.toISOString());
+  }
+
+  if (dateRange?.to) {
+    const endOfDay = new Date(dateRange.to)
+    endOfDay.setHours(23, 59, 59, 999);
+
+    query = query.lte("created_at", endOfDay.toISOString());
+  }
+  const { data, error } = await query;
 
   if (error) throw error;
 
