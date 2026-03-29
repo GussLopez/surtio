@@ -56,7 +56,7 @@ export default function DeleteSaleDialog({ open, onClose, saleId }: DeleteSaleDi
           </AlertDialogMedia>
           <AlertDialogTitle>¿Eliminar venta?</AlertDialogTitle>
           <AlertDialogDescription>
-            Esta acción eliminará el producto permanentemente y no se podrá recuperar.
+            Esta acción eliminará la venta pero no modificará el stock del los productos vendidos.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-3">
