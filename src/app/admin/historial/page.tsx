@@ -1,5 +1,5 @@
 'use client';
-import DeleteSaleDialog from "@/components/sales/DaleteSaleDialog";
+import DeleteSaleDialog from "@/components/sales/DeleteSaleDialog";
 import EditSaleDialog from "@/components/sales/EditSaleDialog";
 import CancelSaleDialog from "@/components/sales/CancelSaleDialog";
 import SaleReceipt from "@/components/sales/SaleReceipt";
@@ -24,19 +24,22 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { ArchiveRestore, Ban, FileClock, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { DateRange } from "react-day-picker";
+type ModalState =
+  | { type: "edit"; sale: Sale }
+  | { type: "view"; sale: Sale }
+  | { type: "delete"; saleId: string }
+  | { type: "null"; saleId: string }
+  | null
 
 export default function HistorialPage() {
-  type ModalState =
-    | { type: "edit"; sale: Sale }
-    | { type: "view"; sale: Sale }
-    | { type: "delete"; saleId: string }
-    | { type: "null"; saleId: string }
-    | null
-  const [modal, setModal] = useState<ModalState>(null)
+  const [modal, setModal] = useState<ModalState>(null);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
+
   const { data, isLoading } = useQuery({
-    queryKey: ["sales-reports"],
+    queryKey: ["sales-reports", dateRange],
     queryFn: async () => {
-      const data = await getSales();
+      const data = await getSales(dateRange);
       return data;
     },
     retry: 1,
@@ -59,7 +62,7 @@ export default function HistorialPage() {
         <h1 className="text-3xl font-semibold">Historial de Ventas</h1>
       </div>
       <div className="flex justify-between items-center mt-6">
-        <RangeDatePicker />
+        <RangeDatePicker date={dateRange} setDate={setDateRange} />
         <div className="flex gap-2">
           <Button
             variant={'outline'}
