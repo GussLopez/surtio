@@ -106,7 +106,10 @@ export default function MovementsHistory() {
           </TableHeader>
           <TableBody>
             {isLoading && (
-              <TableLoadingData variant="dateStart" totalRows={5} />
+              <TableLoadingData
+                columns={['date', 'text', 'smallText', 'text','number', 'doubleText', 'actions']}
+                totalRows={5}
+              />
             )}
             {data?.length === 0 ? (
               <TableRow>
