@@ -113,11 +113,18 @@ export default function EditUserModal({ employe, onClose, open }: EditUserProps)
                 rules={{ required: true }}
                 defaultValue=""
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select 
+                  onValueChange={field.onChange}
+                   value={field.value}
+                   disabled={employe.role === "owner"}
+                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Selecciona un rol" />
                     </SelectTrigger>
                     <SelectContent>
+                      {employe.role === "owner" && (
+                        <SelectItem value="owner">Propietario</SelectItem>
+                      )}
                       <SelectItem value="admin">Administrador</SelectItem>
                       <SelectItem value="seller">Vendedor</SelectItem>
                       <SelectItem value="stock-man">Gestor de inventario</SelectItem>

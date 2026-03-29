@@ -1,7 +1,7 @@
 'use client';
-import { UserIcon } from "@phosphor-icons/react";
+import { CrownSimpleIcon, UserIcon } from "@phosphor-icons/react";
 import { Badge } from "../ui/badge";
-import { ChevronDown, Edit, Mail, Shield, Trash2 } from "lucide-react";
+import { ChevronDown, Crown, Edit, Mail, Shield, Trash2 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { Button } from "../ui/button";
 import { AnimatePresence, motion } from "motion/react";
@@ -25,19 +25,26 @@ const gradientVariants = {
   admin: 'from-orange-400 to-red-600',
   seller: 'from-cyan-400 to-blue-600',
   stockMan: 'from-yellow-400 to-amber-600',
+  owner: 'from-rose-400 to-red-600',
 }
 export default function UserCard({ user, onEdit, onDelete }: UserCardProps) {
   const [open, setOpen] = useState(false);
   return (
     <div className="rounded-md overflow-hidden bg-facent">
       <div className={`h-24 w-full bg-linear-to-br relative
-         ${user.role === 'admin' && gradientVariants.admin || user.role === 'seller' && gradientVariants.seller || user.role === 'stock-man' && gradientVariants.stockMan}`
+         ${user.role === 'admin' && gradientVariants.admin || user.role === 'seller' && gradientVariants.seller || user.role === 'stock-man' && gradientVariants.stockMan || user.role === 'owner' && gradientVariants.owner}`
       }>
+        {user.role === 'owner' && (
+          <div className="absolute top-4 left-4 text-yellow-300">
+            <Crown size={20} className="fill-yellow-300" />
+          </div>
+        )}
         <div className="absolute top-4 right-4">
           <Badge variant={'secondary'}>
             {user.role === 'admin' && 'Administrador'}
             {user.role === 'seller' && 'Vendedor'}
             {user.role === 'stock-man' && 'Almacenista'}
+            {user.role === 'owner' && 'Propietario'}
           </Badge>
         </div>
         <div className="absolute -bottom-10 left-4">
@@ -121,6 +128,7 @@ export default function UserCard({ user, onEdit, onDelete }: UserCardProps) {
             size={'icon-lg'}
             variant={'outline'}
             onClick={() => onDelete(user.id)}
+            disabled={user.role === "owner"}
           >
             <Trash2 size={40} className="size-4.5" />
             <span className="sr-only">Eliminar un usuario</span>
