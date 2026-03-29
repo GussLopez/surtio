@@ -13,8 +13,12 @@ import { CalendarIcon } from "lucide-react"
 import { type DateRange } from "react-day-picker"
 import { es } from "date-fns/locale"
 
-export function RangeDatePicker() {
-  const [date, setDate] = React.useState<DateRange | undefined>()
+interface RangeDateProps {
+  date: DateRange | undefined
+  setDate: (date: DateRange | undefined) => void
+}
+
+export function RangeDatePicker({ date, setDate }: RangeDateProps) {
 
   return (
     <div className="w-60">
@@ -23,7 +27,7 @@ export function RangeDatePicker() {
           <Button
             variant="outline"
             id="date-picker-range"
-            className="justify-start px-2.5 font-normal"
+            className="justify-start px-2.5 font-normal w-full"
           >
             <CalendarIcon />
             {date?.from ? (
