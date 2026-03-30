@@ -33,8 +33,8 @@ const data = {
       icon: DollarSign,
     },
     {
-      title: "Historial",
-      url: "/admin/historial",
+      title: "Historial de Ventas",
+      url: "/admin/historial-ventas",
       icon: FileClock,
       items: [
         {
