@@ -289,7 +289,7 @@ function formatCurrency(value: number) {
 export default function ReceiptPDFDocument({ sale }: { sale: Sale }) {
   const formatDate = new Date(sale.created_at!).toLocaleDateString("es-MX", {
     day: "2-digit",
-    month: "2-digit",
+    month: "short",
     year: "numeric",
   });
 

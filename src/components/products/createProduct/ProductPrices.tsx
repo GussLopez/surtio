@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { ProductForm } from "@/types";
 import { TrendUpIcon } from "@phosphor-icons/react";
-import { useState } from "react";
 
 interface ProductPricesProps {
   formData: ProductForm;
