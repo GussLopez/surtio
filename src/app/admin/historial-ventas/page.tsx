@@ -16,6 +16,8 @@ import { DateRange } from "react-day-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
 import SalesListView from "@/components/sales/SalesListView";
 import SalesTableView from "@/components/sales/SalesTableView";
+import { useBusinessStore } from "@/store/BusinessStore";
+import { sileo } from "sileo";
 type ModalState =
   | { type: "edit"; sale: Sale }
   | { type: "view"; sale: Sale }
@@ -27,6 +29,8 @@ export default function HistorialPage() {
   const [view, setView] = useState('list')
   const [modal, setModal] = useState<ModalState>(null);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const businessId = useBusinessStore(state => state.id)
+  const [loading, setLoading] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["sales-reports", dateRange],
@@ -37,12 +41,12 @@ export default function HistorialPage() {
     retry: 1,
   })
 
-   useEffect(() => {
-      const savedView = localStorage.getItem("inventory-view")
-      if (savedView) {
-        setView(savedView)
-      }
-    }, [])
+  useEffect(() => {
+    const savedView = localStorage.getItem("inventory-view")
+    if (savedView) {
+      setView(savedView)
+    }
+  }, [])
 
   const handleValueChange = (value: string) => {
     setView(value);
@@ -60,6 +64,48 @@ export default function HistorialPage() {
 
   const openNull = (saleId: string) =>
     setModal({ type: "null", saleId })
+
+  const handleDownload = async () => {
+    if (!data || data.length === 0) {
+      sileo.warning({
+        title: 'No hay datos para exportar'
+      });
+      return;
+    }
+    setLoading(true);
+    const params = new URLSearchParams({
+      from: dateRange?.from?.toISOString() ?? "",
+      to: dateRange?.to
+        ? new Date(dateRange.to.setHours(23, 59, 59, 999)).toISOString()
+        : "",
+      business_id: businessId!
+    });
+
+    const res = await fetch(`/api/export-sales?${params.toString()}`);
+
+    if (!res.ok) {
+      const err = await res.json();
+      alert(err.error);
+      return;
+    }
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = dateRange?.from && dateRange.to ? `ventas-${dateRange?.from?.toLocaleDateString('es-MX', {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit"
+    })}-${dateRange?.to?.toLocaleDateString('en-MX', {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit"
+    })}.csv` : 'ventas.csv'
+    a.click();
+    setLoading(false);
+  };
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -90,9 +136,10 @@ export default function HistorialPage() {
           </Button>
           <Button
             variant={'outline'}
-            disabled={data?.length === 0}
+            disabled={!data || data?.length === 0 || loading}
+            onClick={handleDownload}
           >
-            <DownloadSimpleIcon size={20} weight="bold" />
+            {loading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
           </Button>
         </div>

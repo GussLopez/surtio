@@ -111,3 +111,47 @@ export async function cancelSale(saleId: string, cancelReason: string) {
 
   if (error) throw error;
 }
+
+export async function getSalesForExport(dateRange?: {
+  from?: Date;
+  to?: Date;
+}) {
+  let query = supabase
+    .from("sales")
+    .select(
+      `
+      *,
+      sale_items (
+        id,
+        quantity,
+        price,
+        product_id,
+        products (
+          id,
+          name,
+          sku,
+          cost
+        )
+      )
+    `,
+    )
+    .eq("status", "completed")
+    .order("created_at", { ascending: false })
+    .limit(10);
+
+  if (dateRange?.from) {
+    query = query.gte("created_at", dateRange.from?.toISOString());
+  }
+
+  if (dateRange?.to) {
+    const endOfDay = new Date(dateRange.to);
+    endOfDay.setHours(23, 59, 59, 999);
+    query = query.lte("created_at", endOfDay.toISOString());
+  }
+
+  const { data, error } = await query;
+
+  if (error) throw error;
+
+  return data;
+}
