@@ -44,7 +44,7 @@ export default function HistorialPage() {
   })
 
   useEffect(() => {
-    const savedView = localStorage.getItem("inventory-view")
+    const savedView = localStorage.getItem("sales-history-view")
     if (savedView) {
       setView(savedView)
     }
