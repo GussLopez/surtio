@@ -68,7 +68,7 @@ export default function SalesTableView({ data, onView, onEdit, onDelete, onNull 
                     </span>
                   </div>
                 </TableCell>
-                <TableCell className="text-end">
+                <TableCell className="text-end w-20">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
