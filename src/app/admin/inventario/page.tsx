@@ -119,9 +119,14 @@ export default function InventarioPage() {
               <SelectGroup>
                 <SelectLabel>Categorías</SelectLabel>
                 <SelectItem value="all">Todos</SelectItem>
-                {categories?.map((cat) => (
-                  <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
-                ))}
+                {catLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
+                {categories?.length === 0 ? (
+                  <p className="p-2 text-sm  text-muted-foreground">No hay categorías registradas</p>
+                ) : (
+                  categories?.map((cat) => (
+                    <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
+                  ))
+                )}
               </SelectGroup>
             </SelectContent>
           </Select>
