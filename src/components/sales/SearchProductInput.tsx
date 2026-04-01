@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { searchProducts } from '@/lib/services/productService'
 import { ProductItem } from '@/types'
+import { useDebounce } from 'use-debounce';
 
 interface SearchProductProps {
   setProduct: (product: ProductItem) => void;
@@ -29,14 +30,7 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(inputValue);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [inputValue]);
+  const [debouncedSearch] = useDebounce(inputValue, 500)
 
   const { data: products = null, isLoading } = useQuery<ProductItem[]>({
     queryKey: ['products-search', debouncedSearch],
@@ -63,7 +57,7 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
           <ChevronsUpDownIcon className='opacity-50' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='p-0'>
+      <PopoverContent align='start' className='p-0'>
         <Command shouldFilter={false}>
           <CommandInput
             placeholder='Buscar por nombre o SKU...'
@@ -71,7 +65,6 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
             value={inputValue}
             onValueChange={setInputValue}
           />
-
           <CommandList>
             {isLoading && (
               <CommandEmpty>Buscando...</CommandEmpty>
