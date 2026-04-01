@@ -2,11 +2,17 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getProducts() {
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
+export async function getProducts(categoryId?: number, search?: string) {
+  let query = supabase.from("products").select("*");
+
+  if (categoryId) {
+    query = query.eq("category_id", categoryId);
+  }
+
+  if (search && search.trim() !== "") {
+    query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%`);
+  }
+  const { data, error } = await query;
 
   if (error) throw error;
 

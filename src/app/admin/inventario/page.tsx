@@ -14,6 +14,10 @@ import { Product } from "@/types";
 import EditProductModal from "@/components/products/EditProductModal";
 import ViewProductModal from "@/components/products/ViewPrductModal";
 import { DeleteProduct } from "@/components/products/DeleteProduct";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getBusinessCategories } from "@/lib/services/categoriesService";
+import { useDebounce } from 'use-debounce'
 
 type ModalState =
   | { type: "edit"; product: Product }
@@ -23,7 +27,10 @@ type ModalState =
 
 export default function InventarioPage() {
   const [view, setView] = useState("table")
-  const [modal, setModal] = useState<ModalState>(null)
+  const [modal, setModal] = useState<ModalState>(null);
+  const [selectedCategorie, setSelectedCategorie] = useState('all');
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search, 500)
 
   useEffect(() => {
     const savedView = localStorage.getItem("inventory-view")
@@ -38,11 +45,21 @@ export default function InventarioPage() {
   }
 
   const { data, isLoading, error } = useQuery<Product[]>({
-    queryKey: ["stock-products"],
+    queryKey: ["stock-products", selectedCategorie, debouncedSearch],
     queryFn: async () => {
-      const data = await getProducts();
+      const data = await getProducts(
+        selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
+        debouncedSearch
+      );
       return data;
     },
+    retry: 1,
+    refetchOnWindowFocus: false
+  })
+
+  const { data: categories, isLoading: catLoading } = useQuery({
+    queryKey: ["business-categories"],
+    queryFn: async () => await getBusinessCategories(),
     retry: 1,
     refetchOnWindowFocus: false
   })
@@ -83,13 +100,43 @@ export default function InventarioPage() {
           <AddProduct />
         </div>
       </div>
-      <div className="mt-4">
-        <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Buscar producto, SKU..."
-            className="max-w-80 pl-9"
-          />
+      <div className="flex justify-between mt-4">
+        <div className="flex gap-3">
+          <div className="relative">
+            <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Buscar producto, SKU..."
+              className="max-w-80 pl-9"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+          <Select value={selectedCategorie} onValueChange={setSelectedCategorie}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent position="popper" align="start">
+              <SelectGroup>
+                <SelectLabel>Categorías</SelectLabel>
+                <SelectItem value="all">Todos</SelectItem>
+                {categories?.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant={'outline'}
+          >
+            PDF Lista
+          </Button>
+          <Button
+            variant={'outline'}
+          >
+            CSV
+          </Button>
         </div>
       </div>
       <div className="mt-6">
