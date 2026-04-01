@@ -285,8 +285,11 @@ function formatCurrency(value: number) {
     maximumFractionDigits: 2,
   });
 }
-
-export default function ReceiptPDFDocument({ sale }: { sale: Sale }) {
+interface ReceiptPDFDocumentProps {
+  sale: Sale,
+  businessName: string;
+}
+export default function ReceiptPDFDocument({ sale, businessName }: ReceiptPDFDocumentProps) {
   const formatDate = new Date(sale.created_at!).toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "short",
@@ -314,7 +317,7 @@ export default function ReceiptPDFDocument({ sale }: { sale: Sale }) {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.storeName}>Tienda Demo</Text>
+            <Text style={styles.storeName}>{businessName}</Text>
             <Text style={styles.headerSubtitle}>Recibo de venta</Text>
           </View>
           <View style={styles.headerRight}>

@@ -22,7 +22,7 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
   const handleDownloadPDF = async () => {
     setDownloading(true);
     try {
-      await generateReceiptPDF(sale);
+      await generateReceiptPDF(sale, businessName!);
     } finally {
       setDownloading(false);
     }
