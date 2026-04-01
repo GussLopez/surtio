@@ -8,6 +8,7 @@ import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { generateReceiptPDF } from "@/lib/generateReceiptPDF";
 import { useState } from "react";
+import { useBusinessStore } from "@/store/BusinessStore";
 
 interface SaleReceiptProps {
   open: boolean;
@@ -16,8 +17,8 @@ interface SaleReceiptProps {
 }
 
 export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
+  const businessName = useBusinessStore(state => state.name)
   const [downloading, setDownloading] = useState(false);
-
   const handleDownloadPDF = async () => {
     setDownloading(true);
     try {
@@ -56,7 +57,7 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
               <StorefrontIcon size={40} />
             </div>
             <div>
-              <DialogTitle className="text-2xl font-bold">Tienda Demo</DialogTitle>
+              <DialogTitle className="text-2xl font-bold">{businessName}</DialogTitle>
               <DialogDescription>Recibo de venta</DialogDescription>
             </div>
           </div>
@@ -119,12 +120,18 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
                   <TableRow key={item.id}>
                     <TableCell>{item.products.name}</TableCell>
                     <TableCell>{item.quantity}</TableCell>
-                    <TableCell>{item.price.toLocaleString('es-MX', {
+                    <TableCell>${item.price.toLocaleString('es-MX', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}</TableCell>
+                    <TableCell>${item.products.cost.toLocaleString('es-MX', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}</TableCell>
+                    <TableCell className="text-right">${(item.quantity * item.price).toLocaleString('es-MX', {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2
                     })} MXN</TableCell>
-                    <TableCell>{item.products.cost}</TableCell>
-                    <TableCell className="text-right">{item.quantity * item.price}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

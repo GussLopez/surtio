@@ -18,6 +18,7 @@ import SalesListView from "@/components/sales/SalesListView";
 import SalesTableView from "@/components/sales/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
+import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";
 type ModalState =
   | { type: "edit"; sale: Sale }
   | { type: "view"; sale: Sale }
@@ -30,7 +31,8 @@ export default function HistorialPage() {
   const [modal, setModal] = useState<ModalState>(null);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const businessId = useBusinessStore(state => state.id)
-  const [loading, setLoading] = useState(false);
+  const [csvLoading, setCsvLoading] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ["sales-reports", dateRange],
@@ -65,6 +67,27 @@ export default function HistorialPage() {
   const openNull = (saleId: string) =>
     setModal({ type: "null", saleId })
 
+  const handleDownloadPDF = async () => {
+    if (!data || data.length === 0) {
+      sileo.warning({
+        title: 'No hay datos para exportar'
+      });
+      return;
+    }
+    setPdfLoading(true);
+    try {
+      await generateSalesHistoryPDF(data, dateRange);
+    } catch (error) {
+      console.error(error);
+      sileo.error({
+        title: 'Error al exportar los datos',
+        description: 'Ocurrió un error al exportar los datos en PDF, por favor intenta más tarde'
+      })
+    } finally {
+      setPdfLoading(false);
+    }
+  }
+
   const handleDownload = async () => {
     if (!data || data.length === 0) {
       sileo.warning({
@@ -72,7 +95,7 @@ export default function HistorialPage() {
       });
       return;
     }
-    setLoading(true);
+    setCsvLoading(true);
     const params = new URLSearchParams({
       from: dateRange?.from?.toISOString() ?? "",
       to: dateRange?.to
@@ -104,7 +127,7 @@ export default function HistorialPage() {
       year: "2-digit"
     })}.csv` : 'ventas.csv'
     a.click();
-    setLoading(false);
+    setCsvLoading(false);
   };
   return (
     <div>
@@ -129,17 +152,18 @@ export default function HistorialPage() {
           </Tabs>
           <Button
             variant={'outline'}
-            disabled={data?.length === 0}
+            disabled={!data || data?.length === 0 || pdfLoading}
+            onClick={handleDownloadPDF}
           >
-            <FileTextIcon size={20} weight="bold" />
-            PDF Lista
+            {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
+            {pdfLoading ? "Generando" : "PDF Lista"}
           </Button>
           <Button
             variant={'outline'}
-            disabled={!data || data?.length === 0 || loading}
+            disabled={!data || data?.length === 0 || pdfLoading}
             onClick={handleDownload}
           >
-            {loading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
+            {pdfLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
           </Button>
         </div>
