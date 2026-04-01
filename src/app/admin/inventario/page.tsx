@@ -2,7 +2,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
 import AddProduct from "@/components/products/AddProduct";
 import ProductTable from "@/components/products/ProductTable";
-import { ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getProducts } from "@/lib/services/productService";
@@ -30,7 +30,9 @@ export default function InventarioPage() {
   const [modal, setModal] = useState<ModalState>(null);
   const [selectedCategorie, setSelectedCategorie] = useState('all');
   const [search, setSearch] = useState('');
-  const [debouncedSearch] = useDebounce(search, 500)
+  const [debouncedSearch] = useDebounce(search, 500);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [csvLoading, setCsvLoading] = useState(false);
 
   useEffect(() => {
     const savedView = localStorage.getItem("inventory-view")
@@ -135,12 +137,18 @@ export default function InventarioPage() {
         <div className="flex gap-2">
           <Button
             variant={'outline'}
+            disabled={!data || data?.length === 0 || pdfLoading}
+            // onClick={handleDownloadPDF}
           >
-            PDF Lista
+            {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
+            {pdfLoading ? "Generando" : "PDF Lista"}
           </Button>
           <Button
             variant={'outline'}
+            disabled={!data || data?.length === 0 || csvLoading}
+            // onClick={handleDownloadCsv}
           >
+            {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
           </Button>
         </div>
