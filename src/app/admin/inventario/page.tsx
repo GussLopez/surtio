@@ -44,7 +44,7 @@ export default function InventarioPage() {
     localStorage.setItem("inventory-view", value)
   }
 
-  const { data, isLoading, error } = useQuery<Product[]>({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["stock-products", selectedCategorie, debouncedSearch],
     queryFn: async () => {
       const data = await getProducts(
@@ -77,6 +77,7 @@ export default function InventarioPage() {
   const openDelete = (product: Product) =>
     setModal({ type: "delete", product })
 
+  console.log(data);
   return (
     <div className="relative">
       <div className="flex justify-between">

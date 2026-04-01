@@ -1,25 +1,29 @@
 export interface Product {
-  id: string;
-  business_id: string;
-  name: string;
-  description: string | null;
-  price: number;
-  cost: number;
-  stock: number;
-  min_stock: number;
-  sku: string;
-  model: string | null;
-  image: string | null;
   barcode: string | null;
-  unit: string | null;
+  business_id: string;
+  category_id: number | null;
+  cost: number;
+  created_at: string | null;
+  description: string | null;
+  id: string;
+  image: string | null;
   is_active: boolean;
-  supplier_id: number | null
-  categorie_id: number | null
+  min_stock: number;
+  model: string | null;
+  name: string;
+  price: number;
+  sku: string;
+  stock: number;
+  supplier_id: number | null;
+  unit: string | null;
+  categories: {
+    id: number;
+    name: string;
+  } | null;
 }
 
-export type ProductForm = Omit<Product, 'id' | 'business_id'>
-
+export type ProductForm = Omit<Product, "id" | "business_id">;
 
 export interface ProductItem extends Product {
-  quantity?: number
+  quantity?: number;
 }

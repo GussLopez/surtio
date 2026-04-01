@@ -68,7 +68,9 @@ export default function ViewProductModal({ open, onClose, product }: ProductModa
                       <p>Categoría</p>
                     </div>
 
-                    <p className="font-normal text-sm italic text-gray-500">No disponible</p>
+                    <p className={`font-normal text-sm ${product?.model ? 'font-medium' : 'italic text-gray-500'}`}>
+                      {product?.categories?.name || 'No disponible'}
+                    </p>
                   </div>
                   <div className="flex items-center justify-between py-3 border-b">
                     <div className="flex items-center gap-2">
@@ -161,7 +163,7 @@ export default function ViewProductModal({ open, onClose, product }: ProductModa
                     <p className="">Código de barras</p>
                   </div>
                   <p className={`col-span-4 col-start-9 text-sm text-end pr-3 font-medium 
-                    ${!product?.barcode && 'font-normal text-sm italic text-gray-500' }`}>
+                    ${!product?.barcode && 'font-normal text-sm italic text-gray-500'}`}>
                     {product?.barcode ? product.barcode : 'No disponible'}
                   </p>
                 </div>
