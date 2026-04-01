@@ -88,7 +88,7 @@ export default function HistorialPage() {
     }
   }
 
-  const handleDownload = async () => {
+  const handleDownloadCsv = async () => {
     if (!data || data.length === 0) {
       sileo.warning({
         title: 'No hay datos para exportar'
@@ -160,10 +160,10 @@ export default function HistorialPage() {
           </Button>
           <Button
             variant={'outline'}
-            disabled={!data || data?.length === 0 || pdfLoading}
-            onClick={handleDownload}
+            disabled={!data || data?.length === 0 || csvLoading}
+            onClick={handleDownloadCsv}
           >
-            {pdfLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
+            {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
           </Button>
         </div>
