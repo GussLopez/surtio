@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getBusinessCategories } from "@/lib/services/categoriesService";
 import { useDebounce } from 'use-debounce'
+import { sileo } from "sileo";
+import { generateProductsPDF } from "@/lib/generateProductsPDF";
 
 type ModalState =
   | { type: "edit"; product: Product }
@@ -79,7 +81,26 @@ export default function InventarioPage() {
   const openDelete = (product: Product) =>
     setModal({ type: "delete", product })
 
-  console.log(data);
+  const handleDownloadPDF = async () => {
+    if (!data || data.length === 0) {
+      sileo.warning({
+        title: 'No hay datos para exportar'
+      });
+      return;
+    }
+    setPdfLoading(true);
+    try {
+      const categoryName = categories?.find(c => c.id.toString() === selectedCategorie)?.name;
+      await generateProductsPDF(data, categoryName || selectedCategorie);
+    } catch (error) {
+      sileo.error({
+        title: 'Error al descargar el pdf',
+        description: 'Ocurrió un error al descargar el PDF, por favor intenta más tarde'
+      })
+    } finally {
+      setPdfLoading(false)
+    }
+  }
   return (
     <div className="relative">
       <div className="flex justify-between">
@@ -138,7 +159,7 @@ export default function InventarioPage() {
           <Button
             variant={'outline'}
             disabled={!data || data?.length === 0 || pdfLoading}
-            // onClick={handleDownloadPDF}
+            onClick={handleDownloadPDF}
           >
             {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
             {pdfLoading ? "Generando" : "PDF Lista"}
