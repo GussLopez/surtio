@@ -36,67 +36,17 @@ const data = {
       title: "Historial de Ventas",
       url: "/admin/historial-ventas",
       icon: FileClock,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
     },
     {
       title: "Reportes",
       url: "/admin/reportes",
       icon: ChartNoAxesCombined,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
     },
-    {
+    /* {
       title: "Operaciones",
       url: "/admin/operaciones",
       icon: BookOpen,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+    }, */
   ],
   projects: [
     {

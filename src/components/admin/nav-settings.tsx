@@ -45,7 +45,7 @@ export function NavSettings({
       <SidebarMenu>
         {settings.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip={item.name}>
               <Link href={item.url} className={`${path === item.url && activeClasses}`}>
                 <item.icon />
                 <span>{item.name}</span>
