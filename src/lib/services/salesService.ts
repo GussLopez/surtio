@@ -29,7 +29,7 @@ export async function createSaleFromCart(
   return data;
 }
 
-export async function getSales(dateRange?: { from?: Date; to?: Date }) {
+export async function getSales(businessId: string, dateRange?: { from?: Date; to?: Date }) {
   let query = supabase
     .from("sales")
     .select(
@@ -49,6 +49,7 @@ export async function getSales(dateRange?: { from?: Date; to?: Date }) {
       )
     `,
     )
+    .eq("business_id", businessId)
     .eq("status", "completed")
     .order("created_at", { ascending: false })
     .limit(10);

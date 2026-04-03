@@ -35,9 +35,9 @@ export default function HistorialPage() {
   const [pdfLoading, setPdfLoading] = useState(false);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["sales-reports", dateRange],
+    queryKey: ["sales-reports", businessId, dateRange],
     queryFn: async () => {
-      const data = await getSales(dateRange);
+      const data = await getSales(businessId!, dateRange);
       return data;
     },
     retry: 1,
