@@ -169,7 +169,7 @@ export default function HistorialPage() {
         </div>
       </div>
       <div className="mt-5">
-        {isLoading && <div className="flex justify-center items-center py-10">
+        {isLoading && <div className="flex justify-center items-center h-70">
           <Spinner className="size-7" />
         </div>
         }

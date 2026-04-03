@@ -179,7 +179,7 @@ export default function InventarioPage() {
       </div>
       <div className="mt-6">
         {isLoading ? (
-          <div className="flex justify-center items-center h-90">
+          <div className="flex justify-center items-center h-70">
             <Spinner className="size-7" />
           </div>
         ) : (
