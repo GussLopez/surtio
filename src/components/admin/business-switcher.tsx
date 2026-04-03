@@ -89,7 +89,12 @@ export function BusinessSwitcher() {
                 ) : (
                   <>
                     <span className="truncate font-medium">{activeBusiness.name}</span>
-                    <span className="truncate text-xs">{activeBusiness.plan === 'free' && 'Basic'}</span>
+                    <span
+                      className={`truncate text-xs ${activeBusiness.plan === 'pro' && 'text-primary font-semibold'}`}
+                    >
+                      {activeBusiness.plan === 'pro' && 'Pro'}
+                      {activeBusiness.plan === 'free' && 'Gratuito'}
+                    </span>
                   </>
                 )}
               </div>
