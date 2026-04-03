@@ -1,15 +1,14 @@
 'use client'
-
 import AddSupplierDialog from "@/components/admin/suppliers/AddSupplierDialog";
 import DeleteSupplierDialog from "@/components/admin/suppliers/DeleteSupplierDialog";
 import EditSupplierDialog from "@/components/admin/suppliers/EditSupplierDialog";
 import { Button } from "@/components/animate-ui/components/buttons/button";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Spinner } from "@/components/ui/spinner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import TableLoadingData from "@/components/ui/TableLoadingData";
 import { getBusinessSuppliers } from "@/lib/services/supplierService";
+import { useBusinessStore } from "@/store/BusinessStore";
 import { Supplier } from "@/types";
 import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
@@ -22,12 +21,13 @@ type ModalState =
   | { type: "delete", supplierId: number }
   | null
 export default function ProveedoresPage() {
-  const [modal, setModal] = useState<ModalState>(null)
+  const [modal, setModal] = useState<ModalState>(null);
+  const businessId = useBusinessStore(state => state.id);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["business-suppliers"],
+    queryKey: ["business-suppliers", businessId],
     queryFn: async () => {
-      const data = await getBusinessSuppliers();
+      const data = await getBusinessSuppliers(businessId!);
       return data;
     },
     retry: 1,
@@ -52,17 +52,16 @@ export default function ProveedoresPage() {
           </Button>
         </div>
       </div>
-      <div className="mt-10 border border-input rounded-lg overflow-hidden">
-
-        {data?.length === 0 ? (
-          <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10">
-            <div className="p-2 rounded-lg text-primary bg-primary/10">
-              <TruckTrailerIcon size={30} />
-            </div>
-            <p className="font-medium text-accent-foreground">No hay proveedores</p>
-            <p className="text-sm/relaxed text-center text-muted-foreground px-6">No se han regostrado ningún proveedor. Empieza creando un proveedor.</p>
+      {data?.length === 0 ? (
+        <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10 mt-10">
+          <div className="p-2 rounded-lg text-primary bg-primary/10">
+            <TruckTrailerIcon size={30} />
           </div>
-        ) : (
+          <p className="font-medium text-accent-foreground">No hay proveedores</p>
+          <p className="text-sm/relaxed text-center text-muted-foreground px-6">No se han regostrado ningún proveedor. Empieza creando un proveedor.</p>
+        </div>
+      ) : (
+        <div className="mt-10 border border-input rounded-lg overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
@@ -142,8 +141,8 @@ export default function ProveedoresPage() {
               ))}
             </TableBody>
           </Table>
-        )}
-      </div>
+        </div>
+      )}
       {modal?.type === "create" && (
         <AddSupplierDialog
           open

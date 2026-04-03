@@ -15,11 +15,12 @@ export async function createSupplier(supplier: SupplierForm) {
   return data;
 }
 
-export async function getBusinessSuppliers() {
+export async function getBusinessSuppliers(businessId: string) {
   const { data, error } = await supabase
     .from("suppliers")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .eq("business_id", businessId);
 
   if (error) throw error;
 
