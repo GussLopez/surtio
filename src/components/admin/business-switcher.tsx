@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -19,16 +18,26 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useUserStore } from "@/store/UserStore"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getBusinessByUserId } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Skeleton } from "../ui/skeleton"
+import Link from "next/link"
 
+interface BusinessSoreProps {
+  id: string;
+  name: string;
+  plan: string;
+  owner_id: string;
+}
 export function BusinessSwitcher() {
   const userId = useUserStore((state) => state.id);
   const { isMobile } = useSidebar()
-  const setBussines = useBusinessStore(state => state.setBusiness)
-  const activeBusiness = useBusinessStore(state => state)
+  const setBussines = useBusinessStore(state => state.setBusiness);
+  const activeBusiness = useBusinessStore(state => state);
+  const businessId = useBusinessStore(state => state.id);
+  const queryClient = useQueryClient();
+
   const { data: businesses, isLoading } = useQuery({
     queryKey: ["business", userId],
     queryFn: async () => await getBusinessByUserId(userId!),
@@ -36,19 +45,29 @@ export function BusinessSwitcher() {
     staleTime: 1000 * 60 * 30,
   })
   React.useEffect(() => {
-    if (businesses?.length) {
+    if (businesses?.length && !businessId) {
       const business = businesses[0];
 
       setBussines({
         id: business.id,
         name: business.name,
         owner_id: business.owner_id,
-        plan: business.plan ?? "free",
-        created_at: business.created_at || ""
+        plan: business.plan ?? "free"
       })
     }
-  }, [businesses, setBussines])
+  }, [businesses, businessId, setBussines])
 
+
+  const handleChangeBusiness = (business: BusinessSoreProps) => {
+    activeBusiness.clearBusiness();
+    setBussines({
+      id: business.id,
+      name: business.name,
+      plan: business.plan || 'free',
+      owner_id: business.owner_id
+    })
+    queryClient.invalidateQueries()
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -86,25 +105,26 @@ export function BusinessSwitcher() {
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Tiendas
             </DropdownMenuLabel>
-            {businesses?.map((business, index) => (
+            {businesses?.map((business) => (
               <DropdownMenuItem
                 key={business.id}
-                // onClick={() => setActiveTeam(business)}
+                onClick={() => handleChangeBusiness(business)}
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-md border">
                   <Store className="size-3.5 shrink-0" />
                 </div>
                 {business.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                <Plus className="size-4" />
-              </div>
-              <div className="font-medium text-muted-foreground">Agregar tienda</div>
+            <DropdownMenuItem asChild>
+              <Link href={'/admin/new'} className="gap-2 p-2">
+                <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                  <Plus className="size-4" />
+                </div>
+                <div className="font-medium text-muted-foreground">Agregar tienda</div>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
