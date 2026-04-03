@@ -2,14 +2,23 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getProducts(categoryId?: number, search?: string) {
-  let query = supabase.from("products").select(`
+export async function getProducts(
+  businessId: string,
+  categoryId?: number,
+  search?: string,
+) {
+  let query = supabase
+    .from("products")
+    .select(
+      `
     *,
     categories (
       id,
       name
     )  
-  `);
+  `,
+    )
+    .eq("business_id", businessId);
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);

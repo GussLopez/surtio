@@ -20,6 +20,7 @@ import { getBusinessCategories } from "@/lib/services/categoriesService";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/lib/generateProductsPDF";
+import { useBusinessStore } from "@/store/BusinessStore";
 
 type ModalState =
   | { type: "edit"; product: Product }
@@ -35,6 +36,7 @@ export default function InventarioPage() {
   const [debouncedSearch] = useDebounce(search, 500);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [csvLoading, setCsvLoading] = useState(false);
+  const businessId = useBusinessStore(state => state.id)
 
   useEffect(() => {
     const savedView = localStorage.getItem("inventory-view")
@@ -49,9 +51,10 @@ export default function InventarioPage() {
   }
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["stock-products", selectedCategorie, debouncedSearch],
+    queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId],
     queryFn: async () => {
       const data = await getProducts(
+        businessId!,
         selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
         debouncedSearch
       );
