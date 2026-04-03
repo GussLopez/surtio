@@ -24,6 +24,7 @@ export async function createMovement(movements: MovementInsert[]) {
 }
 
 export async function getMovements(
+  businessId: string,
   userId?: string,
   dateRange?: { from?: Date; to?: Date },
 ) {
@@ -37,7 +38,7 @@ export async function getMovements(
         name,
         sku
       )
-    `);
+    `).eq("business_id", businessId)
   if (userId && userId !== "ninguno") {
     query = query.eq("user_id", userId);
   }

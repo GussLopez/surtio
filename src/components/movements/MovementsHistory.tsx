@@ -13,8 +13,8 @@ import { DeleteMovement } from "./DeleteMovement"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
 import { getUsers } from "@/lib/services/userService"
 import { DateRange } from "react-day-picker"
-import { Skeleton } from "../ui/skeleton"
 import TableLoadingData from "../ui/TableLoadingData"
+import { useBusinessStore } from "@/store/BusinessStore"
 
 type ModalState =
   | { type: "delete"; movementId: number }
@@ -23,12 +23,13 @@ type ModalState =
 export default function MovementsHistory() {
   const [modal, setModal] = useState<ModalState>(null);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const businessId = useBusinessStore(state => state.id);
 
   const [selectedUser, setSelectedUser] = useState("ninguno")
   const { data, isLoading, error } = useQuery({
-    queryKey: ["business-movements", selectedUser, dateRange],
+    queryKey: ["business-movements", businessId, selectedUser, dateRange],
     queryFn: async () => {
-      const data = await getMovements(selectedUser, dateRange);
+      const data = await getMovements(businessId!, selectedUser, dateRange);
       return data;
     },
     retry: 1,
