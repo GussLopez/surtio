@@ -5,6 +5,7 @@ import DeleteUserModal from "@/components/admin/users/DeleteUserModal";
 import EditUserModal from "@/components/admin/users/EditUserModal";
 import { Spinner } from "@/components/ui/spinner";
 import { getUsers } from "@/lib/services/userService"
+import { useBusinessStore } from "@/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
 import { UserRoundSearch, Users } from "lucide-react";
 import { useState } from "react";
@@ -22,10 +23,12 @@ type ModalState =
   | null
 
 export default function UsuariosPage() {
-  const [modal, setModal] = useState<ModalState>(null)
+  const businessId = useBusinessStore(state => state.id);
+  const [modal, setModal] = useState<ModalState>(null);
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["business-users"],
-    queryFn: async () => await getUsers(),
+    queryKey: ["business-users", businessId],
+    queryFn: async () => await getUsers(businessId!),
     retry: 1,
     refetchOnWindowFocus: false
   })

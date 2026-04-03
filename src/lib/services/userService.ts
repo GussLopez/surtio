@@ -2,11 +2,12 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getUsers() {
+export async function getUsers(businessId: string) {
   const { data, error } = await supabase
     .from("profiles")
     .select("*")
     .order("created_at")
+    .eq("business_id", businessId);
 
   if (error) throw error;
 
