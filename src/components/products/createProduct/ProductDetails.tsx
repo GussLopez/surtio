@@ -65,7 +65,7 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
         <Label htmlFor="unit" className="font-semibold text-xs">Categoria</Label>
         <div className="flex gap-2">
           <Select
-            value={formData.categorie_id?.toString() || 'ninguno'}
+            value={formData.category_id?.toString() || 'ninguno'}
             onValueChange={(value) => {
               if (value === 'ninguno') {
                 onChange({ categorie_id: null })

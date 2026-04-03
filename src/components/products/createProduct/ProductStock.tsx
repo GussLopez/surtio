@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getBusinessSuppliers } from "@/lib/services/supplierService";
+import { useBusinessStore } from "@/store/BusinessStore";
 import { ProductForm } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
@@ -19,11 +20,12 @@ type ModalState =
   | null
 export default function ProductPrices({ formData, onChange }: ProductPricesProps) {
   const [modal, setModal] = useState<ModalState>(null);
+  const businessId = useBusinessStore(state => state.id)
 
   const { data, isLoading } = useQuery({
     queryKey: ["business-suppliers"],
     queryFn: async () => {
-      const data = await getBusinessSuppliers()
+      const data = await getBusinessSuppliers(businessId!)
       return data;
     },
     retry: 1

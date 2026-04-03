@@ -32,7 +32,7 @@ export default function AddProduct() {
     unit: '',
     is_active: true,
     supplier_id: null,
-    categorie_id: null
+    category_id: null
   }
   const [formData, setFormData] = useState(initialFormData);
   const queryClient = useQueryClient();
