@@ -136,7 +136,7 @@ export default function EditUserModal({ employe, onClose, open }: EditUserProps)
           </FieldSet>
           <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button variant={'secondary'}>Cancelar</Button>
+              <Button variant={'outline'}>Cancelar</Button>
             </DialogClose>
             <Button
               disabled={isPending || !businessId}

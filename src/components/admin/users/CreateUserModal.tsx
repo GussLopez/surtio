@@ -162,7 +162,7 @@ export default function CreateUser() {
           </FieldSet>
           <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button variant={'secondary'}>Cancelar</Button>
+              <Button variant={'outline'}>Cancelar</Button>
             </DialogClose>
             <Button
               disabled={loading || !businessId}
