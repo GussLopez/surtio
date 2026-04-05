@@ -1,13 +1,9 @@
-'use client'
-
+'use client';
 import { PlusIcon } from "@phosphor-icons/react";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../ui/collapsible";
-import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Textarea } from "../../ui/textarea";
 import { useForm } from "react-hook-form";
