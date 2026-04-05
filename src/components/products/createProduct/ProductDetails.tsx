@@ -11,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { ClipboardCheck, ClipboardX, Plus } from "lucide-react";
 import { useState } from "react";
 import AddCategorieDialog from "../categories/AddCategorieDialog";
-import { useBusinessStore } from "@/store/BusinessStore";
 
 interface ProductDetailsProps {
   formData: ProductForm;
@@ -25,7 +24,7 @@ type ModalState =
 export default function ProductDetails({ formData, onChange }: ProductDetailsProps) {
   const [isActive, setIsActive] = useState(true);
   const [modal, setModal] = useState<ModalState>(null);
-  const businessId = useBusinessStore(state => state.id);
+
   const { data, isLoading } = useQuery({
     queryKey: ["business-categories"],
     queryFn: async () => {
