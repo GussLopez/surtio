@@ -10,13 +10,11 @@ import { editEmploye } from "@/app/admin/usuarios/page";
 
 interface UserCardProps {
   user: {
-    business_id: string;
-    created_at: string | null;
     full_name: string | null;
     id: string;
-    role: string;
     email: string;
   }
+  role: string
   onEdit: (employe: editEmploye) => void;
   onDelete: (employeId: string) =>  void;
 }
@@ -27,24 +25,24 @@ const gradientVariants = {
   stockMan: 'from-yellow-400 to-amber-600',
   owner: 'from-rose-400 to-red-600',
 }
-export default function UserCard({ user, onEdit, onDelete }: UserCardProps) {
+export default function UserCard({ user, role, onEdit, onDelete }: UserCardProps) {
   const [open, setOpen] = useState(false);
   return (
     <div className="rounded-md overflow-hidden bg-facent">
       <div className={`h-24 w-full bg-linear-to-br relative
-         ${user.role === 'admin' && gradientVariants.admin || user.role === 'seller' && gradientVariants.seller || user.role === 'stock-man' && gradientVariants.stockMan || user.role === 'owner' && gradientVariants.owner}`
+         ${role === 'admin' && gradientVariants.admin || role === 'seller' && gradientVariants.seller || role === 'stock-man' && gradientVariants.stockMan || role === 'owner' && gradientVariants.owner}`
       }>
-        {user.role === 'owner' && (
+        {role === 'owner' && (
           <div className="absolute top-4 left-4 text-yellow-300">
             <Crown size={20} className="fill-yellow-300" />
           </div>
         )}
         <div className="absolute top-4 right-4">
           <Badge variant={'secondary'}>
-            {user.role === 'admin' && 'Administrador'}
-            {user.role === 'seller' && 'Vendedor'}
-            {user.role === 'stock-man' && 'Almacenista'}
-            {user.role === 'owner' && 'Propietario'}
+            {role === 'admin' && 'Administrador'}
+            {role === 'seller' && 'Vendedor'}
+            {role === 'stock-man' && 'Almacenista'}
+            {role === 'owner' && 'Propietario'}
           </Badge>
         </div>
         <div className="absolute -bottom-10 left-4">
@@ -114,8 +112,8 @@ export default function UserCard({ user, onEdit, onDelete }: UserCardProps) {
             onClick={() => onEdit({
               id: user.id,
               name: user.full_name!,
-              email: user.email!,
-              role: user.role!,
+              email: user.email,
+              role: role,
             })}
           >
             <Edit size={40} />
@@ -128,7 +126,7 @@ export default function UserCard({ user, onEdit, onDelete }: UserCardProps) {
             size={'icon-lg'}
             variant={'outline'}
             onClick={() => onDelete(user.id)}
-            disabled={user.role === "owner"}
+            disabled={role === "owner"}
           >
             <Trash2 size={40} className="size-4.5" />
             <span className="sr-only">Eliminar un usuario</span>

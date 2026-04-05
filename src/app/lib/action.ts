@@ -21,29 +21,50 @@ export async function createEmploye({
   role,
   business_id,
 }: CreateEmployeProps) {
-  const { error: userError } = await supabase.auth.admin.createUser({
+
+  const { data, error: userError } = await supabase.auth.admin.createUser({
     email,
     password,
     email_confirm: true,
-    user_metadata: {
-      name,
-      role,
-      business_id,
-    },
+    user_metadata: { name },
   });
 
   if (userError) throw userError;
+
+  const userId = data.user.id;
+
+  // 🔥 CLAVE: usar upsert
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .upsert({
+      id: userId,
+      full_name: name,
+      email,
+    });
+
+  if (profileError) throw profileError;
+
+  const { error: membershipError } = await supabase
+    .from("memberships")
+    .insert({
+      user_id: userId,
+      business_id,
+      role,
+    });
+
+  if (membershipError) throw membershipError;
 
   return { success: true };
 }
 
 export async function deleteEmploye(userId: string) {
-  const { error: profileError } = await supabase
-    .from("profiles")
+  const { error: membershipError } = await supabase
+    .from("memberships")
     .delete()
-    .eq("id", userId);
+    .eq("user_id", userId);
 
-  if (profileError) throw profileError;
+  if (membershipError) throw membershipError;
+
   const { error: authError } = await supabase.auth.admin.deleteUser(userId);
 
   if (authError) throw authError;

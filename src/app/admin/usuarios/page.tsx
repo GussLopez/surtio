@@ -3,11 +3,14 @@ import UserCard from "@/components/admin/userCard";
 import CreateUser from "@/components/admin/users/CreateUserModal";
 import DeleteUserModal from "@/components/admin/users/DeleteUserModal";
 import EditUserModal from "@/components/admin/users/EditUserModal";
+import { Button } from "@/components/ui/button";
+import ServerError from "@/components/ui/server-error";
 import { Spinner } from "@/components/ui/spinner";
 import { getUsers } from "@/lib/services/userService"
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
 import { UserRoundSearch, Users } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export interface editEmploye {
@@ -38,6 +41,7 @@ export default function UsuariosPage() {
 
   const openDelete = (employeId: string) =>
     setModal({ type: "delete", employeId })
+  console.log(data);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -49,6 +53,9 @@ export default function UsuariosPage() {
           <CreateUser />
         </div>
       </div>
+      {error && (
+        <ServerError />
+      )}
       {isLoading && (
         <div className="flex justify-center mt-40">
           <Spinner className="size-7" />
@@ -67,10 +74,11 @@ export default function UsuariosPage() {
         <div className="grid grid-cols-4 gap-5 mt-10">
           {data?.map((user) => (
             <UserCard
-              key={user.id}
-              user={user}
+              key={user.profiles.id}
+              user={user.profiles}
               onEdit={openEdit}
               onDelete={openDelete}
+              role={user.role}
             />
           ))}
         </div>
