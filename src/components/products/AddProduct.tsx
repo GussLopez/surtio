@@ -15,9 +15,11 @@ import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../ui/spinner";
 import { sileo } from "sileo";
+import { useBusinessStore } from "@/store/BusinessStore";
 
 
 export default function AddProduct() {
+  const businessId = useBusinessStore(state => state.id);
   const initialFormData: ProductForm = {
     name: '',
     description: '',
@@ -44,7 +46,7 @@ export default function AddProduct() {
   const handleCreate = async () => {
     try {
       setLoading(true);
-      await createProduct(formData);
+      await createProduct(formData, businessId!);
       queryClient.invalidateQueries({ queryKey: ["stock-products"] });
       setLoading(false);
       setOpen(false);

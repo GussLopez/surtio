@@ -45,7 +45,8 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
     barcode: '',
     is_active: true,
     unit: '',
-    supplier_id: null
+    supplier_id: null,
+    category_id: null
   });
  
   useEffect(() => {
@@ -63,7 +64,8 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
         barcode: product.barcode,
         is_active: product.is_active,
         unit: product.unit,
-        supplier_id: product.supplier_id
+        supplier_id: product.supplier_id,
+        category_id: product.category_id
       });
     }
   }, [product]);

@@ -68,9 +68,9 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
             value={formData.category_id?.toString() || 'ninguno'}
             onValueChange={(value) => {
               if (value === 'ninguno') {
-                onChange({ categorie_id: null })
+                onChange({ category_id: null })
               } else {
-                onChange({ categorie_id: Number(value) })
+                onChange({ category_id: Number(value) })
               }
             }}
           >
@@ -123,7 +123,7 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
           open
           onClose={() => setModal(null)}
           onCraeted={(categorie) => {
-            onChange({ categorie_id: categorie.id })
+            onChange({ category_id: categorie.id })
           }}
         />
       )}

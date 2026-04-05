@@ -2,23 +2,16 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getProducts(
-  businessId: string,
-  categoryId?: number,
-  search?: string,
-) {
-  let query = supabase
-    .from("products")
-    .select(
-      `
+export async function getProducts(categoryId?: number, search?: string) {
+  let query = supabase.from("products").select(
+    `
     *,
     categories (
       id,
       name
     )  
   `,
-    )
-    .eq("business_id", businessId);
+  );
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);
@@ -28,7 +21,6 @@ export async function getProducts(
     query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%`);
   }
   const { data, error } = await query;
-
   if (error) throw error;
 
   return data;
@@ -46,9 +38,12 @@ export async function getProductById(id: string) {
   return data;
 }
 
-export async function createProduct(product: any) {
-  const { error } = await supabase.from("products").insert(product);
-
+export async function createProduct(product: any, businessId: string) {
+  const { error } = await supabase.from("products").insert({
+    ...product,
+    business_id: businessId
+  });
+  console.log('ERROR: ', error);
   if (error) throw error;
 }
 
