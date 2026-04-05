@@ -127,9 +127,9 @@ export default function RegisterMovement() {
   }
 
   const { data, isLoading } = useQuery({
-    queryKey: ["business-suppliers"],
+    queryKey: ["business-suppliers", businessId],
     queryFn: async () => {
-      const data = await getBusinessSuppliers()
+      const data = await getBusinessSuppliers(businessId!)
       return data;
     },
     retry: 1

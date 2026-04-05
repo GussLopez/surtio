@@ -37,14 +37,14 @@ export default function MovementsHistory() {
 
   const { data: profiles, isLoading: loadingProfiles } = useQuery({
     queryKey: ["business-users"],
-    queryFn: async () => await getUsers(),
+    queryFn: async () => await getUsers(businessId!),
     retry: 1,
     refetchOnWindowFocus: false,
   })
 
   return (
     <div>
-      <div className="flex justify-between items-center mt-6">
+      <div className="flex justify-between items-center mt-10">
         <div className="flex gap-4">
           <RangeDatePicker date={dateRange} setDate={setDateRange} />
           <Select
@@ -64,10 +64,10 @@ export default function MovementsHistory() {
                 ) : (
                   profiles?.map((profile) => (
                     <SelectItem
-                      key={profile.id}
-                      value={profile.id}
+                      key={profile.profiles.id}
+                      value={profile.profiles.id}
                     >
-                      {profile.full_name}
+                      {profile.profiles.full_name}
                     </SelectItem>
                   ))
                 )}
