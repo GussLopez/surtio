@@ -47,7 +47,8 @@ export default function Register({ user }: RegisterProps) {
           data: {
             name,
             email,
-            role: 'owner'
+            role: 'owner',
+            create_business: true
           }
         }
       })
