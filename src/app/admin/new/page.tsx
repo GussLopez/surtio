@@ -47,7 +47,7 @@ export default function NewBusiness() {
   const handleCreateBusinesss = async (formData: BusinessForm) => {
     setLoading(true);
     try {
-      const newBusiness = await createBusiness(formData);
+      const newBusiness = await createBusiness(formData.name);
       business.clearBusiness();
       business.setBusiness({
         id: newBusiness.id,
