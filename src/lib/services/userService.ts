@@ -9,11 +9,12 @@ export async function getUsers(businessId: string) {
       `
       role,
       created_at,
-      profiles!memberships_profile_fk (*)
-    `,
+      profiles:user_id (*)
+    `
     )
     .eq("business_id", businessId)
     .order("created_at");
+    
   if (error) throw error;
 
   return data;
@@ -52,7 +53,10 @@ export async function deleteProfile(profileId: string) {
 export async function getProfileById(id: string) {
   const { data, error } = await supabase
     .from("profiles")
-    .select("*")
+    .select(`
+        *,
+        memberships (role)
+      `)
     .eq("id", id)
     .single();
 

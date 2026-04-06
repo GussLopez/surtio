@@ -18,7 +18,7 @@ export default function SessionListener() {
           id: profile.id,
           email: profile.email,
           nombres: profile.full_name || '',
-          role: profile.role
+          role: profile.memberships[0].role
         });
       }
     }
