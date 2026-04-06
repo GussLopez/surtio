@@ -19,6 +19,7 @@ import { useQuery } from '@tanstack/react-query'
 import { searchProducts } from '@/lib/services/productService'
 import { ProductItem } from '@/types'
 import { useDebounce } from 'use-debounce';
+import { useBusinessStore } from '@/store/BusinessStore';
 
 interface SearchProductProps {
   setProduct: (product: ProductItem) => void;
@@ -30,11 +31,12 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [debouncedSearch] = useDebounce(inputValue, 500)
+  const [debouncedSearch] = useDebounce(inputValue, 500);
+  const businessId = useBusinessStore(state => state.id);
 
   const { data: products = null, isLoading } = useQuery<ProductItem[]>({
     queryKey: ['products-search', debouncedSearch],
-    queryFn: () => searchProducts(debouncedSearch),
+    queryFn: () => searchProducts(debouncedSearch, businessId!),
     enabled: debouncedSearch.trim().length > 0,
     staleTime: 1000 * 60 * 50
   })

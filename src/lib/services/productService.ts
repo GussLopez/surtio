@@ -2,7 +2,7 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getProducts(categoryId?: number, search?: string) {
+export async function getProducts(businessId: string, categoryId?: number, search?: string) {
   let query = supabase.from("products").select(
     `
     *,
@@ -11,7 +11,7 @@ export async function getProducts(categoryId?: number, search?: string) {
       name
     )  
   `,
-  );
+  ).eq('business_id', businessId);
 
   if (categoryId) {
     query = query.eq("category_id", categoryId);
@@ -62,13 +62,14 @@ export async function deleteProduct(id: string) {
   if (error) throw error;
 }
 
-export async function searchProducts(query: string) {
+export async function searchProducts(query: string, businessId: string) {
   const { data, error } = await supabase
     .from("products")
     .select("*")
     .or(`name.ilike.%${query}%,sku.ilike.%${query}%`)
     .order("name", { ascending: true })
-    .limit(10);
+    .limit(10)
+    .eq('business_id', businessId);
   if (error) throw error;
 
   return data;

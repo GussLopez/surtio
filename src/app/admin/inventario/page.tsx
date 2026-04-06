@@ -54,6 +54,7 @@ export default function InventarioPage() {
     queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId],
     queryFn: async () => {
       const data = await getProducts(
+        businessId!, 
         selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
         debouncedSearch
       );
