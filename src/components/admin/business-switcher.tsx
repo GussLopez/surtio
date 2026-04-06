@@ -114,10 +114,10 @@ export function BusinessSwitcher() {
               <DropdownMenuItem
                 key={business.id}
                 onClick={() => handleChangeBusiness(business)}
-                className="gap-2 p-2"
+                className={`gap-2 mb-1 p-2 ${business.id === businessId && 'bg-muted'}`}
               >
-                <div className="flex size-6 items-center justify-center rounded-md border">
-                  <Store className="size-3.5 shrink-0" />
+                <div className='flex size-6 items-center justify-center rounded-md border'>
+                  <Store className='size-3.5 shrink-0' />
                 </div>
                 {business.name}
               </DropdownMenuItem>
