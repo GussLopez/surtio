@@ -14,13 +14,20 @@ export async function getBusinessByUserId(id: string) {
   return data;
 }
 
-export async function createBusiness(name: string) {
-  const { data: { user } } = await supabase.auth.getUser();
-  
+export async function createBusiness(bData: BusinessForm) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   if (!user) throw new Error("Usuario no autenticado");
 
-  const { data: businessId, error: rpcError } = await supabase
-    .rpc('create_business_with_membership', { business_name: name });
+  const payload = {
+    ...bData,
+  };
+  const { data: businessId, error: rpcError } = await supabase.rpc(
+    "create_business_with_membership",
+    { business_data: payload },
+  );
 
   if (rpcError) {
     console.error("RPC Error:", rpcError);
@@ -38,4 +45,16 @@ export async function createBusiness(name: string) {
   }
 
   return business;
+}
+
+export async function getBusinessById(id: string) {
+  const { data, error } = await supabase
+    .from("businesses")
+    .select()
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
 }

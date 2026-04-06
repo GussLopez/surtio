@@ -11,6 +11,7 @@ import { useUserStore } from "@/store/UserStore";
 import { BusinessForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { sileo } from "sileo";
@@ -18,6 +19,7 @@ import { sileo } from "sileo";
 export default function NewBusiness() {
   const ownerId = useUserStore(state => state.id);
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const business = useBusinessStore();
   const { register, handleSubmit, setValue, control, formState: { errors } } = useForm({
@@ -34,7 +36,8 @@ export default function NewBusiness() {
       city: '',
       address: '',
       zip_code: '',
-      owner_id: ''
+      owner_id: '',
+      currency: 'mxn'
     }
   })
 
@@ -47,7 +50,7 @@ export default function NewBusiness() {
   const handleCreateBusinesss = async (formData: BusinessForm) => {
     setLoading(true);
     try {
-      const newBusiness = await createBusiness(formData.name);
+      const newBusiness = await createBusiness(formData);
       business.clearBusiness();
       business.setBusiness({
         id: newBusiness.id,
@@ -59,6 +62,7 @@ export default function NewBusiness() {
       sileo.success({
         title: 'Tienda creada correctamente'
       })
+      router.push('/admin');
     } catch (error) {
       console.error(error);
       sileo.error({
@@ -125,6 +129,39 @@ export default function NewBusiness() {
                   className="font-semibold text-primary-light hover:underline hover:text-primary"
                 >Ver detalles</Link>
               </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-12">
+            <div className="col-span-4">
+              <Label htmlFor="currency">Tipo de Moneda</Label>
+            </div>
+            <div className="col-span-8">
+              <Controller
+                control={control}
+                name="currency"
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="w-full bg-white">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="mxn">
+                        <img src='/img/currency/mexico.png' alt={`Mexico flag`} className='h-4 w-6' />{' '}
+                        MXN
+                      </SelectItem>
+                      <SelectItem value="usd">
+                        <img src='/img/currency/us.png' alt={`US flag`} className='h-4 w-6' />{' '}
+                        USD
+                      </SelectItem>
+                      <SelectItem value="eur">
+                        <img src='/img/currency/europe.png' alt={`Europe flag`} className='h-4 w-6' />{' '}
+                        EUR
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
             </div>
           </div>
           <div className="grid grid-cols-12">
