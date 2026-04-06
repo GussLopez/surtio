@@ -1,4 +1,4 @@
-'use client';;
+'use client'
 import { DollarSign, Plus, ScanBarcode } from 'lucide-react';
 import ComboboxSearchProduct from '@/components/sales/SearchProductInput'
 import { Input } from '@/components/ui/input';
@@ -15,10 +15,12 @@ import { createSaleFromCart, getSaleById } from '@/lib/services/salesService';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
 import NewSaleReceipt from '@/components/sales/NewSaleReceipt';
+import { useBusinessStore } from '@/store/BusinessStore';
 
 export default function VentasPage() {
   const [product, setProduct] = useState<ProductItem | null>(null);
   const addToCart = useCartStore(state => state.addToCart);
+  const businessId = useBusinessStore(state => state.id);
   const getTotal = useCartStore(state => state.getTotal);
   const items = useCartStore(state => state.items);
   const [saleId, setSaleId] = useState<string | null>(null);
@@ -42,7 +44,7 @@ export default function VentasPage() {
   const handleCheckOut = async () => {
     try {
       setLoading(true);
-      const newSaleId = await createSaleFromCart("cash");
+      const newSaleId = await createSaleFromCart("cash", businessId!);
       setSaleId(newSaleId);
       setOpen(true);
       sileo.success({

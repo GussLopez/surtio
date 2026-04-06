@@ -5,6 +5,7 @@ const supabase = getSupabaseBrowserClient();
 
 export async function createSaleFromCart(
   paymentMethod: "cash" | "card" | "transfer",
+  businessId: string,
 ) {
   const items = useCartStore.getState().items;
 
@@ -20,6 +21,7 @@ export async function createSaleFromCart(
   const { data, error } = await supabase.rpc("create_sale", {
     p_payment_method: paymentMethod,
     p_items: formattedItems,
+    p_business_id: businessId,
   });
 
   if (error) throw error;
@@ -29,7 +31,10 @@ export async function createSaleFromCart(
   return data;
 }
 
-export async function getSales(businessId: string, dateRange?: { from?: Date; to?: Date }) {
+export async function getSales(
+  businessId: string,
+  dateRange?: { from?: Date; to?: Date },
+) {
   let query = supabase
     .from("sales")
     .select(
