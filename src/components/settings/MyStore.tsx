@@ -7,6 +7,8 @@ import { CalendarDays, Clock, CreditCard, FileText, Globe, Mail, MapPin, Phone, 
 import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import InfoItem from "../ui/InfoItem";
+import { Skeleton } from "../ui/skeleton";
 
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);
@@ -22,27 +24,44 @@ export default function MyStore() {
       year: "numeric",
     });
   };
-  console.log(data);
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted">
-        <div className="size-24 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 overflow-hidden shrink-0">
-          {data?.logo ? (
-            <img src={data.logo} alt={data.name} className="w-full h-full object-cover" />
-          ) : (
-            <Store className="size-10 text-primary" />
-          )}
-        </div>
+        {isLoading ? (
+          <Skeleton className="size-24 rounded-2xl" />
+        ) : (
+          <div className="size-24 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 overflow-hidden shrink-0">
+            {data?.logo ? (
+              <img src={data.logo} alt={data.name} className="w-full h-full object-cover" />
+            ) : (
+              <Store className="size-10 text-primary" />
+            )}
+          </div>
+        )}
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight">{data?.name}</h1>
-            <Badge variant="secondary" className="border-transparent uppercase tracking-wide bg-linear-to-r from-pink-500 to-orange-500 bg-size-[105%] bg-center text-white">
-              {data?.plan}
-            </Badge>
+            {isLoading ? (
+              <>
+                <Skeleton className="w-40 h-5" />
+                <Skeleton className="w-15 h-4" />
+              </>
+            ) : (
+              <>
+                <h1 className="text-2xl font-bold tracking-tight">{data?.name}</h1>
+                <Badge variant="secondary" className={`border-transparent uppercase tracking-wide ${data?.plan === 'pro' && 'bg-linear-to-r from-pink-500 to-orange-500 bg-size-[105%] bg-center text-white'}`}>
+                  {data?.plan}
+                </Badge>
+              </>
+            )
+            }
           </div>
-          <p className="text-muted-foreground text-sm max-w-2xl">
-            {data?.description || "Sin descripción del negocio configurada."}
-          </p>
+          {isLoading ? (
+            <Skeleton className="w-50 h-2 mt-3" />
+          ) : (
+            <p className="text-muted-foreground text-sm max-w-2xl">
+              {data?.description || "Sin descripción del negocio configurada."}
+            </p>
+          )}
         </div>
       </div>
 
@@ -54,9 +73,22 @@ export default function MyStore() {
           </div>
           <Separator />
           <div className="space-y-3">
-            <InfoItem label="Razón Social" value={data?.legal_name} />
-            <InfoItem label="RFC / Tax ID" value={data?.rfc} />
-            <InfoItem label="ID de Negocio" value={data?.id} isCode />
+            <InfoItem
+              label="Razón Social"
+              value={data?.legal_name}
+              isLoading={isLoading}
+            />
+            <InfoItem
+              label="RFC / Tax ID"
+              value={data?.rfc}
+              isLoading={isLoading}
+            />
+            <InfoItem
+              label="ID de Negocio"
+              value={data?.id}
+              isCode
+              isLoading={isLoading}
+            />
           </div>
         </section>
 
@@ -68,8 +100,18 @@ export default function MyStore() {
           <Separator />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
             <div className="space-y-3">
-              <InfoItem icon={<Mail size={14} />} label="Correo Electrónico" value={data?.email} />
-              <InfoItem icon={<Phone size={14} />} label="Teléfono" value={data?.phone} />
+              <InfoItem
+                icon={<Mail size={14} />}
+                label="Correo Electrónico"
+                value={data?.email}
+                isLoading={isLoading}
+              />
+              <InfoItem
+                icon={<Phone size={14} />}
+                label="Teléfono"
+                value={data?.phone}
+                isLoading={isLoading}
+              />
             </div>
             <div className="space-y-1">
               <p className="text-[10px] uppercase font-bold text-muted-foreground/70">Dirección Física</p>
@@ -99,16 +141,19 @@ export default function MyStore() {
               icon={<CreditCard size={14} />}
               label="Moneda"
               value={data?.currency}
+              isLoading={isLoading}
             />
             <InfoItem
               icon={<Clock size={14} />}
               label="Zona Horaria"
               value={data?.timezone}
+              isLoading={isLoading}
             />
             <InfoItem
               icon={<CalendarDays size={14} />}
               label="Miembro desde"
               value={data?.created_at ? formatDate(data.created_at) : null}
+              isLoading={isLoading}
             />
             <InfoItem
               label="Estado de Cuenta"
@@ -127,7 +172,8 @@ export default function MyStore() {
           <div className="mt-3">
             <Button
               variant={'destructive'}
-              className="rounded-[5px]"
+              size={'sm'}
+              className="rounded-[5px] font-semibold cursor-pointer"
             >
               Eliminar Tienda
             </Button>
@@ -137,36 +183,4 @@ export default function MyStore() {
       </div>
     </div>
   )
-}
-
-function InfoItem({
-  label,
-  value,
-  icon,
-  isCode = false,
-  isBadge = false
-}: {
-  label: string;
-  value?: string | null;
-  icon?: React.ReactNode;
-  isCode?: boolean;
-  isBadge?: boolean;
-}) {
-  return (
-    <div className="space-y-1">
-      <p className="text-[10px] uppercase font-bold text-muted-foreground/70 flex items-center gap-1.5">
-        {icon}
-        {label}
-      </p>
-      {isBadge ? (
-        <Badge className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 border-emerald-500/20 shadow-none">
-          {value || "N/A"}
-        </Badge>
-      ) : (
-        <p className={`text-sm font-semibold ${isCode ? 'font-mono text-xs text-muted-foreground' : 'text-foreground'}`}>
-          {value || "—"}
-        </p>
-      )}
-    </div>
-  );
 }
