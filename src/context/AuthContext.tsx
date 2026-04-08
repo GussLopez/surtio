@@ -30,13 +30,17 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
         return;
       }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("business_id")
-        .eq("id", currentUser.id)
-        .single();
+      const { data: memberships } = await supabase
+        .from("memberships")
+        .select("business_id, role")
+        .eq("user_id", currentUser.id);
 
-      setBusinessId(profile?.business_id ?? null);
+      if (!memberships || memberships.length === 0) {
+        setBusinessId(null);
+        return;
+      }
+
+      setBusinessId(memberships[0].business_id);
     };
     loadUserData();
 
@@ -51,19 +55,36 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
         return;
       }
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("business_id")
-        .eq("id", currentUser.id)
-        .single();
+      const loadUserData = async () => {
+        const { data } = await supabase.auth.getUser();
+        const currentUser = data.user;
 
-        setBusinessId(profile?.business_id ?? null)
+        setUser(currentUser);
+
+        if (!currentUser) {
+          setBusinessId(null);
+          return;
+        }
+
+        const { data: memberships } = await supabase
+          .from("memberships")
+          .select("business_id, role")
+          .eq("user_id", currentUser.id);
+
+        if (!memberships || memberships.length === 0) {
+          setBusinessId(null);
+          return;
+        }
+
+        setBusinessId(memberships[0].business_id);
+      };
     });
+    loadUserData();
 
     return () => {
       subscription.unsubscribe();
     }
-   
+
   }, []);
 
   return (
