@@ -58,3 +58,13 @@ export async function getBusinessById(id: string) {
 
   return data;
 }
+
+
+export async function DeleteBusiness(businessId: string) {
+  const { error } = await supabase
+    .from("businesses")
+    .delete()
+    .eq("id", businessId);
+
+  if (error) throw error;
+}

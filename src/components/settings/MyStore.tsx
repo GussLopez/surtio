@@ -3,15 +3,36 @@
 import { getBusinessById } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { useQuery } from "@tanstack/react-query"
-import { CalendarDays, Clock, CreditCard, FileText, Globe, Mail, MapPin, Phone, Store, Trash, Trash2, TriangleAlert } from "lucide-react";
+import {
+  CalendarDays,
+  Clock,
+  CreditCard,
+  FileText,
+  Globe,
+  Mail,
+  MapPin,
+  Phone,
+  Store,
+  TriangleAlert,
+} from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import InfoItem from "../ui/InfoItem";
 import { Skeleton } from "../ui/skeleton";
+import { Business } from "@/types";
+import { useState } from "react";
+import DeleteBusinessDialog from "../admin/business/DeleteBusinessDialog";
+
+type ModalState =
+  | { type: "editLogo"; business: Business }
+  | { type: "editName"; business: Business }
+  | { type: "delete"; businessId: string, businessName: string }
+  | null
 
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);
+  const [modal, setModal] = useState<ModalState>(null);
   const { data, isLoading } = useQuery({
     queryKey: ["current-business", businessId],
     queryFn: async () => await getBusinessById(businessId!)
@@ -24,6 +45,10 @@ export default function MyStore() {
       year: "numeric",
     });
   };
+
+  const handleDelete = (businessId: string, businessName: string) =>
+    setModal({ type: "delete", businessId, businessName });
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted">
@@ -174,6 +199,8 @@ export default function MyStore() {
               variant={'destructive'}
               size={'sm'}
               className="rounded-[5px] font-semibold cursor-pointer"
+              onClick={() => handleDelete(data?.id!, data?.name!)}
+              disabled={isLoading}
             >
               Eliminar Tienda
             </Button>
@@ -181,6 +208,15 @@ export default function MyStore() {
           </div>
         </section>
       </div>
+
+      {modal?.type === "delete" && (
+        <DeleteBusinessDialog
+          open
+          onClose={() => setModal(null)}
+          businessId={modal.businessId}
+          businessName={modal.businessName}
+        />
+      )}
     </div>
   )
 }
