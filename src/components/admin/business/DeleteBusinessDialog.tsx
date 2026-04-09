@@ -73,6 +73,7 @@ export default function DeleteBusinessDialog({ open, onClose, businessId, busine
       mutate();
     }
   }
+  console.log(confirmed);
   return (
     <Dialog open={open} onOpenChange={() => onClose()}>
       <DialogContent>
@@ -99,7 +100,7 @@ export default function DeleteBusinessDialog({ open, onClose, businessId, busine
           <Button
             variant={'destructive'}
             onClick={handleDelete}
-            disabled={confirmed && false || isPending}
+            disabled={!confirmed && true || isPending}
           >
             {isPending ? (
               <>
