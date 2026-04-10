@@ -1,4 +1,4 @@
-import { BusinessForm } from "@/types";
+import { Business, BusinessForm } from "@/types";
 import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
@@ -59,6 +59,14 @@ export async function getBusinessById(id: string) {
   return data;
 }
 
+export async function editBusiness(businessId: string, business: BusinessForm) {
+  const { error } = await supabase
+  .from("businesses")
+  .update(business)
+  .eq("id", businessId)
+
+  if (error) throw error;
+}
 
 export async function DeleteBusiness(businessId: string) {
   const { error } = await supabase

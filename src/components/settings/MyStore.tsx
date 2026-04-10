@@ -12,6 +12,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  SquarePen,
   Store,
   TriangleAlert,
 } from "lucide-react";
@@ -23,10 +24,11 @@ import { Skeleton } from "../ui/skeleton";
 import { Business } from "@/types";
 import { useState } from "react";
 import DeleteBusinessDialog from "../admin/business/DeleteBusinessDialog";
+import EditBusinessDrawer from "../admin/business/EditBusinessDrawer";
 
 type ModalState =
   | { type: "editLogo"; business: Business }
-  | { type: "editName"; business: Business }
+  | { type: "editBussines"; business: Business, variant: 'name' | 'contact' | 'legal' }
   | { type: "delete"; businessId: string, businessName: string }
   | null
 
@@ -49,9 +51,12 @@ export default function MyStore() {
   const handleDelete = (businessId: string, businessName: string) =>
     setModal({ type: "delete", businessId, businessName });
 
+  const handleEdit = (business: Business, variant: 'name' | 'contact' | 'legal') =>
+    setModal({ type: "editBussines", business, variant });
+
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted">
+      <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted relative group">
         {isLoading ? (
           <Skeleton className="size-24 rounded-2xl" />
         ) : (
@@ -88,10 +93,30 @@ export default function MyStore() {
             </p>
           )}
         </div>
+        <Button
+          className="absolute top-3 right-3 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+          variant={'outline'}
+          size={'sm'}
+          disabled={isLoading}
+          onClick={() => handleEdit(data!, 'name')}
+        >
+          <SquarePen />
+          <span className="sr-only">Editar información del negocio</span>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <section className="bg-card p-5 rounded-xl border border-muted space-y-4">
+        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 relative group">
+          <Button
+            className="absolute top-3 right-5 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+            variant={'outline'}
+            size={'sm'}
+            disabled={isLoading}
+            onClick={() => handleEdit(data!, 'legal')}
+          >
+            <SquarePen />
+            <span className="sr-only">Editar información del negocio</span>
+          </Button>
           <div className="flex items-center gap-2 font-semibold text-sm uppercase tracking-wider">
             <FileText size={18} />
             <span>Identidad Legal</span>
@@ -117,7 +142,17 @@ export default function MyStore() {
           </div>
         </section>
 
-        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 md:col-span-2">
+        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 md:col-span-2 group relative">
+          <Button
+            className="absolute top-3 right-5 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+            variant={'outline'}
+            size={'sm'}
+            disabled={isLoading}
+            onClick={() => handleEdit(data!, "contact")}
+          >
+            <SquarePen />
+            <span className="sr-only">Editar información del negocio</span>
+          </Button>
           <div className="flex items-center gap-2 font-semibold text-sm uppercase tracking-wider">
             <MapPin size={18} />
             <span>Contacto y Ubicación</span>
@@ -215,6 +250,15 @@ export default function MyStore() {
           onClose={() => setModal(null)}
           businessId={modal.businessId}
           businessName={modal.businessName}
+        />
+      )}
+
+      {modal?.type === "editBussines" && (
+        <EditBusinessDrawer
+          open
+          onClose={() => setModal(null)}
+          business={modal.business}
+          variant={modal.variant}
         />
       )}
     </div>
