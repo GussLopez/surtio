@@ -11,6 +11,7 @@ interface BusinessState {
     owner_id: string;
     plan: string;
   }) => void;
+  setName: (name: string) => void;
   clearBusiness: () => void;
 }
 
@@ -20,14 +21,8 @@ export const useBusinessStore = create<BusinessState>((set) => ({
   owner_id: null,
   plan: null,
 
-  setBusiness: (business) =>
-    set({
-      id: business.id,
-      name: business.name,
-      owner_id: business.owner_id,
-      plan: business.plan,
-    }),
-
+  setBusiness: (data) => set((state) => ({ ...state, ...data })),
+  setName: (name: string) => set(() => ({ name })),
   clearBusiness: () =>
     set({
       id: null,
