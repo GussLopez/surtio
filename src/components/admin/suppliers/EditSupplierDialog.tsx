@@ -47,11 +47,7 @@ export default function EditSupplierDialog({ open, onClose, supplier }: AddSupli
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (formData: SupplierForm) => {
-      {
-        console.log(isActive);
-        console.log(formData);
-        await updateSupplier(supplier.id, formData)
-      }
+      await updateSupplier(supplier.id, formData)
     },
     onSuccess: () => {
       sileo.success({
