@@ -12,7 +12,7 @@ import { useUserStore } from "@/store/UserStore";
 import { Business, BusinessForm } from "@/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
