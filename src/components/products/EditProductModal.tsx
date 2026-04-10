@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   Dialog,
   DialogClose,
@@ -14,10 +14,10 @@ import ProductDetails from "./createProduct/ProductDetails";
 import ProductPrices from "./createProduct/ProductPrices";
 import ProductStock from "./createProduct/ProductStock";
 import { Button } from "../ui/button";
-import { getProductById, updateProduct } from "@/lib/services/productService";
+import { updateProduct } from "@/lib/services/productService";
 import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { Spinner } from "../ui/spinner";
 
