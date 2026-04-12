@@ -12,6 +12,9 @@ import { useForm } from "react-hook-form"
 import ErrorMessage from "../ui/error-message"
 import { useRouter } from "next/navigation"
 import { sileo } from "sileo";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import { Separator } from "../ui/separator";
 
 interface RegisterProps {
   user: User | null
@@ -24,6 +27,8 @@ interface RegisterForm {
 
 export default function Register({ user }: RegisterProps) {
   const router = useRouter();
+  const [checked, setChecked] = useState(false);
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const supabase = getSupabaseBrowserClient();
   const initialValues: RegisterForm = {
@@ -36,6 +41,12 @@ export default function Register({ user }: RegisterProps) {
   })
 
   const handleRegister = async (formData: RegisterForm) => {
+    if (!checked) {
+      sileo.warning({
+        title: 'Acepta los términos y condiciones para registrate'
+      });
+      return;
+    }
     try {
       setLoading(true);
       const { email, password, name } = formData;
@@ -53,13 +64,13 @@ export default function Register({ user }: RegisterProps) {
         }
       })
       setLoading(false);
+      router.push('/admin');
       if (error) {
         sileo.error({
           title: "Oopss...",
           description: "Ocurrio un error al registrarte"
         });
       }
-      console.log('ERROR: ', error);
       if (!error) {
         sileo.success({
           title: "Cuenta creada",
@@ -72,12 +83,30 @@ export default function Register({ user }: RegisterProps) {
     }
   }
   return (
-    <div className="col-span-8">
+    <div className="relative">
       <div className="max-w-104 mx-auto p-10">
         <div className="flex flex-col items-center mb-6">
-          <PackageIcon size={60} className="text-primary mb-3" />
+          <div className="mb-10">
+            {theme === "dark" ? (
+              <Image
+                src={'/img/logo/flyzzio-light.svg'}
+                alt="Flyzzio Logo"
+                width={30}
+                height={30}
+              />
+            ) : (
+              <Image
+                src={'/img/logo/flyzzio.svg'}
+                alt="Flyzzio Logo"
+                width={30}
+                height={30}
+              />
+            )}
+          </div>
           <h1 className="mb-1 text-3xl font-semibold">Crea una cuenta</h1>
-          <p className="text-sm text-gray-600 dark:text-neutral-200">¿Ya tienes cuenta? <Link className="text-primary underline font-medium" href={'/auth/login'}>Inicia sesión</Link></p>
+          <p
+            className="text-sm text-muted-foreground text-center"
+          >Únete ahora para optimizar tu experiencia desde el primer día.</p>
         </div>
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
           <div>
@@ -106,8 +135,8 @@ export default function Register({ user }: RegisterProps) {
                 required: "El email es requerido"
               })}
             />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </div>
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
           <div>
             <label
               className="block text-sm font-medium mb-2"
@@ -122,10 +151,13 @@ export default function Register({ user }: RegisterProps) {
             />
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
-          <div className="flex gap-2 items-center mb-8">
-            <Checkbox />
+          <div className="flex gap-2 items-center mb-4">
+            <Checkbox 
+              id="termsAndConditions"
+              onCheckedChange={e => setChecked(e ? true : false)}
+            />
             <label
-              htmlFor="remember"
+              htmlFor="termsAndConditions"
               className="text-sm text-gray-600 dark:text-neutral-100"
             >
               Acepto <Link href={'/'} className="hover:underline">términos y condiciones</Link>
@@ -141,8 +173,40 @@ export default function Register({ user }: RegisterProps) {
               Registrarse
             </Button>
           </div>
+          <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
+            <Separator className="w-full" />
+            <span className="shrink-0 text-muted-foreground">O registrate con</span>
+            <Separator className="w-full" />
+          </div>
+          <Button
+            variant={'outline'}
+            className="w-full"
+            type="button"
+          >
+            <div className="w-4 h-4">
+              <img
+                src="/img/icons/google.svg"
+                alt="Google Icon"
+              />
+            </div>
+            Google
+          </Button>
+          <p className="text-xs text-muted-foreground text-center">
+            ¿Ya tienes cuenta? <Link href={'/auth/login'} className="text-primary font-medium hover:underline">Inicia sesión.</Link>
+          </p>
         </form>
       </div>
+      <p
+        className="absolute bottom-4 left-4 text-xs text-neutral-400"
+      >
+        © {new Date().getFullYear()} Flyzzio - Todos los derechos reservados.
+      </p>
+      <Link
+        href={'/legal/politicas-privacidad'}
+        className="absolute bottom-4 right-4 text-xs text-neutral-400 hover:underline"
+      >
+        Políticas de Privacidad
+      </Link>
     </div>
   )
 }

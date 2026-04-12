@@ -5,15 +5,17 @@ import { useState } from "react"
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { PackageIcon, WarningCircleIcon } from "@phosphor-icons/react"
+import { WarningCircleIcon } from "@phosphor-icons/react"
 import Link from "next/link"
 import { Checkbox } from "../ui/checkbox"
-import { BrandLogo } from "../ui/BrandLogo"
 import { Spinner } from "../ui/spinner"
 import { useForm } from "react-hook-form"
 import ErrorMessage from "../ui/error-message"
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
+import Image from "next/image"
+import { Separator } from "../ui/separator"
+import { useTheme } from "next-themes"
 
 interface LoginForm {
   email: string;
@@ -22,6 +24,7 @@ interface LoginForm {
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
   const supabase = getSupabaseBrowserClient();
   const [authError, setAuthError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -58,12 +61,32 @@ export default function Login() {
     setLoading(false);
   }
   return (
-    <div className="col-span-8">
+    <div className="relative">
       <div className="max-w-104 mx-auto p-10 col-span-8">
         <div className="flex flex-col items-center mb-6">
-          <PackageIcon size={60} className="text-primary mb-3" />
-          <h1 className="mb-1 text-3xl font-semibold">Accede a tu cuenta</h1>
-          <p className="text-sm text-gray-600 dark:text-neutral-200">¿No tienes cuenta? <Link className="text-primary underline font-medium" href={'/auth/register'}>Registrate</Link></p>
+          <div className="mb-10">
+            {theme === "dark" ? (
+              <Image
+                src={'/img/logo/flyzzio-light.svg'}
+                alt="Flyzzio Logo"
+                width={30}
+                height={30}
+              />
+            ) : (
+              <Image
+                src={'/img/logo/flyzzio.svg'}
+                alt="Flyzzio Logo"
+                width={30}
+                height={30}
+              />
+            )}
+          </div>
+          <h1 className="mb-1 text-3xl font-semibold">Bienvenido a Flyzzio</h1>
+          <p
+            className="text-sm text-muted-foreground"
+          >
+            Inicia sesión con tu correo electrónico y contraseña
+          </p>
         </div>
         <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
           {authError && (
@@ -113,12 +136,18 @@ export default function Login() {
             </div>
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
-          <div className="flex gap-2 items-center mb-8">
-            <Checkbox id="remember" />
-            <label
-              htmlFor="remember"
-              className="text-sm text-gray-600 dark:text-neutral-100"
-            >Mantener sesión iniciada por 30 días</label>
+          <div className="flex justify-between mb-6">
+            <div className="flex gap-2 items-center">
+              <Checkbox id="remember" />
+              <label
+                htmlFor="remember"
+                className="text-sm text-gray-600 dark:text-neutral-100"
+              >Recuerdame</label>
+            </div>
+            <Link
+              href={'/forgot-password'}
+              className="text-sm text-primary-light dark:text-primary hover:underline font-medium"
+            >¿Olvidaste tu contraseña?</Link>
           </div>
           <div>
             <Button
@@ -130,12 +159,43 @@ export default function Login() {
               Acceder
             </Button>
           </div>
-
-          <Link
-            className="block text-sm text-primary/80 dark:text-primary hover:underline text-center font-medium"
-            href={'/forgot-password'}>¿Olvidaste tu contraseña?</Link>
+          <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
+            <Separator className="w-full" />
+            <span className="shrink-0 text-muted-foreground">O inicia sesión con</span>
+            <Separator className="w-full" />
+          </div>
+          <Button
+            variant={'outline'}
+            className="w-full"
+            type="button"
+          >
+            <div className="w-4 h-4">
+              <img
+                src="/img/icons/google.svg"
+                alt="Google Icon"
+              />
+            </div>
+            Google
+          </Button>
+          <p className="text-xs text-muted-foreground text-center">
+            ¿No tienes cuenta? <Link href={'/auth/register'} className="text-primary font-medium hover:underline">Registrate ahora.</Link>
+          </p>
         </form>
+
+        <p
+          className="absolute bottom-4 left-4 text-xs text-neutral-400"
+        >
+          © {new Date().getFullYear()} Flyzzio - Todos los derechos reservados.
+        </p>
+        <Link
+          href={'/legal/politicas-privacidad'}
+          className="absolute bottom-4 right-4 text-xs text-neutral-400 hover:underline"
+        >
+          Políticas de Privacidad
+        </Link>
+
       </div>
     </div>
   )
 }
+
