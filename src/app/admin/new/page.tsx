@@ -1,5 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button";
+import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -96,6 +97,7 @@ export default function NewBusiness() {
                   required: 'El nombre es requerido'
                 })}
               />
+              <ErrorMessage>{errors.name?.message}</ErrorMessage>
               <p className="text-xs text-muted-foreground pt-1.5">¿Cuál es el nombre de tu negocio o empresa? Puedes cambiarlo más tarde.</p>
             </div>
           </div>
