@@ -28,7 +28,7 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
   const userId = useUserStore(state => state.id);
 
 
-  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<BusinessForm>({});
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<BusinessForm>({});
 
   useEffect(() => {
     if (business) {
