@@ -23,6 +23,7 @@ import { getBusinessByUserId } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
+import { useTheme } from "next-themes"
 
 interface BusinessSoreProps {
   id: string;
@@ -37,6 +38,7 @@ export function BusinessSwitcher() {
   const activeBusiness = useBusinessStore(state => state);
   const businessId = useBusinessStore(state => state.id);
   const queryClient = useQueryClient();
+  const { theme } = useTheme();
 
   const { data: businesses, isLoading } = useQuery({
     queryKey: ["business", userId],
@@ -77,8 +79,20 @@ export function BusinessSwitcher() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="bg-primary text-white flex aspect-square size-8 items-center justify-center rounded-lg">
-                <Package className="size-5" />
+              <div className="flex aspect-square size-8 p-1 items-center justify-center rounded-lg">
+                {theme === "dark" ? (
+                  <img
+                    src="/img/logo/flyzzio-light.svg"
+                    alt="Flyzzio Logo"
+                    className="w-auto h-full"
+                  />
+                ) : (
+                  <img
+                    src="/img/logo/flyzzio.svg"
+                    alt="Flyzzio Logo"
+                    className="w-auto h-full"
+                  />
+                )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 {isLoading ? (
