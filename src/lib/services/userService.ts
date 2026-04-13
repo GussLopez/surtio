@@ -1,3 +1,4 @@
+import { UserForm } from "@/types";
 import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
@@ -94,4 +95,13 @@ async function waitForProfile(userId: string) {
   }
 
   throw new Error("Profile no se creó a tiempo");
+}
+
+export async function updateProfile (data: UserForm, userId: string) {
+  const { error } = await supabase
+    .from("profiles")
+    .update(data)
+    .eq("id", userId)
+  
+  if (error) throw error;
 }
