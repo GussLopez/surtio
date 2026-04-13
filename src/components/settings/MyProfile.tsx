@@ -120,12 +120,6 @@ export default function MyProfile() {
                 value={data?.phone}
                 isLoading={isLoading}
               />
-              <InfoItem
-                label="ID de Usuario"
-                value={data?.id}
-                isCode
-                isLoading={isLoading}
-              />
             </div>
           </div>
         </section>
@@ -140,7 +134,7 @@ export default function MyProfile() {
               size={'sm'}
               className="rounded-[5px] font-semibold cursor-pointer"
               onClick={() => openDelete(data?.id!, data?.full_name!)}
-              disabled={isLoading}
+              disabled
             >
               Eliminar Cuenta
             </Button>
