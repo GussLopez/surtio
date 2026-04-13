@@ -16,10 +16,16 @@ export interface Product {
   stock: number;
   supplier_id: number | null;
   unit: string | null;
- 
+  categories: {
+    id: number;
+    name: string;
+  } | null;
 }
 
-export type ProductForm = Omit<Product, "id" | "business_id" | "categories" | "created_at">;
+export type ProductForm = Omit<
+  Product,
+  "id" | "business_id" | "categories" | "created_at"
+>;
 
 export interface ProductItem extends Product {
   quantity?: number;
