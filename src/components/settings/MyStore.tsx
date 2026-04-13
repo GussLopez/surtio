@@ -56,7 +56,7 @@ export default function MyStore() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted relative group">
+      <div className="flex flex-col md:flex-row gap-6 items-start md:items-center bg-card p-6 rounded-xl border border-muted relative">
         {isLoading ? (
           <Skeleton className="size-24 rounded-2xl" />
         ) : (
@@ -94,7 +94,7 @@ export default function MyStore() {
           )}
         </div>
         <Button
-          className="absolute top-3 right-3 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+          className="absolute top-3 right-3 transition-all duration-200 ease-in-out rounded-full"
           variant={'outline'}
           size={'sm'}
           disabled={isLoading}
@@ -106,9 +106,9 @@ export default function MyStore() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 relative group">
+        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 relative">
           <Button
-            className="absolute top-3 right-5 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+            className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
             variant={'outline'}
             size={'sm'}
             disabled={isLoading}
@@ -142,9 +142,9 @@ export default function MyStore() {
           </div>
         </section>
 
-        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 md:col-span-2 group relative">
+        <section className="bg-card p-5 rounded-xl border border-muted space-y-4 md:col-span-2 relative">
           <Button
-            className="absolute top-3 right-5 opacity-0 scale-95 group-hover:opacity-100 transition-all duration-200 ease-in-out rounded-full"
+            className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
             variant={'outline'}
             size={'sm'}
             disabled={isLoading}
@@ -224,8 +224,7 @@ export default function MyStore() {
         </section>
 
         <section className="bg-card p-5 rounded-xl border border-muted md:col-span-1">
-          <div className="flex items-center gap-2 font-semibold text-sm uppercase tracking-wider">
-            <TriangleAlert size={18} />
+          <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-wider text-destructive">
             <span>Zona de peligro</span>
           </div>
           <p className="text-xs text-muted-foreground mt-1">Las acciones en esta sección son permanentes y no se pueden deshacer</p>
