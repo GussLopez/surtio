@@ -7,10 +7,27 @@ export interface Employe {
 }
 
 export interface Profile {
-  business_id: string;
+  avatar_url: string | null;
   created_at: string | null;
   email: string;
   full_name: string | null;
   id: string;
-  role: string;
+  is_active: boolean;
+  is_blocked: boolean | null;
+  last_login_at: string | null;
+  last_name: string | null;
+  phone: string | null;
+  memberships: {
+    role: string;
+  }[];
+}
+
+export interface UserForm {
+  avatar_url: string | null;
+  full_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  memberships: {
+    role: string;
+  }[];
 }
