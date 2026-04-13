@@ -1,3 +1,4 @@
+import MyProfile from "@/components/settings/MyProfile";
 import MyStore from "@/components/settings/MyStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Lock, Receipt, Route, Settings2, SquareUserRound, Store } from "lucide-react";
@@ -34,7 +35,7 @@ export default function AjustesPage() {
           <MyStore />
         </TabsContent>
         <TabsContent value="profile">
-          <div>Content2</div>
+          <MyProfile />
         </TabsContent>
         <TabsContent value="password">
           <div>Content3</div>
