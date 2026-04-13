@@ -82,13 +82,9 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
                 <SelectLabel>Categorias</SelectLabel>
                 <SelectItem value="ninguno" defaultChecked>Ninguno</SelectItem>
                 {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
-                {data?.length === 0 ? (
-                  <p className="p-2 text-xs text-muted-foreground">No hay categorías registrados</p>
-                ) : (
-                  data?.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
-                  ))
-                )}
+                {data?.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>

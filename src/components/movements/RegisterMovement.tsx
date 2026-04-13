@@ -152,13 +152,9 @@ export default function RegisterMovement() {
                   <SelectLabel>Proveedores</SelectLabel>
                   <SelectItem value="ninguno" defaultChecked>Ninguno</SelectItem>
                   {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
-                  {data?.length === 0 ? (
-                    <p className="p-2 text-sm  text-muted-foreground">No hay proveedores registrados</p>
-                  ) : (
-                    data?.map((supp) => (
+                  {data?.map((supp) => (
                       <SelectItem key={supp.id} value={supp.id.toString()}>{supp.name}</SelectItem>
-                    ))
-                  )}
+                    ))}
                 </SelectGroup>
               </SelectContent>
             </Select>

@@ -54,7 +54,7 @@ export default function InventarioPage() {
     queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId],
     queryFn: async () => {
       const data = await getProducts(
-        businessId!, 
+        businessId!,
         selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
         debouncedSearch
       );
@@ -147,13 +147,9 @@ export default function InventarioPage() {
                 <SelectLabel>Categorías</SelectLabel>
                 <SelectItem value="all">Todos</SelectItem>
                 {catLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
-                {categories?.length === 0 ? (
-                  <p className="p-2 text-sm  text-muted-foreground">No hay categorías registradas</p>
-                ) : (
-                  categories?.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
-                  ))
-                )}
+                {categories?.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id.toString()}>{cat.name}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -170,7 +166,7 @@ export default function InventarioPage() {
           <Button
             variant={'outline'}
             disabled={!data || data?.length === 0 || csvLoading}
-            // onClick={handleDownloadCsv}
+          // onClick={handleDownloadCsv}
           >
             {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
