@@ -2,9 +2,9 @@ import { pdf } from "@react-pdf/renderer";
 import ProductsPDFDocument from "./ProductsPDFDocument";
 import type { Product } from "@/types";
 
-export async function generateProductsPDF(products: Product[], categoryFilter?: string) {
+export async function generateProductsPDF(products: Product[], businessName: string, categoryFilter?: string) {
   const blob = await pdf(
-    <ProductsPDFDocument products={products} categoryFilter={categoryFilter} />
+    <ProductsPDFDocument products={products} businessName={businessName} categoryFilter={categoryFilter} />
   ).toBlob();
 
   const url = URL.createObjectURL(blob);

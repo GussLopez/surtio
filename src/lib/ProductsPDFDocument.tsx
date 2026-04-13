@@ -312,10 +312,11 @@ function formatCurrency(value: number) {
 
 interface ProductsPDFProps {
   products: Product[];
+  businessName: string;
   categoryFilter?: string;
 }
 
-export default function ProductsPDFDocument({ products, categoryFilter }: ProductsPDFProps) {
+export default function ProductsPDFDocument({ products, businessName, categoryFilter }: ProductsPDFProps) {
   const generatedDate = new Date().toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "2-digit",
@@ -353,7 +354,7 @@ export default function ProductsPDFDocument({ products, categoryFilter }: Produc
           {/* Header */}
           <View style={styles.header}>
             <View>
-              <Text style={styles.storeName}>Tienda Demo</Text>
+              <Text style={styles.storeName}>{businessName}</Text>
               <Text style={styles.headerSubtitle}>Inventario de Productos</Text>
             </View>
             <View style={styles.headerRight}>

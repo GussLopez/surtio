@@ -33,6 +33,7 @@ export default function InventarioPage() {
   const [modal, setModal] = useState<ModalState>(null);
   const [selectedCategorie, setSelectedCategorie] = useState('all');
   const [search, setSearch] = useState('');
+  const businessName = useBusinessStore(state => state.name);
   const [debouncedSearch] = useDebounce(search, 500);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [csvLoading, setCsvLoading] = useState(false);
@@ -94,7 +95,7 @@ export default function InventarioPage() {
     setPdfLoading(true);
     try {
       const categoryName = categories?.find(c => c.id.toString() === selectedCategorie)?.name;
-      await generateProductsPDF(data, categoryName || selectedCategorie);
+      await generateProductsPDF(data, businessName!, categoryName || selectedCategorie);
     } catch (error) {
       sileo.error({
         title: 'Error al descargar el pdf',
