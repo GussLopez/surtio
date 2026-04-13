@@ -85,8 +85,8 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
     <Drawer direction="right" open={open} onOpenChange={() => onClose()}>
       <DrawerContent>
         <DrawerHeader className="border-b border-input">
-          <DrawerTitle className="text-xl">{business.name}</DrawerTitle>
-          <DrawerDescription className="text-base">Edita la información de tu tienda</DrawerDescription>
+          <DrawerTitle className="text-2xl">{business.name}</DrawerTitle>
+          <DrawerDescription>Edita la información de tu tienda</DrawerDescription>
         </DrawerHeader>
         <form onSubmit={handleSubmit(onSave)} className="flex flex-col grow">
           {variant === "name" && (
