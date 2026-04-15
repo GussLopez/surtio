@@ -41,7 +41,6 @@ export default function AddProduct() {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const userRole = useUserStore(state => state.role);
-  console.log(userRole);
   const [open, setOpen] = useState(false);
   const updateForm = (data: Partial<ProductForm>) =>
     setFormData(prev => ({ ...prev, ...data }))
