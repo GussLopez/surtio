@@ -3,11 +3,16 @@ import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();
 
-export async function getBusinessByUserId(id: string) {
+export async function getBusinessByUserId(userId: string) {
   const { data, error } = await supabase
-    .from("businesses")
-    .select("*")
-    .eq("owner_id", id);
+    .from("memberships")
+    .select(
+      `
+      role,
+      businesses (*)
+    `,
+    )
+    .eq("user_id", userId);
 
   if (error) throw error;
 
@@ -61,9 +66,9 @@ export async function getBusinessById(id: string) {
 
 export async function editBusiness(businessId: string, business: BusinessForm) {
   const { error } = await supabase
-  .from("businesses")
-  .update(business)
-  .eq("id", businessId)
+    .from("businesses")
+    .update(business)
+    .eq("id", businessId);
 
   if (error) throw error;
 }
