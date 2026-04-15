@@ -41,7 +41,7 @@ export function NavSettings({
   const activeClasses = 'text-primary bg-primary/10 hover:bg-primary/10! hover:text-primary!'
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Administración</SidebarGroupLabel>
+      {settings.length > 0 && <SidebarGroupLabel>Administración</SidebarGroupLabel>}
       <SidebarMenu>
         {settings.map((item) => (
           <SidebarMenuItem key={item.name}>
