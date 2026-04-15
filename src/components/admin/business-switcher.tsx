@@ -40,24 +40,26 @@ export function BusinessSwitcher() {
   const queryClient = useQueryClient();
   const { theme } = useTheme();
 
-  const { data: businesses, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["business", userId],
     queryFn: async () => await getBusinessByUserId(userId!),
     enabled: !!userId,
     staleTime: 1000 * 60 * 30,
   })
   React.useEffect(() => {
-    if (businesses?.length && !businessId) {
-      const business = businesses[0];
+    if (data?.length && !businessId) {
+      const { businesses } = data[0];
 
       setBussines({
-        id: business.id,
-        name: business.name,
-        owner_id: business.owner_id,
-        plan: business.plan ?? "free"
-      })
+        id: businesses.id,
+        name: businesses.name,
+        owner_id: businesses.owner_id,
+        plan: businesses.plan ?? "free"
+      });
+
+      document.cookie = `active_business_id=${businesses.id}; path=/; max-age=${60 * 60 * 24 * 7}`;
     }
-  }, [businesses, businessId, setBussines])
+  }, [data, businessId, setBussines]);
 
 
   const handleChangeBusiness = (business: BusinessSoreProps) => {
@@ -68,6 +70,9 @@ export function BusinessSwitcher() {
       plan: business.plan || 'free',
       owner_id: business.owner_id
     })
+
+    document.cookie = `active_business_id=${business.id}; path=/; max-age=${60 * 60 * 24 * 7}`;
+
     queryClient.invalidateQueries()
   }
   return (
@@ -124,16 +129,16 @@ export function BusinessSwitcher() {
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Tiendas
             </DropdownMenuLabel>
-            {businesses?.map((business) => (
+            {data?.map((business) => (
               <DropdownMenuItem
-                key={business.id}
-                onClick={() => handleChangeBusiness(business)}
-                className={`gap-2 mb-1 p-2 ${business.id === businessId && 'bg-muted'}`}
+                key={business.businesses.id}
+                onClick={() => handleChangeBusiness(business.businesses)}
+                className={`gap-2 mb-1 p-2 ${business.businesses.id === businessId && 'bg-muted'}`}
               >
                 <div className='flex size-6 items-center justify-center rounded-md border'>
                   <Store className='size-3.5 shrink-0' />
                 </div>
-                {business.name}
+                {business.businesses.name}
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
