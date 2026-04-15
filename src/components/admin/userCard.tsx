@@ -16,7 +16,7 @@ interface UserCardProps {
   }
   role: string
   onEdit: (employe: editEmploye) => void;
-  onDelete: (employeId: string) =>  void;
+  onDelete: (employeId: string) => void;
 }
 
 const gradientVariants = {
@@ -24,6 +24,29 @@ const gradientVariants = {
   seller: 'from-cyan-400 to-blue-600',
   stockMan: 'from-yellow-400 to-amber-600',
   owner: 'from-rose-400 to-red-600',
+}
+
+const roleActions = {
+  owner: ['Acceso completo'],
+  admin: [
+    'Gestionar inventario',
+    'Gestionar entradas',
+    'Gestionar proveedores',
+    'Gestionar ventas',
+    'Modificar ventas',
+    'Ver historial de ventas'
+  ],
+  seller: [
+    'Registrar ventas',
+    'Ver historial de ventas',
+    'Ver inventario'
+  ],
+  'stock-man': [
+    'Gestionar inventario',
+    'Eliminar productos',
+    'Gestionar entradas',
+    'Gestionar proveedores'
+  ]
 }
 export default function UserCard({ user, role, onEdit, onDelete }: UserCardProps) {
   const [open, setOpen] = useState(false);
@@ -88,11 +111,11 @@ export default function UserCard({ user, role, onEdit, onDelete }: UserCardProps
                   >
                     <div className="py-4">
                       <ul className="text-xs space-y-2 pl-4">
-                        <li>Inventario</li>
-                        <li>Ventas</li>
-                        <li>Historial de ventas</li>
-                        <li>Reportes</li>
-                        <li>Operaciones</li>
+                        {roleActions[role as keyof typeof roleActions]?.map((permiso, index) => (
+                          <li key={index}>
+                            {permiso}
+                          </li>
+                        ))}
                       </ul>
                       <p className="text-sm mt-4 font-medium border-t pt-2">Acceso completo</p>
                     </div>
