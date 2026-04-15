@@ -78,8 +78,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
         setBusinessId(memberships[0].business_id);
       };
+      loadUserData();
     });
-    loadUserData();
 
     return () => {
       subscription.unsubscribe();
