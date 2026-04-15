@@ -19,6 +19,7 @@ import { NavUser } from "@/components/admin/nav-user"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
 import { NavSettings } from "./nav-settings";
 import { BusinessSwitcher } from "./business-switcher";
+import { useUserStore } from "@/store/UserStore";
 
 const data = {
   navMain: [
@@ -26,22 +27,25 @@ const data = {
       title: "Inicio",
       url: "/admin",
       icon: LayoutTemplate,
+      roles: ["owner", "admin", "stock-man", "seller"]
     },
     {
       title: "Ventas",
       url: "/admin/ventas",
       icon: DollarSign,
+      roles: ["owner", "admin", "seller"]
     },
     {
       title: "Historial de Ventas",
       url: "/admin/historial-ventas",
       icon: FileClock,
+      roles: ["owner", "admin", "seller"]
     },
-    {
+    /* {
       title: "Reportes",
       url: "/admin/reportes",
       icon: ChartNoAxesCombined,
-    },
+    }, */
     /* {
       title: "Operaciones",
       url: "/admin/operaciones",
@@ -53,16 +57,19 @@ const data = {
       name: "Inventario",
       url: "/admin/inventario",
       icon: Package,
+      roles: ["owner", "admin", "stock-man", "seller"]
     },
     {
       name: "Entradas y Salidas",
       url: "/admin/entradas-salidas",
       icon: ArrowRightLeft,
+      roles: ["owner", "admin", "stock-man"]
     },
     {
       name: "Proveedores",
       url: "/admin/proveedores",
       icon: Truck,
+      roles: ["owner", "admin", "stock-man"]
     },
   ],
   settings: [
@@ -70,25 +77,31 @@ const data = {
       name: "Usuarios",
       url: "/admin/usuarios",
       icon: Users,
+      roles: ["owner"]
     },
     {
       name: "Ajustes",
       url: "/admin/ajustes",
       icon: Settings2,
+      roles: ["owner"]
     },
   ],
 }
 
 export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const userRole = useUserStore((state) => state.role);
+  console.log(userRole);
+  const filterByRole = (items: any[]) => 
+    items.filter(item => !item.roles || item.roles.includes(userRole));
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <BusinessSwitcher />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSettings settings={data.settings} />
+        <NavMain items={filterByRole(data.navMain)} />
+        <NavProjects projects={filterByRole(data.projects)} />
+        <NavSettings settings={filterByRole(data.settings)} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
