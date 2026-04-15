@@ -1,11 +1,20 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function proxy(request: NextRequest) {
+const ROLE_ROUTES: Record<string, string[]> = {
+  "/admin/admin": ["owner", "admin", "seller", "stock-man"],
+  "/admin/usuarios": ["owner", "admin"],
+  "/admin/ajustes": ["owner"],
+  "/admin/inventario": ["owner", "admin", "stock-man", "seller"],
+  "/admin/entradas-salidas": ["owner", "admin", "stock-man"],
+  "/admin/proveedores": ["owner", "admin", "stock-man"],
+  "/admin/ventas": ["owner", "admin", "seller"],
+  "/admin/historial-ventas": ["owner", "admin", "seller"],
+  "/admin/new": ["owner"],
+};
 
-  let response = NextResponse.next({
-    request
-  });
+export async function proxy(request: NextRequest) {
+  let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -26,34 +35,43 @@ export async function proxy(request: NextRequest) {
           response.cookies.set({ name, value: "", ...options });
         },
       },
-    }
+    },
   );
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const { pathname } = request.nextUrl;
 
+  const businessId = request.cookies.get("active_business_id")?.value;
+  
+  if (user && pathname.startsWith("/admin")) {
+    let userRole = "seller";
 
-  const isAuthPage =
-    request.nextUrl.pathname.startsWith("/auth");
+    if (businessId) {
+      const { data: membership } = await supabase
+        .from("memberships")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("business_id", businessId)
+        .single();
 
-  const isProtectedRoute =
-    request.nextUrl.pathname.startsWith("/admin");
+      if (membership) {
+        userRole = membership.role;
+      }
+    }
 
-
-  if (!user && isProtectedRoute) {
-
-    return NextResponse.redirect(
-      new URL("/auth/login", request.url)
+    const restrictedPath = Object.keys(ROLE_ROUTES).find((path) =>
+      pathname.startsWith(path),
     );
 
-  }
-  if (user && isAuthPage) {
+    if (restrictedPath) {
+      const allowedRoles = ROLE_ROUTES[restrictedPath];
 
-    return NextResponse.redirect(
-      new URL("/admin", request.url)
-    );
-
+      if (!allowedRoles.includes(userRole)) {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
+    }
   }
 
   return response;
