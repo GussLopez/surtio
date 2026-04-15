@@ -5,6 +5,7 @@ import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Product } from "@/types";
+import Can from "../ui/Can";
 
 interface ProductTableProps {
   data: Product[]
@@ -49,7 +50,7 @@ export default function ProductTable({ data, isLoading, totalInventario, onEdit,
               const stockColor = product.stock <= product.min_stock
                 ? "text-red-500 bg-red-50 dark:bg-red-950/30"
                 : product.stock <= product.min_stock + 5 ? "text-amber-500 bg-amber-100 dark:bg-amber-950/30"
-                : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30";
+                  : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30";
               return (
                 <TableRow key={product.id} className="group transition-colors">
                   <TableCell className="text-center">
@@ -95,33 +96,35 @@ export default function ProductTable({ data, isLoading, totalInventario, onEdit,
                     <span className="text-[9px] ml-1 text-muted-foreground font-normal">MXN</span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <MoreHorizontal className="size-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuGroup>
-                          <DropdownMenuLabel className="text-xs">Acciones</DropdownMenuLabel>
-                          <DropdownMenuItem onClick={() => onEdit(product)}>
-                            <PencilIcon />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <SlidersHorizontal />
-                            Ajustar
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup onClick={() => onDelete(product)}>
-                          <DropdownMenuItem variant="destructive">
-                            <Trash2Icon />
-                            Eliminar
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <Can roles={["owner", "admin", "stock-man"]}>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <MoreHorizontal className="size-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuGroup>
+                            <DropdownMenuLabel className="text-xs">Acciones</DropdownMenuLabel>
+                            <DropdownMenuItem onClick={() => onEdit(product)}>
+                              <PencilIcon />
+                              Editar
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <SlidersHorizontal />
+                              Ajustar
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuGroup onClick={() => onDelete(product)}>
+                            <DropdownMenuItem variant="destructive">
+                              <Trash2Icon />
+                              Eliminar
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </Can>
                   </TableCell>
                 </TableRow>
               )
