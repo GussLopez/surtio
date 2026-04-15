@@ -90,7 +90,6 @@ const data = {
 
 export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const userRole = useUserStore((state) => state.role);
-  console.log(userRole);
   const filterByRole = (items: any[]) => 
     items.filter(item => !item.roles || item.roles.includes(userRole));
   return (
