@@ -16,6 +16,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../ui/spinner";
 import { sileo } from "sileo";
 import { useBusinessStore } from "@/store/BusinessStore";
+import { useUserStore } from "@/store/UserStore";
 
 
 export default function AddProduct() {
@@ -39,6 +40,8 @@ export default function AddProduct() {
   const [formData, setFormData] = useState(initialFormData);
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
+  const userRole = useUserStore(state => state.role);
+  console.log(userRole);
   const [open, setOpen] = useState(false);
   const updateForm = (data: Partial<ProductForm>) =>
     setFormData(prev => ({ ...prev, ...data }))
@@ -68,7 +71,10 @@ export default function AddProduct() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <CustomBtn>
+        <CustomBtn
+          disabled={userRole === 'seller'}
+          className={`${userRole === 'seller' && 'hidden'}`}
+        >
           <Plus />
           Agregar
         </CustomBtn>
