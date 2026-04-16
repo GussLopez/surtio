@@ -2,8 +2,6 @@
 import * as React from "react"
 import {
   ArrowRightLeft,
-  BookOpen,
-  ChartNoAxesCombined,
   DollarSign,
   FileClock,
   LayoutTemplate,
