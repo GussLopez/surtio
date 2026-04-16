@@ -61,7 +61,7 @@ export default function Login() {
     setLoading(false);
   }
   return (
-    <div className="relative">
+    <div className="min-h-screen relative">
       <div className="max-w-104 mx-auto p-10 col-span-8">
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
