@@ -33,15 +33,13 @@ export default function Preloader({ isReady }: { isReady: boolean }) {
           className="fixed inset-0 flex flex-col items-center justify-center z-9999 bg-background"
           initial={{ opacity: 1 }}
           exit={{
-            y: '-100%',
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
+            filter: "blur(20px)",
+            opacity: 0
           }}
         >
           <motion.div
             className="flex items-center gap-4 mb-20"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -20, filter: "blur(30px)" }}
           >
             <div className="size-14 lg:size-20">
               <img
