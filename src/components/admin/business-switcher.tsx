@@ -85,19 +85,16 @@ export function BusinessSwitcher() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="flex aspect-square size-8 p-1 items-center justify-center rounded-lg">
-                {theme === "dark" ? (
-                  <img
-                    src="/img/logo/flyzzio-light.svg"
-                    alt="Flyzzio Logo"
-                    className="w-auto h-full"
-                  />
-                ) : (
-                  <img
-                    src="/img/logo/flyzzio.svg"
-                    alt="Flyzzio Logo"
-                    className="w-auto h-full"
-                  />
-                )}
+                <img
+                  src="/img/logo/flyzzio-light.svg"
+                  alt="Flyzzio Logo"
+                  className="w-auto h-full hidden dark:block"
+                />
+                <img
+                  src="/img/logo/flyzzio.svg"
+                  alt="Flyzzio Logo"
+                  className="w-auto h-full block dark:hidden"
+                />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 {isLoading ? (
