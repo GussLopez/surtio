@@ -82,7 +82,7 @@ export default function VentasPage() {
         <h1 className="text-3xl font-semibold">Ventas</h1>
       </div>
 
-      <div className='grid grid-cols-3 gap-10 mt-10'>
+      <div className='grid grid-cols-3 gap-x-10 gap-y-4 mt-10'>
         <div className='col-span-2 p-4 rounded-lg border border-input'>
           <div className='flex items-center gap-3'>
             <ScanBarcode />
