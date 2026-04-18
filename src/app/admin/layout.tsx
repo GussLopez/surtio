@@ -7,7 +7,7 @@ import SessionListener from "@/components/auth/SessionListener";
 import ClientWrapper from "@/components/admin/ClientWrapper";
 
 export const metadata: Metadata = {
-  title: "Stock Pro - Admin",
+  title: "Flyzzio - Admin",
 };
 
 export default function AdminLayout({
