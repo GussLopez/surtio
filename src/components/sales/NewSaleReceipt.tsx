@@ -5,6 +5,8 @@ import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/lib/generateReceiptPDF";
+import { useBusinessStore } from "@/store/BusinessStore";
+import { Spinner } from "../ui/spinner";
 
 interface SaleRecipProps {
   open: boolean;
@@ -14,6 +16,7 @@ interface SaleRecipProps {
 
 export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) {
   const [downloading, setDownloading] = useState(false);
+  const businessName = useBusinessStore(state => state.name);
   const printRef = useRef<HTMLDivElement>(null);
   const formatDate = new Date(sale.created_at!)
     .toLocaleDateString("es-MX", {
@@ -25,7 +28,7 @@ export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) 
   const handleDownloadPDF = async () => {
     setDownloading(true);
     try {
-      await generateReceiptPDF(sale);
+      await generateReceiptPDF(sale, businessName!);
     } finally {
       setDownloading(false);
     }
@@ -87,9 +90,19 @@ export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) 
             <Button
               variant={'secondary'}
               onClick={handleDownloadPDF}
+              disabled={downloading}
             >
-              <DownloadSimpleIcon size={20} />
-              PDF
+              {downloading ? (
+                <>
+                  <Spinner />
+                  PDF
+                </>
+              ) : (
+                <>
+                  <DownloadSimpleIcon size={20} />
+                  PDF
+                </>
+              )}
             </Button>
           </div>
 
