@@ -7,12 +7,16 @@ import { format } from "date-fns";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { useState } from "react";
-import { Trash, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
-export default function ShoppingCartItems() {
+interface ShoppingCartProps {
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
+}
+
+export default function ShoppingCartItems({ date, setDate } : ShoppingCartProps) {
   const items = useCartStore(state => state.items);
-  const [date, setDate] = useState<Date | undefined>(new Date());
   const removeFromCart = useCartStore(state => state.removeFromCart)
   return (
     <div className="col-span-2 p-4 border border-input rounded-lg">

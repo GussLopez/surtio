@@ -6,6 +6,7 @@ const supabase = getSupabaseBrowserClient();
 export async function createSaleFromCart(
   paymentMethod: "cash" | "card" | "transfer",
   businessId: string,
+  saleDate: Date
 ) {
   const items = useCartStore.getState().items;
 
@@ -22,6 +23,7 @@ export async function createSaleFromCart(
     p_payment_method: paymentMethod,
     p_items: formattedItems,
     p_business_id: businessId,
+    p_created_at: saleDate.toISOString()
   });
 
   if (error) throw error;

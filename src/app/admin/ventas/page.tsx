@@ -24,6 +24,7 @@ export default function VentasPage() {
   const getTotal = useCartStore(state => state.getTotal);
   const items = useCartStore(state => state.items);
   const [saleId, setSaleId] = useState<string | null>(null);
+  const [saleDate, setSaleDate] = useState<Date | undefined>(new Date());
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -44,7 +45,7 @@ export default function VentasPage() {
   const handleCheckOut = async () => {
     try {
       setLoading(true);
-      const newSaleId = await createSaleFromCart("cash", businessId!);
+      const newSaleId = await createSaleFromCart("cash", businessId!, saleDate || new Date());
       setSaleId(newSaleId);
       setOpen(true);
       sileo.success({
@@ -52,7 +53,8 @@ export default function VentasPage() {
         description: "La venta se registró correctamente",
         autopilot: true
       });
-      queryClient.invalidateQueries({ queryKey: ["stock-products", "sales-reports"] })
+      queryClient.invalidateQueries({ queryKey: ["stock-products", "sales-reports"] });
+      queryClient.invalidateQueries({ queryKey: ["monthlyRevenue", businessId] });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -169,7 +171,7 @@ export default function VentasPage() {
             </Button>
           </div>
         </div>
-        <ShoppingCartItems />
+        <ShoppingCartItems date={saleDate} setDate={setSaleDate} />
       </div>
       {receipt && (
         <NewSaleReceipt
