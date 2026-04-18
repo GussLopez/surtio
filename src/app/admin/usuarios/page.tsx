@@ -31,7 +31,7 @@ export default function UsuariosPage() {
     queryKey: ["business-users", businessId],
     queryFn: async () => await getUsers(businessId!),
     retry: 1,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
 
   const openEdit = (employe: editEmploye) =>

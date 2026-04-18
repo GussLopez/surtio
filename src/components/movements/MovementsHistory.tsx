@@ -39,7 +39,7 @@ export default function MovementsHistory() {
     queryKey: ["business-users"],
     queryFn: async () => await getUsers(businessId!),
     retry: 1,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   })
 
   return (

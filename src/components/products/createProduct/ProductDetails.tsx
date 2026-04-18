@@ -32,7 +32,7 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
       return data;
     },
     retry: 1,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
 
   return (

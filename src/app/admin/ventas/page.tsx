@@ -74,7 +74,7 @@ export default function VentasPage() {
       return getSaleById(saleId);
     },
     retry: 1,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     enabled: !!saleId
   })
   return (

@@ -31,7 +31,7 @@ export default function ProveedoresPage() {
       return data;
     },
     retry: 1,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
 
   const openCreate = () => setModal({ type: "create" });

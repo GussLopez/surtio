@@ -62,14 +62,14 @@ export default function InventarioPage() {
       return data;
     },
     retry: 1,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
 
   const { data: categories, isLoading: catLoading } = useQuery({
     queryKey: ["business-categories"],
     queryFn: async () => await getBusinessCategories(),
     retry: 1,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: true
   })
 
   const totalInventario = data?.reduce((acc, product) => {
