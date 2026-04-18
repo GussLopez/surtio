@@ -1,13 +1,10 @@
 'use client'
 
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function AuthCallback() {
 
-  const router = useRouter();
+ /*  const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = getSupabaseBrowserClient();
 
@@ -31,7 +28,7 @@ export default function AuthCallback() {
 
     exchangeCodeForSession();
 
-  }, []);
+  }, []); */
 
   return (
     <div className="flex flex-col items-center justify-center col-span-8">
