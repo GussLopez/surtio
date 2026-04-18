@@ -16,7 +16,7 @@ export interface Product {
   stock: number;
   supplier_id: number | null;
   unit: string | null;
-  categories: {
+  categories?: {
     id: number;
     name: string;
   } | null;
