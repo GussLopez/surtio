@@ -8,6 +8,7 @@ import { sileo } from "sileo";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import ErrorMessage from "../ui/error-message";
+import { useBusinessStore } from "@/store/BusinessStore";
 
 interface CancelSaleProps {
   open: boolean;
@@ -18,12 +19,14 @@ export default function CancelSaleDialog({ open, onClose, saleId }: CancelSalePr
   const [cancelReason, setCancelReason] = useState('');
   const [error, setError] = useState('')
   const queryClient = useQueryClient();
+  const businessId = useBusinessStore(state => state.id);
 
 
   const { mutate, isPending } = useMutation({
     mutationFn: (reason: string) => cancelSale(saleId, reason),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["sales-reports"] });
+      queryClient.invalidateQueries({ queryKey: ["monthlyRevenue", businessId] });
       sileo.success({
         title: 'Venta cancelada',
         description: 'La venta se canceló correctamente',
@@ -61,7 +64,7 @@ export default function CancelSaleDialog({ open, onClose, saleId }: CancelSalePr
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 space-y-2">
-          <Label>Motivo de anulación</Label>
+          <Label>Motivo de cancelación</Label>
           <Textarea
             onChange={e => {
               setCancelReason(e.target.value);
