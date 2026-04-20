@@ -5,7 +5,6 @@ import { RangeDatePicker } from "../ui/range-date"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react"
 import { useQuery } from "@tanstack/react-query"
-import { getMovements } from "@/lib/services/movementService"
 import { Badge } from "../ui/badge"
 import { Trash2 } from "lucide-react"
 import { useState } from "react"
@@ -15,6 +14,7 @@ import { getUsers } from "@/lib/services/userService"
 import { DateRange } from "react-day-picker"
 import TableLoadingData from "../ui/TableLoadingData"
 import { useBusinessStore } from "@/store/BusinessStore"
+import { Movement } from "@/types"
 
 type ModalState =
   | { type: "delete"; movementId: number }
@@ -26,15 +26,25 @@ export default function MovementsHistory() {
   const businessId = useBusinessStore(state => state.id);
 
   const [selectedUser, setSelectedUser] = useState("ninguno")
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<Movement[]>({
     queryKey: ["business-movements", businessId, selectedUser, dateRange],
     queryFn: async () => {
-      const data = await getMovements(businessId!, selectedUser, dateRange);
-      return data;
+      const res = await fetch('/api/movements/search', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: selectedUser,
+          businessId,
+          dateRange
+        })
+      })
+      if (!res.ok) throw new Error("Error fetching");
+
+      return res.json();
     },
     retry: 1,
   })
 
+  console.log(data);
   const { data: profiles, isLoading: loadingProfiles } = useQuery({
     queryKey: ["business-users"],
     queryFn: async () => await getUsers(businessId!),
@@ -108,7 +118,7 @@ export default function MovementsHistory() {
           <TableBody>
             {isLoading && (
               <TableLoadingData
-                columns={['date', 'text', 'smallText', 'text','number', 'doubleText', 'actions']}
+                columns={['date', 'text', 'smallText', 'text', 'number', 'doubleText', 'actions']}
                 totalRows={5}
               />
             )}

@@ -11,7 +11,6 @@ import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { createMovement, MovementInsert } from "@/lib/services/movementService";
 import { getBusinessSuppliers } from "@/lib/services/supplierService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
@@ -29,6 +28,17 @@ interface ItemsProps {
   product_name: string;
   product_sku: string;
   quantity: number;
+}
+
+interface MovementInsert {
+  product_id: string;
+  business_id: string;
+  quantity: number;
+  type: "entrada" | "salida" | "ajuste";
+  user_id?: string | null;
+  supplier_id?: number | null;
+  reference?: string | null;
+  batch_id: string;
 }
 
 export default function RegisterMovement() {
@@ -107,8 +117,15 @@ export default function RegisterMovement() {
         batch_id: operationId
       }))
 
-      await createMovement(movementsToSave);
-
+      const res = await fetch('/api/movements', {
+        method: 'POST',
+        body: JSON.stringify({
+          movements: movementsToSave
+        })
+      });
+      if (!res.ok) {
+        throw new Error("Error fetching");
+      }
       sileo.success({
         title: 'Movimientos registrados',
         description: 'Los movimientos se registraron correctamente',
@@ -153,8 +170,8 @@ export default function RegisterMovement() {
                   <SelectItem value="ninguno" defaultChecked>Ninguno</SelectItem>
                   {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
                   {data?.map((supp) => (
-                      <SelectItem key={supp.id} value={supp.id.toString()}>{supp.name}</SelectItem>
-                    ))}
+                    <SelectItem key={supp.id} value={supp.id.toString()}>{supp.name}</SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>

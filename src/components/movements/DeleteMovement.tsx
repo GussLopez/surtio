@@ -13,7 +13,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash2Icon } from "lucide-react"
 import { sileo } from "sileo"
 import { Spinner } from "../ui/spinner"
-import { deleteMovement } from "@/lib/services/movementService";
 
 interface MovementModalProps {
   open: boolean
@@ -23,9 +22,17 @@ interface MovementModalProps {
 
 export function DeleteMovement({ open, onClose, movementId }: MovementModalProps) {
   const queryClient = useQueryClient()
-  const { mutate, isPending} = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      await deleteMovement(movementId!);
+      const res = await fetch(`/api/movements/${movementId}`, {
+        method: 'DELETE'
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+      return data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["business-movements"] });
