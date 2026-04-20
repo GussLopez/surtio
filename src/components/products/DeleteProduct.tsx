@@ -9,7 +9,6 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { deleteProduct } from "@/lib/services/productService"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash2Icon } from "lucide-react"
 import { sileo } from "sileo"
@@ -22,10 +21,21 @@ interface ProductModalProps {
 }
 
 export function DeleteProduct({ open, onClose, productId }: ProductModalProps) {
-  const queryClient = useQueryClient()
-  const { mutate, isPending} = useMutation({
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      await deleteProduct(productId!);
+
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'DELETE'
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+
+      return data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["stock-products"] });
@@ -36,12 +46,10 @@ export function DeleteProduct({ open, onClose, productId }: ProductModalProps) {
     },
     onError: (error) => {
       sileo.error({
-        title: "Algo salió mal",
-        description: "Por favor intente más tarde.",
-
+        title: "Acceso denegado",
+        description: error.message || "No tienes permisos para realizar esta acción",
       });
-      console.error(error)
-    },
+    }
   })
   return (
     <AlertDialog open={open} onOpenChange={(value) => !value && onClose()}>

@@ -48,7 +48,7 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
     supplier_id: null,
     category_id: null
   });
- 
+
   useEffect(() => {
     if (product) {
       setFormData({
@@ -75,7 +75,20 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
   const mutation = useMutation({
     mutationFn: async () => {
       setLoadig(true);
-      await updateProduct(productId!, formData)
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product: formData,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Error al editar el producto");
+      }
     },
     onSuccess: () => {
       setLoadig(false);
@@ -90,8 +103,8 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
     onError: (error) => {
       setLoadig(false);
       sileo.error({
-        title: "Algo salió mal",
-        description: "Por favor intente más tarde.",
+        title: "Acceso denegado",
+        description: error.message || "No tienes permisos para realizar esta acción",
       });
       console.error(error)
     },

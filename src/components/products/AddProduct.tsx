@@ -48,8 +48,25 @@ export default function AddProduct() {
   const handleCreate = async () => {
     try {
       setLoading(true);
-      await createProduct(formData, businessId!);
-      queryClient.invalidateQueries({ queryKey: ["stock-products"] });
+      const res = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product: formData,
+          businessId
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Error al crear producto");
+      }
+      
+      setFormData(initialFormData);
+      queryClient.invalidateQueries({ queryKey: ["stock-products", businessId] });
       setLoading(false);
       setOpen(false);
       sileo.success({
