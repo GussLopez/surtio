@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 import InputQuantity from "@/components/sales/InputQuantity";
 import SearchProductInput from "@/components/sales/SearchProductInput";
 import { Badge } from "@/components/ui/badge";
@@ -11,16 +10,15 @@ import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { getBusinessSuppliers } from "@/lib/services/supplierService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
-import { Product } from "@/types";
+import { Product, Supplier } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react"
 import { NumberField } from "react-aria-components";
 import { sileo } from "sileo";
 import AddSupplierDialog from "../admin/suppliers/AddSupplierDialog";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
 
 interface ItemsProps {
   tempId: string;
@@ -143,13 +141,21 @@ export default function RegisterMovement() {
     }
   }
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Supplier[]>({
     queryKey: ["business-suppliers", businessId],
     queryFn: async () => {
-      const data = await getBusinessSuppliers(businessId!)
-      return data;
+      const res = await fetch('/api/suppliers', {
+        method: 'POST',
+        body: JSON.stringify({
+          businessId,
+          active: true
+        })
+      });
+
+      return res.json();
     },
-    retry: 1
+    retry: 1,
+    enabled: !!businessId
   })
   return (
     <div>
