@@ -9,7 +9,6 @@ import ProductDetails from "./createProduct/ProductDetails";
 import ProductPrices from "./createProduct/ProductPrices";
 import ProductStock from "./createProduct/ProductStock";
 import { Button } from "../ui/button";
-import { createProduct } from "@/lib/services/productService";
 import { useState } from "react";
 import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";

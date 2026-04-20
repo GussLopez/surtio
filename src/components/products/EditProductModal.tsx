@@ -14,7 +14,6 @@ import ProductDetails from "./createProduct/ProductDetails";
 import ProductPrices from "./createProduct/ProductPrices";
 import ProductStock from "./createProduct/ProductStock";
 import { Button } from "../ui/button";
-import { updateProduct } from "@/lib/services/productService";
 import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
