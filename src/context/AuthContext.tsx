@@ -7,6 +7,7 @@ import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 type AuthContextType = {
   user: User | null;
   businessId: string | null;
+  loading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -14,12 +15,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [businessId, setBusinessId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const supabase = getSupabaseBrowserClient();
 
   useEffect(() => {
 
     const loadUserData = async () => {
+      setLoading(true);
+
       const { data } = await supabase.auth.getUser();
       const currentUser = data.user;
 
@@ -27,6 +31,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
       if (!currentUser) {
         setBusinessId(null);
+        setLoading(false);
         return;
       }
 
@@ -37,10 +42,12 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
       if (!memberships || memberships.length === 0) {
         setBusinessId(null);
+        setLoading(false);
         return;
       }
 
       setBusinessId(memberships[0].business_id);
+      setLoading(false);
     };
     loadUserData();
 
@@ -78,8 +85,8 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
 
         setBusinessId(memberships[0].business_id);
       };
-      loadUserData();
     });
+    loadUserData();
 
     return () => {
       subscription.unsubscribe();
@@ -88,7 +95,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, businessId }}>
+    <AuthContext.Provider value={{ user, businessId, loading }}>
       {children}
     </AuthContext.Provider>
   );
