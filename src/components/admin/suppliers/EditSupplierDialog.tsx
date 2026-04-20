@@ -47,7 +47,13 @@ export default function EditSupplierDialog({ open, onClose, supplier }: AddSupli
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (formData: SupplierForm) => {
-      await updateSupplier(supplier.id, formData)
+      const res = await fetch(`/api/suppliers/${supplier.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ supplier: formData })
+      });
+
+      if (!res.ok) throw new Error("Error fetching");
+      return res.json();
     },
     onSuccess: () => {
       sileo.success({
