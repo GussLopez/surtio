@@ -151,7 +151,6 @@ export default function RegisterMovement() {
     },
     retry: 1
   })
-  const MotionTableRow = motion.create(TableRow);
   return (
     <div>
       <div className="mt-10 flex gap-4">
@@ -234,12 +233,8 @@ export default function RegisterMovement() {
           <TableBody>
             <AnimatePresence mode="popLayout">
               {items.map((item) => (
-                <MotionTableRow
+                <TableRow
                   key={item.tempId}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: .3 }}
                   className="bg-background"
                 >
                   <TableCell className="text-lg font-semibold">
@@ -273,7 +268,7 @@ export default function RegisterMovement() {
                       <Trash size={20} />
                     </Button>
                   </TableCell>
-                </MotionTableRow>
+                </TableRow>
               ))}
             </AnimatePresence>
             <TableRow>
