@@ -4,9 +4,8 @@ import AddSupplierDialog from "@/components/admin/suppliers/AddSupplierDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getBusinessSuppliers } from "@/lib/services/supplierService";
 import { useBusinessStore } from "@/store/BusinessStore";
-import { ProductForm } from "@/types";
+import { ProductForm, Supplier } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import { useState } from "react";
@@ -22,15 +21,22 @@ export default function ProductPrices({ formData, onChange }: ProductPricesProps
   const [modal, setModal] = useState<ModalState>(null);
   const businessId = useBusinessStore(state => state.id)
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Supplier[]>({
     queryKey: ["business-suppliers"],
     queryFn: async () => {
-      const data = await getBusinessSuppliers(businessId!)
-      return data;
+      const res = await fetch('/api/suppliers', {
+        method: 'POST',
+        body: JSON.stringify({
+          businessId,
+          active: true
+        })
+      })
+      return res.json();
     },
-    retry: 1
+    retry: 1,
+    enabled: !!businessId
   })
-  
+
   return (
     <div className="grid grid-cols-2 gap-3 p-2">
       <div>
@@ -84,8 +90,8 @@ export default function ProductPrices({ formData, onChange }: ProductPricesProps
                 <SelectItem value="ninguno" defaultChecked>Ninguno</SelectItem>
                 {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
                 {data?.map((supp) => (
-                    <SelectItem key={supp.id} value={supp.id.toString()}>{supp.name}</SelectItem>
-                  ))}
+                  <SelectItem key={supp.id} value={supp.id.toString()}>{supp.name}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
