@@ -16,14 +16,6 @@ export async function POST(req: Request) {
         },
       },
     );
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return Response.json({ error: "No autorizado" }, { status: 401 });
-    }
     const { product, businessId } = await req.json();
 
     const { error } = await supabase.from("products").insert({
