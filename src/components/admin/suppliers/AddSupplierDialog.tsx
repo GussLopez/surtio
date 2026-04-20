@@ -59,7 +59,11 @@ export default function AddSupplierDialog({ open, onClose, onCraeted }: AddSupli
     }
     try {
       setLoading(true);
-      const newSupplier = await createSupplier(formData)
+      const res = await fetch('/api/suppliers/create', {
+        method: 'POST',
+        body: JSON.stringify({ supplier: formData })
+      })
+      if (!res.ok) throw new Error('Error fetching');
 
       sileo.success({
         title: 'Proveedor creado',
@@ -69,8 +73,8 @@ export default function AddSupplierDialog({ open, onClose, onCraeted }: AddSupli
 
       queryClient.invalidateQueries({ queryKey: ["business-suppliers"] });
 
-      onCraeted?.(newSupplier);
-      
+      onCraeted?.(await res.json());
+
       setLoading(false);
       onClose();
     } catch (error) {
