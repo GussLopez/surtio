@@ -1,8 +1,6 @@
-'use client'
-
+'use client';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Spinner } from "@/components/ui/spinner";
-import { deleteSupplier } from "@/lib/services/supplierService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2Icon } from "lucide-react";
 import { sileo } from "sileo";
@@ -16,7 +14,10 @@ export default function DeleteSupplierDialog({ open, onClose, supplierId }: Prod
   const queryClient = useQueryClient()
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      await deleteSupplier(supplierId);
+      const res = await fetch(`/api/suppliers/${supplierId}`, {
+        method: 'DELETE'
+      })
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["business-suppliers"] });
