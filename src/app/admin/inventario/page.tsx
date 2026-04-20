@@ -5,7 +5,6 @@ import ProductTable from "@/components/products/ProductTable";
 import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getProducts } from "@/lib/services/productService";
 import { useQuery } from "@tanstack/react-query";
 import CardView from "@/components/products/CardView";
 import { Input } from "@/components/ui/input";
@@ -37,7 +36,7 @@ export default function InventarioPage() {
   const [debouncedSearch] = useDebounce(search, 500);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [csvLoading, setCsvLoading] = useState(false);
-  const businessId = useBusinessStore(state => state.id)
+  const businessId = useBusinessStore(state => state.id);
 
   useEffect(() => {
     const savedView = localStorage.getItem("inventory-view")
@@ -51,27 +50,32 @@ export default function InventarioPage() {
     localStorage.setItem("inventory-view", value)
   }
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<Product[]>({
     queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId],
-    queryFn: async () => {
-      const data = await getProducts(
-        businessId!,
-        selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
-        debouncedSearch
-      );
-      return data;
+    enabled: !!businessId,
+    queryFn: async ({ signal }) => {
+      const res = await fetch('/api/products/search', {
+        method: 'POST',
+        body: JSON.stringify({
+          businessId,
+          categoryId: selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
+          search: debouncedSearch
+        }),
+        signal
+      })
+      if (!res.ok) throw new Error("Error fetching")
+
+      return res.json()
     },
     retry: 1,
-    refetchOnWindowFocus: true
   })
-
+  
   const { data: categories, isLoading: catLoading } = useQuery({
     queryKey: ["business-categories"],
     queryFn: async () => await getBusinessCategories(),
     retry: 1,
     refetchOnWindowFocus: true
   })
-
   const totalInventario = data?.reduce((acc, product) => {
     return acc + (product.price * product.stock);
   }, 0) || 0;
