@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import TableLoadingData from "@/components/ui/TableLoadingData";
-import { getBusinessSuppliers } from "@/lib/services/supplierService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Supplier } from "@/types";
 import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";
@@ -24,14 +23,21 @@ export default function ProveedoresPage() {
   const [modal, setModal] = useState<ModalState>(null);
   const businessId = useBusinessStore(state => state.id);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Supplier[]>({
     queryKey: ["business-suppliers", businessId],
     queryFn: async () => {
-      const data = await getBusinessSuppliers(businessId!);
-      return data;
+      const res = await fetch('/api/suppliers', {
+        method: 'POST',
+        body: JSON.stringify({ businessId })
+      });
+
+      if (!res.ok) throw new Error("Error fetching");
+
+      return res.json();
     },
     retry: 1,
-    refetchOnWindowFocus: true
+    refetchOnWindowFocus: true,
+    enabled: !!businessId
   })
 
   const openCreate = () => setModal({ type: "create" });
