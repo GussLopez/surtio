@@ -25,22 +25,23 @@ export async function DELETE(
       },
     );
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return Response.json({ error: "No autorizado" }, { status: 401 });
-    }
-
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("products")
       .delete()
-      .eq("id", productId);
+      .eq("id", productId)
+      .select();
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 });
     }
+
+    if (!data || data.length === 0) {
+      return Response.json(
+        { error: "No tienes permisos para eliminar este producto" },
+        { status: 403 },
+      );
+    }
+
     return Response.json({ success: true });
   } catch (err: any) {
     return Response.json(
@@ -57,8 +58,6 @@ export async function PUT(
   try {
     const { id: productId } = await params;
     const { product } = await req.json();
-    console.log(productId);
-    console.log(product);
     if (!productId) {
       return Response.json({ error: "Id inválido" }, { status: 500 });
     }
@@ -76,15 +75,21 @@ export async function PUT(
         },
       },
     );
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("products")
       .update(product)
-      .eq("id", productId);
+      .eq("id", productId)
+      .select();
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 });
     }
-
+    if (!data || data.length === 0) {
+      return Response.json(
+        { error: "No tienes permisos para editar este producto" },
+        { status: 403 },
+      );
+    }
     return Response.json({ success: true });
   } catch (err: any) {
     return Response.json(
