@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { ProductItem } from '@/types';
 import { sileo } from 'sileo';
 import ShoppingCartItems from '@/components/sales/ShoppingCart';
-import { createSaleFromCart, getSaleById } from '@/lib/services/salesService';
+import { getSaleById } from '@/lib/services/salesService';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
 import NewSaleReceipt from '@/components/sales/NewSaleReceipt';
@@ -45,8 +45,27 @@ export default function VentasPage() {
   const handleCheckOut = async () => {
     try {
       setLoading(true);
-      const newSaleId = await createSaleFromCart("cash", businessId!, saleDate || new Date());
-      setSaleId(newSaleId);
+      const items = useCartStore.getState().items;
+
+      if (items.length === 0) {
+        throw new Error("El carrito esta vacío");
+      }
+
+      const formattedItems = items.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+      }));
+      const res = await fetch('/api/sales/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          paymentMethod: "cash",
+          items: formattedItems,
+          businessId,
+          saleDate: saleDate || new Date()
+        })
+      })
+      setSaleId(await res.json());
+      useCartStore.getState().clearCart();
       setOpen(true);
       sileo.success({
         title: "Venta registrada",
