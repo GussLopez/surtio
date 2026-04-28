@@ -37,10 +37,18 @@ export default function HistorialPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["sales-reports", businessId, dateRange],
     queryFn: async () => {
-      const data = await getSales(businessId!, dateRange);
-      return data;
+      const res = await fetch('/api/sales', {
+        method: 'POST',
+        body: JSON.stringify({
+          businessId,
+          dateRange
+        })
+      })
+      if (!res.ok) throw new Error('Error fetching');
+      return res.json();
     },
-    retry: 1,
+    enabled: !!businessId,
+    retry: 1
   })
 
   useEffect(() => {
