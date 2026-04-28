@@ -18,16 +18,16 @@ export async function POST(req: Request) {
       },
     );
     const { data, error } = await supabase
-    .from("memberships")
-    .select(
-      `
+      .from("memberships")
+      .select(
+        `
       role,
       created_at,
       profiles:user_id (*)
-    `
-    )
-    .eq("business_id", businessId)
-    .order("created_at");
+    `,
+      )
+      .eq("business_id", businessId)
+      .order("created_at");
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 });
@@ -38,6 +38,6 @@ export async function POST(req: Request) {
     return Response.json(
       { error: err.message || "Unexpected error" },
       { status: 500 },
-    )
+    );
   }
 }
