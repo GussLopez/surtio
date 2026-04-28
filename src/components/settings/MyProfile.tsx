@@ -6,7 +6,7 @@ import { Profile } from "@/types";
 import { UserIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
-import { FileText, SquarePen, TriangleAlert, UserSquare } from "lucide-react";
+import { SquarePen, UserSquare } from "lucide-react";
 import { Separator } from "../ui/separator";
 import InfoItem from "../ui/InfoItem";
 import { Skeleton } from "../ui/skeleton";
