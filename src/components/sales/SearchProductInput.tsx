@@ -35,9 +35,20 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
   const businessId = useBusinessStore(state => state.id);
 
   const { data: products = null, isLoading } = useQuery<ProductItem[]>({
-    queryKey: ['products-search', debouncedSearch],
-    queryFn: () => searchProducts(debouncedSearch, businessId!),
-    enabled: debouncedSearch.trim().length > 0,
+    queryKey: ['products-search', debouncedSearch, businessId],
+    queryFn: async () => {
+      const res = await fetch('/api/products/search', {
+        method: 'POST',
+        body: JSON.stringify({
+          businessId,
+          search: debouncedSearch
+        })
+      })
+      if (!res.ok) throw new Error("Error fetching")
+
+      return res.json()
+    },
+    enabled: debouncedSearch.trim().length > 0 || !!businessId,
     staleTime: 1000 * 60 * 50
   })
   const selectedProduct = products?.find(p => p.id === value)
