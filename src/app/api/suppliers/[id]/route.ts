@@ -8,8 +8,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const { supplier } = await req.json();
-    console.log('ID: ', id);
-    console.log('SUPP: ', supplier);
+    
     if (!id) {
       return Response.json({ error: "Id inválido" }, { status: 500 });
     }
