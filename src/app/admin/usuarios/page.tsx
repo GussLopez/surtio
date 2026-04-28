@@ -5,7 +5,6 @@ import DeleteUserModal from "@/components/admin/users/DeleteUserModal";
 import EditUserModal from "@/components/admin/users/EditUserModal";
 import ServerError from "@/components/ui/server-error";
 import { Spinner } from "@/components/ui/spinner";
-import { getUsers } from "@/lib/services/userService"
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
 import { UserRoundSearch, Users } from "lucide-react";
@@ -23,15 +22,38 @@ type ModalState =
   | { type: "delete"; employeId: string }
   | null
 
+interface UsersType {
+  role: string;
+  created_at: string | null;
+  profiles: {
+    avatar_url: string | null;
+    created_at: string | null;
+    email: string;
+    full_name: string | null;
+    id: string;
+    is_active: boolean;
+    is_blocked: boolean | null;
+    last_login_at: string | null;
+    last_name: string | null;
+    phone: string | null;
+  };
+}
 export default function UsuariosPage() {
   const businessId = useBusinessStore(state => state.id);
   const [modal, setModal] = useState<ModalState>(null);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<UsersType[]>({
     queryKey: ["business-users", businessId],
-    queryFn: async () => await getUsers(businessId!),
+    queryFn: async () => {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({ businessId })
+      });
+      return res.json();
+    },
     retry: 1,
-    refetchOnWindowFocus: true
+    refetchOnWindowFocus: true,
+    enabled: !!businessId
   })
 
   const openEdit = (employe: editEmploye) =>
