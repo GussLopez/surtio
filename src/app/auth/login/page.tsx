@@ -8,7 +8,6 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import Image from "next/image"
-import { useTheme } from "next-themes"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Input } from "@/components/ui/input"
 import ErrorMessage from "@/components/ui/error-message"
@@ -24,7 +23,6 @@ interface LoginForm {
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
-  const { theme } = useTheme();
   const supabase = getSupabaseBrowserClient();
   const [authError, setAuthError] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -65,21 +63,20 @@ export default function Login() {
       <div className="max-w-104 mx-auto p-10 col-span-8">
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
-            {theme === "dark" ? (
-              <Image
-                src={'/img/logo/flyzzio-light.svg'}
-                alt="Flyzzio Logo"
-                width={30}
-                height={30}
-              />
-            ) : (
-              <Image
-                src={'/img/logo/flyzzio.svg'}
-                alt="Flyzzio Logo"
-                width={30}
-                height={30}
-              />
-            )}
+            <Image
+              src={'/img/logo/flyzzio-light.svg'}
+              className="hidden dark:block"
+              alt="Flyzzio Logo"
+              width={30}
+              height={30}
+            />
+            <Image
+              src={'/img/logo/flyzzio.svg'}
+              className="block dark:hidden"
+              alt="Flyzzio Logo"
+              width={30}
+              height={30}
+            />
           </div>
           <h1 className="mb-1 text-3xl font-semibold">Bienvenido a Flyzzio</h1>
           <p

@@ -6,7 +6,6 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { sileo } from "sileo";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
@@ -24,7 +23,6 @@ interface RegisterForm {
 export default function Register() {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
-  const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const supabase = getSupabaseBrowserClient();
   const initialValues: RegisterForm = {
@@ -83,21 +81,20 @@ export default function Register() {
       <div className="max-w-104 mx-auto p-10">
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
-            {theme === "dark" ? (
-              <Image
-                src={'/img/logo/flyzzio-light.svg'}
-                alt="Flyzzio Logo"
-                width={30}
-                height={30}
-              />
-            ) : (
-              <Image
-                src={'/img/logo/flyzzio.svg'}
-                alt="Flyzzio Logo"
-                width={30}
-                height={30}
-              />
-            )}
+            <Image
+              src={'/img/logo/flyzzio-light.svg'}
+              className="hidden dark:block"
+              alt="Flyzzio Logo"
+              width={30}
+              height={30}
+            />
+            <Image
+              src={'/img/logo/flyzzio.svg'}
+              className="block dark:hidden"
+              alt="Flyzzio Logo"
+              width={30}
+              height={30}
+            />
           </div>
           <h1 className="mb-1 text-3xl font-semibold">Crea una cuenta</h1>
           <p
@@ -148,7 +145,7 @@ export default function Register() {
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
           <div className="flex gap-2 items-center mb-4">
-            <Checkbox 
+            <Checkbox
               id="termsAndConditions"
               onCheckedChange={e => setChecked(e ? true : false)}
             />
