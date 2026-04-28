@@ -43,7 +43,8 @@ export async function POST(req: Request) {
       .limit(10);
 
     if (dateRange?.from) {
-      query = query.gte("created_at", dateRange.from?.toISOString());
+      const fromDate = new Date(dateRange.from);
+      query = query.gte("created_at", fromDate.toISOString());
     }
 
     if (dateRange?.to) {
@@ -53,16 +54,16 @@ export async function POST(req: Request) {
     }
 
     const { data, error } = await query;
-
+    console.log("ERROR: ", error);
     if (error) {
       return Response.json({ error: error.message }, { status: 500 });
     }
-
-    if (!data || data.length === 0) {
-      return Response.json(
-        { error: "No tienes permisos para eliminar este producto" },
-        { status: 403 },
-      );
-    }
-  } catch {}
+    console.log("DATA: ", data);
+    return Response.json(data);
+  } catch (err: any) {
+    return Response.json(
+      { error: err.message || "Unexpected error" },
+      { status: 500 },
+    );
+  }
 }
