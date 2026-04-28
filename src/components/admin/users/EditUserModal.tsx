@@ -9,7 +9,6 @@ import { updateEmployee } from "@/lib/services/userService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { UserIcon } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
@@ -24,10 +23,8 @@ interface EditUserProps {
   open: boolean
 }
 export default function EditUserModal({ employe, onClose, open }: EditUserProps) {
-  console.log(employe);
   const businessId = useBusinessStore(state => state.id);
   const queryClient = useQueryClient();
-  const [isVisible, setIsVisible] = useState(false);
   const { register, handleSubmit, getValues, control, formState: { errors } } = useForm({
     defaultValues: {
       name: employe.name,
@@ -38,10 +35,18 @@ export default function EditUserModal({ employe, onClose, open }: EditUserProps)
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (formData: { name: string; role: string }) => {
-      await updateEmployee(employe.id, businessId!, {
-        full_name: formData.name,
-        role: formData.role
-      })
+      const res = await fetch(`/api/users/${employe.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          profileName: formData.name,
+          role: formData.role,
+          businessId
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error("Error al editar el usuario");
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["business-users"] })
@@ -59,7 +64,7 @@ export default function EditUserModal({ employe, onClose, open }: EditUserProps)
       })
     }
   })
- 
+
   const onSave = (data: any) => {
     mutate(data)
   }
@@ -113,11 +118,11 @@ export default function EditUserModal({ employe, onClose, open }: EditUserProps)
                 rules={{ required: true }}
                 defaultValue=""
                 render={({ field }) => (
-                  <Select 
-                  onValueChange={field.onChange}
-                   value={field.value}
-                   disabled={employe.role === "owner"}
-                   >
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    disabled={employe.role === "owner"}
+                  >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Selecciona un rol" />
                     </SelectTrigger>
