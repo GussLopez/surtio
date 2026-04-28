@@ -1,5 +1,5 @@
-'use client';
-import { useEffect, useState } from 'react';
+'use client'
+import { useState } from 'react';
 
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
 
@@ -16,7 +16,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
-import { searchProducts } from '@/lib/services/productService'
 import { ProductItem } from '@/types'
 import { useDebounce } from 'use-debounce';
 import { useBusinessStore } from '@/store/BusinessStore';
