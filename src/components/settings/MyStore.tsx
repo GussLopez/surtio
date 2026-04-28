@@ -37,7 +37,15 @@ export default function MyStore() {
   const [modal, setModal] = useState<ModalState>(null);
   const { data, isLoading } = useQuery({
     queryKey: ["current-business", businessId],
-    queryFn: async () => await getBusinessById(businessId!)
+    queryFn: async () => {
+      const res = await fetch(`/api/businesses/${businessId}`, {
+        method: 'GET'
+      });
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
+    enabled: !!businessId
   })
 
   const formatDate = (date: string) => {
