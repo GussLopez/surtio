@@ -1,11 +1,10 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
-import { DeleteBusiness } from "@/lib/services/businessService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
 import { Business } from "@/types";
@@ -15,13 +14,13 @@ import { useEffect, useState } from "react";
 import { sileo } from "sileo";
 
 interface DeleteBusinessProps {
-  open: boolean;
-  onClose: () => void;
+  isLoading: boolean;
   businessId: string;
   businessName: string;
 }
 
-export default function DeleteBusinessDialog({ open, onClose, businessId, businessName }: DeleteBusinessProps) {
+export default function DeleteBusinessDialog({ isLoading, businessId, businessName }: DeleteBusinessProps) {
+  const [open, setOpen] = useState(false);
   const userId = useUserStore((state) => state.id);
   const setBusiness = useBusinessStore(state => state.setBusiness);
   const queryClient = useQueryClient();
@@ -81,9 +80,18 @@ export default function DeleteBusinessDialog({ open, onClose, businessId, busine
       mutate();
     }
   }
-  console.log(confirmed);
   return (
-    <Dialog open={open} onOpenChange={() => onClose()}>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant={'destructive'}
+          size={'sm'}
+          className="rounded-[5px] font-semibold cursor-pointer"
+          disabled={isLoading}
+        >
+          Eliminar Tienda
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-2xl">Eliminar Tienda</DialogTitle>

@@ -1,32 +1,29 @@
-'use client'
-
+'use client';
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
-import { editBusiness } from "@/lib/services/businessService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
 import { Business, BusinessForm } from "@/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
 interface EditBusinessProps {
-  open: boolean;
-  onClose: () => void;
   variant: 'legal' | 'contact' | 'name'
   business: Business;
+  children: React.ReactNode
 }
-export default function EditBusinessDrawer({ open, onClose, business, variant }: EditBusinessProps) {
+export default function EditBusinessDrawer({ business, variant, children }: EditBusinessProps) {
+  const [open, setOpen] = useState(false);
   const setBusinessName = useBusinessStore(state => state.setName);
   const queryClient = useQueryClient();
   const userId = useUserStore(state => state.id);
-
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<BusinessForm>({});
 
@@ -58,7 +55,7 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
         })
       })
       if (!res.ok) throw new Error('Error fetching');
-      
+
       return res.json();
     },
     onSuccess: (data) => {
@@ -68,7 +65,7 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
       if (variant === "name") {
         setBusinessName(data.name);
       }
-      onClose();
+      setOpen(false);
       queryClient.invalidateQueries({
         queryKey: ["current-business", business.id]
       });
@@ -89,10 +86,11 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
     mutate(data)
   }
   return (
-    <Drawer direction="right" open={open} onOpenChange={() => onClose()}>
+    <Drawer direction="right" open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="border-b border-input">
-          <DrawerTitle className="text-2xl">{business.name}</DrawerTitle>
+          <DrawerTitle className="text-2xl">{business?.name}</DrawerTitle>
           <DrawerDescription>Edita la información de tu tienda</DrawerDescription>
         </DrawerHeader>
         <form onSubmit={handleSubmit(onSave)} className="flex flex-col grow">
