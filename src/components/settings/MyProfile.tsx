@@ -19,14 +19,36 @@ type ModalState =
   | { type: "delete"; userId: string, userName: string }
   | null
 
+interface ProfileData {
+  avatar_url: string | null;
+  created_at: string | null;
+  email: string;
+  full_name: string | null;
+  id: string;
+  is_active: boolean;
+  is_blocked: boolean | null;
+  last_login_at: string | null;
+  last_name: string | null;
+  phone: string | null;
+  memberships: {
+    role: string;
+  }[];
+}
+
 export default function MyProfile() {
   const userId = useUserStore(state => state.id);
   const [modal, setModal] = useState<ModalState>(null);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<ProfileData>({
     queryKey: ["profile"],
-    queryFn: async () => await getProfileById(userId!),
-    retry: 1
+    queryFn: async () => {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: 'GET'
+      });
+      return res.json();
+    },
+    retry: 1,
+    enabled: !!userId
   })
 
   const openEdit = (user: Profile) => setModal({ type: "editUser", user });
