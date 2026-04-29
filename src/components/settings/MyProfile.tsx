@@ -84,29 +84,35 @@ export default function MyProfile() {
             ))
           )}
         </div>
-        <Button
-          className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
-          variant={'outline'}
-          size={'sm'}
-          disabled={isLoading}
-          onClick={() => openEdit(data!)}
-        >
-          <SquarePen />
-          <span className="sr-only">Editar información del negocio</span>
-        </Button>
+        {data && (
+          <EditUserDrawer user={data}>
+            <Button
+              className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
+              variant={'outline'}
+              size={'sm'}
+              disabled={isLoading}
+            >
+              <SquarePen />
+              <span className="sr-only">Editar información del negocio</span>
+            </Button>
+          </EditUserDrawer>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <section className="col-span-3 bg-card p-5 rounded-xl border border-muted space-y-4 relative">
-          <Button
-            className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
-            variant={'outline'}
-            size={'sm'}
-            disabled={isLoading}
-            onClick={() => openEdit(data!)}
-          >
-            <SquarePen />
-            <span className="sr-only">Editar información del negocio</span>
-          </Button>
+          {data && (
+            <EditUserDrawer user={data}>
+              <Button
+                className="absolute top-3 right-5 transition-all duration-200 ease-in-out rounded-full"
+                variant={'outline'}
+                size={'sm'}
+                disabled={isLoading}
+              >
+                <SquarePen />
+                <span className="sr-only">Editar información del negocio</span>
+              </Button>
+            </EditUserDrawer>
+          )}
           <div className="flex items-center gap-2 font-semibold text-sm uppercase tracking-wider">
             <UserSquare size={18} />
             <span>Información personal</span>
@@ -164,14 +170,6 @@ export default function MyProfile() {
           </div>
         </section>
       </div>
-
-      {modal?.type === "editUser" && (
-        <EditUserDrawer
-          onClose={() => setModal(null)}
-          open
-          user={data!}
-        />
-      )}
     </div>
   )
 }

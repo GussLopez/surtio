@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
@@ -16,12 +16,12 @@ import { useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
 interface EditUserProps {
-  open: boolean;
-  onClose: () => void;
+  children: React.ReactNode
   user: Profile;
 }
 
-export default function EditUserDrawer({ open, onClose, user }: EditUserProps) {
+export default function EditUserDrawer({ children, user }: EditUserProps) {
+  const [open, setOpen] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<UserForm>({});
   const [isHover, setIsHover] = useState(false);
   const queryClient = useQueryClient();
@@ -60,7 +60,8 @@ export default function EditUserDrawer({ open, onClose, user }: EditUserProps) {
     mutate(data)
   }
   return (
-    <Drawer direction="right" open={open} onClose={onClose}>
+    <Drawer direction="right" open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="border-b border-input">
           <DrawerTitle>Edita tu información</DrawerTitle>
