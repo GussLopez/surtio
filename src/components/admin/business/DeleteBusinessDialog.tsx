@@ -30,7 +30,15 @@ export default function DeleteBusinessDialog({ open, onClose, businessId, busine
 
   const router = useRouter();
   const { mutate, isPending } = useMutation({
-    mutationFn: async () => DeleteBusiness(businessId),
+    mutationFn: async () => {
+      const res = await fetch(`/api/businesses/${businessId}`, {
+        method: 'DELETE'
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["business"] });
       sileo.success({

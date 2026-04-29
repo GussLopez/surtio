@@ -51,8 +51,15 @@ export default function EditBusinessDrawer({ open, onClose, business, variant }:
   }, [business, reset])
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: BusinessForm) => {
-      await editBusiness(business.id, data);
-      return data;
+      const res = await fetch(`/api/businesses/${business.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          business: data
+        })
+      })
+      if (!res.ok) throw new Error('Error fetching');
+      
+      return res.json();
     },
     onSuccess: (data) => {
       sileo.success({

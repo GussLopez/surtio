@@ -51,7 +51,14 @@ export default function NewBusiness() {
   const handleCreateBusinesss = async (formData: BusinessForm) => {
     setLoading(true);
     try {
-      const newBusiness = await createBusiness(formData);
+      const res = await fetch('/api/businesses/create', {
+        method: 'POST',
+        body: JSON.stringify({ bData: formData })
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      const newBusiness = await res.json();
       business.clearBusiness();
       business.setBusiness({
         id: newBusiness.id,
