@@ -38,8 +38,7 @@ export function BusinessSwitcher() {
   const activeBusiness = useBusinessStore(state => state);
   const businessId = useBusinessStore(state => state.id);
   const queryClient = useQueryClient();
-  const { theme } = useTheme();
-
+  
   const { data, isLoading } = useQuery({
     queryKey: ["business", userId],
     queryFn: async () => await getBusinessByUserId(userId!),
