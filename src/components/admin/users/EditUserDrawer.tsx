@@ -39,7 +39,14 @@ export default function EditUserDrawer({ children, user }: EditUserProps) {
   }, [user, reset])
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: UserForm) => {
-      await updateProfile(data, userId!);
+      const res = await fetch(`/api/users/profile/${userId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ profile: data })
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
     },
     onSuccess: () => {
       sileo.success({
