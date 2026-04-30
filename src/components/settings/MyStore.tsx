@@ -19,7 +19,6 @@ import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import InfoItem from "../ui/InfoItem";
 import { Skeleton } from "../ui/skeleton";
-import { Business } from "@/types";
 import DeleteBusinessDialog from "../admin/business/DeleteBusinessDialog";
 import EditBusinessDrawer from "../admin/business/EditBusinessDrawer";
 
@@ -75,7 +74,8 @@ export default function MyStore() {
                 className={`border-transparent uppercase tracking-wide 
                 ${data?.plan === 'pro' 
                   && 'bg-linear-to-r from-pink-500 to-orange-500 bg-size-[105%] bg-center text-white'}
-                 ${data?.plan === 'premium' && 'bg-linear-to-r from-yellow-400 to-amber-700 bg-size-[105%]'}
+                 ${data?.plan === 'premium' 
+                  && 'bg-linear-to-r from-yellow-400 to-amber-700 bg-size-[105%] bg-center text-white'}
                 `}>
                   {data?.plan}
                 </Badge>
