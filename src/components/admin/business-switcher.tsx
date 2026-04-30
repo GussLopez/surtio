@@ -23,7 +23,6 @@ import { getBusinessByUserId } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 
 interface BusinessSoreProps {
   id: string;
@@ -38,7 +37,7 @@ export function BusinessSwitcher() {
   const activeBusiness = useBusinessStore(state => state);
   const businessId = useBusinessStore(state => state.id);
   const queryClient = useQueryClient();
-  
+
   const { data, isLoading } = useQuery({
     queryKey: ["business", userId],
     queryFn: async () => await getBusinessByUserId(userId!),
