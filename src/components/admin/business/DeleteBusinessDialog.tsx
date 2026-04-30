@@ -39,7 +39,7 @@ export default function DeleteBusinessDialog({ isLoading, businessId, businessNa
       return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["business"] });
+      queryClient.invalidateQueries({ queryKey: ["business", userId] });
       sileo.success({
         title: 'Tienda eliminada',
         description: 'La tienda se eliminó correctamente'
@@ -53,7 +53,9 @@ export default function DeleteBusinessDialog({ isLoading, businessId, businessNa
           owner_id: business.owner_id,
           plan: business.plan
         })
+        
         router.push('/admin');
+        router.refresh();
       } else {
         router.push('/admin/new');
       }
