@@ -23,12 +23,6 @@ import { Business } from "@/types";
 import DeleteBusinessDialog from "../admin/business/DeleteBusinessDialog";
 import EditBusinessDrawer from "../admin/business/EditBusinessDrawer";
 
-type ModalState =
-  | { type: "editLogo"; business: Business }
-  | { type: "editBussines"; business: Business, variant: 'name' | 'contact' | 'legal' }
-  | { type: "delete"; businessId: string, businessName: string }
-  | null
-
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);
   const businessName = useBusinessStore(state => state.name);
@@ -76,7 +70,13 @@ export default function MyStore() {
             ) : (
               <>
                 <h1 className="text-2xl font-bold tracking-tight">{data?.name}</h1>
-                <Badge variant="secondary" className={`border-transparent uppercase tracking-wide ${data?.plan === 'pro' && 'bg-linear-to-r from-pink-500 to-orange-500 bg-size-[105%] bg-center text-white'}`}>
+                <Badge 
+                variant="secondary" 
+                className={`border-transparent uppercase tracking-wide 
+                ${data?.plan === 'pro' 
+                  && 'bg-linear-to-r from-pink-500 to-orange-500 bg-size-[105%] bg-center text-white'}
+                 ${data?.plan === 'premium' && 'bg-linear-to-r from-yellow-400 to-amber-700 bg-size-[105%]'}
+                `}>
                   {data?.plan}
                 </Badge>
               </>
