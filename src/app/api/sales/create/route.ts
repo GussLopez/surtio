@@ -18,15 +18,16 @@ export async function POST(req: Request) {
         },
       },
     );
-
+    const isoDate = new Date(saleDate).toISOString();
     const { data, error } = await supabase.rpc("create_sale", {
       p_payment_method: paymentMethod,
       p_items: items,
       p_business_id: businessId,
-      p_created_at: saleDate.toISOString(),
+      p_created_at: isoDate,
     });
 
     if (error) {
+      console.error(error);
       return Response.json({ error: error.message }, { status: 500 });
     }
 

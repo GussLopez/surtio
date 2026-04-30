@@ -64,6 +64,11 @@ export default function VentasPage() {
           saleDate: saleDate || new Date()
         })
       })
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("ERROR BACKEND:", err);
+        throw new Error(err.error || 'Error fetching');
+      }
       setSaleId(await res.json());
       useCartStore.getState().clearCart();
       setOpen(true);
