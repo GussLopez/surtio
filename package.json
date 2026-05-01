@@ -33,6 +33,7 @@
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.1",
     "react-lottie": "^1.2.10",
+    "recharts": "^3.8.1",
     "sileo": "^0.1.5",
     "sweetalert2": "^11.26.18",
     "tailwind-merge": "^3.5.0",
@@ -41,6 +42,7 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@recharts/devtools": "^0.0.11",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/papaparse": "^5.5.2",
@@ -48,6 +50,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "i": "^0.3.7",
+    "npm": "^11.12.1",
     "shadcn": "^3.8.4",
     "supabase": "^2.76.12",
     "tailwindcss": "^4",

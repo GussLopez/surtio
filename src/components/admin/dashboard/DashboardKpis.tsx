@@ -16,8 +16,6 @@ export default function DashboardKpis() {
     enabled: !!businessId,
     retry: 1
   })
-  console.log('DATA: ', data);
-  console.log('ERROR: ', error);
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
       <div className="p-5 shadow-xs rounded-lg border border-muted">
