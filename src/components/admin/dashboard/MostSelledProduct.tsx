@@ -38,7 +38,7 @@ export default function MostSelledProduct() {
     enabled: !!businessId,
     retry: 1
   })
-  
+
   return (
     <div className="col-span-8 p-4 rounded-lg border border-muted shadow-xs">
       <p className="text-lg font-semibold">Productos más vendidos</p>
@@ -68,7 +68,8 @@ export default function MostSelledProduct() {
                 </TableRow>
               ))
             ) : (
-              data?.top_products.map((product) => (
+              data?.top_products ? (
+                data?.top_products.map((product) => (
                 <TableRow
                   key={product.id}
                 >
@@ -86,6 +87,14 @@ export default function MostSelledProduct() {
                   </TableCell>
                 </TableRow>
               ))
+              ) : (
+                <TableRow>
+                  <TableCell 
+                  colSpan={4}
+                  className="text-center text-muted-foreground"
+                  >No hay productos vendidos este mes</TableCell>
+                </TableRow>
+              )
             )}
           </TableBody>
         </Table>
