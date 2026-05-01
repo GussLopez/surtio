@@ -4,25 +4,24 @@ import { useBusinessStore } from "@/store/BusinessStore";
 import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
 import { getMonthlyRevenue } from "@/lib/services/dashboardService";
+import { XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts';
 
 export default function TotalRevenue() {
   const businessId = useBusinessStore(state => state.id);
 
-  const { data, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["monthlyRevenue", businessId],
     queryFn: () => getMonthlyRevenue(businessId!),
     enabled: !!businessId,
     retry: 1
   })
-
-  console.log(data);
   return (
     <div className="col-span-8 h-68 p-4 rounded-lg border border-muted shadow-xs">
       <div className="flex justify-between ">
         <div className="flex flex-col grow">
-          <p className="text-lg font-semibold">Ganancia Total</p>
+          <p className="text-lg font-semibold">Ventas totales</p>
           <div className="mt-auto ">
-            <p className="text-4xl font-bold">$ {data?.ganancia_total_mes.toLocaleString("es-MX", {
+            <p className="text-4xl font-bold">$ {data?.ventas_totales_mes.toLocaleString("es-MX", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             })} <span className="text-lg font-medium">MXN</span></p>
@@ -32,8 +31,60 @@ export default function TotalRevenue() {
             </div>
           </div>
         </div>
-        <div className="w-[60%] h-60 rounded-md bg-muted">
+        <div className="w-[60%] h-60 rounded-md">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={data?.chart_data}
+              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#06B6D4" stopOpacity={0.85} />
+                  <stop offset="95%" stopColor="#06B6D4" stopOpacity={0.1} />
+                </linearGradient>
+              </defs>
 
+              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+
+              <XAxis
+                dataKey="fecha"
+                interval={4}
+                tick={{ fontSize: 12, fill: '#6B7280' }}
+                tickLine={false}
+                axisLine={{ stroke: '#E5E7EB' }}
+              />
+
+              <YAxis
+                tickFormatter={(value) => `$${value.toLocaleString()}`} 
+                tick={{ fontSize: 12, fill: '#6B7280' }}
+                tickLine={false}
+                axisLine={false}
+              />
+
+              <Tooltip
+                contentStyle={{
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                  fontSize: '14px',
+                  borderColor: 'var(--input)',
+                  color: 'var(--muted-foreground)',
+                  fontWeight: 500,
+                  backgroundColor: 'var(--background)'
+                }}
+                cursor={{ stroke: '#06B6D4', strokeWidth: 1.5, strokeDasharray: '4 4' }}
+              />
+
+              <Area
+                type="linear"
+                dataKey="ventas_brutas"
+                stroke="#06B6D4"
+                strokeWidth={3}
+                fill="url(#colorSales)"
+                fillOpacity={1}
+                activeDot={{ r: 6, stroke: '#06B6D4', fill: 'white' }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>
