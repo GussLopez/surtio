@@ -16,6 +16,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
 import NewSaleReceipt from '@/components/sales/NewSaleReceipt';
 import { useBusinessStore } from '@/store/BusinessStore';
+import { normalizeDate } from '@/lib/utils';
 
 export default function VentasPage() {
   const [product, setProduct] = useState<ProductItem | null>(null);
@@ -61,7 +62,7 @@ export default function VentasPage() {
           paymentMethod: "cash",
           items: formattedItems,
           businessId,
-          saleDate: saleDate || new Date()
+          saleDate: normalizeDate(saleDate || new Date())
         })
       })
       if (!res.ok) {
@@ -79,6 +80,7 @@ export default function VentasPage() {
       });
       queryClient.invalidateQueries({ queryKey: ["stock-products", "sales-reports"] });
       queryClient.invalidateQueries({ queryKey: ["monthlyRevenue", businessId] });
+      queryClient.invalidateQueries({ queryKey: ["dashboardKpis", businessId] });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -183,7 +185,7 @@ export default function VentasPage() {
             >
               {loading ? (
                 <>
-                  <Spinner />
+                  <Spinner className='size-6' />
                   Pagando
                 </>
               ) : (
