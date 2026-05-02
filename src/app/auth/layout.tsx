@@ -16,14 +16,23 @@ export default function AuthLayout({
             <p className="max-w-130 mt-5 text-sm text-white/90">Inicia sesión para acceder al dashboard de tu gestor de inventario y controla tu negocio.</p>
           </div>
           <div className="relative w-full">
-            <Skeleton className="w-120 h-90 flex justify-center items-center  bottom-28 left-20 rounded-xl text-muted-foreground bg-muted">
+            <Skeleton className="w-full h-90 flex justify-center items-center  bottom-28 left-20 rounded-xl text-muted-foreground bg-muted">
               <Image size={30} />
             </Skeleton>
-            <Skeleton className="w-45 h-45 absolute right-8 top-8 rounded-xl "></Skeleton>
+            <img
+              src={'/img/login/login-chart.png'}
+              alt="Demo de Gráfica"
+              className="w-52 h-auto absolute -right-8 top-8 block dark:hidden"
+            />
+            <img
+              src={'/img/login/login-chart-dark.png'}
+              alt="Demo de Gráfica"
+              className="w-52 h-auto absolute -right-8 top-8 hidden dark:block"
+            />
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 }
