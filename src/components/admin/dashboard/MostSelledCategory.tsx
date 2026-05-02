@@ -99,7 +99,7 @@ export default function TopCategoriesChart() {
           <Skeleton className="w-full h-full" />
         </div>
       ) : (
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-62.5 w-full">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-62.5 w-full mt-4">
           <BarChart
             width={400}
             height={250}
