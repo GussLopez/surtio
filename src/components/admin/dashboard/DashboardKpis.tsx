@@ -3,19 +3,37 @@
 import { ArrowDownNarrowWide, Ban, DollarSign, Package } from "lucide-react";
 import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
-import { getKpis } from "@/lib/services/dashboardService";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Skeleton } from "@/components/ui/skeleton";
 
+interface DashboardStats {
+  ventas_hoy: number;
+  productos_totales: number;
+  productos_bajo_stock: number;
+  ventas_canceladas: number;
+  porcentaje_ventas: number;
+}
+
 export default function DashboardKpis() {
   const businessId = useBusinessStore(state => state.id);
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<DashboardStats>({
     queryKey: ["dashboardKpis", businessId],
-    queryFn: () => getKpis(businessId!),
+    queryFn: async () => {
+      const res = await fetch('/api/dashboard/kpis', {
+        method: 'POST',
+        body: JSON.stringify({ businessId })
+      });
+      
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     enabled: !!businessId,
     retry: 1
   })
+
+  console.log(data);
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
       <div className="p-5 shadow-xs rounded-lg border border-muted">
