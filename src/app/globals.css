@@ -142,3 +142,9 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+@theme {
+  --breakpoint-3xl: 1920px;
+}
+
+@custom-variant desktop-only (@media (min-width: 1280px) and (max-width: 1536px));
+
