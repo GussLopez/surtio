@@ -1,5 +1,4 @@
 import DashboardKpis from "@/components/admin/dashboard/DashboardKpis";
-import MostActiveDay from "@/components/admin/dashboard/MostActiveDay";
 import MostSelledCategory from "@/components/admin/dashboard/MostSelledCategory";
 import MostSelledProduct from "@/components/admin/dashboard/MostSelledProduct";
 import TotalRevenue from "@/components/admin/dashboard/TotalRevenue";
@@ -18,7 +17,6 @@ export default async function AdminPage() {
       <div className="grid grid-cols-12 gap-5 mt-6">
         <TotalRevenue />
         <div className="col-span-4 row-span-3">
-          <MostActiveDay />
           <MostSelledCategory />
         </div>
         <MostSelledProduct />
