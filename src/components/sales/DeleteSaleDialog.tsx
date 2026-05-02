@@ -28,7 +28,13 @@ export default function DeleteSaleDialog({ open, onClose, saleId }: DeleteSaleDi
 
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      await DeleteSaleById(saleId);
+      const res = await fetch(`/api/sales/${saleId}`, {
+        method: 'DELETE',
+      });
+
+      if (!res.ok) throw new Error('Error deleting sale');
+
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["sales-reports"] });
