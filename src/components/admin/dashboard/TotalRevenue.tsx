@@ -55,8 +55,8 @@ export default function TotalRevenue() {
               >
                 <defs>
                   <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#06B6D4" stopOpacity={0.85} />
-                    <stop offset="95%" stopColor="#06B6D4" stopOpacity={0.1} />
+                    <stop offset="5%" stopColor="#ff6900" stopOpacity={0.85} />
+                    <stop offset="95%" stopColor="#ff6900" stopOpacity={0.1} />
                   </linearGradient>
                 </defs>
 
@@ -93,11 +93,11 @@ export default function TotalRevenue() {
                 <Area
                   type="linear"
                   dataKey="ventas_brutas"
-                  stroke="#06B6D4"
+                  stroke="#ff6900"
                   strokeWidth={3}
                   fill="url(#colorSales)"
                   fillOpacity={1}
-                  activeDot={{ r: 6, stroke: '#06B6D4', fill: 'white' }}
+                  activeDot={{ r: 6, stroke: '#00ABF5', fill: 'white' }}
                 />
               </AreaChart>
             </ResponsiveContainer>
