@@ -20,7 +20,7 @@ interface RangeDateProps {
 export function RangeDatePicker({ date, setDate }: RangeDateProps) {
 
   return (
-    <div className="w-60">
+    <div className="lg:w-60">
       <Popover>
         <PopoverTrigger asChild>
           <Button

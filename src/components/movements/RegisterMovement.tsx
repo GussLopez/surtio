@@ -159,7 +159,7 @@ export default function RegisterMovement() {
   })
   return (
     <div>
-      <div className="mt-10 flex gap-4">
+      <div className="mt-5 lg:mt-10 flex gap-4">
         <div className="max-w-sm w-full">
           <div className="flex gap-2">
             <Select

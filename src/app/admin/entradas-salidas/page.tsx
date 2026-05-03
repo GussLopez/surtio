@@ -11,12 +11,12 @@ export default function EntradasPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
         <div className="flex items-center gap-3">
           <ArrowRightLeft size={30} />
           <h1 className="text-3xl font-semibold">Entradas / Salidas</h1>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mt-5 lg:mt-0">
           <Tabs value={view} onValueChange={setView}>
             <TabsList>
               <TabsTrigger value="register">
