@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import CardView from "@/components/products/CardView";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
-import { Product } from "@/types";
+import { Categorie, Product } from "@/types";
 import EditProductModal from "@/components/products/EditProductModal";
 import ViewProductModal from "@/components/products/ViewPrductModal";
 import { DeleteProduct } from "@/components/products/DeleteProduct";
@@ -70,9 +70,17 @@ export default function InventarioPage() {
     retry: 1,
   })
   
-  const { data: categories, isLoading: catLoading } = useQuery({
+  const { data: categories, isLoading: catLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
-    queryFn: async () => await getBusinessCategories(),
+    queryFn: async () => {
+      const res = await fetch('/api/categories', {
+        method: 'GET',
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     retry: 1,
     refetchOnWindowFocus: true
   })
@@ -111,7 +119,7 @@ export default function InventarioPage() {
   }
   return (
     <div className="relative">
-      <div className="flex justify-between">
+      <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between">
         <div className="flex items-center gap-3">
           <Box size={30} />
           <h1 className="text-3xl font-semibold">Inventario</h1>
@@ -132,19 +140,19 @@ export default function InventarioPage() {
           <AddProduct />
         </div>
       </div>
-      <div className="flex justify-between mt-4">
-        <div className="flex gap-3">
+      <div className="flex flex-col lg:flex-row justify-between mt-4">
+        <div className="flex flex-col lg:flex-row gap-3">
           <div className="relative">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Buscar producto, SKU..."
-              className="max-w-80 pl-9"
+              className="lg:max-w-80 pl-9"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
           </div>
           <Select value={selectedCategorie} onValueChange={setSelectedCategorie}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent position="popper" align="start">
@@ -159,7 +167,7 @@ export default function InventarioPage() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-3 lg:mt-0">
           <Button
             variant={'outline'}
             disabled={!data || data?.length === 0 || pdfLoading}
