@@ -76,7 +76,7 @@ export default function TopCategoriesChart() {
   }, [data?.categories]);
 
   return (
-    <div className="flex flex-col p-4 rounded-lg border border-muted shadow-xs">
+    <div className="flex flex-col p-4 mt-6 xl:mt-0 rounded-lg border border-muted shadow-xs">
       <div className="flex justify-between items-start mb-2">
         <div>
           <p className="text-lg font-semibold">Categorías de Ventas</p>

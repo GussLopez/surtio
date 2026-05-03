@@ -24,9 +24,9 @@ export default function TotalRevenue() {
     retry: 1
   })
   return (
-    <div className="col-span-8 h-68 p-4 rounded-lg border border-muted shadow-xs">
-      <div className="flex justify-between ">
-        <div className="flex flex-col grow">
+    <div className="col-span-8 xl:h-68 xl:p-4 rounded-lg border border-muted shadow-xs">
+      <div className="flex flex-col xl:flex-row xl:justify-between">
+        <div className="flex flex-col grow p-4 xl:p-0">
           <p className="text-lg font-semibold">Ventas totales</p>
           <div className="mt-auto ">
             {isLoading ? (
@@ -44,7 +44,7 @@ export default function TotalRevenue() {
             </div>
           </div>
         </div>
-        <div className="w-[60%] h-60 rounded-md">
+        <div className="xl:w-[60%] h-60 rounded-md">
           {isLoading ? (
             <Skeleton className="w-full h-full" />
           ) : (

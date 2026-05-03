@@ -40,7 +40,7 @@ export default function MostSelledProduct() {
   })
 
   return (
-    <div className="col-span-8 p-4 rounded-lg border border-muted shadow-xs">
+    <div className="col-span-8 p-4 mt-6 xl:mt-0 rounded-lg border border-muted shadow-xs">
       <p className="text-lg font-semibold">Productos más vendidos</p>
       <div className="mt-3">
         <Table>

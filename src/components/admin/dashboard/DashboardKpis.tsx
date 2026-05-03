@@ -35,7 +35,7 @@ export default function DashboardKpis() {
 
   console.log(data);
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
       <div className="p-5 shadow-xs rounded-lg border border-muted">
         <div className="flex justify-between items-center">
           <p className="font-medium text-lg">Ventas de Hoy</p>

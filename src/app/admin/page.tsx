@@ -14,7 +14,7 @@ export default async function AdminPage() {
   return (
     <div>
       <DashboardKpis />
-      <div className="grid grid-cols-12 gap-5 mt-6">
+      <div className="xl:grid xl:grid-cols-12 gap-5 mt-6">
         <TotalRevenue />
         <div className="col-span-4 row-span-3">
           <MostSelledCategory />
