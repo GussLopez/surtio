@@ -10,15 +10,20 @@ import { Trash2 } from "lucide-react"
 import { useState } from "react"
 import { DeleteMovement } from "./DeleteMovement"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
-import { getUsers } from "@/lib/services/userService"
 import { DateRange } from "react-day-picker"
 import TableLoadingData from "../ui/TableLoadingData"
 import { useBusinessStore } from "@/store/BusinessStore"
-import { Movement } from "@/types"
+import { Movement, Profile } from "@/types"
 
 type ModalState =
   | { type: "delete"; movementId: number }
   | null
+
+interface UsersData {
+  role: string;
+  created_at: string;
+  profiles: Profile;
+}
 
 export default function MovementsHistory() {
   const [modal, setModal] = useState<ModalState>(null);
@@ -44,24 +49,32 @@ export default function MovementsHistory() {
     retry: 1,
   })
 
-  console.log(data);
-  const { data: profiles, isLoading: loadingProfiles } = useQuery({
+  const { data: profiles, isLoading: loadingProfiles } = useQuery<UsersData[]>({
     queryKey: ["business-users"],
-    queryFn: async () => await getUsers(businessId!),
+    queryFn: async () => {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({ businessId })
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     retry: 1,
     refetchOnWindowFocus: true,
   })
-
+  console.log(profiles);
   return (
     <div>
-      <div className="flex justify-between items-center mt-10">
-        <div className="flex gap-4">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-10">
+        <div className="flex flex-col lg:flex-row gap-4">
           <RangeDatePicker date={dateRange} setDate={setDateRange} />
           <Select
             value={selectedUser}
             onValueChange={value => setSelectedUser(value)}
           >
-            <SelectTrigger className="w-50">
+            <SelectTrigger className="w-full lg:w-50">
               <SelectValue />
             </SelectTrigger>
             <SelectContent position="popper">
@@ -85,7 +98,7 @@ export default function MovementsHistory() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-5 lg:mt-0">
           <Button
             variant={'outline'}
             disabled={data?.length === 0}
