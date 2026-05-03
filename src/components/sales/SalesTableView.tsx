@@ -71,7 +71,7 @@ export default function SalesTableView({ data, onView, onEdit, onDelete, onNull 
                 <TableCell className="text-end w-20">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button size="icon" variant="ghost" className="h-8 w-8 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity">
                         <MoreHorizontal className="size-4" />
                       </Button>
                     </DropdownMenuTrigger>

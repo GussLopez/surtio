@@ -35,16 +35,16 @@ export default function SalesListView({ data, onView, onEdit, onDelete, onNull }
         return (
           <div
             key={sale.id}
-            className="w-full flex border rounded-xl border-input overflow-hidden"
+            className="w-full flex flex-col xl:flex-row border rounded-xl border-input overflow-hidden"
           >
-            <div className="md:w-1/4 p-5 shrink-0 border-r border-input bg-background">
+            <div className="xl:w-1/4 grid grid-cols-2 gap-2 lg:grid-cols-4 xl:block p-2 xl:p-5 shrink-0 border-b xl:border-r xl:border-b-0 border-input bg-background ">
               <Badge
                 variant={'secondary'}
                 className="text-xs font-mono rounded-xs"
               >
                 {sale.sale_number}
               </Badge>
-              <div className="flex items-center text-sm gap-4 font-medium mt-4">
+              <div className="flex items-center text-sm gap-4 font-medium xl:mt-4">
                 <CalendarBlankIcon size={23} className="text-muted-foreground" />
                 <p>{formateDate}</p>
               </div>
@@ -55,7 +55,7 @@ export default function SalesListView({ data, onView, onEdit, onDelete, onNull }
                   <span className="text-[10px] uppercase font-medium tracking-wider text-muted-foreground">Cleinte</span>
                 </div>
               </div>
-              <Separator className="w-full h-px my-3 bg-muted" />
+              <Separator className="w-full h-px my-3 bg-muted hidden xl:block" />
               <div className="flex items-center gap-4">
                 <BriefcaseIcon size={23} className="text-blue-400" weight="duotone" />
                 <div className="flex flex-col">
@@ -107,7 +107,7 @@ export default function SalesListView({ data, onView, onEdit, onDelete, onNull }
               </div>
             </div>
 
-            <div className="w-1/4 shrink-0 p-5 border-l border-input">
+            <div className="xl:w-1/4 shrink-0 p-5 border-t xl:border-t-0 xl:border-l border-input">
               <div className="flex gap-2 justify-between items-baseline">
                 <span
                   className="font-bold  text-sm uppercase tracking-widest text-muted-foreground"
@@ -166,7 +166,7 @@ export default function SalesListView({ data, onView, onEdit, onDelete, onNull }
 
                 <Button
                   variant={'ghost'}
-                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white dark:hover:bg-red-600/90"
+                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white dark:hover:bg-red-600/90 col-span-2 xl:col-span-1"
                   onClick={() => onDelete(sale.id)}
                 >
                   <Trash2 />

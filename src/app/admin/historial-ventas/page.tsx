@@ -6,7 +6,6 @@ import SaleReceipt from "@/components/sales/SaleReceipt";
 import { Button } from "@/components/ui/button";
 import { RangeDatePicker } from "@/components/ui/range-date";
 import { Spinner } from "@/components/ui/spinner";
-import { getSales } from "@/lib/services/salesService";
 import { Sale } from "@/types";
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
@@ -19,6 +18,7 @@ import SalesTableView from "@/components/sales/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";
+
 type ModalState =
   | { type: "edit"; sale: Sale }
   | { type: "view"; sale: Sale }
@@ -143,9 +143,9 @@ export default function HistorialPage() {
         <FileClock size={30} className='text-primary-light' />
         <h1 className="text-3xl font-semibold">Historial de Ventas</h1>
       </div>
-      <div className="flex justify-between items-center mt-6">
+      <div className="xl:flex justify-between items-center mt-6">
         <RangeDatePicker date={dateRange} setDate={setDateRange} />
-        <div className="flex gap-2">
+        <div className="flex gap-2 xl:gap-2 mt-3 xl:mt-0">
           <Tabs value={view} onValueChange={handleValueChange}>
             <TabsList>
               <TabsTrigger value='list'>
