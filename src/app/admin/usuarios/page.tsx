@@ -64,12 +64,12 @@ export default function UsuariosPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
         <div className="flex items-center gap-3">
           <Users size={30} />
           <h1 className="text-3xl font-semibold">Gestión de usuarios</h1>
         </div>
-        <div>
+        <div className="mt-5 lg:mt-0">
           <CreateUser />
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function UsuariosPage() {
           </p>
         </div>
       ) : (
-        <div className="grid sm:grid-cols-1 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-10">
           {data?.map((user) => (
             <UserCard
               key={user.profiles.id}
