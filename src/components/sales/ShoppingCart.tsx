@@ -18,7 +18,7 @@ export default function ShoppingCartItems({ date, setDate } : ShoppingCartProps)
   const items = useCartStore(state => state.items);
   const removeFromCart = useCartStore(state => state.removeFromCart)
   return (
-    <div className="col-span-2 p-4 border border-input rounded-lg">
+    <div className="col-span-2 mt-5 xl:mt-0 p-4 border border-input rounded-lg">
       <div className="flex items-center gap-3">
         <ShoppingCartIcon size={24} />
         <h2 className="font-semibold text-lg">Carrito de compras</h2>

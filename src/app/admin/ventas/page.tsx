@@ -110,53 +110,55 @@ export default function VentasPage() {
         <h1 className="text-3xl font-semibold">Ventas</h1>
       </div>
 
-      <div className='grid grid-cols-3 gap-x-10 gap-y-4 mt-10'>
+      <div className='xl:grid xl:grid-cols-3 gap-x-10 gap-y-4 mt-10'>
         <div className='col-span-2 p-4 rounded-lg border border-input'>
           <div className='flex items-center gap-3'>
             <ScanBarcode />
             <h2 className='font-semibold text-lg'>Agregar Items</h2>
           </div>
-          <div className='flex gap-5 mt-4 text-xs font-medium text-muted-foreground'>
-            <div className='w-full max-w-80'>
+          <div className='lg:flex gap-5 mt-4 text-xs font-medium text-muted-foreground'>
+            <div className='w-full xl:max-w-80'>
               <label htmlFor='searhProduct'>Buscar producto</label>
               <ComboboxSearchProduct
                 setProduct={setProduct}
-                btnClass='w-full max-w-xs justify-between'
+                btnClass='w-full xl:max-w-xs justify-between'
               />
             </div>
-            <div className='w-full max-w-60'>
-              <label>Precio de venta</label>
-              <div className='relative'>
-                <Input
-                  className='pl-9'
-                  type='number'
-                  value={product?.price || 0}
-                  disabled={!product}
-                  onChange={(e) => {
-                    const value = Number(e.target.value);
+            <div className='flex justify-between items-center gap-5 mt-5 lg:mt-0'>
+              <div className='w-full xl:max-w-60'>
+                <label>Precio de venta</label>
+                <div className='relative'>
+                  <Input
+                    className='pl-9'
+                    type='number'
+                    value={product?.price || 0}
+                    disabled={!product}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
 
-                    setProduct(prev => {
-                      if (!prev) return prev;
+                      setProduct(prev => {
+                        if (!prev) return prev;
 
-                      return {
-                        ...prev,
-                        price: value
-                      }
-                    })
-                  }}
-                />
-                <DollarSign className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
+                        return {
+                          ...prev,
+                          price: value
+                        }
+                      })
+                    }}
+                  />
+                  <DollarSign className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
+                </div>
               </div>
-            </div>
 
-            <div className='col-span-2'>
-              <label>Cant.</label>
-              <InputStock
-                quantity={product?.quantity ?? 1}
-                stock={product?.stock ?? 0}
-                setProduct={setProduct}
-                disabled={!product}
-              />
+              <div className='col-span-2'>
+                <label>Cant.</label>
+                <InputStock
+                  quantity={product?.quantity ?? 1}
+                  stock={product?.stock ?? 0}
+                  setProduct={setProduct}
+                  disabled={!product}
+                />
+              </div>
             </div>
           </div>
           <Button
@@ -168,7 +170,7 @@ export default function VentasPage() {
           </Button>
         </div>
 
-        <div className='border border-input rounded-lg'>
+        <div className='mt-5 xl:mt-0 border border-input rounded-lg'>
           <div className='flex items-center justify-between p-4 border-b border-input'>
             <h2 className='text-3xl font-semibold'>Total a pagar</h2>
             <Badge variant={'outline'} className='border-emerald-500 text-emerald-500'>MXN</Badge>
