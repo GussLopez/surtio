@@ -50,7 +50,7 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
   }, 0)
   return (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-      <DialogContent className="min-w-2xl">
+      <DialogContent className="min-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="pt-1 flex-row items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-3 text-primary rounded-xl bg-primary/10 ">
@@ -115,7 +115,7 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
                   <TableHead className="text-end px-4">Total</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody className="max-h-20 overflow-y-hidden">
                 {sale.sale_items.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>{item.products.name}</TableCell>
