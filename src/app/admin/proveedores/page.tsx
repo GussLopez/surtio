@@ -46,12 +46,12 @@ export default function ProveedoresPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
         <div className="flex items-center gap-3">
           <Truck size={30} />
           <h1 className="text-3xl font-semibold">Proveedores</h1>
         </div>
-        <div>
+        <div className="mt-5 lg:mt-0">
           <Button onClick={() => openCreate()}>
             <PlusIcon size={20} weight="bold" />
             Nuevo Proveedor
@@ -127,10 +127,6 @@ export default function ProveedoresPage() {
                           <DropdownMenuItem onClick={() => openEdit(supplier)}>
                             <PencilIcon />
                             Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <SlidersHorizontal />
-                            Ajustar
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
