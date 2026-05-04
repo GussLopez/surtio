@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { ProductItem } from '@/types';
 import { sileo } from 'sileo';
 import ShoppingCartItems from '@/components/sales/ShoppingCart';
-import { getSaleById } from '@/lib/services/salesService';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
 import NewSaleReceipt from '@/components/sales/NewSaleReceipt';
@@ -95,9 +94,15 @@ export default function VentasPage() {
 
   const { data: receipt } = useQuery({
     queryKey: ["sale-recipe", saleId],
-    queryFn: () => {
+    queryFn: async () => {
       if (!saleId) throw new Error("No saleId");
-      return getSaleById(saleId);
+      const res = await fetch(`/api/sales/${saleId}`, {
+        method: 'GET'
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
     },
     retry: 1,
     refetchOnWindowFocus: true,
