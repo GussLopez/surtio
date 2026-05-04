@@ -33,7 +33,6 @@ export default function DashboardKpis() {
     retry: 1
   })
 
-  console.log(data);
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
       <div className="p-5 shadow-xs rounded-lg border border-muted">
