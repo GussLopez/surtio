@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronsUpDown, Package, Plus, Store } from "lucide-react"
+import { ChevronsUpDown, Plus, Store } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -56,7 +56,8 @@ export function BusinessSwitcher() {
       return res.json();
     },
     enabled: !!userId,
-    staleTime: 1000 * 60 * 50
+    staleTime: 1000 * 60 * 50,
+    retry: 1
   })
   React.useEffect(() => {
     if (data?.length && !businessId) {
