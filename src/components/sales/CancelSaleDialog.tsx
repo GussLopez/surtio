@@ -2,7 +2,6 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { cancelSale } from "@/lib/services/salesService";
 import React, { useState } from "react";
 import { sileo } from "sileo";
 import { Textarea } from "../ui/textarea";
@@ -23,7 +22,16 @@ export default function CancelSaleDialog({ open, onClose, saleId }: CancelSalePr
 
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (reason: string) => cancelSale(saleId, reason),
+    mutationFn: async (reason: string) => {
+      const res = await fetch(`/api/sales/${saleId}`, {
+        method: 'POST',
+        body: JSON.stringify({ cancelReason: reason })
+      })
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["sales-reports"] });
       queryClient.invalidateQueries({ queryKey: ["monthlyRevenue", businessId] });
