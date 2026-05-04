@@ -1,10 +1,25 @@
 'use client'
 
-import { getProfileById } from "@/lib/services/userService";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 import { useAuthStore } from "@/store/AuthStore";
 import { useUserStore } from "@/store/UserStore";
 import { useEffect } from "react";
+
+interface ProfileData {
+  avatar_url: string | null;
+  created_at: string | null;
+  email: string;
+  full_name: string | null;
+  id: string;
+  is_active: boolean;
+  is_blocked: boolean | null;
+  last_login_at: string | null;
+  last_name: string | null;
+  phone: string | null;
+  memberships: {
+    role: string;
+  }[];
+}
 
 export default function SessionListener() {
   const supabase = getSupabaseBrowserClient();
@@ -16,7 +31,13 @@ export default function SessionListener() {
 
   useEffect(() => {
     const fetchProfile = async (id: string) => {
-      const profile = await getProfileById(id);
+      const res = await fetch(`/api/users/profile/${id}`, {
+        method: 'GET',
+      });
+
+      if (!res.ok) throw new Error('Error fetching');
+
+      const profile = await res.json();
 
       if (profile) {
         setUser({
