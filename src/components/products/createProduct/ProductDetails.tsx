@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { getBusinessCategories } from "@/lib/services/categoriesService";
-import { ProductForm } from "@/types";
+import { Categorie, ProductForm } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardCheck, ClipboardX, Plus } from "lucide-react";
 import { useState } from "react";
@@ -25,11 +24,16 @@ export default function ProductDetails({ formData, onChange }: ProductDetailsPro
   const [isActive, setIsActive] = useState(true);
   const [modal, setModal] = useState<ModalState>(null);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
     queryFn: async () => {
-      const data = await getBusinessCategories();
-      return data;
+      const res = await fetch('/api/categories', {
+        method: 'GET'
+      })
+      
+      if (!res.ok) throw new Error('Error fetching categories');
+
+      return res.json();
     },
     retry: 1,
     refetchOnWindowFocus: true
