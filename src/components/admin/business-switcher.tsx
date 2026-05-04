@@ -23,6 +23,7 @@ import { getBusinessByUserId } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
+import { Business } from "@/types"
 
 interface BusinessSoreProps {
   id: string;
@@ -30,6 +31,12 @@ interface BusinessSoreProps {
   plan: string;
   owner_id: string;
 }
+
+interface BusinessData {
+  role: string;
+  businesses: Business;
+}
+
 export function BusinessSwitcher() {
   const userId = useUserStore((state) => state.id);
   const { isMobile } = useSidebar()
@@ -38,11 +45,18 @@ export function BusinessSwitcher() {
   const businessId = useBusinessStore(state => state.id);
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<BusinessData[]>({
     queryKey: ["business", userId],
-    queryFn: async () => await getBusinessByUserId(userId!),
+    queryFn: async () => {
+      const res = await fetch('/api/businesses', {
+        method: 'POST',
+        body: JSON.stringify({ userId })
+      });
+      if (!res.ok) throw new Error('Error fetching');
+
+      return res.json();
+    },
     enabled: !!userId,
-    staleTime: 1000 * 60 * 30,
   })
   React.useEffect(() => {
     if (data?.length && !businessId) {
@@ -73,6 +87,7 @@ export function BusinessSwitcher() {
 
     queryClient.invalidateQueries()
   }
+  console.log(data);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -129,7 +144,7 @@ export function BusinessSwitcher() {
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Tiendas
             </DropdownMenuLabel>
-            {data?.map((business) => (
+            {/* {data?.map((business) => (
               <DropdownMenuItem
                 key={business.businesses.id}
                 onClick={() => handleChangeBusiness(business.businesses)}
@@ -140,7 +155,7 @@ export function BusinessSwitcher() {
                 </div>
                 {business.businesses.name}
               </DropdownMenuItem>
-            ))}
+            ))} */}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href={'/admin/new'} className="gap-2 p-2">
