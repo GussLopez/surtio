@@ -5,7 +5,6 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
-import { updateProfile } from "@/lib/services/userService";
 import { useUserStore } from "@/store/UserStore";
 import { Profile, UserForm } from "@/types";
 import { UploadSimpleIcon, UserIcon } from "@phosphor-icons/react";
