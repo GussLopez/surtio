@@ -3,7 +3,10 @@ import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   try {
-    const { dateRange, businessId } = await req.json();
+    const { dateRange, businessId, page = 1, pageSize = 10 } = await req.json();
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
     const cookieStore = await cookies();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -36,11 +39,12 @@ export async function POST(req: Request) {
         )
       )
     `,
+        { count: "exact" },
       )
       .eq("business_id", businessId)
       .eq("status", "completed")
       .order("created_at", { ascending: false })
-      .limit(10);
+      .range(from, to);
 
     if (dateRange?.from) {
       const fromDate = new Date(dateRange.from);
@@ -53,13 +57,18 @@ export async function POST(req: Request) {
       query = query.lte("created_at", endOfDay.toISOString());
     }
 
-    const { data, error } = await query;
-    console.log("ERROR: ", error);
+    const { data, error, count } = await query;
+
     if (error) {
       return Response.json({ error: error.message }, { status: 500 });
     }
-    console.log("DATA: ", data);
-    return Response.json(data);
+    
+    return Response.json({
+      data, 
+      total: count,
+      page,
+      pageSize
+    });
   } catch (err: any) {
     return Response.json(
       { error: err.message || "Unexpected error" },

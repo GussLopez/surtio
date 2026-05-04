@@ -8,7 +8,7 @@ import { RangeDatePicker } from "@/components/ui/range-date";
 import { Spinner } from "@/components/ui/spinner";
 import { Sale } from "@/types";
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ArchiveRestore, FileClock, List, Table } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
@@ -18,6 +18,7 @@ import SalesTableView from "@/components/sales/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 type ModalState =
   | { type: "edit"; sale: Sale }
@@ -27,7 +28,9 @@ type ModalState =
   | null
 
 export default function HistorialPage() {
-  const [view, setView] = useState('list')
+  const [view, setView] = useState('list');
+  const [page, setPage] = useState(1);
+  const pageSize = 30;
   const [modal, setModal] = useState<ModalState>(null);
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const businessId = useBusinessStore(state => state.id)
@@ -35,20 +38,23 @@ export default function HistorialPage() {
   const [pdfLoading, setPdfLoading] = useState(false);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["sales-reports", businessId, dateRange],
+    queryKey: ["sales-reports", businessId, dateRange, page],
     queryFn: async () => {
       const res = await fetch('/api/sales', {
         method: 'POST',
         body: JSON.stringify({
           businessId,
-          dateRange
+          dateRange,
+          page,
+          pageSize
         })
       })
       if (!res.ok) throw new Error('Error fetching');
       return res.json();
     },
     enabled: !!businessId,
-    retry: 1
+    retry: 1,
+    placeholderData: keepPreviousData
   })
 
   useEffect(() => {
@@ -137,6 +143,7 @@ export default function HistorialPage() {
     a.click();
     setCsvLoading(false);
   };
+  const totalPages = Math.ceil((data?.total || 0) / pageSize);
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -182,7 +189,7 @@ export default function HistorialPage() {
         </div>
         }
 
-        {data?.length === 0 ? (
+        {data?.data?.length === 0 ? (
           <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10">
             <div className="p-2 rounded-lg text-primary bg-primary/10">
               <ArchiveRestore size={30} />
@@ -194,7 +201,7 @@ export default function HistorialPage() {
           <>
             {data && view === 'list' && (
               <SalesListView
-                data={data}
+                data={data.data}
                 onView={openView}
                 onEdit={openEdit}
                 onDelete={openDelete}
@@ -203,7 +210,7 @@ export default function HistorialPage() {
             )}
             {data && view === 'table' && (
               <SalesTableView
-                data={data}
+                data={data.data}
                 onView={openView}
                 onEdit={openEdit}
                 onDelete={openDelete}
@@ -212,6 +219,24 @@ export default function HistorialPage() {
             )}
           </>
         )}
+        <div>
+          <Pagination className="justify-end mt-4" >
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                  className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext
+                  onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+                  className={page === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
       {modal?.type === "view" && (
         <SaleReceipt
