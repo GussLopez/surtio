@@ -18,7 +18,7 @@ import SalesTableView from "@/components/sales/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";
-import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 type ModalState =
   | { type: "edit"; sale: Sale }
@@ -144,6 +144,7 @@ export default function HistorialPage() {
     setCsvLoading(false);
   };
   const totalPages = Math.ceil((data?.total || 0) / pageSize);
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -228,6 +229,17 @@ export default function HistorialPage() {
                   className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
                 />
               </PaginationItem>
+              {pages.map((p) => (
+                <PaginationItem key={p}>
+                  <PaginationLink
+                    isActive={p === page}
+                    onClick={() => setPage(p)}
+                    className="cursor-pointer"
+                  >
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
               <PaginationItem>
                 <PaginationNext
                   onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
