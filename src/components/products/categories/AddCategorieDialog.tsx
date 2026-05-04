@@ -50,8 +50,13 @@ export default function AddCategorieDialog({ open, onClose, onCraeted }: AddSupl
     }
     try {
       setLoading(true);
-      const newCategorie = await createCategorie(formData)
+      const res = await fetch('/api/categories', {
+        method: 'POST',
+        body: JSON.stringify({ categorie: formData })
+      })
 
+      if (!res.ok) throw new Error('Error creating categorie');
+      const newCategorie = await res.json();
       sileo.success({
         title: 'Categoría creado',
         description: 'La categoría se creó correctamente',
