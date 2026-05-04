@@ -15,7 +15,6 @@ import ViewProductModal from "@/components/products/ViewPrductModal";
 import { DeleteProduct } from "@/components/products/DeleteProduct";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getBusinessCategories } from "@/lib/services/categoriesService";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/lib/generateProductsPDF";

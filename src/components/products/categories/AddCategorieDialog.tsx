@@ -12,7 +12,6 @@ import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../../ui/spinner";
-import { createCategorie } from "@/lib/services/categoriesService";
 
 interface AddSuplierProps {
   open: boolean;
