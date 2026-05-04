@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/sidebar"
 import { useUserStore } from "@/store/UserStore"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { getBusinessByUserId } from "@/lib/services/businessService"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
@@ -57,6 +56,7 @@ export function BusinessSwitcher() {
       return res.json();
     },
     enabled: !!userId,
+    staleTime: 1000 * 60 * 50
   })
   React.useEffect(() => {
     if (data?.length && !businessId) {
@@ -87,7 +87,7 @@ export function BusinessSwitcher() {
 
     queryClient.invalidateQueries()
   }
-  console.log(data);
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -144,7 +144,7 @@ export function BusinessSwitcher() {
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Tiendas
             </DropdownMenuLabel>
-            {/* {data?.map((business) => (
+            {data?.map((business) => (
               <DropdownMenuItem
                 key={business.businesses.id}
                 onClick={() => handleChangeBusiness(business.businesses)}
@@ -155,7 +155,7 @@ export function BusinessSwitcher() {
                 </div>
                 {business.businesses.name}
               </DropdownMenuItem>
-            ))} */}
+            ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href={'/admin/new'} className="gap-2 p-2">

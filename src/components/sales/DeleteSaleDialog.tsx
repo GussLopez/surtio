@@ -13,7 +13,6 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Trash2Icon } from "lucide-react";
-import { DeleteSaleById } from "@/lib/services/salesService";
 import { sileo } from "sileo";
 import { Spinner } from "../ui/spinner";
 

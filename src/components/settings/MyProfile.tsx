@@ -1,6 +1,5 @@
 'use client'
 
-import { getProfileById } from "@/lib/services/userService";
 import { useUserStore } from "@/store/UserStore";
 import { Profile } from "@/types";
 import { UserIcon } from "@phosphor-icons/react";
