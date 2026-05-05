@@ -68,6 +68,9 @@ export default function HistorialPage() {
     setView(value);
     localStorage.setItem('sales-history-view', value);
   }
+  useEffect(() => {
+    setPage(1);
+  }, [dateRange, businessId]);
 
   const openEdit = (sale: Sale) =>
     setModal({ type: "edit", sale })
