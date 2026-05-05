@@ -5,7 +5,7 @@ import ProductTable from "@/components/products/ProductTable";
 import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import CardView from "@/components/products/CardView";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
@@ -19,6 +19,7 @@ import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/lib/generateProductsPDF";
 import { useBusinessStore } from "@/store/BusinessStore";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 type ModalState =
   | { type: "edit"; product: Product }
@@ -26,11 +27,20 @@ type ModalState =
   | { type: "delete"; product: Product }
   | null
 
+interface ProductsData {
+  data: Product[];
+  page: number;
+  pageSize: number;
+  total: number
+}
+
 export default function InventarioPage() {
   const [view, setView] = useState("table")
   const [modal, setModal] = useState<ModalState>(null);
   const [selectedCategorie, setSelectedCategorie] = useState('all');
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
   const businessName = useBusinessStore(state => state.name);
   const [debouncedSearch] = useDebounce(search, 500);
   const [pdfLoading, setPdfLoading] = useState(false);
@@ -49,26 +59,28 @@ export default function InventarioPage() {
     localStorage.setItem("inventory-view", value)
   }
 
-  const { data, isLoading, error } = useQuery<Product[]>({
-    queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId],
-    enabled: !!businessId,
-    queryFn: async ({ signal }) => {
-      const res = await fetch('/api/products/search', {
+  const { data, isLoading, error } = useQuery<ProductsData>({
+    queryKey: ["stock-products", selectedCategorie, debouncedSearch, businessId, page],
+    queryFn: async () => {
+      const res = await fetch('/api/products/list', {
         method: 'POST',
         body: JSON.stringify({
           businessId,
           categoryId: selectedCategorie === 'all' ? undefined : Number(selectedCategorie),
-          search: debouncedSearch
-        }),
-        signal
+          search: debouncedSearch,
+          page,
+          pageSize
+        })
       })
       if (!res.ok) throw new Error("Error fetching")
 
       return res.json()
     },
     retry: 1,
+    enabled: !!businessId,
+    placeholderData: keepPreviousData
   })
-  
+
   const { data: categories, isLoading: catLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
     queryFn: async () => {
@@ -83,7 +95,7 @@ export default function InventarioPage() {
     retry: 1,
     refetchOnWindowFocus: true
   })
-  const totalInventario = data?.reduce((acc, product) => {
+  const totalInventario = data?.data.reduce((acc, product) => {
     return acc + (product.price * product.stock);
   }, 0) || 0;
 
@@ -97,7 +109,7 @@ export default function InventarioPage() {
     setModal({ type: "delete", product })
 
   const handleDownloadPDF = async () => {
-    if (!data || data.length === 0) {
+    if (!data || data.data.length === 0) {
       sileo.warning({
         title: 'No hay datos para exportar'
       });
@@ -106,7 +118,7 @@ export default function InventarioPage() {
     setPdfLoading(true);
     try {
       const categoryName = categories?.find(c => c.id.toString() === selectedCategorie)?.name;
-      await generateProductsPDF(data, businessName!, categoryName || selectedCategorie);
+      await generateProductsPDF(data.data, businessName!, categoryName || selectedCategorie);
     } catch (error) {
       sileo.error({
         title: 'Error al descargar el pdf',
@@ -116,6 +128,11 @@ export default function InventarioPage() {
       setPdfLoading(false)
     }
   }
+  const totalPages = Math.ceil((data?.total || 0) / pageSize);
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  useEffect(() => {
+    setPage(1);
+  }, [selectedCategorie, businessId]);
   return (
     <div className="relative">
       <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between">
@@ -145,7 +162,7 @@ export default function InventarioPage() {
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Buscar producto, SKU..."
-              className="lg:max-w-80 pl-9"
+              className="lg:min-w-60 pl-9"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -169,7 +186,7 @@ export default function InventarioPage() {
         <div className="flex gap-2 mt-3 lg:mt-0">
           <Button
             variant={'outline'}
-            disabled={!data || data?.length === 0 || pdfLoading}
+            disabled={!data || data?.data.length === 0 || pdfLoading}
             onClick={handleDownloadPDF}
           >
             {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
@@ -177,7 +194,7 @@ export default function InventarioPage() {
           </Button>
           <Button
             variant={'outline'}
-            disabled={!data || data?.length === 0 || csvLoading}
+            disabled={!data || data?.data.length === 0 || csvLoading}
           // onClick={handleDownloadCsv}
           >
             {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
@@ -191,7 +208,7 @@ export default function InventarioPage() {
             <Spinner className="size-7" />
           </div>
         ) : (
-          data?.length === 0 ? (
+          data?.data.length === 0 ? (
             <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10">
               <div className="p-2 rounded-lg text-primary bg-primary/10">
                 <PackageSearch size={30} />
@@ -204,7 +221,7 @@ export default function InventarioPage() {
             <>
               {data && view === "table" &&
                 <ProductTable
-                  data={data}
+                  data={data.data}
                   totalInventario={totalInventario}
                   onEdit={openEdit}
                   onDelete={openDelete}
@@ -212,7 +229,7 @@ export default function InventarioPage() {
                 />}
               {data && view === "card" &&
                 <CardView
-                  data={data}
+                  data={data.data}
                   totalInventario={totalInventario}
                   onEdit={openEdit}
                   onDelete={openDelete}
@@ -220,6 +237,35 @@ export default function InventarioPage() {
                 />}
             </>
           ))}
+        <div>
+          <Pagination className="justify-end mt-4" >
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                  className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
+              </PaginationItem>
+              {pages.map((p) => (
+                <PaginationItem key={p}>
+                  <PaginationLink
+                    isActive={p === page}
+                    onClick={() => setPage(p)}
+                    className="cursor-pointer"
+                  >
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+                  className={page === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
       {modal?.type === "edit" && (
         <EditProductModal
