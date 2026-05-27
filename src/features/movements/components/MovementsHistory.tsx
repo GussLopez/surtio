@@ -1,19 +1,18 @@
 'use client'
 
-import { Button } from "../ui/button"
-import { RangeDatePicker } from "../ui/range-date"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react"
 import { useQuery } from "@tanstack/react-query"
-import { Badge } from "../ui/badge"
-import { Trash2 } from "lucide-react"
+import { Badge, Trash2 } from "lucide-react"
 import { useState } from "react"
 import { DeleteMovement } from "./DeleteMovement"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
 import { DateRange } from "react-day-picker"
-import TableLoadingData from "../ui/TableLoadingData"
 import { useBusinessStore } from "@/store/BusinessStore"
 import { Movement, Profile } from "@/types"
+import { RangeDatePicker } from "@/components/ui/range-date"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import TableLoadingData from "@/components/ui/TableLoadingData"
 
 type ModalState =
   | { type: "delete"; movementId: number }

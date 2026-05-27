@@ -1,5 +1,5 @@
 'use client'
-import AddSupplierDialog from "@/components/admin/suppliers/AddSupplierDialog";
+import AddSupplierDialog from "@/features/shared/components/AddSupplierDialog";
 import DeleteSupplierDialog from "@/components/admin/suppliers/DeleteSupplierDialog";
 import EditSupplierDialog from "@/components/admin/suppliers/EditSupplierDialog";
 import { Button } from "@/components/animate-ui/components/buttons/button";

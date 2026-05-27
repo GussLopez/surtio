@@ -1,6 +1,6 @@
 'use client'
 
-import AddSupplierDialog from "@/components/admin/suppliers/AddSupplierDialog";
+import AddSupplierDialog from "@/features/shared/components/AddSupplierDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";

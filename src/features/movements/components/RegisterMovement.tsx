@@ -17,8 +17,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react"
 import { NumberField } from "react-aria-components";
 import { sileo } from "sileo";
-import AddSupplierDialog from "../admin/suppliers/AddSupplierDialog";
 import { AnimatePresence } from "motion/react";
+import AddSupplierDialog from "@/shared/components/AddSupplierDialog";
 
 interface ItemsProps {
   tempId: string;

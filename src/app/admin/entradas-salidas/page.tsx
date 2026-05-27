@@ -1,8 +1,8 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
-import MovementsHistory from "@/components/movements/MovementsHistory";
-import RegisterMovement from "@/components/movements/RegisterMovement";
+import MovementsHistory from "@/features/movements/components/MovementsHistory";
+import RegisterMovement from "@/features/movements/components/RegisterMovement";
 import { ArrowRightLeft, FolderInput, History } from "lucide-react";
 import { useState } from "react";
 

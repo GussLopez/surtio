@@ -9,10 +9,10 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Spinner } from "@/components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash2Icon } from "lucide-react"
 import { sileo } from "sileo"
-import { Spinner } from "../ui/spinner"
 
 interface MovementModalProps {
   open: boolean
