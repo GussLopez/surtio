@@ -4,7 +4,7 @@ import { Sale } from "@/types";
 import { Separator } from "../../../components/ui/separator";
 import { Button } from "../../../components/ui/button";
 import { useRef, useState } from "react";
-import { generateReceiptPDF } from "@/lib/generateReceiptPDF";
+import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Spinner } from "../../../components/ui/spinner";
 
