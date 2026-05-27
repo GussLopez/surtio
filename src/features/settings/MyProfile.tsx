@@ -4,13 +4,13 @@ import { useUserStore } from "@/store/UserStore";
 import { Profile } from "@/types";
 import { UserIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 import { SquarePen, UserSquare } from "lucide-react";
-import { Separator } from "../ui/separator";
-import InfoItem from "../ui/InfoItem";
-import { Skeleton } from "../ui/skeleton";
+import { Separator } from "../../components/ui/separator";
+import InfoItem from "../../components/ui/InfoItem";
+import { Skeleton } from "../../components/ui/skeleton";
 import { useState } from "react";
-import EditUserDrawer from "../admin/users/EditUserDrawer";
+import EditUserDrawer from "../../components/admin/users/EditUserDrawer";
 
 type ModalState =
   | { type: "editAvatar"; user: Profile }

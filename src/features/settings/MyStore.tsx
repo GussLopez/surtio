@@ -14,13 +14,13 @@ import {
   SquarePen,
   Store,
 } from "lucide-react";
-import { Badge } from "../ui/badge";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
-import InfoItem from "../ui/InfoItem";
-import { Skeleton } from "../ui/skeleton";
-import DeleteBusinessDialog from "../admin/business/DeleteBusinessDialog";
-import EditBusinessDrawer from "../admin/business/EditBusinessDrawer";
+import { Badge } from "../../components/ui/badge";
+import { Separator } from "../../components/ui/separator";
+import { Button } from "../../components/ui/button";
+import InfoItem from "../../components/ui/InfoItem";
+import { Skeleton } from "../../components/ui/skeleton";
+import DeleteBusinessDialog from "../../components/admin/business/DeleteBusinessDialog";
+import EditBusinessDrawer from "../../components/admin/business/EditBusinessDrawer";
 
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);
