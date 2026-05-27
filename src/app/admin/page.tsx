@@ -1,16 +1,14 @@
-import DashboardKpis from "@/components/admin/dashboard/DashboardKpis";
-import MostSelledCategory from "@/components/admin/dashboard/MostSelledCategory";
-import MostSelledProduct from "@/components/admin/dashboard/MostSelledProduct";
-import TotalRevenue from "@/components/admin/dashboard/TotalRevenue";
+import DashboardKpis from "@/features/dashboard/DashboardKpis";
+import MostSelledCategory from "@/features/dashboard/MostSelledCategory";
+import MostSelledProduct from "@/features/dashboard/MostSelledProduct";
+import TotalRevenue from "@/features/dashboard/TotalRevenue";
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    redirect('/auth/login')
-  }
+  if (!user) redirect('/auth/login');
   return (
     <div>
       <DashboardKpis />
