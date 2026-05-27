@@ -17,7 +17,7 @@ import SalesListView from "@/features/sales/components/SalesListView";
 import SalesTableView from "@/features/sales/components/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
-import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";
+import { generateSalesHistoryPDF } from "@/features/sales/utils/generateSalesHisotryPDF";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 type ModalState =

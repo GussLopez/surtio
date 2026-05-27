@@ -1,5 +1,5 @@
 'use client';
-import { useCartStore } from "@/store/useCartStore";
+import { useCartStore } from "@/features/sales/store/useCartStore";
 import { CalendarIcon, ShoppingCartIcon } from "@phosphor-icons/react";
 import { Popover, PopoverContent, PopoverTrigger } from "../../../components/ui/popover";
 import { es } from "date-fns/locale";
