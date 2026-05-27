@@ -19,8 +19,8 @@ import { Separator } from "../../components/ui/separator";
 import { Button } from "../../components/ui/button";
 import InfoItem from "../../components/ui/InfoItem";
 import { Skeleton } from "../../components/ui/skeleton";
-import DeleteBusinessDialog from "../../components/admin/business/DeleteBusinessDialog";
-import EditBusinessDrawer from "../../components/admin/business/EditBusinessDrawer";
+import DeleteBusinessDialog from "../business/components/DeleteBusinessDialog";
+import EditBusinessDrawer from "../business/components/EditBusinessDrawer";
 
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);
