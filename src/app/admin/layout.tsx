@@ -3,7 +3,7 @@ import { AuthContextProvider } from "@/context/AuthContext";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { Separator } from "@/components/ui/separator";
-import SessionListener from "@/components/auth/SessionListener";
+import SessionListener from "@/features/auth/components/SessionListener";
 import ClientWrapper from "@/components/admin/ClientWrapper";
 
 export const metadata: Metadata = {
