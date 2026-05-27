@@ -1,8 +1,8 @@
 'use client'
 import { DollarSign, Plus, ScanBarcode } from 'lucide-react';
-import ComboboxSearchProduct from '@/components/sales/SearchProductInput'
+import ComboboxSearchProduct from '@/features/sales/components/SearchProductInput'
 import { Input } from '@/components/ui/input';
-import InputStock from '@/components/sales/ProductQuantity';
+import InputStock from '@/features/sales/components/ProductQuantity';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircleIcon, SealPercentIcon } from '@phosphor-icons/react';
@@ -10,10 +10,10 @@ import { useCartStore } from '@/store/useCartStore';
 import { useState } from 'react';
 import { ProductItem } from '@/types';
 import { sileo } from 'sileo';
-import ShoppingCartItems from '@/components/sales/ShoppingCart';
+import ShoppingCartItems from '@/features/sales/components/ShoppingCart';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
-import NewSaleReceipt from '@/components/sales/NewSaleReceipt';
+import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
 import { useBusinessStore } from '@/store/BusinessStore';
 import { normalizeDate } from '@/lib/utils';
 

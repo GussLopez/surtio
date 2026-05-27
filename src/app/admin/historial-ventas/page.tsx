@@ -1,8 +1,8 @@
 'use client'
-import DeleteSaleDialog from "@/components/sales/DeleteSaleDialog";
-import EditSaleDialog from "@/components/sales/EditSaleDialog";
-import CancelSaleDialog from "@/components/sales/CancelSaleDialog";
-import SaleReceipt from "@/components/sales/SaleReceipt";
+import DeleteSaleDialog from "@/features/sales/components/DeleteSaleDialog";
+import EditSaleDialog from "@/features/sales/components/EditSaleDialog";
+import CancelSaleDialog from "@/features/sales/components/CancelSaleDialog";
+import SaleReceipt from "@/features/sales/components/SaleReceipt";
 import { Button } from "@/components/ui/button";
 import { RangeDatePicker } from "@/components/ui/range-date";
 import { Spinner } from "@/components/ui/spinner";
@@ -13,8 +13,8 @@ import { ArchiveRestore, FileClock, List, Table } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
-import SalesListView from "@/components/sales/SalesListView";
-import SalesTableView from "@/components/sales/SalesTableView";
+import SalesListView from "@/features/sales/components/SalesListView";
+import SalesTableView from "@/features/sales/components/SalesTableView";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/lib/generateSalesHisotryPDF";

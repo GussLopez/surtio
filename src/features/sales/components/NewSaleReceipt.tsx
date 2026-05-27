@@ -1,12 +1,12 @@
 import { DownloadSimpleIcon, PrinterIcon, SealCheckIcon } from "@phosphor-icons/react";
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
 import { Sale } from "@/types";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
+import { Separator } from "../../../components/ui/separator";
+import { Button } from "../../../components/ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/lib/generateReceiptPDF";
 import { useBusinessStore } from "@/store/BusinessStore";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
 
 interface SaleRecipProps {
   open: boolean;

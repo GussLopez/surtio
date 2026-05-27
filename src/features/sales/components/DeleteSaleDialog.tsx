@@ -10,11 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogMedia,
   AlertDialogTitle,
-} from "../ui/alert-dialog";
-import { Button } from "../ui/button";
+} from "../../../components/ui/alert-dialog";
+import { Button } from "../../../components/ui/button";
 import { Trash2Icon } from "lucide-react";
 import { sileo } from "sileo";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
 
 interface DeleteSaleDialogProps {
   open: boolean;

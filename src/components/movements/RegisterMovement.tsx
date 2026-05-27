@@ -1,6 +1,6 @@
 'use client';
-import InputQuantity from "@/components/sales/InputQuantity";
-import SearchProductInput from "@/components/sales/SearchProductInput";
+import InputQuantity from "@/features/sales/components/InputQuantity";
+import SearchProductInput from "@/features/sales/components/SearchProductInput";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";

@@ -1,9 +1,9 @@
 'use client'
 import { Sale } from "@/types"
-import { Badge } from "../ui/badge"
+import { Badge } from "../../../components/ui/badge"
 import { BriefcaseIcon, CalendarBlankIcon, NotePencilIcon, PackageIcon, ReceiptIcon, TrendUpIcon, UserCircleIcon } from "@phosphor-icons/react"
-import { Separator } from "../ui/separator"
-import { Button } from "../ui/button"
+import { Separator } from "../../../components/ui/separator"
+import { Button } from "../../../components/ui/button"
 import { Ban, Trash2 } from "lucide-react"
 
 interface SaleListProps {

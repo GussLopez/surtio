@@ -1,12 +1,12 @@
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Button } from "../ui/button";
-import { Spinner } from "../ui/spinner";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
+import { Button } from "../../../components/ui/button";
+import { Spinner } from "../../../components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { sileo } from "sileo";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
-import ErrorMessage from "../ui/error-message";
+import { Textarea } from "../../../components/ui/textarea";
+import { Label } from "../../../components/ui/label";
+import ErrorMessage from "../../../components/ui/error-message";
 import { useBusinessStore } from "@/store/BusinessStore";
 
 interface CancelSaleProps {

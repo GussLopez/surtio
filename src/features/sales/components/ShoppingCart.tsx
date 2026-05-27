@@ -1,11 +1,11 @@
 'use client';
 import { useCartStore } from "@/store/useCartStore";
 import { CalendarIcon, ShoppingCartIcon } from "@phosphor-icons/react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../../../components/ui/popover";
 import { es } from "date-fns/locale";
 import { format } from "date-fns";
-import { Button } from "../ui/button";
-import { Calendar } from "../ui/calendar";
+import { Button } from "../../../components/ui/button";
+import { Calendar } from "../../../components/ui/calendar";
 import { Trash2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
