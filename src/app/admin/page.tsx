@@ -1,7 +1,7 @@
-import DashboardKpis from "@/features/dashboard/DashboardKpis";
-import MostSelledCategory from "@/features/dashboard/MostSelledCategory";
-import MostSelledProduct from "@/features/dashboard/MostSelledProduct";
-import TotalRevenue from "@/features/dashboard/TotalRevenue";
+import DashboardKpis from "@/features/dashboard/components/DashboardKpis";
+import MostSelledCategory from "@/features/dashboard/components/MostSelledCategory";
+import MostSelledProduct from "@/features/dashboard/components/MostSelledProduct";
+import TotalRevenue from "@/features/dashboard/components/TotalRevenue";
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { redirect } from "next/navigation";
 
