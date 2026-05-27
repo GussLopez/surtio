@@ -40,7 +40,7 @@ export default function InventarioPage() {
   const [selectedCategorie, setSelectedCategorie] = useState('all');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const pageSize = 5;
+  const pageSize = 20;
   const businessName = useBusinessStore(state => state.name);
   const [debouncedSearch] = useDebounce(search, 500);
   const [pdfLoading, setPdfLoading] = useState(false);
@@ -195,7 +195,7 @@ export default function InventarioPage() {
           <Button
             variant={'outline'}
             disabled={!data || data?.data.length === 0 || csvLoading}
-          // onClick={handleDownloadCsv}
+            // onClick={handleDownloadCsv}
           >
             {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
@@ -289,7 +289,7 @@ export default function InventarioPage() {
         />
       )}
       {view === "card" && (
-        <div className="fixed bottom-10 right-10 px-5 py-3 border border-input shadow-lg rounded-lg bg-white dark:bg-black">
+        <div className="fixed bottom-10 right-10 px-5 py-3 border border-input shadow-lg rounded-lg bg-white dark:bg-black z-99">
           <p className="font-semibold">Total Inventario</p>
           <p className="font-black text-lg text-primary-light">
             ${totalInventario.toLocaleString()} <span className="text-[10px] font-normal text-muted-foreground">MXN</span>
