@@ -1,8 +1,8 @@
 'use client'
 import UserCard from "@/components/admin/userCard";
-import CreateUser from "@/components/admin/users/CreateUserModal";
-import DeleteUserModal from "@/components/admin/users/DeleteUserModal";
-import EditUserModal from "@/components/admin/users/EditUserModal";
+import CreateUser from "@/features/users/components/CreateUserModal";
+import DeleteUserModal from "@/features/users/components/DeleteUserModal";
+import EditUserModal from "@/features/users/components/EditUserModal";
 import ServerError from "@/components/ui/server-error";
 import { Spinner } from "@/components/ui/spinner";
 import { useBusinessStore } from "@/store/BusinessStore";
