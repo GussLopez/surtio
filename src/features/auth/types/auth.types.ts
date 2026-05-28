@@ -5,3 +5,8 @@ export type AuthContextType = {
   businessId: string | null;
   loading: boolean;
 };
+
+export type SignInInput = {
+  email: string;
+  password: string;
+}
