@@ -4,7 +4,7 @@ import EditSaleDialog from "@/features/sales/components/EditSaleDialog";
 import CancelSaleDialog from "@/features/sales/components/CancelSaleDialog";
 import SaleReceipt from "@/features/sales/components/SaleReceipt";
 import { Button } from "@/shared/components/ui/button";
-import { RangeDatePicker } from "@/components/ui/range-date";
+import { RangeDatePicker } from "@/shared/components/ui/range-date";
 import { Spinner } from "@/components/ui/spinner";
 import { Sale } from "@/types";
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react";
