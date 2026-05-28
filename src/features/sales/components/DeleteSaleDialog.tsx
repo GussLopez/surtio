@@ -10,7 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogMedia,
   AlertDialogTitle,
-} from "../../../components/ui/alert-dialog";
+} from "../../../shared/components/ui/alert-dialog";
 import { Button } from "../../../components/ui/button";
 import { Trash2Icon } from "lucide-react";
 import { sileo } from "sileo";
