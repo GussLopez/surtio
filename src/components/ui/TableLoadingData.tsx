@@ -1,5 +1,5 @@
 import { Skeleton } from "./skeleton";
-import { TableRow, TableCell } from "./table";
+import { TableRow, TableCell } from "../../shared/components/ui/table";
 
 type ColumnType =
   | 'image'

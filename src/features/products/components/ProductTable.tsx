@@ -1,5 +1,5 @@
 'use client';;
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
 import { Image, MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon } from "lucide-react";
 import { Skeleton } from "../../../components/ui/skeleton";
 import { Button } from "../../../shared/components/ui/button";

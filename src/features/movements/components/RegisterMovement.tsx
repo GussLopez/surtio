@@ -8,7 +8,7 @@ import { ArrowLeft, Plus, SquarePen, Trash } from "lucide-react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";

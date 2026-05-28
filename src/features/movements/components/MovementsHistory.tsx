@@ -11,7 +11,7 @@ import { Movement, Profile } from "@/types"
 import { RangeDatePicker } from "@/components/ui/range-date"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/shared/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table"
 import TableLoadingData from "@/components/ui/TableLoadingData"
 
 type ModalState =

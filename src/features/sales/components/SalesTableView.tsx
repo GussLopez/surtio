@@ -1,6 +1,6 @@
 'use client'
 import { Sale } from "@/types";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
 import { ReceiptIcon, TrendUpIcon } from "@phosphor-icons/react";
 import { Button } from "../../../shared/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
