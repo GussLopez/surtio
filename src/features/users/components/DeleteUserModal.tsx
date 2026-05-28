@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteEmploye } from "@/app/lib/action";
+import { deleteEmploye } from "@/features/users/lib/action";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogTitle } from "@/shared/components/ui/alert-dialog";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

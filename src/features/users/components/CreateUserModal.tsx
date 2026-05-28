@@ -1,5 +1,5 @@
 'use client'
-import { createEmploye } from "@/app/lib/action";
+import { createEmploye } from "@/features/users/lib/action";
 import { Button as AnimatedBtn } from "@/shared/components/animate-ui/components/buttons/button";
 import { Button } from "@/shared/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialog";

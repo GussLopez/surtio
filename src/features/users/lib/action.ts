@@ -33,7 +33,6 @@ export async function createEmploye({
 
   const userId = data.user.id;
 
-  // 🔥 CLAVE: usar upsert
   const { error: profileError } = await supabase
     .from("profiles")
     .upsert({
