@@ -1,7 +1,7 @@
 import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { ProductForm } from "@/shared/types";
 import { Image } from "lucide-react";
+import { ProductForm } from "../../types/products.types";
 
 interface productGeneralProps {
   formData: ProductForm;

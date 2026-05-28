@@ -12,7 +12,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ArchiveRestore, FileClock, List, Table } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
 import SalesListView from "@/features/sales/components/SalesListView";
 import SalesTableView from "@/features/sales/components/SalesTableView";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
