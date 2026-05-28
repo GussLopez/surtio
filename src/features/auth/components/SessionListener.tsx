@@ -1,8 +1,8 @@
 'use client'
 
 import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client";
-import { useAuthStore } from "@/store/AuthStore";
-import { useUserStore } from "@/store/UserStore";
+import { useAuthStore } from "@/shared/store/AuthStore";
+import { useUserStore } from "@/shared/store/UserStore";
 import { useEffect } from "react";
 
 interface ProfileData {

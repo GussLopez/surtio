@@ -3,7 +3,7 @@
 import { ArrowDownNarrowWide, Ban, DollarSign, Package } from "lucide-react";
 import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 

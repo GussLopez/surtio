@@ -5,8 +5,8 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { useBusinessStore } from "@/store/BusinessStore";
-import { useUserStore } from "@/store/UserStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
+import { useUserStore } from "@/shared/store/UserStore";
 import { Business } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

@@ -5,7 +5,7 @@ import { Separator } from "../../../shared/components/ui/separator";
 import { Button } from "../../../shared/components/ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Spinner } from "../../../shared/components/ui/spinner";
 
 interface SaleRecipProps {

@@ -10,8 +10,8 @@ import { Separator } from "@/shared/components/ui/separator";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { useBusinessStore } from "@/store/BusinessStore";
-import { useUserStore } from "@/store/UserStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
+import { useUserStore } from "@/shared/store/UserStore";
 import { Product, Supplier } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react"

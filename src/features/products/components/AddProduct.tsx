@@ -14,8 +14,8 @@ import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../../../shared/components/ui/spinner";
 import { sileo } from "sileo";
-import { useBusinessStore } from "@/store/BusinessStore";
-import { useUserStore } from "@/store/UserStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
+import { useUserStore } from "@/shared/store/UserStore";
 
 
 export default function AddProduct() {

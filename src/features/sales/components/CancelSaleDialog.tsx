@@ -7,7 +7,7 @@ import { sileo } from "sileo";
 import { Textarea } from "../../../shared/components/ui/textarea";
 import { Label } from "../../../shared/components/ui/label";
 import ErrorMessage from "../../../shared/components/ui/error-message";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 
 interface CancelSaleProps {
   open: boolean;

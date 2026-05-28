@@ -18,7 +18,7 @@ import { cn } from '@/shared/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { ProductItem } from '@/types'
 import { useDebounce } from 'use-debounce';
-import { useBusinessStore } from '@/store/BusinessStore';
+import { useBusinessStore } from '@/shared/store/BusinessStore';
 
 interface SearchProductProps {
   setProduct: (product: ProductItem) => void;

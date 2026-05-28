@@ -8,7 +8,7 @@ import { Field, FieldLabel, FieldSet } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Employe } from "@/types";
 import { UserIcon, UserPlusIcon } from "@phosphor-icons/react";
 import { useQueryClient } from "@tanstack/react-query";

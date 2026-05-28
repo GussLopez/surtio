@@ -1,6 +1,6 @@
 'use client'
 
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
 import { XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts';

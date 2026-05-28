@@ -23,9 +23,9 @@ import {
 } from "@/shared/components/ui/sidebar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/store/AuthStore";
+import { useAuthStore } from "@/shared/store/AuthStore";
 import { Skeleton } from "../../../shared/components/ui/skeleton";
-import { useUserStore } from "@/store/UserStore";
+import { useUserStore } from "@/shared/store/UserStore";
 
 export function NavUser() {
   const { theme, setTheme } = useTheme();

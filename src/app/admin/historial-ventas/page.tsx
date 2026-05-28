@@ -15,7 +15,7 @@ import { DateRange } from "react-day-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
 import SalesListView from "@/features/sales/components/SalesListView";
 import SalesTableView from "@/features/sales/components/SalesTableView";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/features/sales/utils/generateSalesHisotryPDF";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";

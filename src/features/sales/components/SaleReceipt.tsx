@@ -8,7 +8,7 @@ import { Separator } from "../../../shared/components/ui/separator";
 import { Button } from "../../../shared/components/ui/button";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { useState } from "react";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 
 interface SaleReceiptProps {
   open: boolean;

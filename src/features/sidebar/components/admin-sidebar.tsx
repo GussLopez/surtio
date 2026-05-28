@@ -17,7 +17,7 @@ import { NavUser } from "@/features/sidebar/components/nav-user"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/shared/components/ui/sidebar";
 import { NavSettings } from "@/features/sidebar/components/nav-settings";
 import { BusinessSwitcher } from "./business-switcher";
-import { useUserStore } from "@/store/UserStore";
+import { useUserStore } from "@/shared/store/UserStore";
 
 const data = {
   navMain: [

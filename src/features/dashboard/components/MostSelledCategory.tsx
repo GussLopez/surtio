@@ -1,6 +1,6 @@
 'use client'
 
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { Bar, BarChart, Label, Pie, PieChart, XAxis, YAxis } from "recharts";

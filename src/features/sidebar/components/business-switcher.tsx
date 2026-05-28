@@ -17,9 +17,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/shared/components/ui/sidebar"
-import { useUserStore } from "@/store/UserStore"
+import { useUserStore } from "@/shared/store/UserStore"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { useBusinessStore } from "@/store/BusinessStore"
+import { useBusinessStore } from "@/shared/store/BusinessStore"
 import { Skeleton } from "../../../shared/components/ui/skeleton"
 import Link from "next/link"
 import { Business } from "@/types"

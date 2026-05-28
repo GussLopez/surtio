@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table"
-import { useBusinessStore } from "@/store/BusinessStore"
+import { useBusinessStore } from "@/shared/store/BusinessStore"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowUpCircle } from "lucide-react";
 

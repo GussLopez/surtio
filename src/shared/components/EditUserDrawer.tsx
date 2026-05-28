@@ -5,7 +5,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { useUserStore } from "@/store/UserStore";
+import { useUserStore } from "@/shared/store/UserStore";
 import { Profile, UserForm } from "@/types";
 import { UploadSimpleIcon, UserIcon } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

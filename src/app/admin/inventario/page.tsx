@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/features/products/utils/generateProductsPDF";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 
 type ModalState =

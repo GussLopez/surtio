@@ -7,7 +7,7 @@ import { Badge } from "@/shared/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import TableLoadingData from "@/shared/components/ui/TableLoadingData";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Supplier } from "@/types";
 import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";

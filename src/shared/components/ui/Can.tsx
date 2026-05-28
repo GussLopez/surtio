@@ -1,5 +1,5 @@
 import { getMyRole } from "@/shared/services/userService";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useEffect, useState } from "react";
 
 export default function Can({ roles, children }: { roles: string[], children: React.ReactNode }) {

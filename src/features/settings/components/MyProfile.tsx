@@ -1,6 +1,6 @@
 'use client'
 
-import { useUserStore } from "@/store/UserStore";
+import { useUserStore } from "@/shared/store/UserStore";
 import { Profile } from "@/types";
 import { UserIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";

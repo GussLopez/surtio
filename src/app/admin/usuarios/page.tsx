@@ -5,7 +5,7 @@ import DeleteUserModal from "@/features/users/components/DeleteUserModal";
 import EditUserModal from "@/features/users/components/EditUserModal";
 import ServerError from "@/shared/components/ui/server-error";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
 import { UserRoundSearch, Users } from "lucide-react";
 import { useState } from "react";

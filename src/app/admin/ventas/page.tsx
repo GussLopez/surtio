@@ -14,7 +14,7 @@ import ShoppingCartItems from '@/features/sales/components/ShoppingCart';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/shared/components/ui/spinner';
 import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
-import { useBusinessStore } from '@/store/BusinessStore';
+import { useBusinessStore } from '@/shared/store/BusinessStore';
 import { normalizeDate } from '@/shared/lib/utils';
 
 export default function VentasPage() {

@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Supplier, SupplierForm } from "@/types";
-import { useBusinessStore } from "@/store/BusinessStore";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { sileo } from "sileo";
 import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "@/shared/components/ui/spinner";
