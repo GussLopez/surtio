@@ -2,17 +2,17 @@
 
 import { Plus } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../shared/components/ui/dialog";
-import { Button as CustomBtn } from "../../../components/animate-ui/components/buttons/button";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
+import { Button as CustomBtn } from "@/shared/components/animate-ui/components/buttons/button";
+import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
 import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
 import ProductPrices from "./create/ProductPrices";
 import ProductStock from "./create/ProductStock";
-import { Button } from "../../../shared/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
 import { ProductForm } from "../types/products.types";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../../../shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { sileo } from "sileo";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useUserStore } from "@/shared/store/UserStore";
