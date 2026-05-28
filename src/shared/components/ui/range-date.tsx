@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/shared/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "@/shared/components/ui/calendar"
 import {
   Popover,
   PopoverContent,

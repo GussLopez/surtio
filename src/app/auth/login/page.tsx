@@ -14,7 +14,7 @@ import ErrorMessage from "@/components/ui/error-message"
 import { Button } from "@/shared/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Spinner } from "@/components/ui/spinner"
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/shared/components/ui/separator"
 
 interface LoginForm {
   email: string;

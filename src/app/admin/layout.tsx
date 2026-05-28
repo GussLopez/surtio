@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/shared/components/ui/sidebar";
 import { AdminSidebar } from "@/features/sidebar/components/admin-sidebar";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/components/ui/separator";
 import SessionListener from "@/features/auth/components/SessionListener";
 import ClientWrapper from "@/shared/components/ClientWrapper";
 

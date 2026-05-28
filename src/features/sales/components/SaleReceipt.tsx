@@ -4,7 +4,7 @@ import { DownloadSimpleIcon, StorefrontIcon, UserIcon } from "@phosphor-icons/re
 import { Badge } from "../../../shared/components/ui/badge";
 import { CreditCard } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
-import { Separator } from "../../../components/ui/separator";
+import { Separator } from "../../../shared/components/ui/separator";
 import { Button } from "../../../shared/components/ui/button";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { useState } from "react";

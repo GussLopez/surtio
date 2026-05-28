@@ -1,7 +1,7 @@
 import { Package, MoreVertical, PencilIcon, SlidersHorizontal, Trash2Icon } from "lucide-react";
 import { Badge } from "../../../shared/components/ui/badge";
 import { Button } from "../../../shared/components/ui/button";
-import { Separator } from "../../../components/ui/separator";
+import { Separator } from "../../../shared/components/ui/separator";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
 import { Product } from "@/types";
 

@@ -5,7 +5,7 @@ import { Skeleton } from "../../../shared/components/ui/skeleton";
 import { Button } from "../../../shared/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
 import { Product } from "@/types";
-import Can from "../../../components/ui/Can";
+import Can from "../../../shared/components/ui/Can";
 
 interface ProductTableProps {
   data: Product[]

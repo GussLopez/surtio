@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../../../components/ui/
 import { es } from "date-fns/locale";
 import { format } from "date-fns";
 import { Button } from "../../../shared/components/ui/button";
-import { Calendar } from "../../../components/ui/calendar";
+import { Calendar } from "../../../shared/components/ui/calendar";
 import { Trash2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 

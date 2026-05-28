@@ -11,7 +11,7 @@ import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface RegisterForm {
