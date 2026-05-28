@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AuthContextProvider } from "@/context/AuthContext";
+import { AuthContextProvider } from "@/features/auth/context/AuthContext";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/shared/components/ui/sidebar";
 import { AdminSidebar } from "@/features/sidebar/components/admin-sidebar";
 import { Separator } from "@/shared/components/ui/separator";
