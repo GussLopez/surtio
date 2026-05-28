@@ -6,7 +6,10 @@ export type AuthContextType = {
   loading: boolean;
 };
 
-export type SignInInput = {
+export type SingUpInput = {
+  name: string;
   email: string;
   password: string;
 }
+
+export type SignInInput = Pick<SingUpInput, 'email' | 'password'>
