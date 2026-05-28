@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { AdminSidebar } from "@/features/sidebar/components/admin-sidebar";
 import { Separator } from "@/components/ui/separator";
 import SessionListener from "@/features/auth/components/SessionListener";
-import ClientWrapper from "@/components/admin/ClientWrapper";
+import ClientWrapper from "@/shared/components/ClientWrapper";
 
 export const metadata: Metadata = {
   title: "Flyzzio - Admin",

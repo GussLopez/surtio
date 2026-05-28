@@ -11,11 +11,11 @@ import {
   Users,
 } from "lucide-react";
 
-import { NavMain } from "@/components/admin/nav-main"
-import { NavProjects } from "@/components/admin/nav-projects"
-import { NavUser } from "@/components/admin/nav-user"
+import { NavMain } from "@/features/sidebar/components/nav-main"
+import { NavProjects } from "@/features/sidebar/components/nav-projects"
+import { NavUser } from "@/features/sidebar/components/nav-user"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
-import { NavSettings } from "./nav-settings";
+import { NavSettings } from "@/features/sidebar/components/nav-settings";
 import { BusinessSwitcher } from "./business-switcher";
 import { useUserStore } from "@/store/UserStore";
 

@@ -1,5 +1,5 @@
 'use client'
-import UserCard from "@/components/admin/userCard";
+import UserCard from "@/features/users/components/userCard";
 import CreateUser from "@/features/users/components/CreateUserModal";
 import DeleteUserModal from "@/features/users/components/DeleteUserModal";
 import EditUserModal from "@/features/users/components/EditUserModal";
