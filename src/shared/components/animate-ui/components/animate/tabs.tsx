@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {
   Tabs as TabsPrimitive,
   TabsList as TabsListPrimitive,
@@ -13,7 +11,7 @@ import {
   type TabsTriggerProps as TabsTriggerPrimitiveProps,
   type TabsContentProps as TabsContentPrimitiveProps,
   type TabsContentsProps as TabsContentsPrimitiveProps,
-} from '@/components/animate-ui/primitives/animate/tabs';
+} from '@/shared/components/animate-ui/primitives/animate/tabs';
 import { cn } from '@/shared/lib/utils';
 
 type TabsProps = TabsPrimitiveProps;

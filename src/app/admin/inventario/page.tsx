@@ -1,5 +1,5 @@
 'use client'
-import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
 import AddProduct from "@/features/products/components/AddProduct";
 import ProductTable from "@/features/products/components/ProductTable";
 import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
