@@ -9,10 +9,10 @@ import {
   DialogTitle,
 } from "../../../components/ui/dialog";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
-import ProductGeneral from "../../../components/products/createProduct/ProductGeneral";
-import ProductDetails from "../../../components/products/createProduct/ProductDetails";
-import ProductPrices from "../../../components/products/createProduct/ProductPrices";
-import ProductStock from "../../../components/products/createProduct/ProductStock";
+import ProductGeneral from "./create/ProductGeneral";
+import ProductDetails from "./create/ProductDetails";
+import ProductPrices from "./create/ProductPrices";
+import ProductStock from "./create/ProductStock";
 import { Button } from "../../../components/ui/button";
 import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
