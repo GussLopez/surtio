@@ -1,6 +1,6 @@
 import MyProfile from "@/features/settings/components/MyProfile";
 import MyStore from "@/features/settings/components/MyStore";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { Lock, Receipt, Route, Settings2, SquareUserRound, Store } from "lucide-react";
 
 export default function AjustesPage() {

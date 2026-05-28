@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { useEffect, useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Categorie, CategorieForm } from "@/types";
 import { useBusinessStore } from "@/store/BusinessStore";

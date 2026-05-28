@@ -4,7 +4,7 @@ import { Spinner } from "../../../components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { sileo } from "sileo";
-import { Textarea } from "../../../components/ui/textarea";
+import { Textarea } from "../../../shared/components/ui/textarea";
 import { Label } from "../../../components/ui/label";
 import ErrorMessage from "../../../components/ui/error-message";
 import { useBusinessStore } from "@/store/BusinessStore";

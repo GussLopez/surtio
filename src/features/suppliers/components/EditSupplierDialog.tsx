@@ -7,7 +7,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../co
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, ClipboardCheck, ClipboardX } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Textarea } from "../../../components/ui/textarea";
+import { Textarea } from "../../../shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Supplier, SupplierForm } from "@/types";
 import { sileo } from "sileo";
