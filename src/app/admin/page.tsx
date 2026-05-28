@@ -3,7 +3,13 @@ import MostSelledCategory from "@/features/dashboard/components/MostSelledCatego
 import MostSelledProduct from "@/features/dashboard/components/MostSelledProduct";
 import TotalRevenue from "@/features/dashboard/components/TotalRevenue";
 import { createSupabaseServerClient } from "@/shared/supabase/server-client";
+import { GeneratePageTitle } from "@/shared/utils/metadata";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: GeneratePageTitle('Dashboard')
+}
 
 export default async function AdminPage() {
   const supabase = await createSupabaseServerClient();
