@@ -1,23 +1,23 @@
 'use client'
 import { Tabs, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
-import AddProduct from "@/features/products/components/AddProduct";
-import ProductTable from "@/features/products/components/ProductTable";
+import AddProduct from "@/features/inventory/components/AddProduct";
+import ProductTable from "@/features/inventory/components/ProductTable";
 import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import CardView from "@/features/products/components/CardView";
+import CardView from "@/features/inventory/components/CardView";
 import { Input } from "@/shared/components/ui/input";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Categorie, Product } from "@/shared/types";
-import EditProductModal from "@/features/products/components/EditProductModal";
-import ViewProductModal from "@/features/products/components/ViewPrductModal";
-import { DeleteProduct } from "@/features/products/components/DeleteProduct";
+import EditProductModal from "@/features/inventory/components/EditProductModal";
+import ViewProductModal from "@/features/inventory/components/ViewPrductModal";
+import { DeleteProduct } from "@/features/inventory/components/DeleteProduct";
 import { Button } from "@/shared/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
-import { generateProductsPDF } from "@/features/products/utils/generateProductsPDF";
+import { generateProductsPDF } from "@/features/inventory/utils/generateProductsPDF";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 
