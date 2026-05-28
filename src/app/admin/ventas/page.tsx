@@ -15,7 +15,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '@/shared/components/ui/spinner';
 import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
 import { useBusinessStore } from '@/shared/store/BusinessStore';
-import { normalizeDate } from '@/shared/lib/utils';
+import { normalizeDate } from '@/shared/utils/utils';
 
 export default function VentasPage() {
   const [product, setProduct] = useState<ProductItem | null>(null);
