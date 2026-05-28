@@ -10,7 +10,7 @@ import ProductPrices from "./create/ProductPrices";
 import ProductStock from "./create/ProductStock";
 import { Button } from "../../../shared/components/ui/button";
 import { useState } from "react";
-import { ProductForm } from "@/shared/types";
+import { ProductForm } from "../types/products.types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../../../shared/components/ui/spinner";
 import { sileo } from "sileo";
