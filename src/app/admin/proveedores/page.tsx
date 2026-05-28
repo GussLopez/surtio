@@ -1,7 +1,7 @@
 'use client'
 import AddSupplierDialog from "@/features/shared/components/AddSupplierDialog";
-import DeleteSupplierDialog from "@/components/admin/suppliers/DeleteSupplierDialog";
-import EditSupplierDialog from "@/components/admin/suppliers/EditSupplierDialog";
+import DeleteSupplierDialog from "@/features/suppliers/components/DeleteSupplierDialog";
+import EditSupplierDialog from "@/features/suppliers/components/EditSupplierDialog";
 import { Button } from "@/components/animate-ui/components/buttons/button";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";

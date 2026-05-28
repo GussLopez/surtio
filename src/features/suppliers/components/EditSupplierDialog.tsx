@@ -1,18 +1,18 @@
 'use client';;
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
-import { Label } from "../../ui/label";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../ui/collapsible";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../components/ui/collapsible";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, ClipboardCheck, ClipboardX } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Textarea } from "../../ui/textarea";
+import { Textarea } from "../../../components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Supplier, SupplierForm } from "@/types";
 import { sileo } from "sileo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 
 interface AddSuplierProps {
