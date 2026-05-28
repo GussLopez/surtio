@@ -1,6 +1,6 @@
 'use client';
 import { CrownSimpleIcon, UserIcon } from "@phosphor-icons/react";
-import { Badge } from "../../../components/ui/badge";
+import { Badge } from "../../../shared/components/ui/badge";
 import { ChevronDown, Crown, Edit, Mail, Shield, Trash2 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../components/ui/collapsible";
 import { Button } from "../../../components/ui/button";

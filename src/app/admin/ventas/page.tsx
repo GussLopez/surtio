@@ -4,7 +4,7 @@ import ComboboxSearchProduct from '@/features/sales/components/SearchProductInpu
 import { Input } from '@/components/ui/input';
 import InputStock from '@/features/sales/components/ProductQuantity';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/shared/components/ui/badge';
 import { CheckCircleIcon, SealPercentIcon } from '@phosphor-icons/react';
 import { useCartStore } from '@/features/sales/store/useCartStore';
 import { useState } from 'react';

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
 import { Product } from "@/types";
 import { CubeIcon, StackIcon, StackMinusIcon, TagIcon, TextboxIcon, TrendUpIcon } from "@phosphor-icons/react";
-import { Badge } from "../../../components/ui/badge";
+import { Badge } from "../../../shared/components/ui/badge";
 interface ProductModalProps {
   open: boolean
   onClose: () => void

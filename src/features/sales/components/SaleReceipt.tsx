@@ -1,7 +1,7 @@
 import { Sale } from "@/types";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
 import { DownloadSimpleIcon, StorefrontIcon, UserIcon } from "@phosphor-icons/react";
-import { Badge } from "../../../components/ui/badge";
+import { Badge } from "../../../shared/components/ui/badge";
 import { CreditCard } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
 import { Separator } from "../../../components/ui/separator";
