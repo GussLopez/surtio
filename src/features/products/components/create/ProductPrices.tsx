@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/components/ui/input";
 import { ProductForm } from "@/types";
 import { TrendUpIcon } from "@phosphor-icons/react";
 

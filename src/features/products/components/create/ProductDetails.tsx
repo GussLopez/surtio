@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Categorie, ProductForm } from "@/types";

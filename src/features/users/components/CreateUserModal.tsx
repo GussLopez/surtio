@@ -4,8 +4,8 @@ import { Button as AnimatedBtn } from "@/components/animate-ui/components/button
 import { Button } from "@/shared/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ErrorMessage from "@/components/ui/error-message";
-import { Field, FieldLabel, FieldSet } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Field, FieldLabel, FieldSet } from "@/shared/components/ui/field";
+import { Input } from "@/shared/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { useBusinessStore } from "@/store/BusinessStore";

@@ -1,7 +1,7 @@
 'use client'
 import { DollarSign, Plus, ScanBarcode } from 'lucide-react';
 import ComboboxSearchProduct from '@/features/sales/components/SearchProductInput'
-import { Input } from '@/components/ui/input';
+import { Input } from '@/shared/components/ui/input';
 import InputStock from '@/features/sales/components/ProductQuantity';
 import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';

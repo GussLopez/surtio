@@ -7,7 +7,7 @@ import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import CardView from "@/features/products/components/CardView";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Categorie, Product } from "@/types";
 import EditProductModal from "@/features/products/components/EditProductModal";
