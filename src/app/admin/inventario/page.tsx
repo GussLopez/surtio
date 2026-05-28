@@ -17,7 +17,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
-import { generateProductsPDF } from "@/lib/generateProductsPDF";
+import { generateProductsPDF } from "@/features/products/utils/generateProductsPDF";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 
