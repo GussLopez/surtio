@@ -14,7 +14,7 @@ import {
 } from '@/shared/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { ProductItem } from '@/types'
 import { useDebounce } from 'use-debounce';

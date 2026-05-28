@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client"
+import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client"
 import { useRouter } from "next/navigation"
 import { WarningCircleIcon } from "@phosphor-icons/react"
 import Link from "next/link"

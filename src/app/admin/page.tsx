@@ -2,7 +2,7 @@ import DashboardKpis from "@/features/dashboard/components/DashboardKpis";
 import MostSelledCategory from "@/features/dashboard/components/MostSelledCategory";
 import MostSelledProduct from "@/features/dashboard/components/MostSelledProduct";
 import TotalRevenue from "@/features/dashboard/components/TotalRevenue";
-import { createSupabaseServerClient } from "@/lib/supabase/server-client";
+import { createSupabaseServerClient } from "@/shared/supabase/server-client";
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {

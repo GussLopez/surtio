@@ -1,6 +1,6 @@
 'use client'
 
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
+import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client";
 import { useAuthStore } from "@/store/AuthStore";
 import { useUserStore } from "@/store/UserStore";
 import { useEffect } from "react";

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react"
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client"
+import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"

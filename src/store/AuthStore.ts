@@ -1,4 +1,4 @@
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
+import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client";
 import { create } from "zustand";
 
 type AuthState = {
