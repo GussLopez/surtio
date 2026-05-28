@@ -20,7 +20,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/features/sidebar/components/sidebar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/AuthStore";

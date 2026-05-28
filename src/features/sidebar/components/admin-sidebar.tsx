@@ -14,7 +14,7 @@ import {
 import { NavMain } from "@/features/sidebar/components/nav-main"
 import { NavProjects } from "@/features/sidebar/components/nav-projects"
 import { NavUser } from "@/features/sidebar/components/nav-user"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/features/sidebar/components/sidebar";
 import { NavSettings } from "@/features/sidebar/components/nav-settings";
 import { BusinessSwitcher } from "./business-switcher";
 import { useUserStore } from "@/store/UserStore";

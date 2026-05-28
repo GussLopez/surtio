@@ -23,7 +23,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/features/sidebar/components/sidebar"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
