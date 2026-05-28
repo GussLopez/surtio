@@ -5,22 +5,6 @@ import { useAuthStore } from "@/shared/store/AuthStore";
 import { useUserStore } from "@/shared/store/UserStore";
 import { useEffect } from "react";
 
-interface ProfileData {
-  avatar_url: string | null;
-  created_at: string | null;
-  email: string;
-  full_name: string | null;
-  id: string;
-  is_active: boolean;
-  is_blocked: boolean | null;
-  last_login_at: string | null;
-  last_name: string | null;
-  phone: string | null;
-  memberships: {
-    role: string;
-  }[];
-}
-
 export default function SessionListener() {
   const supabase = getSupabaseBrowserClient();
 

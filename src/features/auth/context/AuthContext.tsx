@@ -3,12 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { getSupabaseBrowserClient } from "@/shared/supabase/browser-client";
-
-type AuthContextType = {
-  user: User | null;
-  businessId: string | null;
-  loading: boolean;
-};
+import { AuthContextType } from "../types/auth.types";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
