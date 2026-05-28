@@ -19,7 +19,7 @@ import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/lib/generateProductsPDF";
 import { useBusinessStore } from "@/store/BusinessStore";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 
 type ModalState =
   | { type: "edit"; product: Product }
