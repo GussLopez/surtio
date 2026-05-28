@@ -5,7 +5,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@/shared/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
