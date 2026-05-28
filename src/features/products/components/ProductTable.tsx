@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, Table
 import { Image, MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon } from "lucide-react";
 import { Skeleton } from "../../../shared/components/ui/skeleton";
 import { Button } from "../../../shared/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../shared/components/ui/dropdown-menu";
 import { Product } from "@/types";
 import Can from "../../../shared/components/ui/Can";
 

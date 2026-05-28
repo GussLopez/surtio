@@ -1,5 +1,5 @@
 'use client';;
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
 import { Label } from "../../../shared/components/ui/label";
 import { Input } from "../../../shared/components/ui/input";
 import { Button } from "../../../shared/components/ui/button";
@@ -12,8 +12,8 @@ import { useForm } from "react-hook-form";
 import { Supplier, SupplierForm } from "@/types";
 import { sileo } from "sileo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../../../components/ui/spinner";
-import { Switch } from "@/components/ui/switch";
+import { Spinner } from "../../../shared/components/ui/spinner";
+import { Switch } from "@/shared/components/ui/switch";
 
 interface AddSuplierProps {
   open: boolean;

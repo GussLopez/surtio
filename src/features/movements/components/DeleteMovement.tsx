@@ -9,7 +9,7 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
 } from "@/shared/components/ui/alert-dialog";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash2Icon } from "lucide-react"
 import { sileo } from "sileo"

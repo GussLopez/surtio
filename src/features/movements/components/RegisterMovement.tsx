@@ -7,7 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/shared/components/ui/
 import { ArrowLeft, Plus, SquarePen, Trash } from "lucide-react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Separator } from "@/shared/components/ui/separator";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useBusinessStore } from "@/store/BusinessStore";

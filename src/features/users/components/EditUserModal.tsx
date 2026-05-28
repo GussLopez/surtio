@@ -1,10 +1,10 @@
 import { Button } from "@/shared/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import ErrorMessage from "@/components/ui/error-message";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
+import ErrorMessage from "@/shared/components/ui/error-message";
 import { Field, FieldLabel, FieldSet } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { UserIcon } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

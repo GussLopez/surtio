@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/shared/components/ui/switch";
 import { Categorie, ProductForm } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardCheck, ClipboardX, Plus } from "lucide-react";

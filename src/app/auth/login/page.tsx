@@ -10,10 +10,10 @@ import { EyeIcon, EyeOffIcon } from "lucide-react"
 import Image from "next/image"
 import { Alert, AlertDescription, AlertTitle } from "@/shared/components/ui/alert"
 import { Input } from "@/shared/components/ui/input"
-import ErrorMessage from "@/components/ui/error-message"
+import ErrorMessage from "@/shared/components/ui/error-message"
 import { Button } from "@/shared/components/ui/button"
 import { Checkbox } from "@/shared/components/ui/checkbox"
-import { Spinner } from "@/components/ui/spinner"
+import { Spinner } from "@/shared/components/ui/spinner"
 import { Separator } from "@/shared/components/ui/separator"
 
 interface LoginForm {

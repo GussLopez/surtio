@@ -2,12 +2,12 @@
 import { createEmploye } from "@/app/lib/action";
 import { Button as AnimatedBtn } from "@/components/animate-ui/components/buttons/button";
 import { Button } from "@/shared/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import ErrorMessage from "@/components/ui/error-message";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialog";
+import ErrorMessage from "@/shared/components/ui/error-message";
 import { Field, FieldLabel, FieldSet } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Employe } from "@/types";
 import { UserIcon, UserPlusIcon } from "@phosphor-icons/react";

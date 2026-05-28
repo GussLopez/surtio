@@ -1,5 +1,5 @@
 import { Sale } from "@/types";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
 
 interface EditSaleProps {
   sale: Sale;

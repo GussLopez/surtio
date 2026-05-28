@@ -12,7 +12,7 @@ import { ProductItem } from '@/types';
 import { sileo } from 'sileo';
 import ShoppingCartItems from '@/features/sales/components/ShoppingCart';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '@/components/ui/spinner';
+import { Spinner } from '@/shared/components/ui/spinner';
 import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
 import { useBusinessStore } from '@/store/BusinessStore';
 import { normalizeDate } from '@/lib/utils';

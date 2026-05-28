@@ -7,10 +7,10 @@ import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { sileo } from "sileo";
 import Image from "next/image";
-import ErrorMessage from "@/components/ui/error-message";
+import ErrorMessage from "@/shared/components/ui/error-message";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { Separator } from "@/shared/components/ui/separator";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 

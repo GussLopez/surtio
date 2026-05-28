@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../../../components/ui/dialog";
+} from "../../../shared/components/ui/dialog";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
 import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
-import { Spinner } from "../../../components/ui/spinner";
+import { Spinner } from "../../../shared/components/ui/spinner";
 
 interface EditModalProps {
   open: boolean

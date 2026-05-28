@@ -14,7 +14,7 @@ import {
 import { Button } from "../../../shared/components/ui/button";
 import { Trash2Icon } from "lucide-react";
 import { sileo } from "sileo";
-import { Spinner } from "../../../components/ui/spinner";
+import { Spinner } from "../../../shared/components/ui/spinner";
 
 interface DeleteSaleDialogProps {
   open: boolean;

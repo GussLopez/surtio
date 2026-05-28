@@ -4,9 +4,9 @@ import DeleteSupplierDialog from "@/features/suppliers/components/DeleteSupplier
 import EditSupplierDialog from "@/features/suppliers/components/EditSupplierDialog";
 import { Button } from "@/components/animate-ui/components/buttons/button";
 import { Badge } from "@/shared/components/ui/badge";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
-import TableLoadingData from "@/components/ui/TableLoadingData";
+import TableLoadingData from "@/shared/components/ui/TableLoadingData";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Supplier } from "@/types";
 import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";

@@ -1,10 +1,10 @@
 'use client'
 import { Button } from "@/shared/components/ui/button";
-import ErrorMessage from "@/components/ui/error-message";
+import ErrorMessage from "@/shared/components/ui/error-message";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";

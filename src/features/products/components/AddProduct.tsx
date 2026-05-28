@@ -1,7 +1,7 @@
 'use client'
 
 import { Plus } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../shared/components/ui/dialog";
 import { Button as CustomBtn } from "../../../components/animate-ui/components/buttons/button";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
 import ProductGeneral from "./create/ProductGeneral";
@@ -12,7 +12,7 @@ import { Button } from "../../../shared/components/ui/button";
 import { useState } from "react";
 import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../../../components/ui/spinner";
+import { Spinner } from "../../../shared/components/ui/spinner";
 import { sileo } from "sileo";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
