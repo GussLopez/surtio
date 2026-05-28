@@ -16,7 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/features/sidebar/components/sidebar"
+} from "@/shared/components/ui/sidebar"
 import { useUserStore } from "@/store/UserStore"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useBusinessStore } from "@/store/BusinessStore"
