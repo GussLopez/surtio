@@ -4,7 +4,7 @@ import { useBusinessStore } from "@/store/BusinessStore";
 import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
 import { XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts';
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 export default function TotalRevenue() {
   const businessId = useBusinessStore(state => state.id);

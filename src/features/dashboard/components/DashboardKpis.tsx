@@ -5,7 +5,7 @@ import ProfitBadge from "./ProfitBadge";
 import { useQuery } from "@tanstack/react-query";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 interface DashboardStats {
   ventas_hoy: number;

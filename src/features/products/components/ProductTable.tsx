@@ -1,7 +1,7 @@
 'use client';;
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
 import { Image, MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon } from "lucide-react";
-import { Skeleton } from "../../../components/ui/skeleton";
+import { Skeleton } from "../../../shared/components/ui/skeleton";
 import { Button } from "../../../shared/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../components/ui/dropdown-menu";
 import { Product } from "@/types";

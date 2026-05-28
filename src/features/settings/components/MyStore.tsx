@@ -20,7 +20,7 @@ import { Button } from "@/shared/components/ui/button";
 import InfoItem from "./InfoItem";
 import DeleteBusinessDialog from "../../business/components/DeleteBusinessDialog";
 import EditBusinessDrawer from "../../business/components/EditBusinessDrawer";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 export default function MyStore() {
   const businessId = useBusinessStore(state => state.id);

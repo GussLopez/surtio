@@ -1,6 +1,6 @@
 'use client'
 import { Badge } from "../../../shared/components/ui/badge";
-import { Skeleton } from "../../../components/ui/skeleton";
+import { Skeleton } from "../../../shared/components/ui/skeleton";
 
 export default function InfoItem({
   label,
