@@ -3,7 +3,7 @@ import { Button } from "@/shared/components/ui/button";
 import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useBusinessStore } from "@/store/BusinessStore";

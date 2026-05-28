@@ -16,7 +16,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet"
+} from "@/shared/components/ui/sheet"
 import { Skeleton } from "@/shared/components/ui/skeleton"
 import {
   Tooltip,

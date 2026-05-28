@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from "react";
-import Preloader from "@/components/ui/preloader";
+import Preloader from "@/shared/components/ui/preloader";
 import { useUserStore } from "@/store/UserStore";
 import { useBusinessStore } from "@/store/BusinessStore";
 

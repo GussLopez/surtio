@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { Button } from "../../shared/components/ui/button";
+import { Button } from "./button";
 import { useTheme } from "next-themes";
 import { CloudLightning, MessageCircle, RefreshCw } from "lucide-react";
 

@@ -4,14 +4,14 @@ import { useBusinessStore } from "@/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { Bar, BarChart, Label, Pie, PieChart, XAxis, YAxis } from "recharts";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/shared/components/ui/chart";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 
 export interface CategoryData {

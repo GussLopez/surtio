@@ -1,7 +1,7 @@
 'use client';
 import { useCartStore } from "@/features/sales/store/useCartStore";
 import { CalendarIcon, ShoppingCartIcon } from "@phosphor-icons/react";
-import { Popover, PopoverContent, PopoverTrigger } from "../../../components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../../../shared/components/ui/popover";
 import { es } from "date-fns/locale";
 import { format } from "date-fns";
 import { Button } from "../../../shared/components/ui/button";

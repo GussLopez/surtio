@@ -3,7 +3,7 @@
 import AddSupplierDialog from "@/shared/components/AddSupplierDialog";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { ProductForm, Supplier } from "@/types";
 import { useQuery } from "@tanstack/react-query";

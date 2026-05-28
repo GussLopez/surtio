@@ -14,7 +14,7 @@ import EditProductModal from "@/features/products/components/EditProductModal";
 import ViewProductModal from "@/features/products/components/ViewPrductModal";
 import { DeleteProduct } from "@/features/products/components/DeleteProduct";
 import { Button } from "@/shared/components/ui/button";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";
 import { generateProductsPDF } from "@/lib/generateProductsPDF";

@@ -3,7 +3,7 @@ import UserCard from "@/features/users/components/userCard";
 import CreateUser from "@/features/users/components/CreateUserModal";
 import DeleteUserModal from "@/features/users/components/DeleteUserModal";
 import EditUserModal from "@/features/users/components/EditUserModal";
-import ServerError from "@/components/ui/server-error";
+import ServerError from "@/shared/components/ui/server-error";
 import { Spinner } from "@/components/ui/spinner";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
