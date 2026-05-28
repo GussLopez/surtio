@@ -3,7 +3,7 @@ import DeleteSaleDialog from "@/features/sales/components/DeleteSaleDialog";
 import EditSaleDialog from "@/features/sales/components/EditSaleDialog";
 import CancelSaleDialog from "@/features/sales/components/CancelSaleDialog";
 import SaleReceipt from "@/features/sales/components/SaleReceipt";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { RangeDatePicker } from "@/components/ui/range-date";
 import { Spinner } from "@/components/ui/spinner";
 import { Sale } from "@/types";

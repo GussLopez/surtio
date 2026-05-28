@@ -2,7 +2,7 @@
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../components/ui/collapsible";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, ClipboardCheck, ClipboardX } from "lucide-react";

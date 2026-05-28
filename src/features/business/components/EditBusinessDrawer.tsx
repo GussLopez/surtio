@@ -1,5 +1,5 @@
 'use client';
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

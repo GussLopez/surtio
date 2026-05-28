@@ -13,7 +13,7 @@ import { Categorie, Product } from "@/types";
 import EditProductModal from "@/features/products/components/EditProductModal";
 import ViewProductModal from "@/features/products/components/ViewPrductModal";
 import { DeleteProduct } from "@/features/products/components/DeleteProduct";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useDebounce } from 'use-debounce'
 import { sileo } from "sileo";

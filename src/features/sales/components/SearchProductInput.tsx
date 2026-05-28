@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import {
   Command,
   CommandEmpty,

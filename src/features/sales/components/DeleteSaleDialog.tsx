@@ -11,7 +11,7 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
 } from "../../../shared/components/ui/alert-dialog";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { Trash2Icon } from "lucide-react";
 import { sileo } from "sileo";
 import { Spinner } from "../../../components/ui/spinner";

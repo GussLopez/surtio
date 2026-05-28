@@ -3,7 +3,7 @@ import { DollarSign, Plus, ScanBarcode } from 'lucide-react';
 import ComboboxSearchProduct from '@/features/sales/components/SearchProductInput'
 import { Input } from '@/components/ui/input';
 import InputStock from '@/features/sales/components/ProductQuantity';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
 import { CheckCircleIcon, SealPercentIcon } from '@phosphor-icons/react';
 import { useCartStore } from '@/features/sales/store/useCartStore';

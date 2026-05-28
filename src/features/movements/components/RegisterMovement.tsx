@@ -2,7 +2,7 @@
 import InputQuantity from "@/features/sales/components/InputQuantity";
 import SearchProductInput from "@/features/sales/components/SearchProductInput";
 import { Badge } from "@/shared/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ArrowLeft, Plus, SquarePen, Trash } from "lucide-react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";

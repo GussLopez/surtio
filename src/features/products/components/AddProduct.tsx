@@ -8,7 +8,7 @@ import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
 import ProductPrices from "./create/ProductPrices";
 import ProductStock from "./create/ProductStock";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { useState } from "react";
 import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";

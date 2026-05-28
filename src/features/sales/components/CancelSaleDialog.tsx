@@ -1,5 +1,5 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { Spinner } from "../../../components/ui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";

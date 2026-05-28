@@ -13,7 +13,7 @@ import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
 import ProductPrices from "./create/ProductPrices";
 import ProductStock from "./create/ProductStock";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

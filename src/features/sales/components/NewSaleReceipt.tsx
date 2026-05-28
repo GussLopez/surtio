@@ -2,7 +2,7 @@ import { DownloadSimpleIcon, PrinterIcon, SealCheckIcon } from "@phosphor-icons/
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
 import { Sale } from "@/types";
 import { Separator } from "../../../components/ui/separator";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/components/ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { useBusinessStore } from "@/store/BusinessStore";

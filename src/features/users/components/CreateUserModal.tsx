@@ -1,7 +1,7 @@
 'use client'
 import { createEmploye } from "@/app/lib/action";
 import { Button as AnimatedBtn } from "@/components/animate-ui/components/buttons/button";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ErrorMessage from "@/components/ui/error-message";
 import { Field, FieldLabel, FieldSet } from "@/components/ui/field";

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ErrorMessage from "@/components/ui/error-message";
 import { Field, FieldLabel, FieldSet } from "@/components/ui/field";

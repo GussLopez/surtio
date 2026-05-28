@@ -3,7 +3,7 @@ import { PlusIcon } from "@phosphor-icons/react";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";

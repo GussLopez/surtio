@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import InfoItem from "./InfoItem";
 import DeleteBusinessDialog from "../../business/components/DeleteBusinessDialog";
 import EditBusinessDrawer from "../../business/components/EditBusinessDrawer";

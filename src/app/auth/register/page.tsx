@@ -9,7 +9,7 @@ import { sileo } from "sileo";
 import Image from "next/image";
 import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
