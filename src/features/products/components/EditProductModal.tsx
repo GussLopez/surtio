@@ -7,18 +7,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../animate-ui/components/animate/tabs";
-import ProductGeneral from "./createProduct/ProductGeneral";
-import ProductDetails from "./createProduct/ProductDetails";
-import ProductPrices from "./createProduct/ProductPrices";
-import ProductStock from "./createProduct/ProductStock";
-import { Button } from "../ui/button";
+} from "../../../components/ui/dialog";
+import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
+import ProductGeneral from "../../../components/products/createProduct/ProductGeneral";
+import ProductDetails from "../../../components/products/createProduct/ProductDetails";
+import ProductPrices from "../../../components/products/createProduct/ProductPrices";
+import ProductStock from "../../../components/products/createProduct/ProductStock";
+import { Button } from "../../../components/ui/button";
 import { useEffect, useState } from "react";
 import { Product, ProductForm } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
 
 interface EditModalProps {
   open: boolean

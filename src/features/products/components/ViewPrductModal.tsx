@@ -1,9 +1,9 @@
 import { Barcode, ClipboardCheck, ClipboardX, FileText, Image } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../animate-ui/components/animate/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../components/ui/dialog";
+import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
 import { Product } from "@/types";
 import { CubeIcon, StackIcon, StackMinusIcon, TagIcon, TextboxIcon, TrendUpIcon } from "@phosphor-icons/react";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../../components/ui/badge";
 interface ProductModalProps {
   open: boolean
   onClose: () => void

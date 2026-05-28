@@ -1,18 +1,18 @@
 'use client'
 import { Tabs, TabsList, TabsTrigger } from "@/components/animate-ui/components/animate/tabs";
-import AddProduct from "@/components/products/AddProduct";
-import ProductTable from "@/components/products/ProductTable";
+import AddProduct from "@/features/products/components/AddProduct";
+import ProductTable from "@/features/products/components/ProductTable";
 import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import CardView from "@/components/products/CardView";
+import CardView from "@/features/products/components/CardView";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Categorie, Product } from "@/types";
-import EditProductModal from "@/components/products/EditProductModal";
-import ViewProductModal from "@/components/products/ViewPrductModal";
-import { DeleteProduct } from "@/components/products/DeleteProduct";
+import EditProductModal from "@/features/products/components/EditProductModal";
+import ViewProductModal from "@/features/products/components/ViewPrductModal";
+import { DeleteProduct } from "@/features/products/components/DeleteProduct";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useDebounce } from 'use-debounce'

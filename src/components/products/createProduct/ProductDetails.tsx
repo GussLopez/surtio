@@ -9,7 +9,7 @@ import { Categorie, ProductForm } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardCheck, ClipboardX, Plus } from "lucide-react";
 import { useState } from "react";
-import AddCategorieDialog from "../categories/AddCategorieDialog";
+import AddCategorieDialog from "@/shared/components/AddCategorieDialog";
 
 interface ProductDetailsProps {
   formData: ProductForm;

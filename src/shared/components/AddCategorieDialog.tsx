@@ -1,17 +1,17 @@
 'use client';
 import { PlusIcon } from "@phosphor-icons/react";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
-import { Label } from "../../ui/label";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { Textarea } from "../../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Categorie, CategorieForm } from "@/types";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { sileo } from "sileo";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../../ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 
 interface AddSuplierProps {
   open: boolean;

@@ -1,18 +1,18 @@
 'use client'
 
 import { Plus } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { Button as CustomBtn } from "../animate-ui/components/buttons/button";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../animate-ui/components/animate/tabs";
-import ProductGeneral from "./createProduct/ProductGeneral";
-import ProductDetails from "./createProduct/ProductDetails";
-import ProductPrices from "./createProduct/ProductPrices";
-import ProductStock from "./createProduct/ProductStock";
-import { Button } from "../ui/button";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
+import { Button as CustomBtn } from "../../../components/animate-ui/components/buttons/button";
+import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
+import ProductGeneral from "../../../components/products/createProduct/ProductGeneral";
+import ProductDetails from "../../../components/products/createProduct/ProductDetails";
+import ProductPrices from "../../../components/products/createProduct/ProductPrices";
+import ProductStock from "../../../components/products/createProduct/ProductStock";
+import { Button } from "../../../components/ui/button";
 import { useState } from "react";
 import { ProductForm } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../../../components/ui/spinner";
 import { sileo } from "sileo";
 import { useBusinessStore } from "@/store/BusinessStore";
 import { useUserStore } from "@/store/UserStore";
