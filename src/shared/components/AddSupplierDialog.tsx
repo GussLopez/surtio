@@ -10,7 +10,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import { Supplier, SupplierForm } from "@/types";
+import { Supplier, SupplierForm } from "@/shared/types";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { sileo } from "sileo";
 import { useQueryClient } from "@tanstack/react-query";

@@ -1,5 +1,5 @@
 'use client'
-import { Sale } from "@/types";
+import { Sale } from "@/shared/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
 import { ReceiptIcon, TrendUpIcon } from "@phosphor-icons/react";
 import { Button } from "../../../shared/components/ui/button";

@@ -16,7 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/
 
 import { cn } from '@/shared/lib/utils'
 import { useQuery } from '@tanstack/react-query'
-import { ProductItem } from '@/types'
+import { ProductItem } from '@/shared/types'
 import { useDebounce } from 'use-debounce';
 import { useBusinessStore } from '@/shared/store/BusinessStore';
 

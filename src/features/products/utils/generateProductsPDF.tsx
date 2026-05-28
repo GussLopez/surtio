@@ -1,6 +1,6 @@
 import { pdf } from "@react-pdf/renderer";
 import ProductsPDFDocument from "./ProductsPDFDocument";
-import type { Product } from "@/types";
+import type { Product } from "@/shared/types";
 
 export async function generateProductsPDF(products: Product[], businessName: string, categoryFilter?: string) {
   const blob = await pdf(

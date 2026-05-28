@@ -1,7 +1,7 @@
 import { Barcode, ClipboardCheck, ClipboardX, FileText, Image } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../../../components/animate-ui/components/animate/tabs";
-import { Product } from "@/types";
+import { Product } from "@/shared/types";
 import { CubeIcon, StackIcon, StackMinusIcon, TagIcon, TextboxIcon, TrendUpIcon } from "@phosphor-icons/react";
 import { Badge } from "../../../shared/components/ui/badge";
 interface ProductModalProps {

@@ -1,6 +1,6 @@
 import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { ProductForm } from "@/types";
+import { ProductForm } from "@/shared/types";
 import { Image } from "lucide-react";
 
 interface productGeneralProps {

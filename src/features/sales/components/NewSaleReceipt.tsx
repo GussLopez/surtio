@@ -1,6 +1,6 @@
 import { DownloadSimpleIcon, PrinterIcon, SealCheckIcon } from "@phosphor-icons/react";
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
-import { Sale } from "@/types";
+import { Sale } from "@/shared/types";
 import { Separator } from "../../../shared/components/ui/separator";
 import { Button } from "../../../shared/components/ui/button";
 import { useRef, useState } from "react";

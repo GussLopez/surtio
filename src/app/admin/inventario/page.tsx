@@ -9,7 +9,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import CardView from "@/features/products/components/CardView";
 import { Input } from "@/shared/components/ui/input";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { Categorie, Product } from "@/types";
+import { Categorie, Product } from "@/shared/types";
 import EditProductModal from "@/features/products/components/EditProductModal";
 import ViewProductModal from "@/features/products/components/ViewPrductModal";
 import { DeleteProduct } from "@/features/products/components/DeleteProduct";

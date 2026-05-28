@@ -1,5 +1,5 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-import type { Sale } from "@/types";
+import type { Sale } from "@/shared/types";
 
 const ORANGE = "#F97316";
 const GREEN = "#10B981";

@@ -7,7 +7,7 @@ import { Spinner } from "@/shared/components/ui/spinner";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useUserStore } from "@/shared/store/UserStore";
-import { Business, BusinessForm } from "@/types"
+import { Business, BusinessForm } from "@/shared/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Image } from "lucide-react";
 import { useEffect, useState } from "react";

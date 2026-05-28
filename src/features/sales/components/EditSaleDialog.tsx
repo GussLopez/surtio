@@ -1,4 +1,4 @@
-import { Sale } from "@/types";
+import { Sale } from "@/shared/types";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
 
 interface EditSaleProps {

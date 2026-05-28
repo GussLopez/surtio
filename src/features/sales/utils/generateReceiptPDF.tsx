@@ -1,6 +1,6 @@
 import { pdf } from "@react-pdf/renderer";
 import ReceiptPDFDocument from "./ReceiptPDFDocument";
-import type { Sale } from "@/types";
+import type { Sale } from "@/shared/types";
 
 export async function generateReceiptPDF(sale: Sale, businessName: string) {
   const blob = await pdf(<ReceiptPDFDocument sale={sale} businessName={businessName} />).toBlob();

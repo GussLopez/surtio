@@ -6,7 +6,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useUserStore } from "@/shared/store/UserStore";
-import { Profile, UserForm } from "@/types";
+import { Profile, UserForm } from "@/shared/types";
 import { UploadSimpleIcon, UserIcon } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";

@@ -5,7 +5,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Switch } from "@/shared/components/ui/switch";
-import { Categorie, ProductForm } from "@/types";
+import { Categorie, ProductForm } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import { ClipboardCheck, ClipboardX, Plus } from "lucide-react";
 import { useState } from "react";

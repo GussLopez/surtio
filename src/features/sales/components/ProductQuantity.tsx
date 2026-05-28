@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductItem } from '@/types';
+import { ProductItem } from '@/shared/types';
 import { MinusIcon, PlusIcon } from 'lucide-react'
 
 import { Button, Group, Input, NumberField } from 'react-aria-components';

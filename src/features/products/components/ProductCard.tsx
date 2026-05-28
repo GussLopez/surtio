@@ -3,7 +3,7 @@ import { Badge } from "../../../shared/components/ui/badge";
 import { Button } from "../../../shared/components/ui/button";
 import { Separator } from "../../../shared/components/ui/separator";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../shared/components/ui/dropdown-menu";
-import { Product } from "@/types";
+import { Product } from "@/shared/types";
 
 interface ProductCardProps {
   product: Product;

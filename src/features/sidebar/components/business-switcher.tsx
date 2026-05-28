@@ -22,7 +22,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useBusinessStore } from "@/shared/store/BusinessStore"
 import { Skeleton } from "../../../shared/components/ui/skeleton"
 import Link from "next/link"
-import { Business } from "@/types"
+import { Business } from "@/shared/types"
 
 interface BusinessSoreProps {
   id: string;

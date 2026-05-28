@@ -1,4 +1,4 @@
-import { Sale } from "@/types";
+import { Sale } from "@/shared/types";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
 import { DownloadSimpleIcon, StorefrontIcon, UserIcon } from "@phosphor-icons/react";
 import { Badge } from "../../../shared/components/ui/badge";

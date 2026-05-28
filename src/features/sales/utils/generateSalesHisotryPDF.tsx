@@ -1,5 +1,5 @@
 import { pdf } from "@react-pdf/renderer";
-import type { Sale } from "@/types";
+import type { Sale } from "@/shared/types";
 import SalesHistoryPDFDocument from "./SalesHistoryPDFDocument";
 
 interface DateRange {

@@ -7,7 +7,7 @@ import { Label } from "@/shared/components/ui/label";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useUserStore } from "@/shared/store/UserStore";
-import { Business } from "@/types";
+import { Business } from "@/shared/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

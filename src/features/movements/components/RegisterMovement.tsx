@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, Table
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useUserStore } from "@/shared/store/UserStore";
-import { Product, Supplier } from "@/types";
+import { Product, Supplier } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react"
 import { NumberField } from "react-aria-components";

@@ -6,7 +6,7 @@ import SaleReceipt from "@/features/sales/components/SaleReceipt";
 import { Button } from "@/shared/components/ui/button";
 import { RangeDatePicker } from "@/shared/components/ui/range-date";
 import { Spinner } from "@/shared/components/ui/spinner";
-import { Sale } from "@/types";
+import { Sale } from "@/shared/types";
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ArchiveRestore, FileClock, List, Table } from "lucide-react";

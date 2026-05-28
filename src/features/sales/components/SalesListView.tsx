@@ -1,5 +1,5 @@
 'use client'
-import { Sale } from "@/types"
+import { Sale } from "@/shared/types"
 import { Badge } from "../../../shared/components/ui/badge"
 import { BriefcaseIcon, CalendarBlankIcon, NotePencilIcon, PackageIcon, ReceiptIcon, TrendUpIcon, UserCircleIcon } from "@phosphor-icons/react"
 import { Separator } from "../../../shared/components/ui/separator"

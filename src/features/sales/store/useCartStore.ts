@@ -1,4 +1,4 @@
-import { Product, ProductItem } from "@/types";
+import { Product, ProductItem } from "@/shared/types";
 import { sileo } from "sileo";
 import { create } from "zustand";
 

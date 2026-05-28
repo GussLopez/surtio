@@ -7,7 +7,7 @@ import { Button } from "@/shared/components/ui/button";
 import { useEffect, useState } from "react";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import { Categorie, CategorieForm } from "@/types";
+import { Categorie, CategorieForm } from "@/shared/types";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { sileo } from "sileo";
 import { useQueryClient } from "@tanstack/react-query";

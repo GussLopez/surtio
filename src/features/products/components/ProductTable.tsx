@@ -4,7 +4,7 @@ import { Image, MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon } from
 import { Skeleton } from "../../../shared/components/ui/skeleton";
 import { Button } from "../../../shared/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../shared/components/ui/dropdown-menu";
-import { Product } from "@/types";
+import { Product } from "@/shared/types";
 import Can from "../../../shared/components/ui/Can";
 
 interface ProductTableProps {

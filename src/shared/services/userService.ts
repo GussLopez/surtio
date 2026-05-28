@@ -1,4 +1,4 @@
-import { UserForm } from "@/types";
+import { UserForm } from "@/shared/types";
 import { getSupabaseBrowserClient } from "../supabase/browser-client";
 
 const supabase = getSupabaseBrowserClient();

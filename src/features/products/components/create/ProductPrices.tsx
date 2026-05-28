@@ -1,5 +1,5 @@
 import { Input } from "@/shared/components/ui/input";
-import { ProductForm } from "@/types";
+import { ProductForm } from "@/shared/types";
 import { TrendUpIcon } from "@phosphor-icons/react";
 
 interface ProductPricesProps {

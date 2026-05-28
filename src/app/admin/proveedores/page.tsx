@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import TableLoadingData from "@/shared/components/ui/TableLoadingData";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
-import { Supplier } from "@/types";
+import { Supplier } from "@/shared/types";
 import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon, Truck } from "lucide-react";

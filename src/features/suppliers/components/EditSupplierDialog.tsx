@@ -9,7 +9,7 @@ import { ChevronDown, ClipboardCheck, ClipboardX } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Textarea } from "../../../shared/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import { Supplier, SupplierForm } from "@/types";
+import { Supplier, SupplierForm } from "@/shared/types";
 import { sileo } from "sileo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Spinner } from "../../../shared/components/ui/spinner";
