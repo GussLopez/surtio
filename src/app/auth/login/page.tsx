@@ -40,13 +40,13 @@ export default function Login() {
         <LoginForm />
 
         <p
-          className="absolute bottom-4 left-4 text-xs text-neutral-400"
+          className="absolute hidden sm:block bottom-4 left-4 text-xs text-neutral-400"
         >
           © {new Date().getFullYear()} Flyzzio - Todos los derechos reservados.
         </p>
         <Link
           href={'/legal/politicas-privacidad'}
-          className="absolute bottom-4 right-4 text-xs text-neutral-400 hover:underline"
+          className="absolute bottom-4 right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-4 text-xs text-neutral-400 hover:underline"
         >
           Políticas de Privacidad
         </Link>
