@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geist.className} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute={'class'} enableSystem defaultTheme="system">
+        <ThemeProvider attribute={'class'} defaultTheme="system">
           <Providers>
             {children}
           </Providers>
