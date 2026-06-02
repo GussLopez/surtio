@@ -1,11 +1,11 @@
-'use client';;
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
+'use client'
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
 import { Image, MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon } from "lucide-react";
-import { Skeleton } from "../../../shared/components/ui/skeleton";
-import { Button } from "../../../shared/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../shared/components/ui/dropdown-menu";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Button } from "@/shared/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import { Product } from "@/shared/types";
-import Can from "../../../shared/components/ui/Can";
+import Can from "@/shared/components/Can";
 
 interface ProductTableProps {
   data: Product[]
