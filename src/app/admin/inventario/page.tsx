@@ -6,7 +6,6 @@ import { DownloadSimpleIcon, FileTextIcon, ListDashesIcon, SquaresFourIcon } fro
 import { Box, PackageSearch, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import CardView from "@/features/inventory/components/CardView";
 import { Input } from "@/shared/components/ui/input";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Categorie, Product } from "@/shared/types";
@@ -21,6 +20,8 @@ import { generateProductsPDF } from "@/features/inventory/utils/generateProducts
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 import AdjustStock from "@/features/inventory/components/AdjustStock";
+import ProductCard from "@/features/inventory/components/ProductCard";
+import ExportProducts from "@/features/inventory/components/ExportProducts";
 
 type ModalState =
   | { type: "edit"; product: Product }
@@ -43,10 +44,8 @@ export default function InventarioPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const pageSize = 20;
-  const businessName = useBusinessStore(state => state.name);
   const [debouncedSearch] = useDebounce(search, 500);
-  const [pdfLoading, setPdfLoading] = useState(false);
-  const [csvLoading, setCsvLoading] = useState(false);
+
   const businessId = useBusinessStore(state => state.id);
 
   useEffect(() => {
@@ -113,26 +112,7 @@ export default function InventarioPage() {
   const openAdjust = (product: Product) =>
     setModal({ type: "adjust", product });
 
-  const handleDownloadPDF = async () => {
-    if (!data || data.data.length === 0) {
-      sileo.warning({
-        title: 'No hay datos para exportar'
-      });
-      return;
-    }
-    setPdfLoading(true);
-    try {
-      const categoryName = categories?.find(c => c.id.toString() === selectedCategorie)?.name;
-      await generateProductsPDF(data.data, businessName!, categoryName || selectedCategorie);
-    } catch (error) {
-      sileo.error({
-        title: 'Error al descargar el pdf',
-        description: 'Ocurrió un error al descargar el PDF, por favor intenta más tarde'
-      })
-    } finally {
-      setPdfLoading(false)
-    }
-  }
+
   const totalPages = Math.ceil((data?.total || 0) / pageSize);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   useEffect(() => {
@@ -188,24 +168,13 @@ export default function InventarioPage() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2 mt-3 lg:mt-0">
-          <Button
-            variant={'outline'}
-            disabled={!data || data?.data.length === 0 || pdfLoading}
-            onClick={handleDownloadPDF}
-          >
-            {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
-            {pdfLoading ? "Generando" : "PDF Lista"}
-          </Button>
-          <Button
-            variant={'outline'}
-            disabled={!data || data?.data.length === 0 || csvLoading}
-          // onClick={handleDownloadCsv}
-          >
-            {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
-            CSV
-          </Button>
-        </div>
+        {data && categories && (
+          <ExportProducts
+            data={data.data}
+            categories={categories}
+            selectedCategorie={selectedCategorie}
+          />
+        )}
       </div>
       <div className="mt-6">
         {isLoading ? (
@@ -234,14 +203,20 @@ export default function InventarioPage() {
                   onAdjust={openAdjust}
                 />}
               {data && view === "card" &&
-                <CardView
-                  data={data.data}
-                  totalInventario={totalInventario}
-                  onEdit={openEdit}
-                  onDelete={openDelete}
-                  onView={openView}
-                  onAdjust={openAdjust}
-                />}
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-3">
+                  {data?.data.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onEdit={openEdit}
+                      onDelete={openDelete}
+                      onView={openView}
+                      onAdjust={openAdjust}
+                    />
+                  ))}
+                </div>
+              }
+
             </>
           ))}
         <div>
