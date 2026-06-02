@@ -20,11 +20,13 @@ import { sileo } from "sileo";
 import { generateProductsPDF } from "@/features/inventory/utils/generateProductsPDF";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
+import AdjustStock from "@/features/inventory/components/AdjustStock";
 
 type ModalState =
   | { type: "edit"; product: Product }
   | { type: "view"; product: Product }
   | { type: "delete"; product: Product }
+  | { type: "adjust"; product: Product }
   | null
 
 interface ProductsData {
@@ -100,13 +102,16 @@ export default function InventarioPage() {
   }, 0) || 0;
 
   const openEdit = (product: Product) =>
-    setModal({ type: "edit", product })
+    setModal({ type: "edit", product });
 
   const openView = (product: Product) =>
-    setModal({ type: "view", product })
+    setModal({ type: "view", product });
 
   const openDelete = (product: Product) =>
-    setModal({ type: "delete", product })
+    setModal({ type: "delete", product });
+
+  const openAdjust = (product: Product) =>
+    setModal({ type: "adjust", product });
 
   const handleDownloadPDF = async () => {
     if (!data || data.data.length === 0) {
@@ -195,7 +200,7 @@ export default function InventarioPage() {
           <Button
             variant={'outline'}
             disabled={!data || data?.data.length === 0 || csvLoading}
-            // onClick={handleDownloadCsv}
+          // onClick={handleDownloadCsv}
           >
             {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
             CSV
@@ -226,6 +231,7 @@ export default function InventarioPage() {
                   onEdit={openEdit}
                   onDelete={openDelete}
                   onView={openView}
+                  onAdjust={openAdjust}
                 />}
               {data && view === "card" &&
                 <CardView
@@ -234,6 +240,7 @@ export default function InventarioPage() {
                   onEdit={openEdit}
                   onDelete={openDelete}
                   onView={openView}
+                  onAdjust={openAdjust}
                 />}
             </>
           ))}
@@ -285,6 +292,13 @@ export default function InventarioPage() {
         <DeleteProduct
           open
           productId={modal.product.id}
+          onClose={() => setModal(null)}
+        />
+      )}
+      {modal?.type === "adjust" && (
+        <AdjustStock
+          open
+          product={modal.product}
           onClose={() => setModal(null)}
         />
       )}
