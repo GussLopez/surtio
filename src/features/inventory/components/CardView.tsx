@@ -6,11 +6,12 @@ interface CardViewProps {
   isLoading?: boolean;
   totalInventario: number;
   onEdit: (product: Product) => void;
-  onDelete: (product: Product) => void
-  onView: (product: Product) => void
+  onDelete: (product: Product) => void;
+  onView: (product: Product) => void;
+  onAdjust: (product: Product) => void;
 }
 
-export default function CardView({ data, totalInventario, onEdit, onDelete, onView }: CardViewProps) {
+export default function CardView({ data, totalInventario, onEdit, onDelete, onView, onAdjust }: CardViewProps) {
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-3">
@@ -21,6 +22,7 @@ export default function CardView({ data, totalInventario, onEdit, onDelete, onVi
           onEdit={onEdit}
           onView={onView}
           onDelete={onDelete}
+          onAdjust={onAdjust}
         />
       ))}
     </div>
