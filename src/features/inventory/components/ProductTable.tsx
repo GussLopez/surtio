@@ -12,11 +12,20 @@ interface ProductTableProps {
   isLoading?: boolean;
   totalInventario: number;
   onEdit: (product: Product) => void;
-  onDelete: (product: Product) => void
-  onView: (product: Product) => void
+  onDelete: (product: Product) => void;
+  onView: (product: Product) => void;
+  onAdjust: (product: Product) => void;
 }
 
-export default function ProductTable({ data, isLoading, totalInventario, onEdit, onDelete, onView }: ProductTableProps) {
+export default function ProductTable({
+  data,
+  isLoading,
+  totalInventario,
+  onEdit,
+  onDelete,
+  onView,
+  onAdjust
+}: ProductTableProps) {
   return (
     <div className="rounded-md border border-muted mt-6 overflow-hidden bg-card">
       <Table className="w-full">
@@ -99,7 +108,7 @@ export default function ProductTable({ data, isLoading, totalInventario, onEdit,
                     <Can roles={["owner", "admin", "stock-man"]}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button size="icon" variant="ghost" className="h-8 w-8">
                             <MoreHorizontal className="size-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -110,7 +119,7 @@ export default function ProductTable({ data, isLoading, totalInventario, onEdit,
                               <PencilIcon />
                               Editar
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => onAdjust(product)}>
                               <SlidersHorizontal />
                               Ajustar
                             </DropdownMenuItem>
