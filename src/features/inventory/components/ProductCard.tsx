@@ -14,7 +14,7 @@ interface ProductCardProps {
   onAdjust: (product: Product) => void;
 }
 
-export default function ProductCard({ product, onEdit, onDelete, onView }: ProductCardProps) {
+export default function ProductCard({ product, onEdit, onDelete, onView, onAdjust }: ProductCardProps) {
   const stockColor = product.stock <= product.min_stock
     ? "text-red-500 bg-red-50 dark:bg-red-950/30"
     : product.stock <= product.min_stock + 5 ? "text-amber-600 bg-amber-100 dark:bg-amber-950/30"
@@ -22,40 +22,40 @@ export default function ProductCard({ product, onEdit, onDelete, onView }: Produ
   return (
     <div className="rounded-lg border border-muted overflow-hidden">
       <div className="h-45 flex flex-col justify-center items-center bg-facent text-neutral-400 dark:text-neutral-600 relative">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Can roles={["owner", "admin", "stock-man"]}>
+        <Can roles={["owner", "admin", "stock-man"]}>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button
-              variant={'ghost'}
-              size={'icon'}
-              className="rounded-full absolute right-3 top-3 text-neutral-400 z-50"
-            >
-              <MoreVertical />
-              <span className="sr-only">Opciones del producto</span>
-            </Button>
-            </Can>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuGroup>
-              <DropdownMenuLabel className="text-xs">Acciones</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => onEdit(product)}>
-                <PencilIcon />
-                Editar
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SlidersHorizontal />
-                Ajustar
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup onClick={() => onDelete(product)}>
-              <DropdownMenuItem variant="destructive">
-                <Trash2Icon />
-                Eliminar
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                variant={'ghost'}
+                size={'icon'}
+                className="rounded-full absolute right-3 top-3 text-neutral-400 z-50"
+              >
+                <MoreVertical />
+                <span className="sr-only">Opciones del producto</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel className="text-xs">Acciones</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => onEdit(product)}>
+                  <PencilIcon />
+                  Editar
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onAdjust(product)}>
+                  <SlidersHorizontal />
+                  Ajustar
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup onClick={() => onDelete(product)}>
+                <DropdownMenuItem variant="destructive">
+                  <Trash2Icon />
+                  Eliminar
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </Can>
         {product?.image ? (
           <div
             className="w-full h-full flex items-center justify-center p-3 cursor-pointer"
