@@ -54,23 +54,14 @@ export default function InventoryContent({
 
   if (view === "table") {
     return (
-      <>
-        <ProductTable
-          data={products}
-          totalInventario={totalInventario}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onView={onView}
-          onAdjust={onAdjust}
-        />
-
-        <div className="fixed bottom-10 right-10 px-5 py-3 border border-input shadow-lg rounded-lg bg-white dark:bg-black z-99">
-          <p className="font-semibold">Total Inventario</p>
-          <p className="font-black text-lg text-primary-light">
-            ${totalInventario.toLocaleString()} <span className="text-[10px] font-normal text-muted-foreground">MXN</span>
-          </p>
-        </div>
-      </>
+      <ProductTable
+        data={products}
+        totalInventario={totalInventario}
+        onEdit={onEdit}
+        onDelete={onDelete}
+        onView={onView}
+        onAdjust={onAdjust}
+      />
     );
   }
 
@@ -86,6 +77,12 @@ export default function InventoryContent({
           onAdjust={onAdjust}
         />
       ))}
+      <div className="fixed bottom-10 right-10 px-5 py-3 border border-input shadow-lg rounded-lg bg-white dark:bg-black z-10">
+        <p className="font-semibold">Total Inventario</p>
+        <p className="font-black text-lg text-primary-light">
+          ${totalInventario.toLocaleString()} <span className="text-[10px] font-normal text-muted-foreground">MXN</span>
+        </p>
+      </div>
     </div>
   );
 }
