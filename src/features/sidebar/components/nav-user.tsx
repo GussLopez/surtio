@@ -24,7 +24,7 @@ import {
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/shared/store/AuthStore";
-import { Skeleton } from "../../../shared/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 import { useUserStore } from "@/shared/store/UserStore";
 
 export function NavUser() {

@@ -20,7 +20,7 @@ import {
 import { useUserStore } from "@/shared/store/UserStore"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useBusinessStore } from "@/shared/store/BusinessStore"
-import { Skeleton } from "../../../shared/components/ui/skeleton"
+import { Skeleton } from "@/shared/components/ui/skeleton"
 import Link from "next/link"
 import { Business } from "@/shared/types"
 

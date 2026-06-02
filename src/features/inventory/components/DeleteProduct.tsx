@@ -12,7 +12,7 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash2Icon } from "lucide-react"
 import { sileo } from "sileo"
-import { Spinner } from "../../../shared/components/ui/spinner"
+import { Spinner } from "@/shared/components/ui/spinner"
 
 interface ProductModalProps {
   open: boolean

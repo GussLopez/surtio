@@ -1,7 +1,7 @@
 'use client'
 
 import { Plus } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../shared/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialog";
 import { Button as CustomBtn } from "@/shared/components/animate-ui/components/buttons/button";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
 import ProductGeneral from "./create/ProductGeneral";
