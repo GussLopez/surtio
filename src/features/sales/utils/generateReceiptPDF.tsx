@@ -2,8 +2,8 @@ import { pdf } from "@react-pdf/renderer";
 import ReceiptPDFDocument from "./ReceiptPDFDocument";
 import type { Sale } from "@/shared/types";
 
-export async function generateReceiptPDF(sale: Sale, businessName: string) {
-  const blob = await pdf(<ReceiptPDFDocument sale={sale} businessName={businessName} />).toBlob();
+export async function generateReceiptPDF(sale: Sale) {
+  const blob = await pdf(<ReceiptPDFDocument sale={sale} />).toBlob();
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;

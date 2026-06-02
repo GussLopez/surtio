@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import type { Sale } from "@/shared/types";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 
 const ORANGE = "#F97316";
 const GREEN = "#10B981";
@@ -286,10 +287,11 @@ function formatCurrency(value: number) {
   });
 }
 interface ReceiptPDFDocumentProps {
-  sale: Sale,
-  businessName: string;
+  sale: Sale
 }
-export default function ReceiptPDFDocument({ sale, businessName }: ReceiptPDFDocumentProps) {
+export default function ReceiptPDFDocument({ sale }: ReceiptPDFDocumentProps) {
+  const businessName = useBusinessStore(state => state.name);
+
   const formatDate = new Date(sale.created_at!).toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "short",
@@ -428,7 +430,7 @@ export default function ReceiptPDFDocument({ sale, businessName }: ReceiptPDFDoc
           `${pageNumber} / ${totalPages}`
         )} fixed />
         <Text style={styles.footer}>
-          Documento generado automaticamente - Tienda Demo
+          Documento generado automaticamente - {businessName}
         </Text>
       </Page>
     </Document>

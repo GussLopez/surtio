@@ -1,12 +1,11 @@
 import { DownloadSimpleIcon, PrinterIcon, SealCheckIcon } from "@phosphor-icons/react";
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
 import { Sale } from "@/shared/types";
-import { Separator } from "../../../shared/components/ui/separator";
-import { Button } from "../../../shared/components/ui/button";
+import { Separator } from "@/shared/components/ui/separator";
+import { Button } from "@/shared/components/ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
-import { useBusinessStore } from "@/shared/store/BusinessStore";
-import { Spinner } from "../../../shared/components/ui/spinner";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 interface SaleRecipProps {
   open: boolean;
@@ -16,7 +15,6 @@ interface SaleRecipProps {
 
 export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) {
   const [downloading, setDownloading] = useState(false);
-  const businessName = useBusinessStore(state => state.name);
   const printRef = useRef<HTMLDivElement>(null);
   const formatDate = new Date(sale.created_at!)
     .toLocaleDateString("es-MX", {
@@ -28,7 +26,7 @@ export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) 
   const handleDownloadPDF = async () => {
     setDownloading(true);
     try {
-      await generateReceiptPDF(sale, businessName!);
+      await generateReceiptPDF(sale);
     } finally {
       setDownloading(false);
     }
