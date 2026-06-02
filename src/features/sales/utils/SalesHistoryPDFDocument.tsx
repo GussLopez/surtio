@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import type { Sale } from "@/shared/types";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 
 const ORANGE = "#F97316";
 const GREEN = "#10B981";
@@ -297,6 +298,7 @@ interface SalesHistoryPDFProps {
 }
 
 export default function SalesHistoryPDFDocument({ sales, dateRange }: SalesHistoryPDFProps) {
+  const businessName = useBusinessStore(state => state.name);
   const generatedDate = new Date().toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "2-digit",
@@ -436,7 +438,7 @@ export default function SalesHistoryPDFDocument({ sales, dateRange }: SalesHisto
 
           {/* Footer */}
           <Text style={styles.footer}>
-            Documento generado automaticamente - Tienda Demo
+            Documento generado automaticamente - {businessName}
           </Text>
           <Text style={styles.pageNumber}>
             Pagina {pageIndex + 1} de {pages.length}

@@ -1,11 +1,11 @@
 import { Sale } from "@/shared/types";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../../../shared/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
 import { DownloadSimpleIcon, StorefrontIcon, UserIcon } from "@phosphor-icons/react";
-import { Badge } from "../../../shared/components/ui/badge";
+import { Badge } from "@/shared/components/ui/badge";
 import { CreditCard } from "lucide-react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../shared/components/ui/table";
-import { Separator } from "../../../shared/components/ui/separator";
-import { Button } from "../../../shared/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
+import { Separator } from "@/shared/components/ui/separator";
+import { Button } from "@/shared/components/ui/button";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { useState } from "react";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
@@ -22,7 +22,7 @@ export default function SaleReceipt({ open, sale, onClose }: SaleReceiptProps) {
   const handleDownloadPDF = async () => {
     setDownloading(true);
     try {
-      await generateReceiptPDF(sale, businessName!);
+      await generateReceiptPDF(sale);
     } finally {
       setDownloading(false);
     }
