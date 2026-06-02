@@ -8,15 +8,16 @@ import { Product } from "@/shared/types";
 interface ProductCardProps {
   product: Product;
   onEdit: (product: Product) => void;
-  onDelete: (product: Product) => void
-  onView: (product: Product) => void
+  onDelete: (product: Product) => void;
+  onView: (product: Product) => void;
+  onAdjust: (product: Product) => void;
 }
 
 export default function ProductCard({ product, onEdit, onDelete, onView }: ProductCardProps) {
   const stockColor = product.stock <= product.min_stock
     ? "text-red-500 bg-red-50 dark:bg-red-950/30"
     : product.stock <= product.min_stock + 5 ? "text-amber-600 bg-amber-100 dark:bg-amber-950/30"
-    : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30";
+      : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30";
   return (
     <div className="rounded-lg border border-muted overflow-hidden">
       <div className="h-45 flex flex-col justify-center items-center bg-facent text-neutral-400 dark:text-neutral-600 relative">
