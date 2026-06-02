@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import type { Product } from "@/shared/types";
+import { useBusinessStore } from "@/shared/store/BusinessStore";
 
 const ORANGE = "#F97316";
 const GREEN = "#10B981";
@@ -312,11 +313,12 @@ function formatCurrency(value: number) {
 
 interface ProductsPDFProps {
   products: Product[];
-  businessName: string;
   categoryFilter?: string;
 }
 
-export default function ProductsPDFDocument({ products, businessName, categoryFilter }: ProductsPDFProps) {
+export default function ProductsPDFDocument({ products, categoryFilter }: ProductsPDFProps) {
+  const businessName = useBusinessStore(state => state.name);
+
   const generatedDate = new Date().toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "2-digit",
@@ -454,7 +456,7 @@ export default function ProductsPDFDocument({ products, businessName, categoryFi
           </View>
 
           {/* Footer */}
-          <Text style={styles.footer}>Documento generado automaticamente - Tienda Demo</Text>
+          <Text style={styles.footer}>Documento generado automaticamente - {businessName}</Text>
           <Text style={styles.pageNumber}>
             Pagina {pageIndex + 1} de {pages.length}
           </Text>
