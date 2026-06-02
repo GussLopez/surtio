@@ -1,8 +1,4 @@
 'use client'
-import { Tabs, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
-import AddProduct from "@/features/inventory/components/AddProduct";
-import { ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
-import { Box } from "lucide-react";
 import { useEffect, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Categorie, Product } from "@/shared/types";
@@ -13,6 +9,7 @@ import InventoryModals from "@/features/inventory/components/InventoryModals";
 import InventoryFilters from "@/features/inventory/components/InventoryFilters";
 import InventoryContent from "@/features/inventory/components/InventoryContent";
 import InventoryPagination from "@/features/inventory/components/InventoryPagination";
+import InventoryHeader from "@/features/inventory/components/InventoryHeader";
 
 interface ProductsData {
   data: Product[];
@@ -90,27 +87,11 @@ export default function InventarioPage() {
 
   return (
     <div className="relative">
-      <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between">
-        <div className="flex items-center gap-3">
-          <Box size={30} />
-          <h1 className="text-3xl font-semibold">Inventario</h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <Tabs value={view} onValueChange={handleChange}>
-            <TabsList>
-              <TabsTrigger value="table">
-                <ListDashesIcon />
-                Tabla
-              </TabsTrigger>
-              <TabsTrigger value="card">
-                <SquaresFourIcon />
-                Tarjetas
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-          <AddProduct />
-        </div>
-      </div>
+      <InventoryHeader
+        view={view}
+        handleChange={handleChange}
+      />
+
       <InventoryFilters
         search={search}
         onSearchChange={setSearch}
