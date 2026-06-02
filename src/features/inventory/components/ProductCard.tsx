@@ -4,6 +4,7 @@ import { Button } from "../../../shared/components/ui/button";
 import { Separator } from "../../../shared/components/ui/separator";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../../shared/components/ui/dropdown-menu";
 import { Product } from "@/shared/types";
+import Can from "@/shared/components/Can";
 
 interface ProductCardProps {
   product: Product;
@@ -23,7 +24,8 @@ export default function ProductCard({ product, onEdit, onDelete, onView }: Produ
       <div className="h-45 flex flex-col justify-center items-center bg-facent text-neutral-400 dark:text-neutral-600 relative">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
+            <Can roles={["owner", "admin", "stock-man"]}>
+              <Button
               variant={'ghost'}
               size={'icon'}
               className="rounded-full absolute right-3 top-3 text-neutral-400 z-50"
@@ -31,6 +33,7 @@ export default function ProductCard({ product, onEdit, onDelete, onView }: Produ
               <MoreVertical />
               <span className="sr-only">Opciones del producto</span>
             </Button>
+            </Can>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>
