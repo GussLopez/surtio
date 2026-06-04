@@ -67,8 +67,13 @@ export default function AdjustStock({ product, open, onClose }: AdjustStockProps
             </Button>
             <div className="flex-1 flex flex-col text-center">
               <span className="text-7xl font-bold tracking-tight">{newStock}</span>
-              <span className="text-sm text-muted-foreground">
-                Agregado: {newStock - product.stock}
+              <span className={`text-sm
+                  ${newStock - product.stock < 0 && 'text-destructive'}
+                  ${newStock - product.stock > 0 && 'text-green-600'}
+                `}>
+                {newStock - product.stock < 0 && 'Eliminado: '}
+                {newStock - product.stock > 0 && 'Agregado: '}
+                {newStock - product.stock}
               </span>
             </div>
             <Button
