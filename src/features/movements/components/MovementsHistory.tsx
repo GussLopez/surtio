@@ -2,7 +2,7 @@
 
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react"
 import { useQuery } from "@tanstack/react-query"
-import { Badge, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { useState } from "react"
 import { DeleteMovement } from "./DeleteMovement"
 import { DateRange } from "react-day-picker"
@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Button } from "@/shared/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table"
 import TableLoadingData from "@/shared/components/ui/TableLoadingData"
+import { Badge } from "@/shared/components/ui/badge"
 
 type ModalState =
   | { type: "delete"; movementId: number }
@@ -63,6 +64,7 @@ export default function MovementsHistory() {
     retry: 1,
     refetchOnWindowFocus: true,
   })
+  console.log(data);
   return (
     <div>
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-10">
