@@ -63,7 +63,6 @@ export default function MovementsHistory() {
     retry: 1,
     refetchOnWindowFocus: true,
   })
-  console.log(profiles);
   return (
     <div>
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-10">
