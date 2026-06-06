@@ -34,40 +34,36 @@ export default function RegisterForm() {
       });
       return;
     }
-    try {
-      setLoading(true);
-      const { email, password, name } = formData;
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: "http://localhost:3000/auth/callback",
-          data: {
-            name,
-            email,
-            role: 'owner',
-            create_business: true
-          }
+    setLoading(true);
+    const { email, password, name } = formData;
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: "http://localhost:3000/auth/callback",
+        data: {
+          name,
+          email,
+          role: 'owner',
+          create_business: true
         }
-      })
-      setLoading(false);
-      router.push('/admin');
-      if (error) {
-        sileo.error({
-          title: "Oopss...",
-          description: "Ocurrio un error al registrarte"
-        });
       }
-      if (!error) {
-        sileo.success({
-          title: "Cuenta creada",
-          description: "Inicia sesión con tus credenciales"
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      throw new Error('Error al registrar un usuario');
+    })
+
+    if (error) {
+      sileo.error({
+        title: "Error al registrarte",
+        description: "Ocurrió un error al crear la cuenta, por favor intenta más tarde"
+      });
+      console.error(error);
+      return;
     }
+    sileo.success({
+      title: "Cuenta creada",
+      description: "Inicia sesión con tus credenciales"
+    });
+    setLoading(false);
+    router.push('/admin');
   }
   return (
     <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
