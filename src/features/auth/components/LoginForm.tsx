@@ -47,11 +47,9 @@ export default function LoginForm() {
       setLoading(false);
       return;
     }
+    setLoading(false);
 
     router.push('/admin');
-    router.refresh();
-
-    setLoading(false);
   }
   return (
     <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
