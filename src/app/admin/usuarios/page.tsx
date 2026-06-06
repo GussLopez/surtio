@@ -9,6 +9,7 @@ import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useQuery } from "@tanstack/react-query"
 import { UserRoundSearch, Users } from "lucide-react";
 import { useState } from "react";
+import UserCardSkeleton from "@/features/users/components/UserCardSkeleton";
 
 export interface editEmploye {
   id: string;
@@ -76,9 +77,11 @@ export default function UsuariosPage() {
       {error && (
         <ServerError />
       )}
-      {isLoading && (
-        <div className="flex justify-center mt-40">
-          <Spinner className="size-7" />
+      {!isLoading && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-10">
+          <UserCardSkeleton />
+          <UserCardSkeleton />
+          <UserCardSkeleton />
         </div>
       )}
       {data?.length === 0 ? (
