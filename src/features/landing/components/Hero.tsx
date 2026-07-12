@@ -2,6 +2,7 @@ import { Button } from "@/shared/components/ui/button";
 import RaysBackground from "./RaysBackground";
 import SaasMockup from "./SaasMockup";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 
 export default function Hero() {
@@ -37,21 +38,28 @@ export default function Hero() {
               <ArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 opacity-40 group-hover:opacity-100" />
             </Button>
 
-            <Button variant={'outline'} size={'lg'} className="px-3">
-              <div className="w-4 h-4">
-                <img
-                  src="/img/icons/google.svg"
-                  alt="Google Icon"
-                  className="w-full h-auto"
-                />
-              </div>
-              Regístrate con Google
+            <Button
+              variant={'outline'}
+              size={'lg'}
+              className="px-3"
+              asChild
+            >
+              <Link href={'/auth/login'}>
+                <div className="w-4 h-4">
+                  <img
+                    src="/img/icons/google.svg"
+                    alt="Google Icon"
+                    className="w-full h-auto"
+                  />
+                </div>
+                Regístrate con Google
+              </Link>
             </Button>
           </div>
         </div>
 
         <SaasMockup />
       </div>
-    </section>
+    </section >
   );
 }
