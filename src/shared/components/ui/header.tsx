@@ -10,30 +10,32 @@ export default function Header() {
 
   ]
   return (
-    <header>
-      <div className="sticky top-0 z-100 block w-full border-b border-input lg:hidden bg-[#FEFDFB]">
+    <header className="sticky top-0 z-100">
+      <div className="block w-full border-b border-input lg:hidden bg-[#FEFDFB]">
         <div className="h-16 px-6 flex justify-between items-center">
-          <div className="flex items-center gap-1.5">
-            <span>
-              <ArrowUpRight />
-            </span>
-            <span className="text-xl font-semibold">Surtio</span>
+          <div className="w-30">
+            <img
+              src="/img/logo/surtio.svg"
+              alt="Surtio Logo"
+              className="w-full h-auto"
+            />
           </div>
           <div className="">
             <button className="p-2 border border-input rounded-md">
-              <Menu className="size-6"/>
+              <Menu className="size-6" />
             </button>
           </div>
         </div>
       </div>
-      <div className="sticky top-0 z-100 hidden w-full border-b border-input lg:block bg-background">
+      <div className="hidden w-full border-b border-input lg:block bg-background">
         <div className="h-16">
           <nav className="relative w-full h-full flex items-center justify-between flex-1 max-w-7xl mx-auto px-6">
-            <div className="flex items-center gap-1.5">
-              <span>
-                <ArrowUpRight />
-              </span>
-              <span className="text-xl font-semibold">Surtio</span>
+            <div className="w-30">
+              <img
+                src="/img/logo/surtio.svg"
+                alt="Surtio Logo"
+                className="w-full h-auto"
+              />
             </div>
 
             <div className="absolute translate-x-1/2 right-1/2 h-full flex items-center gap-5">
