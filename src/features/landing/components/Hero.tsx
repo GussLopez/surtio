@@ -37,8 +37,15 @@ export default function Hero() {
               <ArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 opacity-40 group-hover:opacity-100" />
             </Button>
 
-            <Button variant={'outline'} size={'lg'}>
-              Ver demostración
+            <Button variant={'outline'} size={'lg'} className="px-3">
+              <div className="w-4 h-4">
+                <img
+                  src="/img/icons/google.svg"
+                  alt="Google Icon"
+                  className="w-full h-auto"
+                />
+              </div>
+              Regístrate con Google
             </Button>
           </div>
         </div>
