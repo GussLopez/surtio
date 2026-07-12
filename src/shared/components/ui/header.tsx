@@ -10,7 +10,7 @@ export default function Header() {
 
   ]
   return (
-    <header className="sticky top-0 z-100 hidden w-full border-b border-input lg:block bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-100 hidden w-full border-b border-input lg:block bg-background">
       <div className="h-16">
         <nav className="relative w-full h-full flex items-center justify-between flex-1 max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-1.5">
