@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components/ui/button";
 import RaysBackground from "./RaysBackground";
 import SaasMockup from "./SaasMockup";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 
 export default function Hero() {
