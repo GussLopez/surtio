@@ -12,7 +12,7 @@ export default function Login() {
   
   return (
     <div className="min-h-screen relative">
-      <div className="max-w-104 3xl:min-h-screen 3xl:flex 3xl:flex-col 3xl:justify-center mx-auto p-10 col-span-8">
+      <div className="max-w-118 3xl:min-h-screen 3xl:flex 3xl:flex-col 3xl:justify-center mx-auto p-10 col-span-8">
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
             <Image
