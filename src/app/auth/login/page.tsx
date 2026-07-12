@@ -16,18 +16,10 @@ export default function Login() {
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
             <Image
-              src={'/img/logo/flyzzio-light.svg'}
-              className="hidden dark:block"
-              alt="Flyzzio Logo"
-              width={30}
-              height={30}
-            />
-            <Image
-              src={'/img/logo/flyzzio.svg'}
-              className="block dark:hidden"
-              alt="Flyzzio Logo"
-              width={30}
-              height={30}
+              src={'/img/logo/surtio-logo.svg'}
+              alt="Surtio Logo"
+              width={35}
+              height={35}
             />
           </div>
           <h1 className="mb-1 text-3xl font-semibold">Bienvenido a Flyzzio</h1>

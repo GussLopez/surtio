@@ -67,6 +67,25 @@ export default function RegisterForm() {
   }
   return (
     <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
+
+      <Button
+        variant={'outline'}
+        className="w-full"
+        type="button"
+      >
+        <div className="w-4 h-4">
+          <img
+            src="/img/icons/google.svg"
+            alt="Google Icon"
+          />
+        </div>
+        Continua con Google
+      </Button>
+      <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
+        <Separator className="w-full" />
+        <span className="shrink-0 text-muted-foreground">O</span>
+        <Separator className="w-full" />
+      </div>
       <div>
         <label
           className="block text-sm font-medium mb-2"
@@ -109,48 +128,28 @@ export default function RegisterForm() {
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
       </div>
-      <div className="flex gap-2 items-center mb-4">
-        <Checkbox
-          id="termsAndConditions"
-          onCheckedChange={e => setChecked(e ? true : false)}
-        />
-        <label
-          htmlFor="termsAndConditions"
-          className="text-sm text-gray-600 dark:text-neutral-100"
-        >
-          Acepto <Link href={'/'} className="hover:underline">términos y condiciones</Link>
-        </label>
-      </div>
-      <div>
+
+      <div className="mt-6">
         <Button
           type="submit"
           disabled={loading}
           className="w-full"
         >
           {loading && <Spinner className="size-4.5" />}
-          Registrarse
+          Comenzar
         </Button>
       </div>
-      <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
-        <Separator className="w-full" />
-        <span className="shrink-0 text-muted-foreground">O registrate con</span>
-        <Separator className="w-full" />
-      </div>
-      <Button
-        variant={'outline'}
-        className="w-full"
-        type="button"
-      >
-        <div className="w-4 h-4">
-          <img
-            src="/img/icons/google.svg"
-            alt="Google Icon"
-          />
-        </div>
-        Google
-      </Button>
-      <p className="text-xs text-muted-foreground text-center">
-        ¿Ya tienes cuenta? <Link href={'/auth/login'} className="text-primary font-medium hover:underline">Inicia sesión.</Link>
+
+      <p className="text-sm text-muted-foreground text-center">
+        Al iniciar sesión, aceptas los{' '}
+        <Link
+          href={'/'}
+          className="hover:underline hover:text-foreground transition-colors"
+        >Términos y Condiciones</Link> y las{' '}
+        <Link
+          href={'/'}
+          className="hover:underline hover:text-foreground transition-colors"
+        >Política de privacidad</Link>.
       </p>
     </form>
   )
