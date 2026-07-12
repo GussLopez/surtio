@@ -25,7 +25,7 @@ export default function Header() {
               <Link
                 key={i}
                 href={link.path}
-                className="px-2.5 py-2 rounded-sm text-sm font-medium hover:bg-accent"
+                className="px-2.5 py-2 rounded-lg text-sm font-medium hover:bg-accent"
               >
                 {link.text}
               </Link>
@@ -34,15 +34,17 @@ export default function Header() {
 
           <div className="flex gap-2">
             <Button
-              className="rounded-[4px]"
+              className="rounded-md"
               variant={'outline'}
+              asChild
             >
-              Inicia sesión
+              <Link href={'/auth/login'}>Inicia sesión</Link>
             </Button>
             <Button
-              className="rounded-[4px] bg-foreground text-background dark:hover:text-white"
+              className="rounded-md bg-foreground text-background dark:hover:text-white"
+              asChild
             >
-              Demostración
+              <Link href={'/admin'}>Demostración</Link>
             </Button>
           </div>
         </nav>
