@@ -1,43 +1,49 @@
+import { Button } from "@/shared/components/ui/button";
 import RaysBackground from "./RaysBackground";
 import SaasMockup from "./SaasMockup";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[850px] overflow-hidden bg-white">
+    <section className="relative min-h-221.5 overflow-hidden">
       <RaysBackground />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 lg:px-8">
-        <div className="flex flex-col items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-14 lg:px-8">
+        <div className="max-w-xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-md border bg-white/80 px-3 py-2 text-sm shadow-sm backdrop-blur">
             <span className="text-zinc-600">Todo tu negocio</span>
             <span className="rounded bg-emerald-50 px-2 py-1 font-medium text-emerald-700">
               En un solo lugar →
             </span>
           </div>
-          
-          <h1 className="text-5xl font-semibold text-center leading-[1.02] tracking-tight text-black md:text-7xl">
+
+          <h1 className="font-serif text-5xl leading-[1.04] tracking-tight 2xl:text-7xl">
             Controla tu negocio sin complicaciones
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg text-center leading-8 text-zinc-600">
+          <p className="mt-6 max-w-lg text-lg leading-6 text-muted-foreground">
             Gestiona inventario, ventas, productos y reportes desde una
             plataforma diseñada para negocios locales.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <button className="rounded-lg bg-black px-6 py-3 font-medium text-white transition hover:bg-zinc-800">
+            <Button
+              size={'lg'}
+              className="px-3 group"
+              variant={'secondary'}
+            >
               Comenzar ahora
-            </button>
+              <ArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 opacity-40 group-hover:opacity-100" />
+            </Button>
 
-            <button className="rounded-lg border border-zinc-200 bg-white/80 px-6 py-3 font-medium text-zinc-900 shadow-sm backdrop-blur transition hover:bg-zinc-50">
+            <Button variant={'outline'} size={'lg'}>
               Ver demostración
-            </button>
+            </Button>
           </div>
         </div>
-        <div className="mt-20">
-          <SaasMockup />
-        </div>
+
+        <SaasMockup />
       </div>
     </section>
   );

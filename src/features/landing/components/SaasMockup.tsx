@@ -1,7 +1,7 @@
 export default function SaasMockup() {
 
   return (
-    <div className="w-full overflow-hidden rounded-3xl border border-zinc-200/80 bg-white/85 shadow-2xl shadow-emerald-950/10 backdrop-blur-md lg:-mt-10">
+    <div className="relative ml-auto mt-20 w-full max-w-3xl overflow-hidden rounded-3xl border border-zinc-200/80 bg-white/85 shadow-2xl shadow-emerald-950/10 backdrop-blur-md lg:-mt-10">
       <div className="flex h-14 items-center gap-2 border-b px-5">
         <span className="h-3 w-3 rounded-full bg-zinc-200" />
         <span className="h-3 w-3 rounded-full bg-zinc-200" />
