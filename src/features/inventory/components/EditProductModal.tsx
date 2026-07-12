@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/components/ui/dialog";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
 import ProductPrices from "./create/ProductPrices";
@@ -129,20 +129,18 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
             <TabsTrigger value={'precios'}>Precios</TabsTrigger>
             <TabsTrigger value={'inventario'}>Inventario</TabsTrigger>
           </TabsList>
-          <TabsContents>
-            <TabsContent value="general">
-              <ProductGeneral formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="detalles">
-              <ProductDetails formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="precios">
-              <ProductPrices formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="inventario">
-              <ProductStock formData={formData} onChange={updateForm} />
-            </TabsContent>
-          </TabsContents>
+          <TabsContent value="general">
+            <ProductGeneral formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="detalles">
+            <ProductDetails formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="precios">
+            <ProductPrices formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="inventario">
+            <ProductStock formData={formData} onChange={updateForm} />
+          </TabsContent>
         </Tabs>
         <DialogFooter className="mt-1">
           <DialogClose asChild>

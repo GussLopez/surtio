@@ -1,5 +1,5 @@
-import { Tabs, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
 import AddProduct from "@/features/inventory/components/AddProduct";
+import { Tabs, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { ListDashesIcon, SquaresFourIcon } from "@phosphor-icons/react";
 import { Box } from "lucide-react";
 

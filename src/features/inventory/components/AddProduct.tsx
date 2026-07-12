@@ -2,8 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialog";
-import { Button as CustomBtn } from "@/shared/components/animate-ui/components/buttons/button";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "@/shared/components/animate-ui/components/animate/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import ProductGeneral from "./create/ProductGeneral";
 import ProductDetails from "./create/ProductDetails";
 import ProductPrices from "./create/ProductPrices";
@@ -63,7 +62,7 @@ export default function AddProduct() {
       if (!res.ok) {
         throw new Error(data.error || "Error al crear producto");
       }
-      
+
       setFormData(initialFormData);
       queryClient.invalidateQueries({ queryKey: ["stock-products", businessId] });
       setLoading(false);
@@ -86,13 +85,13 @@ export default function AddProduct() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <CustomBtn
+        <Button
           disabled={userRole === 'seller'}
           className={`${userRole === 'seller' && 'hidden'}`}
         >
           <Plus />
           Agregar
-        </CustomBtn>
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[70vh] overflow-y-scroll scrollbar-hide lg:overflow-y-hidden lg:min-w-200 px-2 lg:p-6">
         <DialogHeader>
@@ -107,20 +106,18 @@ export default function AddProduct() {
             <TabsTrigger value={'precios'}>Precios</TabsTrigger>
             <TabsTrigger value={'inventario'}>Inventario</TabsTrigger>
           </TabsList>
-          <TabsContents>
-            <TabsContent value="general">
-              <ProductGeneral formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="detalles">
-              <ProductDetails formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="precios">
-              <ProductPrices formData={formData} onChange={updateForm} />
-            </TabsContent>
-            <TabsContent value="inventario">
-              <ProductStock formData={formData} onChange={updateForm} />
-            </TabsContent>
-          </TabsContents>
+          <TabsContent value="general">
+            <ProductGeneral formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="detalles">
+            <ProductDetails formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="precios">
+            <ProductPrices formData={formData} onChange={updateForm} />
+          </TabsContent>
+          <TabsContent value="inventario">
+            <ProductStock formData={formData} onChange={updateForm} />
+          </TabsContent>
         </Tabs>
         <DialogFooter className="mt-1">
           <DialogClose asChild>
