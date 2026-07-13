@@ -12,7 +12,7 @@ export default function Login() {
   
   return (
     <div className="min-h-screen relative">
-      <div className="max-w-118 3xl:min-h-screen 3xl:flex 3xl:flex-col 3xl:justify-center mx-auto p-10 col-span-8">
+      <div className="max-w-md mx-auto p-4">
         <div className="flex flex-col items-center mb-6">
           <div className="mb-10">
             <Image
@@ -30,18 +30,6 @@ export default function Login() {
           </p>
         </div>
         <LoginForm />
-
-        <p
-          className="absolute hidden sm:block bottom-4 left-4 text-xs text-neutral-400"
-        >
-          © {new Date().getFullYear()} Flyzzio - Todos los derechos reservados.
-        </p>
-        <Link
-          href={'/legal/politicas-privacidad'}
-          className="absolute bottom-4 right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-4 text-xs text-neutral-400 hover:underline"
-        >
-          Políticas de Privacidad
-        </Link>
 
       </div>
     </div>
