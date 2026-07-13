@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useState } from "react"
 
 export default function Preloader({ isReady }: { isReady: boolean }) {
@@ -38,22 +39,23 @@ export default function Preloader({ isReady }: { isReady: boolean }) {
             opacity: 0
           }}
         >
-          <motion.div
-            className="flex items-center gap-4 mb-20"
-          >
-            <div className="size-14 lg:size-20">
-              <img
-                src="/img/logo/flyzzio.svg"
-                alt="Logo"
-                className="h-full block dark:hidden"
+          <motion.div className="flex justify-center items-center gap-4 mb-20">
+            <div className="w-62.5 h-auto">
+              <Image
+                src="/img/logo/surtio.svg"
+                alt="Surtio Logo"
+                className="w-full h-auto block dark:hidden"
+                width={200}
+                height={150}
               />
-              <img
-                src="/img/logo/flyzzio-light.svg"
-                alt="Logo"
-                className="h-full hidden dark:block"
+              <Image
+                src="/img/logo/surtio-dark.svg"
+                alt="Surtio Surtio Logo"
+                className="w-full h-auto hidden dark:block"
+                width={200}
+                height={150}
               />
             </div>
-            <div className="text-4xl md:text-6xl font-bold">Flyzzio</div>
           </motion.div>
           <div className="w-64 h-1 bg-muted rounded-full overflow-hidden">
             <motion.div
