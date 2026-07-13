@@ -1,6 +1,5 @@
 'use client'
 import { createEmploye } from "@/features/users/lib/action";
-import { Button as AnimatedBtn } from "@/shared/components/animate-ui/components/buttons/button";
 import { Button } from "@/shared/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialog";
 import ErrorMessage from "@/shared/components/ui/error-message";
@@ -68,10 +67,10 @@ export default function CreateUser() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <AnimatedBtn>
+        <Button>
           <UserPlusIcon size={20} weight="bold" />
           Crear usuario
-        </AnimatedBtn>
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
