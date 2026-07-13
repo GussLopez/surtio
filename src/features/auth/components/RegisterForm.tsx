@@ -66,91 +66,97 @@ export default function RegisterForm() {
     router.push('/admin');
   }
   return (
-    <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
-
-      <Button
-        variant={'outline'}
-        className="w-full"
-        type="button"
-      >
-        <div className="w-4 h-4">
-          <img
-            src="/img/icons/google.svg"
-            alt="Google Icon"
-          />
-        </div>
-        Continua con Google
-      </Button>
-      <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
-        <Separator className="w-full" />
-        <span className="shrink-0 text-muted-foreground">O</span>
-        <Separator className="w-full" />
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium mb-2"
-          htmlFor="nombre">Nombres</label>
-        <Input
-          id="nombre"
-          type="text"
-          aria-invalid={errors.name?.message ? 'true' : 'false'}
-          {...register("name", {
-            required: "El nombre es requerido",
-          })}
-        />
-        <ErrorMessage>{errors.name?.message}</ErrorMessage>
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium mb-2"
-          htmlFor="email">Email</label>
-        <Input
-          id="email"
-          type="text"
-          aria-invalid={errors.email?.message ? 'true' : 'false'}
-          {...register("email", {
-            required: "El email es requerido"
-          })}
-        />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium mb-2"
-          htmlFor="name">Contraseña</label>
-        <Input
-          id="name"
-          type="password"
-          aria-invalid={errors.password?.message ? 'true' : 'false'}
-          {...register("password", {
-            required: "La contraseña es requerida"
-          })}
-        />
-        <ErrorMessage>{errors.password?.message}</ErrorMessage>
-      </div>
-
-      <div className="mt-6">
+    <div>
+      <div className="flex flex-col gap-4">
         <Button
-          type="submit"
-          disabled={loading}
+          variant={'outline'}
           className="w-full"
+          type="button"
         >
-          {loading && <Spinner className="size-4.5" />}
-          Comenzar
+          <div className="w-4 h-4">
+            <img
+              src="/img/icons/google.svg"
+              alt="Google Icon"
+            />
+          </div>
+          Continua con Google
         </Button>
+        <div className="flex justify-center items-center gap-4 my-4 text-xs overflow-hidden">
+          <Separator className="w-full" />
+          <span className="shrink-0 text-muted-foreground">O</span>
+          <Separator className="w-full" />
+        </div>
       </div>
+      <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
+        <div className="flex flex-col space-y-3">
 
-      <p className="text-sm text-muted-foreground text-center">
+          <div>
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="nombre">Nombres</label>
+            <Input
+              id="nombre"
+              type="text"
+              aria-invalid={errors.name?.message ? 'true' : 'false'}
+              {...register("name", {
+                required: "El nombre es requerido",
+              })}
+            />
+            <ErrorMessage>{errors.name?.message}</ErrorMessage>
+          </div>
+          <div>
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="email">Email</label>
+            <Input
+              id="email"
+              type="text"
+              aria-invalid={errors.email?.message ? 'true' : 'false'}
+              {...register("email", {
+                required: "El email es requerido"
+              })}
+            />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          </div>
+          <div>
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="name">Contraseña</label>
+            <Input
+              id="name"
+              type="password"
+              aria-invalid={errors.password?.message ? 'true' : 'false'}
+              {...register("password", {
+                required: "La contraseña es requerida"
+              })}
+            />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          </div>
+
+          <div className="mt-6">
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full"
+            >
+              {loading && <Spinner className="size-4.5" />}
+              Comenzar
+            </Button>
+          </div>
+
+        </div>
+      </form>
+      <p className="text-sm text-muted-foreground text-center mt-4">
         Al iniciar sesión, aceptas los{' '}
         <Link
           href={'/'}
-          className="hover:underline hover:text-foreground transition-colors"
+          className="underline hover:text-foreground transition-colors"
         >Términos y Condiciones</Link> y las{' '}
         <Link
           href={'/'}
-          className="hover:underline hover:text-foreground transition-colors"
+          className="underline hover:text-foreground transition-colors"
         >Política de privacidad</Link>.
       </p>
-    </form>
+    </div>
   )
 }
