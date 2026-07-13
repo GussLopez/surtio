@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fiyzzio",
-  description: "Gestiona tu negocio con Flyzzio",
+  title: "Surtio",
+  description: "Gestiona inventario, ventas, productos y reportes desde una plataforma diseñada para negocios locales.",
 };
 
 export default function RootLayout({
