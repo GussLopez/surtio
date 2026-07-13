@@ -98,16 +98,11 @@ export function BusinessSwitcher() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="flex aspect-square size-8 p-1 items-center justify-center rounded-lg">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
                 <img
-                  src="/img/logo/flyzzio-light.svg"
-                  alt="Flyzzio Logo"
-                  className="w-auto h-full hidden dark:block"
-                />
-                <img
-                  src="/img/logo/flyzzio.svg"
-                  alt="Flyzzio Logo"
-                  className="w-auto h-full block dark:hidden"
+                  src="/img/logo/surtio-logo.svg"
+                  alt="Surtio Logo"
+                  className="w-auto h-full"
                 />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
