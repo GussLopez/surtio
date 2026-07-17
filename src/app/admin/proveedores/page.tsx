@@ -2,7 +2,6 @@
 import AddSupplierDialog from "@/shared/components/AddSupplierDialog";
 import DeleteSupplierDialog from "@/features/suppliers/components/DeleteSupplierDialog";
 import EditSupplierDialog from "@/features/suppliers/components/EditSupplierDialog";
-import { Button } from "@/shared/components/animate-ui/components/buttons/button";
 import { Badge } from "@/shared/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/components/ui/table";
@@ -13,6 +12,7 @@ import { CircleIcon, PlusIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { MoreHorizontal, PencilIcon, SlidersHorizontal, Trash2Icon, Truck } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/shared/components/ui/button";
 
 type ModalState =
   | { type: "create" }
