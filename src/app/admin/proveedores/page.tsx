@@ -53,7 +53,7 @@ export default function ProveedoresPage() {
         </div>
         <div className="mt-5 lg:mt-0">
           <Button onClick={() => openCreate()}>
-            <PlusIcon size={20} weight="bold" />
+            <PlusIcon weight="bold" className="size-5" />
             Nuevo Proveedor
           </Button>
         </div>
