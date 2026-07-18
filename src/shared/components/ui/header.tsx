@@ -1,6 +1,7 @@
-import { ArrowUpRight, Hamburger, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "./button";
 import Link from "next/link";
+import MobileNavMenu from "../MobileNavMenu";
 
 export default function Header() {
   const links = [
@@ -10,7 +11,7 @@ export default function Header() {
 
   ]
   return (
-    <header className="sticky top-0 z-100">
+    <header className="sticky top-0 z-20">
       <div className="block w-full border-b border-input lg:hidden bg-[#FEFDFB]">
         <div className="h-16 px-6 flex justify-between items-center">
           <div className="w-30">
@@ -21,9 +22,7 @@ export default function Header() {
             />
           </div>
           <div className="">
-            <button className="p-2 border border-input rounded-md">
-              <Menu className="size-6" />
-            </button>
+            <MobileNavMenu />
           </div>
         </div>
       </div>
@@ -34,7 +33,12 @@ export default function Header() {
               <img
                 src="/img/logo/surtio.svg"
                 alt="Surtio Logo"
-                className="w-full h-auto"
+                className="w-full h-auto block dark:hidden"
+              />
+              <img
+                src="/img/logo/surtio-dark.svg"
+                alt="Surtio Logo"
+                className="w-full h-auto hidden dark:block"
               />
             </div>
 
