@@ -52,98 +52,88 @@ export default function LoginForm() {
     router.push('/admin');
   }
   return (
-    <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
-      {authError && (
-        <Alert variant={'destructive'}>
-          <WarningCircleIcon size={20} />
-          <AlertTitle className="font-semibold ">Credenciales Inválidas</AlertTitle>
-          <AlertDescription>{authError}</AlertDescription>
-        </Alert>
-      )}
-      <div>
-        <label
-          className="block text-sm font-medium mb-2"
-          htmlFor="email">Email</label>
-        <Input
-          id="email"
-          type="text"
-          aria-invalid={errors.email?.message ? 'true' : 'false'}
-          {...register("email", {
-            required: "El email es requerido"
-          })}
-        />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium mb-2"
-          htmlFor="name">Password</label>
-        <div className="relative">
-          <Input
-            id="name"
-            aria-invalid={errors.password?.message ? "true" : "false"}
-            type={isVisible ? 'text' : 'password'}
-            {...register("password", {
-              required: 'La contraseña es requerida'
-            })}
-          />
-          <Button
-            variant='ghost'
-            type="button"
-            size='icon'
-            onClick={() => setIsVisible(prevState => !prevState)}
-            className='h-full text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
-          >
-            {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-            <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
-          </Button>
-        </div>
-        <ErrorMessage>{errors.password?.message}</ErrorMessage>
-      </div>
-      <div className="flex justify-between mb-6">
-        <div className="flex gap-2 items-center">
-          <Checkbox id="remember" />
-          <label
-            htmlFor="remember"
-            className="text-sm text-gray-600 dark:text-neutral-100"
-          >Recuerdame</label>
-        </div>
-        <Link
-          href={'/forgot-password'}
-          className="text-sm text-primary-light dark:text-primary hover:underline font-medium"
-        >¿Olvidaste tu contraseña?</Link>
-      </div>
-      <div>
+    <div>
+      <div className="flex flex-col gap-4">
         <Button
+          variant={'outline'}
           className="w-full"
-          type="submit"
-          disabled={loading}
+          type="button"
         >
-          {loading && <Spinner className="size-4.5" />}
-          Acceder
+          <div className="w-4 h-4">
+            <img
+              src="/img/icons/google.svg"
+              alt="Google Icon"
+            />
+          </div>
+          Continua con Google
         </Button>
-      </div>
-      <div className="flex justify-center items-center gap-4 text-xs overflow-hidden">
-        <Separator className="w-full" />
-        <span className="shrink-0 text-muted-foreground">O inicia sesión con</span>
-        <Separator className="w-full" />
-      </div>
-      <Button
-        variant={'outline'}
-        className="w-full"
-        type="button"
-      >
-        <div className="w-4 h-4">
-          <img
-            src="/img/icons/google.svg"
-            alt="Google Icon"
-          />
+        <div className="flex justify-center items-center gap-4 my-4 text-xs overflow-hidden">
+          <Separator className="w-full" />
+          <span className="shrink-0 text-muted-foreground">O</span>
+          <Separator className="w-full" />
         </div>
-        Google
-      </Button>
-      <p className="text-xs text-muted-foreground text-center">
-        ¿No tienes cuenta? <Link href={'/auth/register'} className="text-primary font-medium hover:underline">Registrate ahora.</Link>
+      </div>
+      <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
+        <div className="flex flex-col space-y-3">
+          <div>
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="email">Email</label>
+            <Input
+              id="email"
+              type="text"
+              aria-invalid={errors.email?.message ? 'true' : 'false'}
+              {...register("email", {
+                required: "El email es requerido"
+              })}
+            />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label
+                className="block text-sm font-medium mb-2"
+                htmlFor="name">Contraseña
+              </label>
+              <Link
+                className="text-sm font-medium text-primary hover:underline"
+                href={'/auth/forgor-password'}
+              >¿Olvidaste tu contraseña?</Link>
+            </div>
+            <Input
+              id="name"
+              type="password"
+              aria-invalid={errors.password?.message ? 'true' : 'false'}
+              {...register("password", {
+                required: "La contraseña es requerida"
+              })}
+            />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          </div>
+
+          <div className="mt-6">
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full"
+            >
+              {loading && <Spinner className="size-4.5" />}
+              Ingresar
+            </Button>
+          </div>
+        </div>
+      </form>
+      <p className="text-sm text-muted-foreground text-center mt-4">
+        Al iniciar sesión, aceptas los{' '}
+        <Link
+          href={'/'}
+          className="underline hover:text-foreground transition-colors"
+        >Términos y Condiciones</Link> y las{' '}
+        <Link
+          href={'/'}
+          className="underline hover:text-foreground transition-colors"
+        >Política de privacidad</Link>.
       </p>
-    </form>
+    </div>
   )
 }
