@@ -73,8 +73,8 @@ export default function LoginForm() {
           <Separator className="w-full" />
         </div>
       </div>
-      <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
-        <div className="flex flex-col space-y-3">
+      <form onSubmit={handleSubmit(handleLogin)}>
+        <div className="flex flex-col space-y-6">
           <div>
             <label
               className="block text-sm font-medium mb-2"
@@ -111,7 +111,7 @@ export default function LoginForm() {
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
 
-          <div className="mt-6">
+          <div>
             <Button
               type="submit"
               disabled={loading}

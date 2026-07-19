@@ -87,8 +87,8 @@ export default function RegisterForm() {
           <Separator className="w-full" />
         </div>
       </div>
-      <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
-        <div className="flex flex-col space-y-3">
+      <form onSubmit={handleSubmit(handleRegister)}>
+        <div className="flex flex-col space-y-6">
 
           <div>
             <label
@@ -133,7 +133,7 @@ export default function RegisterForm() {
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
 
-          <div className="mt-6">
+          <div>
             <Button
               type="submit"
               disabled={loading}
