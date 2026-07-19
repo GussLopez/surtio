@@ -14,12 +14,12 @@ export default function Register() {
     <div className="min-h-screen relative">
       <div className="max-w-md mx-auto p-4">
         <div className="flex flex-col items-center mb-6">
-          <div className="mb-10">
+          <div className="py-5">
             <Image
               src={'/img/logo/surtio-logo.svg'}
               alt="Surtio Logo"
-              width={35}
-              height={35}
+              width={45}
+              height={45}
             />
           </div>
           <h1 className="mb-1 text-lg font-semibold">Ingresa tus datos para comenzar</h1>

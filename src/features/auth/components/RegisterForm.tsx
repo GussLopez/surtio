@@ -147,7 +147,7 @@ export default function RegisterForm() {
         </div>
       </form>
       <p className="text-sm text-muted-foreground text-center mt-4">
-        Al iniciar sesión, aceptas los{' '}
+        Al registrarte, aceptas los{' '}
         <Link
           href={'/'}
           className="underline hover:text-foreground transition-colors"
