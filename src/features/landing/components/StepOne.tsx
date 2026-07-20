@@ -1,4 +1,6 @@
+import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
+import { ChevronRight } from "lucide-react";
 
 export default function StepOne() {
 
@@ -12,13 +14,30 @@ export default function StepOne() {
 
         <div className="mt-10 grid grid-cols-2 gap-20">
           <div>
-            <div className="flex gap-5 text-lg">
-              <span>01</span>
-              <span>Configura tu tienda</span>
+            <div>
+              <div className="flex gap-5 text-lg">
+                <span>01</span>
+                <span>Configura tu tienda</span>
+              </div>
+              <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
+                Añade tus productos masivamente, agrupalos por categorías, marcas y más
+              </p>
             </div>
-            <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
-              Añade tus productos masivamente, agrupalos por categorías, marcas y más
-            </p>
+            <div className="max-w-lg flex items-center gap-3">
+              <Button className="bg-black hover:bg-black/80">
+                Ver más
+                <ChevronRight className="flex-1"/>
+              </Button>
+              <Button variant={'outline'}>
+                <div className="w-4 h-4">
+                  <img
+                    src="/img/icons/google.svg"
+                    alt="Google Icon"
+                  />
+                </div>
+                Ingresar con Google
+              </Button>
+            </div>
           </div>
           <div>
             <Skeleton className="w-131.25 h-110" />
