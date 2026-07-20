@@ -28,7 +28,7 @@ export default function Header() {
       </div>
       <div className="hidden w-full border-b border-input lg:block bg-background">
         <div className="h-16">
-          <nav className="relative w-full h-full flex items-center justify-between flex-1 max-w-7xl mx-auto px-6">
+          <nav className="relative w-full h-full flex items-center justify-between flex-1 max-w-6xl mx-auto px-6">
             <div className="w-30">
               <img
                 src="/img/logo/surtio.svg"

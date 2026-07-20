@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="relative min-h-221.5 overflow-hidden">
       <RaysBackground />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-14 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-14 lg:px-8">
         <div className="max-w-xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-md border bg-white/80 px-3 py-2 text-sm shadow-sm backdrop-blur">
             <span className="text-zinc-600">Todo tu negocio</span>
@@ -19,7 +19,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-serif text-5xl leading-[1.04] tracking-tight 2xl:text-7xl">
+          <h1 className="font-heading leading-snug lg:leading-18 lg:tracking-normal tracking-tight text-5xl 2xl:text-7xl">
             Controla tu negocio sin complicaciones
           </h1>
 
