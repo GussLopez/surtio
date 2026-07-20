@@ -14,15 +14,50 @@ export default function StepOne() {
         </h2>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-20 px-4">
+      <div className="mt-10 grid grid-cols-2 gap-20 py-16 px-4">
         <div>
           <div>
-            <div className="flex gap-5 text-lg">
+            <div className="flex gap-5 text-xl">
               <span>01</span>
               <span>Configura tu tienda</span>
             </div>
             <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
-              Añade tus productos masivamente, agrupalos por categorías, marcas y más
+              Empieza creando una cuenta para obtener tu tienda y configurala a tu manera
+            </p>
+          </div>
+          <div className="w-full max-w-xl flex items-center gap-3 mt-10">
+            <Button className="min-w-0 flex-1 bg-black hover:bg-black/80">
+              Ver más
+              <ChevronRight className="" />
+            </Button>
+            <Button
+              variant={'outline'}
+              className="min-w-0 flex-1"
+            >
+              <div className="w-4 h-4">
+                <img
+                  src="/img/icons/google.svg"
+                  alt="Google Icon"
+                />
+              </div>
+              Ingresar con Google
+            </Button>
+          </div>
+        </div>
+        <div>
+          <Skeleton className="w-full max-w-131.25 min-h-110" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
+        <div>
+          <div>
+            <div className="flex gap-5 text-xl">
+              <span>02</span>
+              <span>Añade tus productos</span>
+            </div>
+            <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
+              Añade tus productos masivamente, registra su stock, agrupalos por categorías o 
             </p>
           </div>
           <div className="w-full max-w-xl flex items-center gap-3 mt-10">
