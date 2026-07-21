@@ -21,6 +21,20 @@ export default function Home() {
         <Hero />
         <div className="border-y border-input/60">
           <StepOne />
+          <div className="max-w-6xl mx-auto min-h-20.25 w-full bg-white relative">
+            {/* Grid Background */}
+            <div
+              className="absolute inset-0 z-0"
+              style={{
+                backgroundImage: `
+        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
+      `,
+                backgroundSize: "40px 40px",
+              }}
+            />
+            {/* Your Content/Components */}
+          </div>
           <Questions />
         </div>
         <div className="">

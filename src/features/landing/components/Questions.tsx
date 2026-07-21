@@ -5,7 +5,7 @@ export default function Questions() {
   
   return (
   <section>
-    <div className="max-w-6xl px-4 pb-20 mx-auto grid grid-cols-2 gap-5">
+    <div className="max-w-6xl px-4 py-20 mx-auto grid grid-cols-2 gap-5">
       <div className="flex flex-col gap-18 min-h-75 p-8 rounded-lg bg-accent">
         <h2 className="text-3xl font-medium">Preguntas frecuentes</h2>
         <div>

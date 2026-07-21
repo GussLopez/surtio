@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react";
 export default function StepOne() {
 
   return (
-    <section className="max-w-6xl mx-4 xl:mx-auto pt-30 pb-12 border-x border-input/60 relative">
+    <section className="max-w-6xl mx-4 xl:mx-auto pt-30 border-x border-input/60 relative">
       <div className="px-4 relative">
         <div className="absolute left-0 top-12 block h-6 w-0.5 bg-primary lg:top-9" />
         <span className="text-sm tracking-wide uppercase text-muted-foreground">[01] Como funciona</span>
