@@ -6,7 +6,8 @@ import { Metadata } from "next";
 import { GeneratePageTitle } from "@/shared/utils/metadata";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Questions from "@/features/landing/components/Questions";
 
 export const metadata: Metadata = {
   title: GeneratePageTitle('La plataforma para hacer crecer tu negocio')
@@ -20,8 +21,8 @@ export default function Home() {
         <Hero />
         <div className="border-y border-input/60">
           <StepOne />
+          <Questions />
         </div>
-
         <div className="">
           <div className="max-w-6xl px-4 py-6 mx-4 xl:mx-auto border-x border-input/60">
             <div className="flex flex-col gap-16 lg:flex-row lg:justify-between">
