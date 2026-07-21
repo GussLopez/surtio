@@ -37,6 +37,12 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-lighter: var(--primary-lighter);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-glow: var(--primary-glow);
+  --color-primary-border: var(--primary-border);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
