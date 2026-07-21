@@ -60,7 +60,46 @@ export default function StepOne() {
               <span>Añade tus productos</span>
             </div>
             <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
-              Añade tus productos masivamente, registra su stock, agrupalos por categorías o
+              Añade tus productos masivamente, registra su stock, agrupalos por categorías, registra tus proveedores
+            </p>
+          </div>
+          <div className="w-full max-w-xl flex items-center gap-3 mt-10">
+            <Button
+              variant={'secondary'}
+              className="min-w-0 flex-1"
+            >
+
+              Ver más
+              <ChevronRight />
+            </Button>
+            <Button
+              variant={'outline'}
+              className="min-w-0 flex-1"
+            >
+              <div className="w-4 h-4">
+                <img
+                  src="/img/icons/google.svg"
+                  alt="Google Icon"
+                />
+              </div>
+              Ingresar con Google
+            </Button>
+          </div>
+        </div>
+        <div>
+          <Skeleton className="w-full max-w-131.25 min-h-110" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
+        <div>
+          <div>
+            <div className="flex gap-5 text-xl">
+              <span>03</span>
+              <span>Comienza a vender</span>
+            </div>
+            <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
+              Registra tus ventas, mira tus ganancias, genera reportes y controla tu negocio en una sola aplicación.
             </p>
           </div>
           <div className="w-full max-w-xl flex items-center gap-3 mt-10">
