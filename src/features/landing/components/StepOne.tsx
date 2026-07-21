@@ -26,9 +26,12 @@ export default function StepOne() {
             </p>
           </div>
           <div className="w-full max-w-xl flex items-center gap-3 mt-10">
-            <Button className="min-w-0 flex-1 bg-black hover:bg-black/80">
+            <Button
+              className="min-w-0 flex-1"
+              variant={'secondary'}
+            >
               Ver más
-              <ChevronRight className="" />
+              <ChevronRight />
             </Button>
             <Button
               variant={'outline'}
@@ -57,13 +60,17 @@ export default function StepOne() {
               <span>Añade tus productos</span>
             </div>
             <p className="max-w-sm mt-5 text-[15px] text-muted-foreground">
-              Añade tus productos masivamente, registra su stock, agrupalos por categorías o 
+              Añade tus productos masivamente, registra su stock, agrupalos por categorías o
             </p>
           </div>
           <div className="w-full max-w-xl flex items-center gap-3 mt-10">
-            <Button className="min-w-0 flex-1 bg-black hover:bg-black/80">
+            <Button
+              variant={'secondary'}
+              className="min-w-0 flex-1"
+            >
+
               Ver más
-              <ChevronRight className="" />
+              <ChevronRight />
             </Button>
             <Button
               variant={'outline'}

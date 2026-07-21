@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { GeneratePageTitle } from "@/shared/utils/metadata";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: GeneratePageTitle('La plataforma para hacer crecer tu negocio')
@@ -44,11 +44,12 @@ export default function Home() {
                 </Button>
                 <Button
                   asChild
-                  className="group bg-black"
+                  variant={'secondary'}
+                  className="group"
                 >
                   <Link href={'/auth/register'}>
-                    Comenzar
-                    <ArrowRight className="group-hover:translate-x-0.5 transition-transform" />
+                    Comenzar ahora
+                    <ArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 opacity-40 group-hover:opacity-100" />
                   </Link>
                 </Button>
               </div>
