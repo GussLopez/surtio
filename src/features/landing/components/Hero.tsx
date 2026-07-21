@@ -19,7 +19,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-heading leading-snug lg:leading-18 lg:tracking-normal tracking-tight text-5xl 2xl:text-7xl">
+          <h1 className="font-medium leading-snug lg:leading-18 lg:tracking-normal tracking-tight text-5xl 2xl:text-7xl">
             Controla tu negocio sin complicaciones
           </h1>
 

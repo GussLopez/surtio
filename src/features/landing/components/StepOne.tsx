@@ -9,7 +9,7 @@ export default function StepOne() {
       <div className="px-4 relative">
         <div className="absolute left-0 top-12 block h-6 w-0.5 bg-primary lg:top-9" />
         <span className="text-sm tracking-wide uppercase text-muted-foreground">[01] Como funciona</span>
-        <h2 className="font-heading text-2xl  leading-snug tracking-tight sm:tracking-normal md:text-4xl md:leading-12.5 max-w-[80%] lg:max-w-3xl">
+        <h2 className="text-2xl leading-snug tracking-tight sm:tracking-normal md:text-4xl md:leading-12.5 max-w-[80%] lg:max-w-3xl">
           Crea tu tienda, crea tus productos y comienza a tomar el control de tu negocio.
         </h2>
       </div>

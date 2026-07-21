@@ -23,7 +23,7 @@ export default function Footer() {
     { text: 'Usuarios', path: '/features/users' },
   ]
   return (
-    <footer className="border-t-0.5 border-input/60">
+    <footer className="border-t border-input/60">
       <div className="max-w-6xl px-4 mx-auto pt-20 pb-6">
         <div className="grid grid-cols-24 gap-3 border-b border-input/60 pb-12">
           <div className="col-span-5">
