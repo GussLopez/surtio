@@ -24,9 +24,9 @@ export default function Footer() {
   ]
   return (
     <footer className="border-t border-input/60">
-      <div className="max-w-6xl px-4 mx-auto pt-20 pb-6">
-        <div className="grid grid-cols-24 gap-3 border-b border-input/60 pb-12">
-          <div className="col-span-5">
+      <div className="max-w-6xl px-4 mx-auto pt-18 pb-14">
+        <div className="flex flex-col gap-10 lg:grid lg:grid-cols-24 lg:gap-3 border-b border-input/60 pb-12">
+          <div className="lg:col-span-5">
             <Link href={'/'} className="block w-26">
               <img
                 src="/img/logo/surtio.svg"
@@ -35,8 +35,8 @@ export default function Footer() {
               />
             </Link>
           </div>
-          <div className="col-span-19 grid grid-cols-4 gap-5">
-            <div className="flex flex-col gap-6 col-start-2">
+          <div className="lg:col-span-19 grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="flex flex-col gap-6 lg:col-start-2">
               <h3 className="text-sm text-muted-foreground">Funcionalidades</h3>
               <ul className="flex flex-col gap-3 text-sm">
                 {featuresLinks.map((link, i) => (
@@ -51,7 +51,7 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-            <div className="flex flex-col gap-6 col-start-3">
+            <div className="flex flex-col gap-6 lg:col-start-3">
               <h3 className="text-sm text-muted-foreground">Recursos</h3>
               <ul className="flex flex-col gap-3 text-sm">
                 {resourceLinks.map((link, i) => (
@@ -66,7 +66,7 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-            <div className="flex flex-col gap-6 col-start-4">
+            <div className="flex flex-col gap-6 lg:col-start-4">
               <h3 className="text-sm text-muted-foreground">Legal</h3>
               <ul className="flex flex-col gap-3 text-sm">
                 {legalLinks.map((link, i) => (
