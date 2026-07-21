@@ -19,25 +19,21 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <div className="border-y border-input/60">
+        <div className="border-t border-input/60">
           <StepOne />
-          <div className="max-w-6xl mx-auto min-h-20.25 w-full bg-white relative">
-            {/* Grid Background */}
-            <div
-              className="absolute inset-0 z-0"
-              style={{
-                backgroundImage: `
-        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
-      `,
-                backgroundSize: "40px 40px",
-              }}
-            />
-            {/* Your Content/Components */}
-          </div>
-          <Questions />
+          <div
+            className="w-full h-19.75 max-w-6xl mx-auto"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+                linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
+              `,
+              backgroundSize: "18.28px 39.25px",
+            }}
+          />
         </div>
-        <div className="">
+        <Questions />
+        <div className="border-t border-input/60">
           <div className="max-w-6xl px-4 py-6 mx-4 xl:mx-auto border-x border-input/60">
             <div className="flex flex-col gap-16 lg:flex-row lg:justify-between">
               <p className="text-[28px] font-medium">La plataforma pensada para negocios locales</p>
