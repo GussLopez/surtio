@@ -63,13 +63,11 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
           className={btnClass}
           aria-label='Framework combobox'
         >
-          {selectedProduct
-            ? (`${selectedProduct.name} (${selectedProduct.sku}) - ${selectedProduct.model}`)
-            : placeholder ? placeholder : 'Buscar por nombre o SKU...'}
+          Buscar por nombre o SKU...
           <ChevronsUpDownIcon className='opacity-50' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align='start' className='p-0'>
+      <PopoverContent align='start' className='p-0 w-110'>
         <Command shouldFilter={false}>
           <CommandInput
             placeholder='Buscar por nombre o SKU...'
@@ -102,12 +100,19 @@ const SearchProductInput = ({ setProduct, btnClass, btnSize = 'default', placeho
                     setInputValue('')
                   }}
                 >
-                  {product.name} ({product.sku}) - {product.model && product.model}
-                  <CheckIcon
-                    className={cn('ml-auto',
-                      value === product.id ? 'opacity-100' : 'opacity-0'
-                    )}
-                  />
+                  <div className='w-full flex items-center justify-between'>
+                    <div className='flex items-center gap-3'>
+                      <div className='w-10 h-10 border border-input rounded-lg'></div>
+                      <div className='text-sm'>
+                        <p className='font-medium text-neutral-700 dark:text-neutral-200'>{product.name} - ({product.sku})</p>
+                        <span className='text-muted-foreground'>$ {product.price}</span>
+                      </div>
+                    </div>
+                    <div className='px-2 py-1 rounded-full bg-green-200'>
+                      <span className='text-xs'>{product.stock} {product.unit}s</span>
+                    </div>
+                  </div>
+
                 </CommandItem>
               ))}
             </CommandGroup>

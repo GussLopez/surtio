@@ -1,5 +1,5 @@
 'use client'
-import { DollarSign, Plus, ScanBarcode } from 'lucide-react';
+import { DollarSign, Plus, ScanBarcode, Search, Trash, Trash2 } from 'lucide-react';
 import ComboboxSearchProduct from '@/features/sales/components/SearchProductInput'
 import { Input } from '@/shared/components/ui/input';
 import InputStock from '@/features/sales/components/ProductQuantity';
@@ -16,6 +16,7 @@ import { Spinner } from '@/shared/components/ui/spinner';
 import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
 import { useBusinessStore } from '@/shared/store/BusinessStore';
 import { normalizeDate } from '@/shared/utils/utils';
+import { motion } from 'motion/react';
 
 export default function VentasPage() {
   const [product, setProduct] = useState<ProductItem | null>(null);
@@ -23,6 +24,7 @@ export default function VentasPage() {
   const businessId = useBusinessStore(state => state.id);
   const getTotal = useCartStore(state => state.getTotal);
   const items = useCartStore(state => state.items);
+  const removeFromCart = useCartStore(state => state.removeFromCart)
   const [saleId, setSaleId] = useState<string | null>(null);
   const [saleDate, setSaleDate] = useState<Date | undefined>(new Date());
   const [open, setOpen] = useState(false);
@@ -109,103 +111,96 @@ export default function VentasPage() {
     enabled: !!saleId
   })
   return (
-    <div>
-      <div className="flex items-center gap-3">
-        <SealPercentIcon size={30} className='text-green-600' />
-        <h1 className="text-3xl font-semibold">Ventas</h1>
+    <div className='xl:grid xl:grid-cols-2 gap-x-10 gap-y-4 h-[calc(100vh-70px)]'>
+      <div>
+        <h1 className="text-3xl font-semibold">Buscar productos</h1>
+        <div className='mt-5'>
+          <ComboboxSearchProduct
+            setProduct={setProduct}
+            btnClass='w-full  justify-between'
+          />
+        </div>
+
       </div>
 
-      <div className='xl:grid xl:grid-cols-3 gap-x-10 gap-y-4 mt-10'>
-        <div className='col-span-2 p-4 rounded-lg border border-input'>
-          <div className='flex items-center gap-3'>
-            <ScanBarcode />
-            <h2 className='font-semibold text-lg'>Agregar Items</h2>
-          </div>
-          <div className='lg:flex gap-5 mt-4 text-xs font-medium text-muted-foreground'>
-            <div className='w-full xl:max-w-80'>
-              <label htmlFor='searhProduct'>Buscar producto</label>
-              <ComboboxSearchProduct
-                setProduct={setProduct}
-                btnClass='w-full xl:max-w-xs justify-between'
-              />
-            </div>
-            <div className='flex justify-between items-center gap-5 mt-5 lg:mt-0'>
-              <div className='w-full xl:max-w-60'>
-                <label>Precio de venta</label>
-                <div className='relative'>
-                  <Input
-                    className='pl-9'
-                    type='number'
-                    value={product?.price || 0}
-                    disabled={!product}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-
-                      setProduct(prev => {
-                        if (!prev) return prev;
-
-                        return {
-                          ...prev,
-                          price: value
-                        }
-                      })
-                    }}
-                  />
-                  <DollarSign className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
-                </div>
-              </div>
-
-              <div className='col-span-2'>
-                <label>Cant.</label>
-                <InputStock
-                  quantity={product?.quantity ?? 1}
-                  stock={product?.stock ?? 0}
-                  setProduct={setProduct}
-                  disabled={!product}
-                />
-              </div>
-            </div>
-          </div>
+      <div className='flex flex-col mt-5 xl:mt-0 border-l border-input'>
+        <div className='flex justify-end gap-2'>
           <Button
-            className='w-full mt-5 bg-primary-light'
-            onClick={handleAddProduct}
+            variant={'outline'}
+            size={'icon'}
           >
-            <Plus />
-            Agregar Item
+            <Trash />
+          </Button>
+          <Button
+            variant={'outline'}
+            size={'icon'}
+          >
+            <Trash />
           </Button>
         </div>
+        <div className='flex-1 flex justify-center items-center p-4'>
+          {items.length === 0 ? (
+            <div className='flex flex-col gap-3 text-center'>
+              <h3 className='text-3xl font-black text-muted-foreground/70'>Tu carrito esta vacío</h3>
+              <p className='text-muted-foreground/70'>Agrega productos a tu venta</p>
+              <Button variant={'outline'} className='shadow-none h-8'>
+                <Search />
+                Buscar productos
+              </Button>
+            </div>
+          ) : (
+            items.map(item => (
+              <motion.div
+                key={item.id}
+                layout
+                className="flex justify-between items-center mt-3 p-3 rounded-lg border border-muted bg-background"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: 0,
+                  x: -20,
+                  height: 0,
+                  marginTop: 0,
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                  overflow: 'hidden'
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 500,
+                  damping: 50,
+                  opacity: { duration: 0.2 }
+                }}
+              >
+                <div>
+                  <p className="font-semibold">{item.name}</p>
+                  <p className="text-xs">{item.quantity} x ${item.price}</p>
+                </div>
+                <div>
+                  <Button
+                    size={'icon-sm'}
+                    variant={'ghost'}
+                    className="text-red-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 dark:text-red-500"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    <Trash2 />
+                  </Button>
+                </div>
+              </motion.div>
+            ))
+          )}
 
-        <div className='mt-5 xl:mt-0 border border-input rounded-lg'>
-          <div className='flex items-center justify-between p-4 border-b border-input'>
-            <h2 className='text-3xl font-semibold'>Total a pagar</h2>
-            <Badge variant={'outline'} className='border-emerald-500 text-emerald-500'>MXN</Badge>
-          </div>
-          <div className='py-4 text-center'>
-            <p className='text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-green-400 to-cyan-600'>{precioTotal} MXN</p>
-          </div>
-
-          <div className='p-4'>
-            <Button
-              className="w-full h-12 text-xl font-black gap-2 transition-all bg-[#29c24a] hover:bg-[#00ac33] text-white active:scale-[0.98]"
-              disabled={items.length <= 0 || loading}
-              onClick={handleCheckOut}
-            >
-              {loading ? (
-                <>
-                  <Spinner className='size-6' />
-                  Pagando
-                </>
-              ) : (
-                <>
-                  <CheckCircleIcon weight="bold" className='size-8' />
-                  PAGAR AHORA
-                </>
-              )}
-            </Button>
-          </div>
         </div>
-        <ShoppingCartItems date={saleDate} setDate={setSaleDate} />
+        <div className='p-6 border-t border-input'>
+          <Button
+            className='w-full h-13 text-lg bg-primary-light'
+            disabled
+          >
+            Cobrar $0.0
+          </Button>
+        </div>
       </div>
+      {/*  <ShoppingCartItems date={saleDate} setDate={setSaleDate} /> */}
       {receipt && (
         <NewSaleReceipt
           sale={receipt}
@@ -213,7 +208,7 @@ export default function VentasPage() {
           setOpen={setOpen}
         />
       )}
-    </div >
+    </div>
   )
 }
 
