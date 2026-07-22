@@ -1,5 +1,5 @@
-import { Monitor, Moon, Sun } from "lucide-react"
 import Link from "next/link"
+import ThemeButtons from "./theme-buttons"
 
 export default function Footer() {
   const legalLinks = [
@@ -31,7 +31,12 @@ export default function Footer() {
               <img
                 src="/img/logo/surtio.svg"
                 alt="Surtio Logo"
-                className="w-full h-auto"
+                className="w-full h-auto block dark:hidden"
+              />
+              <img
+                src="/img/logo/surtio-dark.svg"
+                alt="Surtio Logo"
+                className="w-full h-auto hidden dark:block"
               />
             </Link>
           </div>
@@ -84,17 +89,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex items-center justify-between py-4">
-          <div className="flex items-center gap-2">
-            <button className="p-1 border border-muted rounded-md">
-              <Sun className="size-4.5 fill-black opacity-60 hover:opacity-100 transition-opacity" />
-            </button>
-            <button className="p-1">
-              <Moon className="size-4.5 opacity-60 hover:opacity-100 transition-opacity" />
-            </button>
-            <button className="p-1">
-              <Monitor className="size-4.5 opacity-60 hover:opacity-100 transition-opacity" />
-            </button>
-          </div>
+          <ThemeButtons />
           <p className="text-sm text-muted-foreground">Copyright Surtio &copy; 2026</p>
         </div>
       </div>

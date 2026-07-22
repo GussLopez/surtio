@@ -74,7 +74,7 @@ export default function LastUpdates() {
             </div>
           </div>
           <div className="flex flex-col justify-between col-start-3 row-span-2 p-5 rounded-xl bg-muted">
-            <h3 className="text-xl">No company? No problem.</h3>
+            <h3 className="text-xl">¿Recien comenzando? No hay problema.</h3>
             <p className="text-muted-foreground text-[15px]">Use Ruul to invoice clients and get paid, even without a registered company.</p>
           </div>
           <div className="col-span-2 px-5 pt-5 rounded-xl bg-muted">
