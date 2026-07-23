@@ -7,7 +7,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
 import { CheckCircleIcon, SealPercentIcon } from '@phosphor-icons/react';
 import { useCartStore } from '@/features/sales/store/useCartStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductItem } from '@/shared/types';
 import { sileo } from 'sileo';
 import ShoppingCartItems from '@/features/sales/components/ShoppingCart';
