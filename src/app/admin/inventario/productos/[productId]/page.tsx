@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Product } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { useParams } from "next/navigation"
 
 export default function ProductDetailsPage() {
@@ -102,6 +102,20 @@ export default function ProductDetailsPage() {
           <p>{product?.stock}</p>
           <p>{product?.min_stock}</p>
         </div>
+      </div>
+
+      <div className="mt-5 p-4 border border-input rounded-lg shadow-xs">
+        <div>
+          <h2 className="text-xl font-medium text-destructive">Zona de riesgo</h2>
+          <p className="text-xm text-muted-foreground">Estas acciones son permanentes y no se pueden deshacer</p>
+        </div>
+        <Button
+          variant={'destructive'}
+          className="mt-3"
+        >
+          <Trash2 />
+          Eliminar
+        </Button>
       </div>
     </div>
   )
