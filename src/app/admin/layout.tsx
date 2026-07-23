@@ -22,7 +22,7 @@ export default function AdminLayout({
           <AdminSidebar />
           <SessionListener />
           <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b border-input transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />
                 <Separator
@@ -31,7 +31,7 @@ export default function AdminLayout({
                 />
               </div>
             </header>
-            <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+            <div className="flex flex-1 flex-col gap-4 p-4 bg-[#F2F5F7] dark:bg-black">
               {children}
             </div>
           </SidebarInset>
