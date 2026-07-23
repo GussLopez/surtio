@@ -24,7 +24,7 @@ export default function TotalRevenue() {
     retry: 1
   })
   return (
-    <div className="col-span-8 xl:h-68 xl:p-4 rounded-lg border border-muted shadow-xs">
+    <div className="col-span-8 xl:h-68 xl:p-4 rounded-lg border border-muted shadow-xs bg-background">
       <div className="flex flex-col xl:flex-row xl:justify-between">
         <div className="flex flex-col grow p-4 xl:p-0">
           <p className="text-lg font-semibold">Ventas totales</p>

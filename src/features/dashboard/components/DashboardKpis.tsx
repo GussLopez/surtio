@@ -35,7 +35,7 @@ export default function DashboardKpis() {
 
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-      <div className="p-5 shadow-xs rounded-lg border border-muted">
+      <div className="p-5 shadow-xs rounded-lg border border-muted bg-background">
         <div className="flex justify-between items-center">
           <p className="font-medium text-lg">Ventas de Hoy</p>
           <div className="p-2 rounded-full bg-primary/10 text-primary">
@@ -61,7 +61,7 @@ export default function DashboardKpis() {
           </div>
         </div>
       </div>
-      <div className="p-5 shadow-xs rounded-lg border border-muted">
+      <div className="p-5 shadow-xs rounded-lg border border-muted bg-background">
         <div className="flex justify-between items-center">
           <p className="font-medium text-lg">Productos Totales</p>
           <div className="p-2 rounded-full bg-primary/10 text-primary">
@@ -78,7 +78,7 @@ export default function DashboardKpis() {
         </div>
       </div>
 
-      <div className="p-5 shadow-xs rounded-lg border border-muted">
+      <div className="p-5 shadow-xs rounded-lg border border-muted bg-background">
         <div className="flex justify-between items-center">
           <p className="font-medium text-lg">Productos bajo Stock</p>
           <div className="p-2 rounded-full bg-primary/10 text-primary">
@@ -94,7 +94,7 @@ export default function DashboardKpis() {
           </div>
         </div>
       </div>
-      <div className="p-5 shadow-xs rounded-lg border border-muted">
+      <div className="p-5 shadow-xs rounded-lg border border-muted bg-background">
         <div className="flex justify-between items-center">
           <p className="font-medium text-lg">Ventas canceladas</p>
           <div className="p-2 rounded-full bg-primary/10 text-primary">
