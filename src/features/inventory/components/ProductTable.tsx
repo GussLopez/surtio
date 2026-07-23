@@ -6,6 +6,7 @@ import { Button } from "@/shared/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 import { Product } from "@/shared/types";
 import Can from "@/shared/components/Can";
+import Link from "next/link";
 
 interface ProductTableProps {
   data: Product[]
@@ -81,14 +82,14 @@ export default function ProductTable({
                     )}
                   </TableCell>
                   <TableCell>
-                    <div className="flex flex-col">
-                      <span className="font-bold text-foreground/90 leading-none mb-1">
+                    <Link href={`/admin/inventario/productos/${product.id}`} className="flex flex-col">
+                      <span className="font-medium text-foreground/90 leading-none mb-1">
                         {product.name}
                       </span>
-                      <span className="text-[10px] font-mono text-muted-foreground tracking-tighter uppercase">
+                      <span className="text-xs text-muted-foreground uppercase">
                         SKU-{product.sku || 'N/A'}
                       </span>
-                    </div>
+                    </Link>
                   </TableCell>
                   <TableCell className="text-right font-medium text-muted-foreground">
                     ${product.price.toLocaleString()}
