@@ -172,7 +172,12 @@ export async function GET(
     );
     const { data, error } = await supabase
       .from("products")
-      .select("*")
+      .select(`*,
+          categories (
+            id,
+            name
+          )
+        `)
       .eq("id", productId)
       .single();
     console.error(error);
