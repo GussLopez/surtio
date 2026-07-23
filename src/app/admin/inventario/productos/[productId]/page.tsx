@@ -52,9 +52,15 @@ export default function ProductDetailsPage() {
       <div className="mt-10 p-4 border border-input rounded-lg shadow-xs">
         <div className="flex flex-col lg:flex-row justify-between">
           <div>
-            <span className="text-xs font-medium text-muted-foreground">Categoría {product?.categories?.name}</span>
-            <h1 className="text-xl font-semibold">{product?.name}</h1>
-            <span className="text-xs font-medium text-muted-foreground">Cód. de Barras: {product?.barcode}</span>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs font-medium text-muted-foreground">Categoría {product?.categories?.name}</span>
+              <h1 className="text-xl font-semibold">{product?.name}</h1>
+
+              <div className="flex gap-3 text-xs font-medium text-muted-foreground">
+                {product?.sku && <span>SKU: {product?.sku}</span>}
+                {product?.barcode && <span>Cód. de Barras: {product?.barcode}</span>}
+              </div>
+            </div>
 
             <div className="flex gap-8 mt-5">
               <div className="flex flex-col">
