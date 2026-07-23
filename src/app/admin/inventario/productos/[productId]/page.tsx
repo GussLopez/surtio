@@ -51,7 +51,7 @@ export default function ProductDetailsPage() {
 
       <div className="mt-10 p-4 border border-input rounded-lg shadow-xs">
         <div className="flex flex-col lg:flex-row justify-between">
-          <div>
+          <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1.5">
               <span className="text-xs font-medium text-muted-foreground">Categoría {product?.categories?.name}</span>
               <h1 className="text-xl font-semibold">{product?.name}</h1>
@@ -62,7 +62,7 @@ export default function ProductDetailsPage() {
               </div>
             </div>
 
-            <div className="flex gap-8 mt-5">
+            <div className="flex gap-8">
               <div className="flex flex-col">
                 <span className="text-sm font-medium text-muted-foreground">Precio</span>
                 <p className="text-xl font-semibold">${product?.price}</p>
@@ -76,6 +76,11 @@ export default function ProductDetailsPage() {
                 <p className="text-xl font-semibold">${product?.stock}</p>
                 <span className="text-xs font-medium text-muted-foreground">{product?.unit}s</span>
               </div>
+            </div>
+
+            <div className="text-sm text-muted-foreground">
+              <span className="text-xs">Descripción</span>
+              <p>{product?.description}</p>
             </div>
           </div>
 
