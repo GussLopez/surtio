@@ -146,3 +146,50 @@ export async function PATCH(
     );
   }
 }
+
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const { id: productId } = await params;
+    if (!productId) {
+      return Response.json({ error: "Id inválido" }, { status: 500 });
+    }
+
+    const cookieStore = await cookies();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll();
+          },
+          setAll() {},
+        },
+      },
+    );
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("id", productId)
+      .single();
+    console.error(error);
+    if (error) {
+      return Response.json({ error: error.message }, { status: 500 });
+    }
+    if (!data || data.length === 0) {
+      return Response.json(
+        { error: "No tienes permisos para consultar este producto" },
+        { status: 403 },
+      );
+    }
+    return Response.json(data);
+  } catch (err: any) {
+    return Response.json(
+      { error: err.message || "Unexpected error" },
+      { status: 500 },
+    );
+  }
+}
