@@ -75,8 +75,21 @@ export default function ProductDetailsPage() {
 
 
           <div>
-            <Skeleton className="w-50 h-50"/>
+            <Skeleton className="w-50 h-50" />
           </div>
+        </div>
+      </div>
+
+      <div className="mt-5 p-4 border border-input rounded-lg shadow-xs">
+        <div className="grid grid-cols-3 gap-5 py-2 border-b border-input font-semibold text-sm">
+          <p>Ubicación</p>
+          <p>Existencias</p>
+          <p>Cantidad Mínima</p>
+        </div>
+        <div className="grid grid-cols-3 gap-5 py-2 text-foreground/80 text-sm">
+          <p>{product?.location ?? '-'}</p>
+          <p>{product?.stock}</p>
+          <p>{product?.min_stock}</p>
         </div>
       </div>
     </div>
