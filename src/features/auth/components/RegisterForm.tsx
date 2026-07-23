@@ -9,13 +9,11 @@ import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Separator } from "@/shared/components/ui/separator";
-import { Checkbox } from "@/shared/components/ui/checkbox";
 import { SingUpInput } from "../types/auth.types"
 import Link from "next/link"
 
 export default function RegisterForm() {
   const router = useRouter();
-  const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const supabase = getSupabaseBrowserClient();
   const initialValues: SingUpInput = {
@@ -28,12 +26,6 @@ export default function RegisterForm() {
   })
 
   const handleRegister = async (formData: SingUpInput) => {
-    if (!checked) {
-      sileo.warning({
-        title: 'Acepta los términos y condiciones para registrate'
-      });
-      return;
-    }
     setLoading(true);
     const { email, password, name } = formData;
     const { error } = await supabase.auth.signUp({
@@ -49,13 +41,13 @@ export default function RegisterForm() {
         }
       }
     })
-
+    console.log(error);
     if (error) {
       sileo.error({
         title: "Error al registrarte",
         description: "Ocurrió un error al crear la cuenta, por favor intenta más tarde"
       });
-      console.error(error);
+      setLoading(false);
       return;
     }
     sileo.success({
