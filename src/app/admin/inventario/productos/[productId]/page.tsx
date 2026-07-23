@@ -2,9 +2,10 @@
 
 import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Spinner } from "@/shared/components/ui/spinner";
 import { Product } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation"
 
@@ -26,31 +27,51 @@ export default function ProductDetailsPage() {
     queryFn: getProduct,
     enabled: !!productId
   })
-  
+
+  if (isLoading) return (
+    <div className="h-full w-full flex flex-col gap-5 justify-center items-center">
+      <div className="w-30">
+        <img
+          src="/img/logo/surtio.svg"
+          alt="Surtio Logo"
+          className="w-full h-auto block dark:hidden"
+        />
+        <img
+          src="/img/logo/surtio-dark.svg"
+          alt="Surtio Logo"
+          className="w-full h-auto hidden dark:block"
+        />
+      </div>
+      <div>
+        <Spinner />
+      </div>
+    </div>
+  )
+
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-5">
-            <Button
-              variant={'outline'}
-              size={'icon-lg'}
-              asChild
-            >
-              <Link href={'/admin/inventario'}>
-                <ArrowLeft className="size-5" />
-                <span className="sr-only">Volver atras</span>
-              </Link>
-            </Button>
-            <h2 className="text-xl font-medium">Detalle del producto</h2>
-          </div>
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-5">
+          <Button
+            variant={'outline'}
+            size={'icon-lg'}
+            asChild
+          >
+            <Link href={'/admin/inventario'}>
+              <ArrowLeft className="size-5" />
+              <span className="sr-only">Volver atras</span>
+            </Link>
+          </Button>
+          <h2 className="text-xl font-medium">Detalle del producto</h2>
+        </div>
 
-          <div>
-            <Button>
+        <div>
+          <Button asChild>
+            <Link href={`/admin/inventario/productos/edit/${productId}`}>
               <Pencil />
               Editar
-            </Button>
-          </div>
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -78,7 +99,7 @@ export default function ProductDetailsPage() {
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-medium text-muted-foreground">Existencias</span>
-                <p className="text-xl font-semibold">${product?.stock}</p>
+                <p className="text-xl font-semibold">{product?.stock}</p>
                 <span className="text-xs font-medium text-muted-foreground">{product?.unit}s</span>
               </div>
             </div>
