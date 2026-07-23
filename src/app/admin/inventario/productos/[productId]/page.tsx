@@ -5,6 +5,7 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Product } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation"
 
 export default function ProductDetailsPage() {
@@ -25,7 +26,7 @@ export default function ProductDetailsPage() {
     queryFn: getProduct,
     enabled: !!productId
   })
-  console.log(product);
+  
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div>
@@ -34,8 +35,12 @@ export default function ProductDetailsPage() {
             <Button
               variant={'outline'}
               size={'icon-lg'}
+              asChild
             >
-              <ArrowLeft className="size-5" />
+              <Link href={'/admin/inventario'}>
+                <ArrowLeft className="size-5" />
+                <span className="sr-only">Volver atras</span>
+              </Link>
             </Button>
             <h2 className="text-xl font-medium">Detalle del producto</h2>
           </div>
@@ -106,15 +111,14 @@ export default function ProductDetailsPage() {
 
       <div className="mt-5 p-4 border border-input rounded-lg shadow-xs">
         <div>
-          <h2 className="text-xl font-medium text-destructive">Zona de riesgo</h2>
-          <p className="text-xm text-muted-foreground">Estas acciones son permanentes y no se pueden deshacer</p>
+          <h2 className="text-xl font-semibold text-destructive">Zona de riesgo</h2>
+          <p className="text-sm text-muted-foreground">Estas acciones son permanentes y no se pueden deshacer</p>
         </div>
         <Button
-          variant={'destructive'}
-          className="mt-3"
+          variant={'outline'}
+          className="mt-5 border-destructive text-destructive hover:bg-destructive hover:text-white"
         >
-          <Trash2 />
-          Eliminar
+          Eliminar Producto
         </Button>
       </div>
     </div>
