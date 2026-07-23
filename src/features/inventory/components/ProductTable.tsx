@@ -59,7 +59,7 @@ export default function ProductTable({
               const stockColor = product.stock <= product.min_stock
                 ? "text-red-500 bg-red-50 dark:bg-red-950/30"
                 : product.stock <= product.min_stock + 5 ? "text-amber-500 bg-amber-100 dark:bg-amber-950/30"
-                  : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30";
+                  : "text-green-700 bg-green-100 dark:text-green-500 dark:bg-green-900/30";
               return (
                 <TableRow key={product.id} className="group transition-colors">
                   <TableCell className="text-center">
@@ -95,7 +95,7 @@ export default function ProductTable({
                   </TableCell>
                   <TableCell className="text-center">
                     <span className={`px-2 py-0.5 rounded-full text-sm font-bold ${stockColor}`}>
-                      {product.stock} <span className="text-[9px] opacity-70">UN</span>
+                      {product.stock} <span className="text-xs">{product.unit}s</span>
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
