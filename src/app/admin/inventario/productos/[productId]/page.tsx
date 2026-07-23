@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "@/shared/components/ui/button";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Product } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Pencil } from "lucide-react";
@@ -19,11 +20,12 @@ export default function ProductDetailsPage() {
     return res.json();
   }
 
-  const { data, isLoading } = useQuery<Product>({
+  const { data: product, isLoading } = useQuery<Product>({
     queryKey: ["selected-product"],
     queryFn: getProduct,
     enabled: !!productId
   })
+  console.log(product);
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div>
@@ -43,6 +45,37 @@ export default function ProductDetailsPage() {
               <Pencil />
               Editar
             </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 p-4 border border-input rounded-lg shadow-xs">
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div>
+            <span className="text-xs font-medium text-muted-foreground">Categoría {product?.categories?.name}</span>
+            <h1 className="text-xl font-semibold">{product?.name}</h1>
+            <span className="text-xs font-medium text-muted-foreground">Cód. de Barras: {product?.barcode}</span>
+
+            <div className="flex gap-8 mt-5">
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-muted-foreground">Precio</span>
+                <p className="text-xl font-semibold">${product?.price}</p>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-muted-foreground">Costo</span>
+                <p className="text-xl font-semibold">${product?.cost}</p>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-muted-foreground">Existencias</span>
+                <p className="text-xl font-semibold">${product?.stock}</p>
+                <span className="text-xs font-medium text-muted-foreground">{product?.unit}s</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div>
+            <Skeleton className="w-50 h-50"/>
           </div>
         </div>
       </div>
