@@ -49,7 +49,7 @@ export default function InventoryContent({
         <p className="text-sm/relaxed text-center text-muted-foreground px-6">
           Aún no has creado ningún producto. Empieza creando tu primer producto.
         </p>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mt-4">
           <Button variant={'outline'}>
             <ArrowUpCircle />
             Importar productos

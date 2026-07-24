@@ -9,7 +9,7 @@ import { Spinner } from "@/shared/components/ui/spinner";
 import { Sale } from "@/shared/types";
 import { DownloadSimpleIcon, FileTextIcon } from "@phosphor-icons/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { ArchiveRestore, FileClock, List, Table } from "lucide-react";
+import { ArchiveRestore, ArrowUpCircle, FileClock, List, Plus, Table } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import SalesListView from "@/features/sales/components/SalesListView";
@@ -19,6 +19,7 @@ import { sileo } from "sileo";
 import { generateSalesHistoryPDF } from "@/features/sales/utils/generateSalesHisotryPDF";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
+import { cn } from "@/shared/utils/utils";
 
 type ModalState =
   | { type: "edit"; sale: Sale }
@@ -150,137 +151,142 @@ export default function HistorialPage() {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   return (
     <div>
-      <div className="flex items-center gap-3">
-        <FileClock size={30} className='text-primary-light' />
-        <h1 className="text-3xl font-semibold">Historial de Ventas</h1>
-      </div>
-      <div className="xl:flex justify-between items-center mt-6">
-        <RangeDatePicker date={dateRange} setDate={setDateRange} />
-        <div className="flex gap-2 xl:gap-2 mt-3 xl:mt-0">
-          <Tabs value={view} onValueChange={handleValueChange}>
-            <TabsList>
-              <TabsTrigger value='list'>
-                <List size={20} />
-                Lista
-              </TabsTrigger>
-              <TabsTrigger value='table'>
-                <Table size={20} />
-                Tabla
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-          <Button
-            variant={'outline'}
-            disabled={!data || data?.length === 0 || pdfLoading}
-            onClick={handleDownloadPDF}
-          >
-            {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
-            {pdfLoading ? "Generando" : "PDF Lista"}
-          </Button>
-          <Button
-            variant={'outline'}
-            disabled={!data || data?.length === 0 || csvLoading}
-            onClick={handleDownloadCsv}
-          >
-            {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
-            CSV
-          </Button>
-        </div>
-      </div>
-      <div className="mt-5">
-        {isLoading && <div className="flex justify-center items-center h-70">
-          <Spinner className="size-7" />
-        </div>
-        }
-
-        {data?.data?.length === 0 ? (
-          <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10">
-            <div className="p-2 rounded-lg text-primary bg-primary/10">
-              <ArchiveRestore size={30} />
-            </div>
-            <p className="font-medium text-accent-foreground">No hay ventas</p>
-            <p className="text-sm/relaxed text-center text-muted-foreground px-6">No se han creado ninguna venta en esta fecha. Empieza creando una venta.</p>
+      <h1 className="text-2xl font-semibold">Historial de Ventas</h1>
+      <div className="mt-6 p-4 bg-background rounded-lg shadow-xs">
+        <div className={cn(data.data.length === 0 ? 'hidden!' : 'block!', "xl:flex justify-between items-center")}>
+          <RangeDatePicker date={dateRange} setDate={setDateRange} />
+          <div className="flex gap-2 xl:gap-2 mt-3 xl:mt-0">
+            <Tabs value={view} onValueChange={handleValueChange}>
+              <TabsList>
+                <TabsTrigger value='list'>
+                  <List size={20} />
+                  Lista
+                </TabsTrigger>
+                <TabsTrigger value='table'>
+                  <Table size={20} />
+                  Tabla
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+            <Button
+              variant={'outline'}
+              disabled={!data || data?.length === 0 || pdfLoading}
+              onClick={handleDownloadPDF}
+            >
+              {pdfLoading ? <Spinner /> : <FileTextIcon size={20} weight="bold" />}
+              {pdfLoading ? "Generando" : "PDF Lista"}
+            </Button>
+            <Button
+              variant={'outline'}
+              disabled={!data || data?.length === 0 || csvLoading}
+              onClick={handleDownloadCsv}
+            >
+              {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
+              CSV
+            </Button>
           </div>
-        ) : (
-          <>
-            {data && view === 'list' && (
-              <SalesListView
-                data={data.data}
-                onView={openView}
-                onEdit={openEdit}
-                onDelete={openDelete}
-                onNull={openNull}
-              />
-            )}
-            {data && view === 'table' && (
-              <SalesTableView
-                data={data.data}
-                onView={openView}
-                onEdit={openEdit}
-                onDelete={openDelete}
-                onNull={openNull}
-              />
-            )}
-          </>
-        )}
-        <div>
-          <Pagination className="justify-end mt-4" >
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-                  className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                />
-              </PaginationItem>
-              {pages.map((p) => (
-                <PaginationItem key={p}>
-                  <PaginationLink
-                    isActive={p === page}
-                    onClick={() => setPage(p)}
-                    className="cursor-pointer"
-                  >
-                    {p}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext
-                  onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-                  className={page === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
         </div>
+        <div className="">
+          {isLoading && <div className="flex justify-center items-center h-70">
+            <Spinner className="size-7" />
+          </div>
+          }
+
+          {data?.data?.length === 0 ? (
+            <div className="flex flex-col items-center justify-center gap-2 mx-auto py-10">
+              <div className="p-2 rounded-lg text-primary bg-primary/10">
+                <ArchiveRestore size={30} />
+              </div>
+              <p className="font-medium text-accent-foreground">No hay ventas</p>
+              <p className="text-sm/relaxed text-center text-muted-foreground px-6">No se han creado ninguna venta en esta fecha. Empieza creando una venta.</p>
+              <div className="flex items-center gap-3 mt-4">
+                <Button>
+                  <Plus />
+                  Crear Venta
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {data && view === 'list' && (
+                <SalesListView
+                  data={data.data}
+                  onView={openView}
+                  onEdit={openEdit}
+                  onDelete={openDelete}
+                  onNull={openNull}
+                />
+              )}
+              {data && view === 'table' && (
+                <SalesTableView
+                  data={data.data}
+                  onView={openView}
+                  onEdit={openEdit}
+                  onDelete={openDelete}
+                  onNull={openNull}
+                />
+              )}
+            </>
+          )}
+          <div className={cn(data.data.length === 0 ? 'hidden' : 'block')}>
+            <Pagination className="justify-end mt-4" >
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                    className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                  />
+                </PaginationItem>
+                {pages.map((p) => (
+                  <PaginationItem key={p}>
+                    <PaginationLink
+                      isActive={p === page}
+                      onClick={() => setPage(p)}
+                      className="cursor-pointer"
+                    >
+                      {p}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+                    className={page === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        </div>
+        {modal?.type === "view" && (
+          <SaleReceipt
+            open
+            sale={modal.sale}
+            onClose={() => setModal(null)}
+          />
+        )}
+        {modal?.type === "edit" && (
+          <EditSaleDialog
+            open
+            sale={modal.sale}
+            onClose={() => setModal(null)}
+          />
+        )}
+        {modal?.type === "delete" && (
+          <DeleteSaleDialog
+            open
+            saleId={modal.saleId}
+            onClose={() => setModal(null)}
+          />
+        )}
+        {modal?.type === "null" && (
+          <CancelSaleDialog
+            open
+            saleId={modal.saleId}
+            onClose={() => setModal(null)}
+          />
+        )}
       </div>
-      {modal?.type === "view" && (
-        <SaleReceipt
-          open
-          sale={modal.sale}
-          onClose={() => setModal(null)}
-        />
-      )}
-      {modal?.type === "edit" && (
-        <EditSaleDialog
-          open
-          sale={modal.sale}
-          onClose={() => setModal(null)}
-        />
-      )}
-      {modal?.type === "delete" && (
-        <DeleteSaleDialog
-          open
-          saleId={modal.saleId}
-          onClose={() => setModal(null)}
-        />
-      )}
-      {modal?.type === "null" && (
-        <CancelSaleDialog
-          open
-          saleId={modal.saleId}
-          onClose={() => setModal(null)}
-        />
-      )}
     </div>
   )
 }
