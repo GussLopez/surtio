@@ -59,7 +59,7 @@ export default function ProveedoresPage() {
         </div>
       </div>
       {data?.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-2 mx-auto py-10 mt-10 bg-background rounded-lg shadow-xs">
+        <div className="flex flex-col items-center justify-center gap-2 mx-auto py-10 mt-5 bg-background rounded-lg shadow-xs">
           <div className="p-2 rounded-lg text-primary bg-primary/10">
             <TruckTrailerIcon size={30} />
           </div>
