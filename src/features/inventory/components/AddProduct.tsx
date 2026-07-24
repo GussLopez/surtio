@@ -31,6 +31,7 @@ export default function AddProduct() {
     image: null,
     location: '',
     barcode: '',
+    type: '',
     unit: '',
     is_active: true,
     supplier_id: null,
