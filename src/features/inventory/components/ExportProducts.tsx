@@ -41,7 +41,7 @@ export default function ExportProducts({ data, categories, selectedCategorie }: 
 
 
   return (
-    <div className="flex gap-2 mt-3 lg:mt-0">
+    <>
       <Button
         variant={'outline'}
         disabled={data.length === 0 || pdfLoading}
@@ -58,6 +58,6 @@ export default function ExportProducts({ data, categories, selectedCategorie }: 
         {csvLoading ? <Spinner /> : <DownloadSimpleIcon size={20} weight="bold" />}
         CSV
       </Button>
-    </div>
+    </>
   )
 }

@@ -1,8 +1,9 @@
-import { PackageSearch } from "lucide-react";
+import { ArrowUpCircle, PackageSearch, Plus } from "lucide-react";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Product } from "@/shared/types";
 import ProductTable from "./ProductTable";
 import ProductCard from "./ProductCard";
+import { Button } from "@/shared/components/ui/button";
 
 interface InventoryContentProps {
   isLoading: boolean;
@@ -36,7 +37,7 @@ export default function InventoryContent({
 
   if (!products?.length) {
     return (
-      <div className="flex flex-col items-center justify-center max-w-sm gap-2 mx-auto py-10">
+      <div className="flex flex-col items-center justify-center  gap-2 mx-auto py-10">
         <div className="p-2 rounded-lg text-primary bg-primary/10">
           <PackageSearch size={30} />
         </div>
@@ -48,6 +49,17 @@ export default function InventoryContent({
         <p className="text-sm/relaxed text-center text-muted-foreground px-6">
           Aún no has creado ningún producto. Empieza creando tu primer producto.
         </p>
+        <div className="flex items-center gap-3">
+          <Button variant={'outline'}>
+            <ArrowUpCircle />
+            Importar productos
+          </Button>
+          <Button>
+            <Plus />
+            Agregar Producto
+          </Button>
+
+        </div>
       </div>
     );
   }

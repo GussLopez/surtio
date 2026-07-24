@@ -9,7 +9,8 @@ import InventoryModals from "@/features/inventory/components/InventoryModals";
 import InventoryFilters from "@/features/inventory/components/InventoryFilters";
 import InventoryContent from "@/features/inventory/components/InventoryContent";
 import InventoryPagination from "@/features/inventory/components/InventoryPagination";
-import InventoryHeader from "@/features/inventory/components/InventoryHeader";
+import AddProduct from "@/features/inventory/components/AddProduct";
+import { cn } from "@/shared/utils/utils";
 
 interface ProductsData {
   data: Product[];
@@ -87,21 +88,27 @@ export default function InventarioPage() {
 
   return (
     <div className="relative">
-      <InventoryHeader
-        view={view}
-        handleChange={handleChange}
-      />
+      <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between">
+        <h1 className="text-2xl font-semibold">Productos</h1>
+        <div className="flex items-center gap-4">
 
-      <InventoryFilters
-        search={search}
-        onSearchChange={setSearch}
-        selectedCategorie={selectedCategorie}
-        onCategoryChange={setSelectedCategorie}
-        categories={categories}
-        categoriesLoading={catLoading}
-        products={data?.data}
-      />
-      <div className="mt-6">
+          <AddProduct />
+        </div>
+      </div>
+      <div className="bg-background p-4 mt-5 rounded-xl shadow-xs">
+        <div className={cn(data?.data.length === 0 ? 'hidden' : 'block')}>
+          <InventoryFilters
+            search={search}
+            onSearchChange={setSearch}
+            selectedCategorie={selectedCategorie}
+            onCategoryChange={setSelectedCategorie}
+            categories={categories}
+            categoriesLoading={catLoading}
+            products={data?.data}
+            view={view}
+            handleChange={handleChange}
+          />
+        </div>
         <InventoryContent
           isLoading={isLoading}
           products={data?.data}
@@ -123,6 +130,6 @@ export default function InventarioPage() {
         modal={modal}
         onClose={closeModal}
       />
-    </div>
+    </div >
   )
 }
