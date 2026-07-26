@@ -1,18 +1,13 @@
-'use client'
-import { DollarSign, Plus, ScanBarcode, Search, Trash, Trash2 } from 'lucide-react';
+'use client';
+import { Search, Trash, Trash2 } from 'lucide-react';
 import ComboboxSearchProduct from '@/features/sales/components/SearchProductInput'
 import { Input } from '@/shared/components/ui/input';
-import InputStock from '@/features/sales/components/ProductQuantity';
 import { Button } from '@/shared/components/ui/button';
-import { Badge } from '@/shared/components/ui/badge';
-import { CheckCircleIcon, SealPercentIcon } from '@phosphor-icons/react';
 import { useCartStore } from '@/features/sales/store/useCartStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductItem } from '@/shared/types';
 import { sileo } from 'sileo';
-import ShoppingCartItems from '@/features/sales/components/ShoppingCart';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '@/shared/components/ui/spinner';
 import NewSaleReceipt from '@/features/sales/components/NewSaleReceipt';
 import { useBusinessStore } from '@/shared/store/BusinessStore';
 import { normalizeDate } from '@/shared/utils/utils';
@@ -31,18 +26,14 @@ export default function VentasPage() {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const precioTotal = getTotal().toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const handleAddProduct = () => {
+
+  useEffect(() => {
     if (!product) {
-      sileo.warning({
-        title: 'Selecciona un producto',
-        description: 'Seleeciona un producto para añadirlo al carrito y registrar la compra',
-        autopilot: false
-      })
       return;
     }
     addToCart(product);
     setProduct(null);
-  }
+  }, [product])
 
   const handleCheckOut = async () => {
     try {
@@ -111,20 +102,19 @@ export default function VentasPage() {
     enabled: !!saleId
   })
   return (
-    <div className='xl:grid xl:grid-cols-2 gap-x-10 gap-y-4 h-[calc(100vh-70px)]'>
+    <div className='xl:grid xl:grid-cols-2 gap-x-10 gap-y-4 h-[calc(100vh-100px)]'>
       <div>
         <h1 className="text-3xl font-semibold">Buscar productos</h1>
         <div className='mt-5'>
           <ComboboxSearchProduct
             setProduct={setProduct}
-            btnClass='w-full  justify-between'
           />
         </div>
 
       </div>
 
-      <div className='flex flex-col mt-5 xl:mt-0 border-l border-input'>
-        <div className='flex justify-end gap-2'>
+      <div className='flex flex-col mt-5 xl:mt-0 border border-input rounded-xl bg-background'>
+        <div className='flex justify-end gap-2 px-6 py-6'>
           <Button
             variant={'outline'}
             size={'icon'}
@@ -138,8 +128,8 @@ export default function VentasPage() {
             <Trash />
           </Button>
         </div>
-        <div className='flex-1 flex justify-center items-center p-4'>
-          {items.length === 0 ? (
+        {items.length === 0 ? (
+          <div className='flex-1 flex flex-col justify-center items-center p-4'>
             <div className='flex flex-col gap-3 text-center'>
               <h3 className='text-3xl font-black text-muted-foreground/70'>Tu carrito esta vacío</h3>
               <p className='text-muted-foreground/70'>Agrega productos a tu venta</p>
@@ -148,21 +138,19 @@ export default function VentasPage() {
                 Buscar productos
               </Button>
             </div>
-          ) : (
-            items.map(item => (
+          </div>
+        ) : (
+          <div className='flex-1 flex flex-col justify-start items-center p-4'>
+            {items.map(item => (
               <motion.div
                 key={item.id}
                 layout
-                className="flex justify-between items-center mt-3 p-3 rounded-lg border border-muted bg-background"
-                initial={{ opacity: 0, y: 20 }}
+                className="w-full flex justify-between items-center mt-3 p-3 rounded-lg border border-muted bg-facent"
+                initial={{ opacity: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
                   opacity: 0,
                   x: -20,
-                  height: 0,
-                  marginTop: 0,
-                  paddingTop: 0,
-                  paddingBottom: 0,
                   overflow: 'hidden'
                 }}
                 transition={{
@@ -172,11 +160,20 @@ export default function VentasPage() {
                   opacity: { duration: 0.2 }
                 }}
               >
-                <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <p className="text-xs">{item.quantity} x ${item.price}</p>
+                <div className='flex gap-3'>
+                  <div className='h-10 w-10 rounded-lg border border-input bg-white'>
+                  </div>
+                  <div className="w-52 text-sm">
+                    <p className="font-medium truncate">{item.name}</p>
+                    <p className="text-muted-foreground">$ {item.price}</p>
+                  </div>
+                  <Input
+                    className='w-20 h-9 text-sm'
+                    value={item.quantity}
+                  />
                 </div>
-                <div>
+                <div className='flex items-center gap-2'>
+                  <span className='font-bold text-sm'>${(item.price * item.quantity).toFixed(2)}</span>
                   <Button
                     size={'icon-sm'}
                     variant={'ghost'}
@@ -187,20 +184,19 @@ export default function VentasPage() {
                   </Button>
                 </div>
               </motion.div>
-            ))
-          )}
+            ))}
+          </div>
+        )}
 
-        </div>
         <div className='p-6 border-t border-input'>
           <Button
-            className='w-full h-13 text-lg bg-primary-light'
+            className='w-full h-13 font-semibold text-lg bg-primary-light'
             disabled
           >
-            Cobrar $0.0
+            Cobrar ${getTotal()}
           </Button>
         </div>
       </div>
-      {/*  <ShoppingCartItems date={saleDate} setDate={setSaleDate} /> */}
       {receipt && (
         <NewSaleReceipt
           sale={receipt}
