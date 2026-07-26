@@ -16,6 +16,7 @@ import { ArrowLeft, CircleQuestionMark, DollarSign } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
 export default function EditProductPage() {
@@ -80,9 +81,6 @@ export default function EditProductPage() {
     }
   }, [product]);
 
-  const updateForm = (data: Partial<ProductForm>) =>
-    setFormData(prev => ({ ...prev, ...data }))
-
   const mutation = useMutation({
     mutationFn: async () => {
       setLoadig(true);
@@ -124,6 +122,19 @@ export default function EditProductPage() {
     mutation.mutate()
   }
 
+  const {
+      register,
+      handleSubmit,
+      setValue,
+      watch,
+      control,
+      formState: { errors }
+    } = useForm<ProductForm>({
+      defaultValues: formData,
+    });
+  
+    const type = watch("type");
+
   return (
     <div className="w-full max-w-4xl mx-auto pb-20">
       <div className="flex justify-between items-center">
@@ -156,7 +167,8 @@ export default function EditProductPage() {
               <div className="grid grid-cols-2 lg:flex gap-2 text-sm text-foreground/80">
                 <Button
                   variant={'outline'}
-                  className={cn(formData.type === 'product' && 'border-primary-light',
+                  onClick={() => setValue("type", "product")}
+                  className={cn(type === 'product' && 'border-primary-light',
                     "shadow-none border-[1.8px]"
                   )}
                 >
@@ -164,7 +176,8 @@ export default function EditProductPage() {
                 </Button>
                 <Button
                   variant={'outline'}
-                  className={cn(formData.type === 'service' && 'border-primary-light',
+                  onClick={() => setValue("type", "service")}
+                  className={cn(type === 'service' && 'border-primary-light',
                     "shadow-none border-[1.8px]"
                   )}
                 >

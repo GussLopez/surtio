@@ -82,9 +82,18 @@ export default function CreateProductPage() {
 
   }
 
-  const { register, handleSubmit, setValue, control, formState: { errors } } = useForm({
-    defaultValues: initialFormData
-  })
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState: { errors }
+  } = useForm<ProductForm>({
+    defaultValues: initialFormData,
+  });
+
+  const type = watch("type");
 
   return (
     <div className="w-full max-w-4xl mx-auto pb-20">
@@ -120,7 +129,8 @@ export default function CreateProductPage() {
                   <Button
                     variant={'outline'}
                     type="button"
-                    className={cn(formData.type === 'product' && 'border-primary-light',
+                    onClick={() => setValue("type", "product")}
+                    className={cn(type === 'product' && 'border-primary-light',
                       "shadow-none border-[1.8px]"
                     )}
                   >
@@ -128,8 +138,9 @@ export default function CreateProductPage() {
                   </Button>
                   <Button
                     variant={'outline'}
+                    onClick={() => setValue("type", "service")}
                     type="button"
-                    className={cn(formData.type === 'service' && 'border-primary-light',
+                    className={cn(type === 'service' && 'border-primary-light',
                       "shadow-none border-[1.8px]"
                     )}
                   >
