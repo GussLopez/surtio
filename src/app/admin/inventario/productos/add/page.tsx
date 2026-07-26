@@ -5,12 +5,13 @@ import { Button } from "@/shared/components/ui/button";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { Textarea } from "@/shared/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
 import { useBusinessStore } from "@/shared/store/BusinessStore";
 import { useUserStore } from "@/shared/store/UserStore";
 import { cn } from "@/shared/utils/utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, CircleQuestionMark, ImageIcon } from "lucide-react";
+import { ArrowLeft, CircleQuestionMark, DollarSign, ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { sileo } from "sileo";
@@ -82,7 +83,7 @@ export default function CreateProductPage() {
 
   }
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto pb-20">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-5">
           <Button
@@ -178,13 +179,95 @@ export default function CreateProductPage() {
       <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
         <h2 className="font-medium p-6">Datos adicionales</h2>
 
-        <div className="grid grid-cols-3 gap-5">
-          <div>
+        <div className="grid grid-cols-3 gap-5 p-6 pt-0">
+          <div className="space-y-2">
             <Label>Unidad de venta</Label>
-
+            <Input />
+          </div>
+          <div className="space-y-2">
+            <Label>Categoría</Label>
+            <Input />
+          </div>
+          <div className="space-y-2">
+            <Label>Marca</Label>
+            <Input />
+          </div>
+          <div className="space-y-2">
+            <Label>Ubicación</Label>
+            <Input placeholder="Ej: Estante 3B" />
+          </div>
+          <div className="space-y-2 col-span-3">
+            <Label>Descripción</Label>
+            <Textarea className="max-h-30" />
           </div>
         </div>
       </div>
+
+      <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
+        <h2 className="font-medium p-6">Existencias</h2>
+
+        <div className="grid grid-cols-3 gap-5 p-6 pt-0">
+          <div className="flex items-center gap-3 col-span-3 mb-2">
+            <Checkbox />
+            <Label>Utilizar Existencias</Label>
+          </div>
+          <div className="space-y-2">
+            <Label>Cantidad</Label>
+            <div className="relative">
+              <Input />
+              <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">Unidades</span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Cantidad mínima</Label>
+            <div className="relative">
+              <Input />
+              <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">Unidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
+        <h2 className="font-medium p-6">Precios y costos</h2>
+
+        <div className="grid grid-cols-3 gap-5 p-6 pt-0">
+          <div className="space-y-2">
+            <Label>Precio de venta</Label>
+            <div className="relative">
+              <DollarSign className="absolute h-full flex justify-center items-center left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
+              <Input
+                placeholder="0.0"
+                className="pl-8"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label>Costo</Label>
+            <div className="relative">
+              <DollarSign className="absolute h-full flex justify-center items-center left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
+              <Input
+                placeholder="0.0"
+                className="pl-8"
+              />
+              <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">por Unidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed bottom-0 left-64 right-0 border-t border-input bg-background">
+        <div className="max-w-4xl flex justify-end gap-3 px-4 mx-auto py-3">
+          <Button variant={'outline'}>
+            <Link href={'/admin/inventario'}>
+              Cancelar
+            </Link>
+          </Button>
+          <Button>
+            Guardar cambios
+          </Button>
+        </div>
+      </div>
+
     </div>
   )
 }
