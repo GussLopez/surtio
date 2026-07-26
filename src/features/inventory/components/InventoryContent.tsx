@@ -4,6 +4,7 @@ import { Product } from "@/shared/types";
 import ProductTable from "./ProductTable";
 import ProductCard from "./ProductCard";
 import { Button } from "@/shared/components/ui/button";
+import Link from "next/link";
 
 interface InventoryContentProps {
   isLoading: boolean;
@@ -54,11 +55,12 @@ export default function InventoryContent({
             <ArrowUpCircle />
             Importar productos
           </Button>
-          <Button>
-            <Plus />
-            Agregar Producto
+          <Button asChild>
+            <Link href={'/admin/inventario/productos/add'}>
+              <Plus />
+              Agregar Producto
+            </Link>
           </Button>
-
         </div>
       </div>
     );
