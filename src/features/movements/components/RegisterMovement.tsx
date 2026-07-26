@@ -281,9 +281,6 @@ export default function RegisterMovement() {
               <TableCell colSpan={5}>
                 <SearchProductInput
                   setProduct={setSelectedProduct}
-                  btnClass="w-full max-w-fit justify-between"
-                  btnSize="sm"
-                  placeholder="Seleccionar producto"
                 />
               </TableCell>
             </TableRow>
