@@ -20,6 +20,7 @@ import { generateSalesHistoryPDF } from "@/features/sales/utils/generateSalesHis
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/shared/components/ui/pagination";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { cn } from "@/shared/utils/utils";
+import Link from "next/link";
 
 type ModalState =
   | { type: "edit"; sale: Sale }
@@ -156,7 +157,7 @@ export default function HistorialPage() {
   };
   const totalPages = Math.ceil((data?.total || 0) / pageSize);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  console.log(data);
+
   return (
     <div>
       <h1 className="text-2xl font-semibold">Historial de Ventas</h1>
@@ -210,9 +211,11 @@ export default function HistorialPage() {
                   <p className="font-medium text-accent-foreground">No hay ventas</p>
                   <p className="text-sm/relaxed text-center text-muted-foreground px-6">No se han creado ninguna venta en esta fecha. Empieza creando una venta.</p>
                   <div className="flex items-center gap-3 mt-4">
-                    <Button>
-                      <Plus />
-                      Crear Venta
+                    <Button asChild>
+                      <Link href={'/admin/ventas'}>
+                        <Plus />
+                        Crear Venta
+                      </Link>
                     </Button>
                   </div>
                 </div>
