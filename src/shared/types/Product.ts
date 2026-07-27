@@ -17,6 +17,7 @@ export interface Product {
   supplier_id: number | null;
   location: string | null;
   unit: string | null;
+  use_stock: boolean;
   type: string;
   categories?: {
     id: number;
