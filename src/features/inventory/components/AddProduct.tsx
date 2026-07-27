@@ -29,6 +29,7 @@ export default function AddProduct() {
     sku: '',
     model: '',
     image: null,
+    use_stock: true,
     location: '',
     barcode: '',
     type: '',
