@@ -24,7 +24,7 @@ export default function AddCategorieDialog({ open, onClose, onCraeted }: AddSupl
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
 
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<CategorieForm>({
+  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm<CategorieForm>({
     defaultValues: {
       name: '',
       description: '',
@@ -55,16 +55,31 @@ export default function AddCategorieDialog({ open, onClose, onCraeted }: AddSupl
       })
 
       if (!res.ok) throw new Error('Error creating categorie');
-      const newCategorie = await res.json();
+      const newCategorie: Categorie = await res.json();
       sileo.success({
         title: 'Categoría creado',
         description: 'La categoría se creó correctamente',
         autopilot: false
       });
 
-      queryClient.invalidateQueries({ queryKey: ["business-categories"] });
+      // Insertamos la nueva categoría en la caché de inmediato para que el
+      // <Select> ya tenga la opción disponible antes de seleccionarla.
+      queryClient.setQueryData<Categorie[]>(["business-categories"], (old) => {
+        if (!old) return [newCategorie];
+        if (old.some((cat) => cat.id === newCategorie.id)) return old;
+        return [...old, newCategorie];
+      });
 
       onCraeted?.(newCategorie);
+
+      // Sincronizamos con el servidor después de seleccionar la categoría.
+      queryClient.invalidateQueries({ queryKey: ["business-categories"] });
+
+      reset({
+        name: '',
+        description: '',
+        business_id: businessId || '',
+      });
 
       setLoading(false);
       onClose();
