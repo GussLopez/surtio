@@ -1,8 +1,10 @@
 'use client';
 
+import AditionalData from "@/features/inventory/components/create/AditionalData";
 import { ProductForm } from "@/features/inventory/types/products.types";
 import { Button } from "@/shared/components/ui/button";
 import { Checkbox } from "@/shared/components/ui/checkbox";
+import ErrorMessage from "@/shared/components/ui/error-message";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Textarea } from "@/shared/components/ui/textarea";
@@ -13,8 +15,8 @@ import { cn } from "@/shared/utils/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, CircleQuestionMark, DollarSign, ImageIcon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { sileo } from "sileo";
 
 export default function CreateProductPage() {
@@ -33,17 +35,32 @@ export default function CreateProductPage() {
     barcode: '',
     type: 'product',
     unit: '',
+    use_stock: true,
     is_active: true,
     supplier_id: null,
     category_id: null
   }
-  const [formData, setFormData] = useState(initialFormData);
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const userRole = useUserStore(state => state.role);
   const [open, setOpen] = useState(false);
 
-  const handleCreate = async () => {
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState: { errors }
+  } = useForm<ProductForm>({
+    defaultValues: initialFormData,
+  });
+
+  const type = watch("type");
+  const useStock = watch("use_stock");
+
+  const handleCreate = async (formData: ProductForm) => {
     try {
       setLoading(true);
       const res = await fetch('/api/products', {
@@ -63,7 +80,6 @@ export default function CreateProductPage() {
         throw new Error(data.error || "Error al crear producto");
       }
 
-      setFormData(initialFormData);
       queryClient.invalidateQueries({ queryKey: ["stock-products", businessId] });
       setLoading(false);
       setOpen(false);
@@ -81,39 +97,23 @@ export default function CreateProductPage() {
     }
 
   }
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    control,
-    formState: { errors }
-  } = useForm<ProductForm>({
-    defaultValues: initialFormData,
-  });
-
-  const type = watch("type");
-
   return (
     <div className="w-full max-w-4xl mx-auto pb-20">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-5">
-          <Button
-            variant={'outline'}
-            size={'icon'}
-
-          >
-            <Link href={'/admin/inventario'}>
-              <ArrowLeft className="size-5" />
-              <span className="sr-only">Volver atras</span>
-            </Link>
-          </Button>
-          <h1 className="text-xl font-semibold">Agregar producto</h1>
+      <form onSubmit={handleSubmit(handleCreate)}>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-5">
+            <Button
+              variant={'outline'}
+              size={'icon'}
+            >
+              <Link href={'/admin/inventario'}>
+                <ArrowLeft className="size-5" />
+                <span className="sr-only">Volver atras</span>
+              </Link>
+            </Button>
+            <h1 className="text-xl font-semibold">Agregar producto</h1>
+          </div>
         </div>
-      </div>
-      <form action="">
-
         <div className="grid grid-cols-2 gap-6 mt-10">
           <div className="border border-input rounded-lg shadow-xs bg-background">
             <h2 className="font-medium p-6">Datos del producto</h2>
@@ -121,7 +121,13 @@ export default function CreateProductPage() {
             <div className="grid grid-cols-2 gap-5 px-6 pb-6">
               <div className="col-span-2 space-y-2">
                 <Label htmlFor="productName">Nombre del producto *</Label>
-                <Input id="productName" />
+                <Input
+                  id="productName"
+                  {...register("name", {
+                    required: "El nombre es requerido"
+                  })}
+                />
+                <ErrorMessage>{errors.name?.message}</ErrorMessage>
               </div>
               <div className="col-span-2">
                 <span className="text-sm font-medium">Tipo</span>
@@ -151,11 +157,17 @@ export default function CreateProductPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="barcode">Código de barras</Label>
-                <Input id="barcode" />
+                <Input
+                  id="barcode"
+                  {...register("barcode")}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="sku">SKU</Label>
-                <Input id="sku" />
+                <Input
+                  id="sku"
+                  {...register("sku")}
+                />
               </div>
               <div className="flex items-center gap-2 col-span-2">
                 <Checkbox id="isActive" />
@@ -194,53 +206,68 @@ export default function CreateProductPage() {
           </div>
         </div>
 
-        <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
-          <h2 className="font-medium p-6">Datos adicionales</h2>
-
-          <div className="grid grid-cols-3 gap-5 p-6 pt-0">
-            <div className="space-y-2">
-              <Label>Unidad de venta</Label>
-              <Input />
-            </div>
-            <div className="space-y-2">
-              <Label>Categoría</Label>
-              <Input />
-            </div>
-            <div className="space-y-2">
-              <Label>Marca</Label>
-              <Input />
-            </div>
-            <div className="space-y-2">
-              <Label>Ubicación</Label>
-              <Input placeholder="Ej: Estante 3B" />
-            </div>
-            <div className="space-y-2 col-span-3">
-              <Label>Descripción</Label>
-              <Textarea className="max-h-30" />
-            </div>
-          </div>
-        </div>
+        <AditionalData
+          register={register}
+          control={control}
+          setValue={setValue}
+        />
 
         <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
           <h2 className="font-medium p-6">Existencias</h2>
 
           <div className="grid grid-cols-3 gap-5 p-6 pt-0">
-            <div className="flex items-center gap-3 col-span-3 mb-2">
-              <Checkbox />
-              <Label>Utilizar Existencias</Label>
-            </div>
+            <Controller
+              name="use_stock"
+              control={control}
+              render={({ field }) => (
+                <div className="flex items-center gap-3 col-span-3 mb-2">
+                  <Checkbox
+                    id="use_stock"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <div className="flex items-center gap-3">
+                    <Label htmlFor="use_stock">Utilizar Existencias</Label>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <CircleQuestionMark className="size-5 text-background fill-neutral-400 dark:fill-white" />
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p className="max-w-40 text-center">
+                          Los productos que no utilizan existencias siempre están en stock.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
+              )}
+            />
             <div className="space-y-2">
-              <Label>Cantidad</Label>
+              <Label htmlFor="stock">Cantidad</Label>
               <div className="relative">
-                <Input />
-                <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">Unidades</span>
+                <Input
+                  id="stock"
+                  disabled={!useStock}
+                  {...register("stock", {
+                    required: "El stock es requerido"
+                  })}
+                />
+                <span className={cn(!useStock ? 'hidden' : 'flex', "absolute h-full justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground")}
+                >Unidades</span>
               </div>
+              <ErrorMessage>{errors.stock?.message}</ErrorMessage>
             </div>
             <div className="space-y-2">
-              <Label>Cantidad mínima</Label>
+              <Label htmlFor="min_stock">Cantidad mínima</Label>
               <div className="relative">
-                <Input />
-                <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">Unidad</span>
+                <Input
+                  disabled={!useStock}
+                  id="min_stock"
+                  {...register("min_stock")}
+                />
+                <span
+                  className={cn(!useStock ? 'hidden' : 'flex', "absolute h-full justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground")}
+                >Unidad</span>
               </div>
             </div>
           </div>
@@ -250,49 +277,54 @@ export default function CreateProductPage() {
 
           <div className="grid grid-cols-3 gap-5 p-6 pt-0">
             <div className="space-y-2">
-              <Label>Precio de venta</Label>
+              <Label htmlFor="price">Precio de venta</Label>
               <div className="relative">
                 <DollarSign className="absolute h-full flex justify-center items-center left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
                 <Input
+                  id="price"
                   placeholder="0.0"
                   className="pl-8"
+                  {...register("price", {
+                    required: "El precio de venta es requerido"
+                  })}
                 />
               </div>
+              <ErrorMessage>{errors.price?.message}</ErrorMessage>
             </div>
             <div className="space-y-2">
-              <Label>Costo</Label>
+              <Label htmlFor="cost">Costo</Label>
               <div className="relative">
                 <DollarSign className="absolute h-full flex justify-center items-center left-2 top-1/2 -translate-y-1/2 text-muted-foreground size-4" />
                 <Input
                   placeholder="0.0"
                   className="pl-8"
+                  {...register("cost")}
                 />
                 <span className="absolute h-full flex justify-center items-center px-2 right-0 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">por Unidad</span>
               </div>
             </div>
           </div>
         </div>
-      </form>
 
-      <div className="fixed bottom-0 left-64 right-0 border-t border-input bg-background">
-        <div className="max-w-4xl flex justify-end gap-3 px-4 mx-auto py-3">
-          <Button
-            variant={'outline'}
-            asChild
-            type="button"
-          >
-            <Link href={'/admin/inventario'}>
-              Cancelar
-            </Link>
-          </Button>
-          <Button
-            type="submit"
-          >
-            Guardar cambios
-          </Button>
+        <div className="fixed bottom-0 left-64 right-0 border-t border-input bg-background">
+          <div className="max-w-4xl flex justify-end gap-3 px-4 mx-auto py-3">
+            <Button
+              variant={'outline'}
+              asChild
+              type="button"
+            >
+              <Link href={'/admin/inventario'}>
+                Cancelar
+              </Link>
+            </Button>
+            <Button
+              type="submit"
+            >
+              Guardar cambios
+            </Button>
+          </div>
         </div>
-      </div>
-
+      </form>
     </div>
   )
 }
