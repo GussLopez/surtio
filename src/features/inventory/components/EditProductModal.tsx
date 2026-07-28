@@ -46,6 +46,7 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
     location: '',
     is_active: true,
     unit: '',
+    use_stock: true,
     type: '',
     supplier_id: null,
     category_id: null
@@ -63,6 +64,7 @@ export default function EditProductModal({ open, onClose, product }: EditModalPr
         sku: product.sku,
         model: product.model,
         image: null,
+        use_stock: product.use_stock,
         location: product.location,
         barcode: product.barcode,
         is_active: product.is_active,
