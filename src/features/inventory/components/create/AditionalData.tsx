@@ -70,7 +70,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
                     }}
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue />
+                      <SelectValue placeholder="Selecciona una categoría" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       <SelectItem value="ninguno">Ninguno</SelectItem>
@@ -122,7 +122,14 @@ export default function AditionalData({ register, control, setValue }: Aditional
           setOpenModal(false)
         }}
         onCraeted={(categorie) => {
-          setValue("category_id", Number(categorie.id));
+          // La categoría recién creada ya está en la caché de react-query,
+          // así que podemos seleccionarla directamente en el select.
+          setValue("category_id", Number(categorie.id), {
+            shouldDirty: true,
+            shouldTouch: true,
+            shouldValidate: true,
+          });
+          setOpenModal(false);
         }}
       />
     </div>
