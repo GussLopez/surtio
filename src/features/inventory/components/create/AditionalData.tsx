@@ -1,21 +1,13 @@
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { Control, Controller, UseFormRegister, UseFormSetValue, useWatch } from "react-hook-form";
+import { Control, Controller, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { ProductForm } from "../../types/products.types";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { useQuery } from "@tanstack/react-query";
 import { Categorie } from "@/shared/types";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AddCategorieDialog from "@/shared/components/AddCategorieDialog";
 import { Button } from "@/shared/components/ui/button";
 
@@ -25,14 +17,9 @@ interface AditionalDataProps {
   setValue: UseFormSetValue<ProductForm>;
 }
 
-type ModalState =
-  | { type: "create" }
-  | null
-
 export default function AditionalData({ register, control, setValue }: AditionalDataProps) {
   const [openModal, setOpenModal] = useState(false);
-  const [modal, setModal] = useState<ModalState>(null);
-
+  const [newCategorie, setNewCategorie] = useState<Categorie | null>(null);
   const { data, isLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
     queryFn: async () => {
@@ -47,6 +34,26 @@ export default function AditionalData({ register, control, setValue }: Aditional
     retry: 1,
     refetchOnWindowFocus: true
   })
+
+  const categories = useMemo(() => {
+    const list = data ?? [];
+    if (newCategorie && !list.some(cat => cat.id === newCategorie.id)) {
+      return [...list, newCategorie];
+    }
+    return list;
+  }, [data, newCategorie]);
+
+  useEffect(() => {
+    if (!newCategorie) return;
+    if (!categories.some(cat => cat.id === newCategorie.id)) return;
+
+    setValue("category_id", newCategorie.id, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+    setNewCategorie(null);
+  }, [newCategorie, categories, setValue]);
 
   return (
     <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
@@ -70,7 +77,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
               render={({ field }) => {
                 return (
                   <Select
-                    value={field.value === null ? "ninguno" : String(field.value)}
+                    value={field.value == null ? "ninguno" : String(field.value)}
                     onValueChange={(value) => {
                       field.onChange(value === "ninguno" ? null : Number(value));
                     }}
@@ -81,7 +88,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
                     <SelectContent position="popper">
                       <SelectItem value="ninguno">Ninguno</SelectItem>
                       {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
-                      {data?.map((cat) => (
+                      {categories.map((cat) => (
                         <SelectItem
                           key={cat.id}
                           value={cat.id.toString()}
@@ -97,7 +104,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
             <Button
               variant={'outline'}
               size={'icon'}
-              onClick={() => setModal({ type: "create" })}
+              onClick={() => setOpenModal(true)}
               type="button"
             >
               <Plus />
@@ -122,20 +129,16 @@ export default function AditionalData({ register, control, setValue }: Aditional
         </div>
       </div>
 
-      {modal?.type === "create" && (
-        <AddCategorieDialog
-          open
-          onClose={() => setModal(null)}
-          onCraeted={(categorie) => {
-            setValue("category_id", Number(categorie.id), {
-              shouldDirty: true,
-              shouldTouch: true,
-              shouldValidate: true,
-            });
-            setOpenModal(false);
-          }}
-        />
-      )}
+      <AddCategorieDialog
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false)
+        }}
+        onCraeted={(categorie) => {
+          setNewCategorie(categorie);
+          setOpenModal(false);
+        }}
+      />
     </div>
   )
 }
