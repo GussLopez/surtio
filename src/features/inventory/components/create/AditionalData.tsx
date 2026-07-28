@@ -25,8 +25,14 @@ interface AditionalDataProps {
   setValue: UseFormSetValue<ProductForm>;
 }
 
+type ModalState =
+  | { type: "create" }
+  | null
+
 export default function AditionalData({ register, control, setValue }: AditionalDataProps) {
   const [openModal, setOpenModal] = useState(false);
+  const [modal, setModal] = useState<ModalState>(null);
+
   const { data, isLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
     queryFn: async () => {
@@ -70,7 +76,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
                     }}
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue />
+                      <SelectValue placeholder="Selecciona una categoría" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       <SelectItem value="ninguno">Ninguno</SelectItem>
@@ -91,7 +97,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
             <Button
               variant={'outline'}
               size={'icon'}
-              onClick={() => setOpenModal(true)}
+              onClick={() => setModal({ type: "create" })}
               type="button"
             >
               <Plus />
@@ -116,15 +122,20 @@ export default function AditionalData({ register, control, setValue }: Aditional
         </div>
       </div>
 
-      <AddCategorieDialog
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false)
-        }}
-        onCraeted={(categorie) => {
-          setValue("category_id", Number(categorie.id));
-        }}
-      />
+      {modal?.type === "create" && (
+        <AddCategorieDialog
+          open
+          onClose={() => setModal(null)}
+          onCraeted={(categorie) => {
+            setValue("category_id", Number(categorie.id), {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+            setOpenModal(false);
+          }}
+        />
+      )}
     </div>
   )
 }
