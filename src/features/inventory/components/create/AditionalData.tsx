@@ -15,7 +15,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { Categorie } from "@/shared/types";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AddCategorieDialog from "@/shared/components/AddCategorieDialog";
 import { Button } from "@/shared/components/ui/button";
 
@@ -27,6 +27,9 @@ interface AditionalDataProps {
 
 export default function AditionalData({ register, control, setValue }: AditionalDataProps) {
   const [openModal, setOpenModal] = useState(false);
+  // Categoría recién creada: la guardamos aparte para asegurarnos de que la
+  // opción exista en el Select antes de seleccionarla.
+  const [newCategorie, setNewCategorie] = useState<Categorie | null>(null);
   const { data, isLoading } = useQuery<Categorie[]>({
     queryKey: ["business-categories"],
     queryFn: async () => {
@@ -41,6 +44,28 @@ export default function AditionalData({ register, control, setValue }: Aditional
     retry: 1,
     refetchOnWindowFocus: true
   })
+
+  const categories = useMemo(() => {
+    const list = data ?? [];
+    if (newCategorie && !list.some(cat => cat.id === newCategorie.id)) {
+      return [...list, newCategorie];
+    }
+    return list;
+  }, [data, newCategorie]);
+
+  // Cuando la nueva categoría ya está renderizada como opción del Select,
+  // la seleccionamos automáticamente.
+  useEffect(() => {
+    if (!newCategorie) return;
+    if (!categories.some(cat => cat.id === newCategorie.id)) return;
+
+    setValue("category_id", newCategorie.id, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+    setNewCategorie(null);
+  }, [newCategorie, categories, setValue]);
 
   return (
     <div className="mt-6 border border-input rounded-lg shadow-xs bg-background">
@@ -64,7 +89,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
               render={({ field }) => {
                 return (
                   <Select
-                    value={field.value === null ? "ninguno" : String(field.value)}
+                    value={field.value == null ? "ninguno" : String(field.value)}
                     onValueChange={(value) => {
                       field.onChange(value === "ninguno" ? null : Number(value));
                     }}
@@ -75,7 +100,7 @@ export default function AditionalData({ register, control, setValue }: Aditional
                     <SelectContent position="popper">
                       <SelectItem value="ninguno">Ninguno</SelectItem>
                       {isLoading && <p className="p-2 text-sm  text-muted-foreground">Cargando...</p>}
-                      {data?.map((cat) => (
+                      {categories.map((cat) => (
                         <SelectItem
                           key={cat.id}
                           value={cat.id.toString()}
@@ -122,13 +147,9 @@ export default function AditionalData({ register, control, setValue }: Aditional
           setOpenModal(false)
         }}
         onCraeted={(categorie) => {
-          // La categoría recién creada ya está en la caché de react-query,
-          // así que podemos seleccionarla directamente en el select.
-          setValue("category_id", Number(categorie.id), {
-            shouldDirty: true,
-            shouldTouch: true,
-            shouldValidate: true,
-          });
+          // Guardamos la categoría para que aparezca como opción del Select;
+          // el efecto de arriba la selecciona en cuanto está renderizada.
+          setNewCategorie(categorie);
           setOpenModal(false);
         }}
       />
