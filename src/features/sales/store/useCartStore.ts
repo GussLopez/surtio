@@ -9,6 +9,7 @@ interface CartItem extends Product {
 interface CartStore {
   items: CartItem[];
   addToCart: (product: ProductItem) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   getTotal: () => number;
@@ -50,6 +51,26 @@ export const useCartStore = create<CartStore>((set, get) => ({
         items: [...get().items, { ...product, quantity: quantityToAdd }],
       });
     }
+  },
+
+  updateQuantity: (id, quantity) => {
+    const item = get().items.find((cartItem) => cartItem.id === id);
+    if (!item || !Number.isInteger(quantity) || quantity < 1) return;
+
+    if (quantity > item.stock) {
+      sileo.warning({
+        title: 'Stock insuficiente',
+        description: `Solo hay ${item.stock} ${item.unit ?? 'unidad'}(s) disponibles`,
+        autopilot: false,
+      });
+      return;
+    }
+
+    set({
+      items: get().items.map((cartItem) =>
+        cartItem.id === id ? { ...cartItem, quantity } : cartItem
+      ),
+    });
   },
 
   removeFromCart: (id) =>

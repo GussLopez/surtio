@@ -1,85 +1,113 @@
 'use client';
+
 import { useState } from 'react';
-
-import { useQuery } from '@tanstack/react-query'
-import { Product, ProductItem } from '@/shared/types'
+import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
-import { useBusinessStore } from '@/shared/store/BusinessStore';
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from '@/shared/components/ui/combobox';
 
-interface SearchProductProps {
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from '@/shared/components/ui/combobox';
+import { Spinner } from '@/shared/components/ui/spinner';
+import { useBusinessStore } from '@/shared/store/BusinessStore';
+import type { ProductItem } from '@/shared/types';
+
+interface SearchProductInputProps {
   setProduct: (product: ProductItem) => void;
 }
-const SearchProductInput = ({ setProduct }: SearchProductProps) => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
-  const [debouncedSearch] = useDebounce(inputValue, 500);
-  const businessId = useBusinessStore(state => state.id);
 
-  const { data: products = null, isLoading } = useQuery<ProductItem[]>({
-    queryKey: ['products-search', debouncedSearch, businessId],
-    queryFn: async () => {
-      const res = await fetch('/api/products/search', {
-        method: 'POST',
-        body: JSON.stringify({
-          businessId,
-          search: debouncedSearch
-        })
-      })
-      if (!res.ok) throw new Error("Error fetching")
+const SEARCH_DELAY = 350;
 
-      return res.json()
-    },
-    enabled: debouncedSearch.trim().length > 0 || !!businessId,
-    staleTime: 1000 * 60 * 50
-  })
-  const selectedProduct = products?.find(p => p.id === value)
+async function searchProducts(businessId: string, search: string) {
+  const response = await fetch('/api/products/search', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ businessId, search }),
+  });
 
-  return (
-    <Combobox items={products || []}>
-      <ComboboxInput
-        value={value}
-        placeholder="Selecciona un producto"
-        className="bg-background"
-      />
-      <ComboboxContent>
-        <ComboboxEmpty>No se encontraron productos.</ComboboxEmpty>
-        <ComboboxList>
-          {(product: Product) => (
-            <ComboboxItem
-              key={product.id}
-              value={product}
-              onClick={() => {
-                setProduct({
-                  ...product,
-                  quantity: 1
-                })
-                setOpen(false)
-                setInputValue('')
-              }}
-            >
-              <div className='w-full flex items-center justify-between'>
-                <div className='flex items-center gap-3'>
-                  <div className='w-10 h-10 border border-input rounded-lg'></div>
-                  <div className='text-sm'>
-                    <p className='font-medium text-neutral-700 dark:text-neutral-200'>
-                      {product.name} - ({product.sku})
-                    </p>
-                    <span className='text-muted-foreground'>$ {product.price}</span>
-                  </div>
-                </div>
-                <div className='px-2 rounded-full bg-green-100 text-green-700'>
-                  <span className='text-xs font-medium'>{product.stock} {product.unit}s</span>
-                </div>
-              </div>
+  if (!response.ok) {
+    throw new Error('No fue posible cargar los productos');
+  }
 
-            </ComboboxItem>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox >
-  )
+  return response.json() as Promise<ProductItem[]>;
 }
 
-export default SearchProductInput
+export default function SearchProductInput({ setProduct }: SearchProductInputProps) {
+  const businessId = useBusinessStore((state) => state.id);
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search.trim(), SEARCH_DELAY);
+
+  const { data: products = [], isFetching, isError } = useQuery({
+    queryKey: ['products-search', businessId, debouncedSearch],
+    queryFn: () => searchProducts(businessId!, debouncedSearch),
+    enabled: open && !!businessId,
+    staleTime: 60_000,
+  });
+
+  const handleSelect = (product: ProductItem | null) => {
+    if (!product) return;
+
+    setProduct({ ...product, quantity: 1 });
+    setSearch('');
+    setOpen(false);
+  };
+
+  return (
+    <Combobox
+      items={products}
+      inputValue={search}
+      onInputValueChange={setSearch}
+      itemToStringLabel={(product: ProductItem) => `${product.name} - (${product.sku})`}
+      value={null}
+      onValueChange={handleSelect}
+      open={open}
+      onOpenChange={setOpen}
+    >
+      <ComboboxInput
+        className="bg-background"
+        placeholder="Buscar por nombre o SKU"
+        showClear={search.length > 0}
+      />
+      <ComboboxContent>
+        {isFetching && products.length === 0 ? (
+          <div className="flex items-center justify-center gap-2 p-4 text-sm text-muted-foreground">
+            <Spinner className="size-4" />
+            Cargando productos...
+          </div>
+        ) : (
+          <>
+            <ComboboxEmpty>
+              {isError ? 'No fue posible cargar los productos.' : 'No se encontraron productos.'}
+            </ComboboxEmpty>
+            <ComboboxList>
+              {(product: ProductItem) => (
+                <ComboboxItem key={product.id} value={product}>
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <div className="min-w-0 text-sm">
+                      <p className="truncate font-medium text-neutral-700 dark:text-neutral-200">
+                        {product.name} - ({product.sku})
+                      </p>
+                      <span className="text-muted-foreground">
+                        ${product.price.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                    <div className="shrink-0 rounded-full bg-green-100 px-2 text-green-700">
+                      <span className="text-xs font-medium">
+                        {product.stock} {product.unit ?? 'unidad'}(s)
+                      </span>
+                    </div>
+                  </div>
+                </ComboboxItem>
+              )}
+            </ComboboxList>
+          </>
+        )}
+      </ComboboxContent>
+    </Combobox>
+  );
+}

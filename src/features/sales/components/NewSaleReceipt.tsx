@@ -46,7 +46,7 @@ export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) 
     }
   }
   return (
-    <Dialog open={true} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent ref={printRef} className="p-0">
         <DialogHeader className="p-6 border-b border-input">
           <DialogTitle>¡Listo!</DialogTitle>
