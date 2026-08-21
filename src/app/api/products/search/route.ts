@@ -17,7 +17,11 @@ export async function POST(req: Request) {
         },
       }
     );
-    const { businessId, categoryId, search } = await req.json();
+    const { businessId, categoryId, search = '' } = await req.json();
+
+    if (!businessId) {
+      return Response.json({ error: 'businessId is required' }, { status: 400 });
+    }
 
     let query = supabase
       .from("products")
@@ -25,7 +29,10 @@ export async function POST(req: Request) {
         *,
         categories (id, name)
       `)
-      .eq("business_id", businessId);
+      .eq("business_id", businessId)
+      .eq("is_active", true)
+      .order("created_at", { ascending: false })
+      .limit(12);
 
     if (categoryId) {
       query = query.eq("category_id", categoryId);
@@ -44,9 +51,9 @@ export async function POST(req: Request) {
 
     return Response.json(data);
 
-  } catch (err: any) {
+  } catch (err: unknown) {
     return Response.json(
-      { error: err.message || "Unexpected error" },
+      { error: err instanceof Error ? err.message : "Unexpected error" },
       { status: 500 }
     );
   }
