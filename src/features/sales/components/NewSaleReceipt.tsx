@@ -6,6 +6,8 @@ import { Button } from "@/shared/components/ui/button";
 import { useRef, useState } from "react";
 import { generateReceiptPDF } from "@/features/sales/utils/generateReceiptPDF";
 import { Spinner } from "@/shared/components/ui/spinner";
+import { Check, ChevronDown, Download, Printer, ReceiptText } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
 
 interface SaleRecipProps {
   open: boolean;
@@ -44,74 +46,58 @@ export default function NewSaleReceipt({ open, setOpen, sale }: SaleRecipProps) 
     }
   }
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent ref={printRef}>
-        <DialogHeader>
-          <DialogTitle
-            className="flex justify-center items-center gap-2 pb-5 text-xl border-b border-input text-green-600 dark:text-green-400"
-          >
-            <SealCheckIcon size={30} />
-            ¡Venta Completada!
-          </DialogTitle>
+    <Dialog open={true} onOpenChange={setOpen}>
+      <DialogContent ref={printRef} className="p-0">
+        <DialogHeader className="p-6 border-b border-input">
+          <DialogTitle>¡Listo!</DialogTitle>
         </DialogHeader>
         <div>
-          <div className="text-center">
-            <p className="text-lg font-bold">Business Name</p>
-            <p className="text-sm text-accent-foreground">{formatDate}</p>
-            <p className="mt-1 text-xs font-medium font-mono text-muted-foreground">ID: {sale?.sale_number}</p>
+          <div className="flex flex-col justify-center items-center gap-2">
+            <div className="w-14 h-14 flex justify-center items-center rounded-full bg-green-600/10 text-green-500">
+              <Check className="size-7" />
+            </div>
+            <p className="text-muted-foreground">Total</p>
+            <p className="mt-1 text-5xl font-extrabold">${sale?.total}</p>
           </div>
 
-          <div className="p-3 mt-4 rounded-lg bg-facent">
-            <div className="flex justify-between items-center">
-              <p>Cliente: </p>
-              <p>Cliente Anónimo</p>
-            </div>
-            <Separator className="w-full h-px my-3" />
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-bold">Total Pagado</p>
-              <p className="text-lg font-bold text-primary-light">
-                {(sale?.total).toLocaleString('es-MX', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })} MXN
-              </p>
+          <div className="py-4 mt-6 rounded-lg mx-8 border-t border-input">
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                onClick={handleDownloadPDF}
+                disabled={downloading}
+              >
+                {downloading ? (
+                  <>
+                    <Spinner />
+                    PDF
+                  </>
+                ) : (
+                  <>
+                    <Download size={20} />
+                    Descargar PDF
+                  </>
+                )}
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant={'outline'}>
+                    Más opciones
+                    <ChevronDown />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={handlePrint}>
+                    <Printer />
+                    Imprimir Ticket
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <ReceiptText />
+                    Ver detalles de la venta
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 mt-4">
-            <Button
-              variant={'outline'}
-              onClick={handlePrint}
-            >
-              <PrinterIcon size={20} />
-              Imprimir
-            </Button>
-            <Button
-              variant={'secondary'}
-              onClick={handleDownloadPDF}
-              disabled={downloading}
-            >
-              {downloading ? (
-                <>
-                  <Spinner />
-                  PDF
-                </>
-              ) : (
-                <>
-                  <DownloadSimpleIcon size={20} />
-                  PDF
-                </>
-              )}
-            </Button>
-          </div>
-
-          <DialogClose asChild>
-            <Button
-              className="w-full mt-6 bg-primary-light"
-              size={'lg'}
-            >
-              Nueva venta
-            </Button>
-          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>
