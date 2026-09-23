@@ -1,6 +1,5 @@
 import { Button } from "@/shared/components/ui/button";
 import RaysBackground from "./RaysBackground";
-import SaasMockup from "./SaasMockup";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
@@ -10,16 +9,9 @@ export default function Hero() {
     <section className="relative min-h-221.5 overflow-hidden">
       <RaysBackground />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 lg:px-8">
-        <div className="max-w-xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-md border bg-white/80 px-3 py-2 text-sm shadow-sm backdrop-blur">
-            <span className="text-zinc-600">Todo tu negocio</span>
-            <span className="rounded bg-emerald-50 px-2 py-1 font-medium text-emerald-700">
-              En un solo lugar →
-            </span>
-          </div>
-
-          <h1 className="font-medium leading-snug lg:leading-18 lg:tracking-normal tracking-tight text-5xl 2xl:text-7xl">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-28 pb-14 lg:px-8">
+        <div className="max-w-sm">
+          <h1 className="font-medium leading-13 lg:tracking-normal tracking-tight text-5xl">
             Controla tu negocio sin complicaciones
           </h1>
 
@@ -31,7 +23,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
               size={'lg'}
-              className="px-3 group"
+              className="w-full px-3 group cursor-pointer"
               variant={'secondary'}
             >
               Comenzar ahora
@@ -41,7 +33,7 @@ export default function Hero() {
             <Button
               variant={'outline'}
               size={'lg'}
-              className="px-3"
+              className="w-full px-3"
               asChild
             >
               <Link href={'/auth/login'}>
@@ -58,8 +50,16 @@ export default function Hero() {
           </div>
         </div>
 
-        <SaasMockup />
+        <div className="mt-10 lg:absolute right-[-14%] w-full lg:max-w-4xl overflow-hidden rounded-3xl border border-input bg-white/85 shadow-2xl shadow-primary/15 backdrop-blur-md lg:-mt-10">
+          <div>
+            <img
+              src="/img/landing/dashboard-preview.png"
+              alt="Dashboard Preview"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
       </div>
-    </section >
+    </section>
   );
 }
