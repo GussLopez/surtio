@@ -5,22 +5,21 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function ThemeButtons() {
-  const { theme, setTheme, systemTheme } = useTheme();
-  console.log(systemTheme);
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="flex items-center gap-2">
       <button
-        className={cn(theme === 'light' && 'border border-input rounded-md', "p-1")}
+        className="border border-input rounded-md p-1 dark:border-none"
         onClick={() => setTheme('light')}
       >
-        <Sun className={cn(theme === 'light' ? 'opacity-100' : 'opacity-60 hover:opacity-100', "size-4.5 transition-opacity")} />
+        <Sun className="dark:opacity-100 hover:opacity-100 size-4.5 transition-opacity" />
       </button>
       <button
-        className={cn(theme === 'dark' && 'border border-input rounded-md', "p-1")}
+        className="dark:border dark:border-input rounded-md p-1"
         onClick={() => setTheme('dark')}
       >
-        <Moon className={cn(theme === 'dark' ? 'opacity-100' : 'opacity-60 hover:opacity-100', "size-4.5 transition-opacity")} />
+        <Moon className="dark:opacity-100 opacity-60 hover:opacity-100 size-4.5 transition-opacity" />
       </button>
       <button
         className={cn(theme === 'system' && 'border border-input rounded-md', "p-1")}
