@@ -1,6 +1,6 @@
 import Header from "@/shared/components/ui/header";
 import Hero from "../features/landing/components/Hero";
-import StepOne from "@/features/landing/components/StepOne";
+import HowItWorks from "@/features/landing/components/HowItWorks";
 import Footer from "@/shared/components/ui/footer";
 import { Metadata } from "next";
 import { GeneratePageTitle } from "@/shared/utils/metadata";
@@ -20,7 +20,7 @@ export default function Home() {
       <main>
         <Hero />
         <div className="border-t border-input/60">
-          <StepOne />
+          <HowItWorks />
           <AppFeatures />
         </div>
         <div className="border-t border-input/60">

@@ -34,6 +34,7 @@
   --color-facent-foreground: var(--facent-foreground);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
+  --color-complementary: var(--complementary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
@@ -59,7 +60,7 @@
 :root {
   --primary: #f54900;
   --primary-foreground: oklch(0.98 0.016 73.684);
-
+  --complementary: #00ABF5;
   --primary-strong: #d83f00;
   --primary-light: #ff6900;
   --primary-lighter: #ff9a62;

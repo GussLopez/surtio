@@ -15,11 +15,11 @@ export default function LastUpdates() {
           <h2 className="text-2xl leading-snug tracking-tight sm:tracking-normal md:text-4xl md:leading-12.5 max-w-[80%] lg:max-w-3xl">
             Una plataforma diseñada para tomar el control de negocios pequeños y medianos que.
           </h2>
-          <div className="flex md:flex-col items-center gap-3">
+          <div className="flex flex-wrap md:flex-col items-center gap-3">
             <Button
               asChild
               variant={'outline'}
-              className="w-fit md:w-full"
+              className="w-full"
             >
               <Link href={'/pricing'}>
                 <div className="w-4 h-4">
@@ -35,7 +35,7 @@ export default function LastUpdates() {
             <Button
               asChild
               variant={'secondary'}
-              className="w-fit md:w-full group"
+              className="w-full group"
             >
               <Link href={'/auth/register'}>
                 Crea tu primer producto
@@ -50,7 +50,7 @@ export default function LastUpdates() {
       </div>
 
       <div className="px-4 mt-10">
-        <div className="grid lg:grid-cols-3 lg:grid-rows-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-5">
           <div className="flex flex-col gap-25 p-5 rounded-xl bg-primary-light">
             <div className="flex items-center justify-between text-white">
               <h3 className="text-xl">Supported in 190 countries</h3>
@@ -62,22 +62,24 @@ export default function LastUpdates() {
               Talk to a real person when you need help, from onboarding to payout.
             </div>
           </div>
-          <div className="flex flex-col gap-25 p-5 rounded-xl bg-[#CBEEF3]"> {/* 00ABF5 */}
+
+          <div className="flex flex-col gap-25 p-5 rounded-xl bg-complementary text-white">
             <div className="flex items-center justify-between">
               <h3 className="text-xl">Real human support</h3>
               <div>
                 <MessageCircle />
               </div>
             </div>
-            <div className="text-neutral-700">
+            <div>
               Talk to a real person when you need help, from onboarding to payout.
             </div>
           </div>
-          <div className="flex flex-col justify-between col-start-3 row-span-2 p-5 rounded-xl bg-muted">
+
+          <div className="flex flex-col justify-between lg:col-start-3 lg:row-span-2 p-5 rounded-xl bg-muted">
             <h3 className="text-xl">¿Recien comenzando? No hay problema.</h3>
             <p className="text-muted-foreground text-[15px]">Use Ruul to invoice clients and get paid, even without a registered company.</p>
           </div>
-          <div className="col-span-2 px-5 pt-5 rounded-xl bg-muted">
+          <div className="lg:col-span-2 px-5 pt-5 rounded-xl bg-muted">
             <div className="max-w-1/2 h-full flex flex-col justify-between pb-5 pr-5">
               <h3 className="text-xl">Fast payouts in one business day</h3>
               <p className="text-muted-foreground">Receive a payout in as little as one business day after your client pays.</p>
