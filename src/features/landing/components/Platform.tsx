@@ -4,7 +4,7 @@ import { ArrowUpRight, Globe, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 
-export default function LastUpdates() {
+export default function Platform() {
 
   return (
     <section className="max-w-6xl mx-4 xl:mx-auto py-20 border-x border-input/60">

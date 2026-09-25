@@ -2,7 +2,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { ChevronRight } from "lucide-react";
 
-export default function HowItWorksPage() {
+export default function HowItWorks() {
 
   return (
     <section className="max-w-6xl mx-4 xl:mx-auto pt-30 border-x border-input/60 relative">

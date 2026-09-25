@@ -7,7 +7,8 @@ import { GeneratePageTitle } from "@/shared/utils/metadata";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import AppFeatures from "@/features/landing/components/AppFeatures";
+import Platform from "@/features/landing/components/Platform";
+import Features from "@/features/landing/components/Features";
 
 export const metadata: Metadata = {
   title: GeneratePageTitle('La plataforma para hacer crecer tu negocio')
@@ -20,8 +21,9 @@ export default function Home() {
       <main>
         <Hero />
         <div className="border-t border-input/60">
+          <Features />
           <HowItWorks />
-          <AppFeatures />
+          <Platform />
         </div>
         <div className="border-t border-input/60">
           <div className="max-w-6xl px-4 py-6 mx-4 xl:mx-auto border-x border-input/60">
