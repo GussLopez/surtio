@@ -1,16 +1,19 @@
 'use client'
 
+import { Badge } from "@/shared/components/ui/badge";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { cn } from "@/shared/utils/utils";
-import { ArrowRight, Check, Search, TrendingUp } from "lucide-react";
-import { AnimatePresence, delay, motion, scale } from "motion/react";
+import { CheckCircleIcon, KeyholeIcon } from "@phosphor-icons/react";
+import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
+import { AnimatePresence, motion, scale } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function FeaturesIlustration() {
   const [checkedLoading, setCheckedLoading] = useState(true);
-  const [productSearch, setProductSearch] = useState(false);
+  const [productHover, setProductHover] = useState(false);
+  const [rolesHover, setRolesHover] = useState(false);
 
   const checks = {
     checkVariants: {
@@ -59,16 +62,31 @@ export default function FeaturesIlustration() {
       stock: 14,
       trend: true
     },
-  ]
+  ];
+
+  const admin = {
+    parentVariants: {
+      rest: { scale: 1 },
+      hover: { scale: 1 }
+    },
+    adminCard: {
+      rest: { width: '90%', scaleY: 1.05 },
+      hover: { width: '88%', scaleY: 1 }
+    },
+    sellerCard: {
+      rest: { width: '80%', scaleY: 1 },
+      hover: { width: '82%', scaleY: 1.05 }
+    }
+  }
   return (
     <div className="grid grid-cols-3 gap-3 px-4 mt-10">
       <motion.div
         className="h-100 p-10 col-span-2 relative rounded-xl border border-input/60 bg-sand group"
-        onHoverStart={() => setProductSearch(true)}
-        onHoverEnd={() => setProductSearch(false)}
+        onHoverStart={() => setProductHover(true)}
+        onHoverEnd={() => setProductHover(false)}
       >
         <AnimatePresence mode="wait" initial={false}>
-          {productSearch && (
+          {productHover && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -89,7 +107,7 @@ export default function FeaturesIlustration() {
             </div>
           </div>
           <AnimatePresence initial={false}>
-            {productSearch && (
+            {productHover && (
               <motion.div
                 initial={{ height: 0, opacity: 0, scale: 0 }}
                 animate={{ height: 'auto', opacity: 1, scale: 1 }}
@@ -144,6 +162,7 @@ export default function FeaturesIlustration() {
           <h3 className="pt-10 font-medium text-lg mt-auto">Consultas</h3>
         </div>
       </motion.div>
+
       <motion.div
         className="h-100 p-8 relative rounded-xl border border-input/60 bg-sand"
         variants={checks.checkVariants}
@@ -221,8 +240,108 @@ export default function FeaturesIlustration() {
           <h3 className="pt-10 font-medium text-lg mt-auto">Operaciones rápidas</h3>
         </div>
       </motion.div>
-      <div className="h-100 bg-muted">
-      </div>
+
+      <motion.div
+        variants={admin.parentVariants}
+        initial="rest"
+        animate="rest"
+        whileHover="hover"
+        className="h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand"
+        onHoverStart={() => setRolesHover(true)}
+        onHoverEnd={() => setRolesHover(false)}
+      >
+        <div className="w-full absolute top-1/2 -translate-y-1/2 right-0">
+          <div className="flex flex-col items-end gap-2">
+            <div className="w-[80%] flex justify-between items-center p-2 border border-input border-r-0 rounded-l-xl bg-white">
+              <div className="flex gap-2">
+                <div className="w-8 h-8 flex justify-center items-center border border-input rounded-lg">
+                  <User2 className="size-5 text-muted-foreground" />
+                </div>
+                <div className="space-y-1">
+                  <Skeleton className="w-20 h-3" />
+                  <Skeleton className="w-10 h-3" />
+                </div>
+              </div>
+              <div>
+                <Badge
+                  variant='secondary'
+                  className="rounded-md text-[10px]"
+                >
+                  <CheckCircleIcon
+                    weight="fill"
+                    className="size-1.5 shrink-0 text-black stroke-3"
+                  />
+                  Gestión
+                </Badge>
+              </div>
+            </div>
+            <motion.div
+              variants={admin.adminCard}
+              className={cn("flex justify-between items-center p-2 border  border-r-0 rounded-l-xl transition-colors bg-white",
+                rolesHover ? 'border-input' : 'border-primary/40'
+              )}
+            >
+              <div className="flex gap-2">
+                <div className={cn("w-8 h-8 flex justify-center items-center border rounded-lg transition-colors",
+                  rolesHover ? 'border-input text-muted-foreground' : 'border-primary/10 bg-primary/10 text-primary'
+                )}>
+                  <User2 className="size-5" />
+                </div>
+                <div className="space-y-1">
+                  <Skeleton className={cn("w-30 h-3", !rolesHover && 'bg-primary/10')} />
+                  <Skeleton className={cn("w-15 h-3", !rolesHover && 'bg-primary/10')} />
+                </div>
+              </div>
+              <div>
+                <Badge
+                  variant={rolesHover ? 'secondary' : 'outline'}
+                  className={cn("rounded-md text-[10px]", !rolesHover && 'text-primary-light')}
+                >
+                  <KeyholeIcon
+                    weight="fill"
+                    className="size-1.5 shrink-0 stroke-3"
+                  />
+                  Admin
+                </Badge>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={admin.sellerCard}
+              className={cn("w-[80%] flex justify-between items-center p-2 border border-r-0 rounded-l-xl bg-white",
+                rolesHover ? 'border-primary/40' : 'border-input'
+              )}
+            >
+              <div className="flex gap-2">
+                <div className={cn("w-8 h-8 flex justify-center items-center border border-input rounded-lg",
+                  rolesHover ? 'border-primary/10 bg-primary/10 text-primary' : 'border-input text-muted-foreground'
+                )}>
+                  <User2 className="size-5" />
+                </div>
+                <div className="space-y-1">
+                  <Skeleton className={cn("w-30 h-3", rolesHover && 'bg-primary/10')} />
+                  <Skeleton className={cn("w-15 h-3", rolesHover && 'bg-primary/10')} />
+                </div>
+              </div>
+              <div>
+                <Badge
+                  variant={rolesHover ? 'outline' : 'secondary'}
+                  className={cn("rounded-md text-[10px]", rolesHover && 'text-primary-light')}
+                >
+                  <CheckCircleIcon
+                    weight="fill"
+                    className="size-1.5 shrink-0 stroke-3"
+                  />
+                  Vendedor
+                </Badge>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+        <div className="flex flex-col w-full h-full">
+          <h3 className="pt-10 font-medium text-lg mt-auto">Controla el acceso</h3>
+        </div>
+      </motion.div>
       <div className="h-100 bg-muted">
       </div>
       <div className="h-100 bg-muted">
