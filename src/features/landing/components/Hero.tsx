@@ -23,7 +23,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Button
               size={'lg'}
-              className="w-full px-3 group cursor-pointer"
+              className="w-full lg:w-fit px-3 group cursor-pointer"
               variant={'secondary'}
             >
               Comenzar ahora
@@ -33,7 +33,7 @@ export default function Hero() {
             <Button
               variant={'outline'}
               size={'lg'}
-              className="w-full px-3"
+              className="w-full lg:w-fit px-3"
               asChild
             >
               <Link href={'/auth/login'}>
@@ -50,7 +50,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-10 lg:absolute right-[-14%] w-full lg:max-w-4xl overflow-hidden rounded-3xl border border-input bg-white/85 shadow-2xl shadow-primary/15 backdrop-blur-md lg:-mt-10">
+        <div className="mt-10 lg:absolute right-[-20%] w-full lg:max-w-4xl overflow-hidden rounded-3xl border border-input bg-white/85 shadow-2xl shadow-primary/15 backdrop-blur-md lg:-mt-10">
           <div>
             <img
               src="/img/landing/dashboard-preview.png"
