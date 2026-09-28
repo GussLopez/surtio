@@ -44,6 +44,7 @@
   --color-primary-subtle: var(--primary-subtle);
   --color-primary-glow: var(--primary-glow);
   --color-primary-border: var(--primary-border);
+  --color-sand: var(--sand);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -64,6 +65,7 @@
   --primary-strong: #d83f00;
   --primary-light: #ff6900;
   --primary-lighter: #ff9a62;
+  --sand: #faf8f5;
 
   --primary-soft: #fff1eb;
   --primary-subtle: #fff8f5;
