@@ -2,7 +2,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { ChevronRight } from "lucide-react";
 
-export default function StepOne() {
+export default function HowItWorks() {
 
   return (
     <section className="max-w-6xl mx-4 xl:mx-auto pt-30 border-x border-input/60 relative">
@@ -14,7 +14,7 @@ export default function StepOne() {
         </h2>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-20 py-16 px-4">
+      <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-20 py-16 px-4">
         <div>
           <div>
             <div className="flex gap-5 text-xl">
@@ -52,7 +52,7 @@ export default function StepOne() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
         <div>
           <div>
             <div className="flex gap-5 text-xl">
@@ -91,7 +91,7 @@ export default function StepOne() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 py-16 px-4 border-t border-input/60">
         <div>
           <div>
             <div className="flex gap-5 text-xl">
