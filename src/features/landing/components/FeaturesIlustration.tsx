@@ -4,9 +4,9 @@ import { Badge } from "@/shared/components/ui/badge";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { cn } from "@/shared/utils/utils";
-import { CheckCircleIcon, KeyholeIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon, KeyholeIcon, PackageIcon, TruckIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
-import { AnimatePresence, motion, scale } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -14,6 +14,7 @@ export default function FeaturesIlustration() {
   const [checkedLoading, setCheckedLoading] = useState(true);
   const [productHover, setProductHover] = useState(false);
   const [rolesHover, setRolesHover] = useState(false);
+  const [supplierHover, setSupplierHover] = useState(false);
 
   const checks = {
     checkVariants: {
@@ -99,7 +100,7 @@ export default function FeaturesIlustration() {
             />
           )}
         </AnimatePresence>
-        <div className="absolute inset-0 flex flex-col justify-center items-center">
+        <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
           <div className="w-[60%] h-16 flex items-center px-6 rounded-full border relative border-input bg-white group-hover:scale-105 transition-transform duration-300">
             <div className="w-full flex justify-between items-center">
               <p className="text-xl font-medium text-foreground/80">Consulta tu inventario</p>
@@ -121,7 +122,7 @@ export default function FeaturesIlustration() {
 
                 }}
                 transition={{ duration: .6, type: "spring", delay: .8 }}
-                className="w-[60%] overflow-hidden shrink-0"
+                className="w-[60%] overflow-hidden shrink-0 pointer-events-none"
               >
                 <div className="pt-5">
                   <div className="h-60 flex px-6 py-1 rounded-xl border border-input bg-white">
@@ -174,7 +175,7 @@ export default function FeaturesIlustration() {
       >
         <motion.div
           variants={checks.backgroundVariants}
-          className="w-20 h-20 absolute top-[30%] right-1/2 translate-x-1/2 rounded-full blur-3xl bg-primary"
+          className="w-20 h-20 absolute top-[30%] right-1/2 translate-x-1/2 rounded-full blur-3xl bg-primary pointer-events-none"
         />
         {[1, 2, 3].map((item, i) => (
           <motion.div
@@ -250,7 +251,7 @@ export default function FeaturesIlustration() {
         onHoverStart={() => setRolesHover(true)}
         onHoverEnd={() => setRolesHover(false)}
       >
-        <div className="w-full absolute top-1/2 -translate-y-1/2 right-0">
+        <div className="w-full absolute top-1/2 -translate-y-1/2 right-0  pointer-events-none">
           <div className="flex flex-col items-end gap-2">
             <div className="w-[80%] flex justify-between items-center p-2 border border-input border-r-0 rounded-l-xl bg-white">
               <div className="flex gap-2">
@@ -275,6 +276,7 @@ export default function FeaturesIlustration() {
                 </Badge>
               </div>
             </div>
+
             <motion.div
               variants={admin.adminCard}
               className={cn("flex justify-between items-center p-2 border  border-r-0 rounded-l-xl transition-colors bg-white",
@@ -342,8 +344,40 @@ export default function FeaturesIlustration() {
           <h3 className="pt-10 font-medium text-lg mt-auto">Controla el acceso</h3>
         </div>
       </motion.div>
-      <div className="h-100 bg-muted">
-      </div>
+      <motion.div
+        className="h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand group"
+        onHoverStart={() => setSupplierHover(true)}
+        onHoverEnd={() => setSupplierHover(false)}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          {supplierHover && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: .3 }}
+              exit={{
+                opacity: 0,
+                transition: { duration: .3 }
+              }}
+              className="w-[60%] h-7 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-full blur-3xl bg-primary"
+            />
+          )}
+        </AnimatePresence>
+        <div className="absolute inset-0 flex justify-center items-center gap-2">
+          <div className="w-15 h-15 flex justify-center items-center rounded-xl group-hover:scale-105 transition-transform duration-400 border border-muted bg-white">
+            <TruckIcon className="size-8 text-primary-light" />
+          </div>
+          <div className="w-15 h-15 flex justify-center items-center rounded-xl group-hover:scale-105 transition-transform duration-400 border border-muted bg-white">
+            <PackageIcon className="size-8 text-primary-light" />
+          </div>
+          <div className="w-15 h-15 flex justify-center items-center rounded-xl group-hover:scale-105 transition-transform duration-400 border border-muted bg-white">
+            <TruckTrailerIcon className="size-8 text-primary-light" />
+          </div>
+        </div>
+        <div className="flex flex-col w-full h-full">
+          <h3 className="pt-10 font-medium text-lg mt-auto">Registra tus proveedores</h3>
+        </div>
+      </motion.div>
       <div className="h-100 bg-muted">
       </div>
       <div className="h-100 col-span-3 bg-muted">
