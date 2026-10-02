@@ -85,10 +85,6 @@ export default function FeaturesIlustration() {
       rest: { scale: 1 },
       hover: { scale: 1 }
     },
-    cardVaraints: {
-      rest: { scale: 1 },
-      hover: { scale: 1.05 }
-    },
     backgroundVariants: {
       rest: {
         opacity: 0,
@@ -96,7 +92,7 @@ export default function FeaturesIlustration() {
       },
       hover: {
         opacity: .8,
-        transition: { duration: .2, delay: .2 }
+        transition: { duration: .2, delay: .1 }
       }
     }
   }
@@ -380,11 +376,11 @@ export default function FeaturesIlustration() {
                 opacity: 0,
                 transition: { duration: .3 }
               }}
-              className="w-[60%] h-7 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-full blur-3xl bg-primary"
+              className="w-[60%] h-7 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 rounded-full pointer-events-none blur-3xl bg-primary"
             />
           )}
         </AnimatePresence>
-        <div className="absolute inset-0 flex justify-center items-center gap-2">
+        <div className="absolute inset-0 flex justify-center items-center gap-2 pointer-events-none">
           <div className="w-15 h-15 flex justify-center items-center rounded-xl group-hover:scale-105 transition-transform duration-400 border border-muted bg-white">
             <TruckIcon className="size-8 text-primary-light" />
           </div>
@@ -409,13 +405,11 @@ export default function FeaturesIlustration() {
         <motion.div
           variants={sales.backgroundVariants}
           transition={{ type: "spring" }}
-          className="w-[70%] h-[40%] absolute top-1/2 -translate-y-1/2 right-0 rounded-l-lg bg-primary blur-3xl"
+          className="w-[70%] h-[40%] absolute top-1/2 -translate-y-1/2 right-0 rounded-l-lg pointer-events-none bg-primary blur-3xl"
         />
 
-        <motion.div
-          variants={sales.cardVaraints}
-          transition={{ type: "spring" }}
-          className="w-[80%] absolute top-1/2 -translate-y-1/2 -right-0.5 rounded-l-lg border border-input border-r-0 overflow-hidden bg-white"
+        <div
+          className="w-[80%] absolute top-1/2 -translate-y-1/2 -right-0.5 rounded-l-lg border border-input border-r-0 overflow-hidden pointer-events-none bg-white"
         >
           <div className="flex">
             <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-b-2 border-primary-light bg-muted">
@@ -449,7 +443,7 @@ export default function FeaturesIlustration() {
               <Skeleton className="w-[90%] h-2" />
             </div>
           </div>
-        </motion.div>
+        </div>
         <div className="flex flex-col w-full h-full">
           <h3 className="pt-10 font-medium text-lg mt-auto">Genrea reportes de ventas</h3>
         </div>
