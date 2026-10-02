@@ -4,7 +4,7 @@ import { Badge } from "@/shared/components/ui/badge";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { cn } from "@/shared/utils/utils";
-import { CheckCircleIcon, KeyholeIcon, PackageIcon, TruckIcon, TruckTrailerIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon, FileArrowUpIcon, FileTextIcon, HardDriveIcon, InvoiceIcon, KeyholeIcon, PackageIcon, TagSimpleIcon, TruckIcon, TruckTrailerIcon } from "@phosphor-icons/react";
 import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -77,6 +77,27 @@ export default function FeaturesIlustration() {
     sellerCard: {
       rest: { width: '80%', scaleY: 1 },
       hover: { width: '82%', scaleY: 1.05 }
+    }
+  }
+
+  const sales = {
+    parentVariants: {
+      rest: { scale: 1 },
+      hover: { scale: 1 }
+    },
+    cardVaraints: {
+      rest: { scale: 1 },
+      hover: { scale: 1.05 }
+    },
+    backgroundVariants: {
+      rest: {
+        opacity: 0,
+        transition: { duration: .3, delay: 0 }
+      },
+      hover: {
+        opacity: .8,
+        transition: { duration: .2, delay: .2 }
+      }
     }
   }
   return (
@@ -378,8 +399,61 @@ export default function FeaturesIlustration() {
           <h3 className="pt-10 font-medium text-lg mt-auto">Registra tus proveedores</h3>
         </div>
       </motion.div>
-      <div className="h-100 bg-muted">
-      </div>
+
+      <motion.div
+        variants={sales.parentVariants}
+        initial="rest"
+        whileHover="hover"
+        className="h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand group"
+      >
+        <motion.div
+          variants={sales.backgroundVariants}
+          transition={{ type: "spring" }}
+          className="w-[70%] h-[40%] absolute top-1/2 -translate-y-1/2 right-0 rounded-l-lg bg-primary blur-3xl"
+        />
+
+        <motion.div
+          variants={sales.cardVaraints}
+          transition={{ type: "spring" }}
+          className="w-[80%] absolute top-1/2 -translate-y-1/2 -right-0.5 rounded-l-lg border border-input border-r-0 overflow-hidden bg-white"
+        >
+          <div className="flex">
+            <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-b-2 border-primary-light bg-muted">
+              <FileTextIcon weight="bold" className="size-3 text-primary-light" />
+              Venta #01
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-r border-muted text-muted-foreground">
+              <InvoiceIcon weight="bold" className="size-3" />
+              Venta #01
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-r border-muted text-muted-foreground">
+              <InvoiceIcon weight="bold" className="size-3" />
+              Venta #02
+            </div>
+          </div>
+          <div className="p-5 pt-1 space-y-2">
+            <div className="space-y-2">
+              <span className="text-neutral-200 dark:text-neutral-800">- - -</span>
+              <Skeleton className="w-[30%] h-2 bg-primary-light" />
+              <Skeleton className="w-[60%] h-2" />
+              <Skeleton className="w-[70%] h-2" />
+              <Skeleton className="w-[45%] h-2" />
+              <Skeleton className="w-[90%] h-2" />
+            </div>
+            <div className="space-y-2">
+              <span className="text-neutral-200 dark:text-neutral-800">- - -</span>
+              <Skeleton className="w-[30%] h-2 bg-primary-light" />
+              <Skeleton className="w-[60%] h-2" />
+              <Skeleton className="w-[70%] h-2" />
+              <Skeleton className="w-[45%] h-2" />
+              <Skeleton className="w-[90%] h-2" />
+            </div>
+          </div>
+        </motion.div>
+        <div className="flex flex-col w-full h-full">
+          <h3 className="pt-10 font-medium text-lg mt-auto">Genrea reportes de ventas</h3>
+        </div>
+      </motion.div>
       <div className="h-100 col-span-3 bg-muted">
       </div>
     </div>
