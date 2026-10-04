@@ -4,9 +4,17 @@ import { Badge } from "@/shared/components/ui/badge";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { cn } from "@/shared/utils/utils";
-import { CheckCircleIcon, FileArrowUpIcon, FileTextIcon, HardDriveIcon, InvoiceIcon, KeyholeIcon, PackageIcon, TagSimpleIcon, TruckIcon, TruckTrailerIcon } from "@phosphor-icons/react";
+import {
+  CheckCircleIcon,
+  FileTextIcon,
+  InvoiceIcon,
+  KeyholeIcon,
+  PackageIcon,
+  TruckIcon,
+  TruckTrailerIcon,
+} from "@phosphor-icons/react";
 import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, scale } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -15,6 +23,7 @@ export default function FeaturesIlustration() {
   const [productHover, setProductHover] = useState(false);
   const [rolesHover, setRolesHover] = useState(false);
   const [supplierHover, setSupplierHover] = useState(false);
+  const [chartHover, setChartHover] = useState(false);
 
   const checks = {
     checkVariants: {
@@ -96,6 +105,8 @@ export default function FeaturesIlustration() {
       }
     }
   }
+  const chartValues = [36, 44, 40, 53, 49, 63, 70, 55, 74, 80, 76, 71, 81, 100, 94];
+
   return (
     <div className="grid grid-cols-3 gap-3 px-4 mt-10">
       <motion.div
@@ -448,8 +459,83 @@ export default function FeaturesIlustration() {
           <h3 className="pt-10 font-medium text-lg mt-auto">Genrea reportes de ventas</h3>
         </div>
       </motion.div>
-      <div className="h-100 col-span-3 bg-muted">
-      </div>
+      <motion.div
+        className="col-span-3 h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand"
+        onHoverStart={() => setChartHover(true)}
+        onHoverEnd={() => setChartHover(false)}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          {chartHover && (
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: .6, type: "spring", delay: .5 }}
+              exit={{ scale: 0, opacity: 0 }}
+              className="w-40 h-10 p-4 absolute bottom-[20%] z-20 left-[5%] rounded-lg border border-input bg-white"
+            >
+              <div>
+                
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence mode="wait" initial={false}>
+          {chartHover && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: .3 }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: .3 }
+                }}
+                className="w-[20%] h-[60%] absolute bottom-0 right-[18%] pointer-events-none blur-3xl bg-primary"
+              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: .3 }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: .3 }
+                }}
+                className="w-[20%] h-[60%] absolute bottom-0 left-[18%] pointer-events-none blur-3xl bg-amber-500"
+              />
+            </>
+          )}
+        </AnimatePresence>
+        <motion.div
+          className="w-[70%] h-[80%] px-10 pb-14 pt-10 absolute -bottom-2 right-1/2 translate-x-1/2 rounded-t-lg border border-b-0 border-input/60 bg-white"
+          animate={{ scale: chartHover ? 1.05 : 1 }}
+          transition={{ duration: .5 }}
+        >
+          <div className="h-full mx-auto flex items-end gap-3 border-b border-input px-1">
+            {chartValues.map((height, i) => (
+              <motion.div
+                key={i}
+                initial={{ height: 0 }}
+                animate={{ height: chartHover ? `${height}%` : `${height / 3}%` }}
+                transition={{
+                  duration: .8,
+                  type: "spring", delay: .01 * i,
+                  stiffness: 200,
+                  damping: 20,
+
+                }}
+                className={cn("flex-1 rounded-t-sm", i === 13 ? "bg-primary" : "bg-[#e9dfcf]")}
+              />
+            ))}
+          </div>
+          <div className="mt-2 flex shrink-0 justify-around text-[9px] text-neutral-400">
+            {chartValues.map((value, index) => (
+              <span key={value}>
+                {index + 1}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
