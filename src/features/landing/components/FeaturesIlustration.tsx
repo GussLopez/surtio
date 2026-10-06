@@ -5,15 +5,18 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { cn } from "@/shared/utils/utils";
 import {
+  BoxArrowUpIcon,
   CheckCircleIcon,
+  CurrencyDollarIcon,
   FileTextIcon,
   InvoiceIcon,
   KeyholeIcon,
   PackageIcon,
+  TrendUpIcon,
   TruckIcon,
   TruckTrailerIcon,
 } from "@phosphor-icons/react";
-import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
+import { ArrowRight, Check, ChevronLeft, ChevronRight, TrendingUp, User2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -111,8 +114,9 @@ export default function FeaturesIlustration() {
   const saleWidthChanges = [15, -20, 10, 25, -30];
   const secondSaleWidthChanges = [-10, 15, -25, 20, -15];
 
-  const chartValues = [36, 44, 40, 53, 49, 63, 70, 55, 74, 80, 76, 71, 81, 100, 94];
-
+  const chartValues = [36, 44, 40, 53, 49, 63, 70, 55, 74, 80, 76, 71, 100, 81];
+  const currentDate = new Date();
+  const month = currentDate.toLocaleDateString('es-ES', { month: 'short' });
   return (
     <div className="grid grid-cols-3 gap-3 px-4 mt-10">
       <motion.div
@@ -505,17 +509,96 @@ export default function FeaturesIlustration() {
         onHoverStart={() => setChartHover(true)}
         onHoverEnd={() => setChartHover(false)}
       >
+        <div className="flex flex-col w-full">
+          <h3 className="font-medium text-lg mt-auto">Visualiza tus ventas, tus operaciones y toma decisiones</h3>
+        </div>
+
         <AnimatePresence mode="wait" initial={false}>
           {chartHover && (
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: .6, type: "spring", delay: .5 }}
-              exit={{ scale: 0, opacity: 0 }}
-              className="w-40 h-10 p-4 absolute bottom-[20%] z-20 left-[5%] rounded-lg border border-input bg-white"
+              exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
+              className="min-w-40 px-4 py-3 absolute bottom-[20%] z-20 left-[5%] rounded-lg border border-input bg-white"
             >
-              <div>
-
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 flex justify-center items-center rounded-lg bg-primary/10 text-primary">
+                  <PackageIcon className="size-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Productos vendidos</p>
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-xl">184</span>
+                    <TrendUpIcon className="size-4 text-lime-500" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence mode="wait" initial={false}>
+          {chartHover && (
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: .6, type: "spring", delay: .5 }}
+              exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
+              className="min-w-30  px-4 py-3 absolute top-[3%] z-20 right-[30%] rounded-lg border border-input bg-white"
+            >
+              <div className="flex justify-between">
+                <div>
+                  <ChevronLeft className="size-4" />
+                </div>
+                <div className="flex justify-center items-center gap-2 text-xs ">
+                  <span className="capitalize">{month}</span>
+                  <span>{currentDate.getFullYear()}</span>
+                </div>
+                <div>
+                  <ChevronRight className="size-4" />
+                </div>
+              </div>
+              <div className="grid grid-cols-7 gap-y-1 mt-3 text-[10px] rounded-md bg-muted">
+                {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+                  <div
+                    key={day}
+                    className={cn("px-2 py-1.5 flex justify-center items-center first:rounded-md first:bg-primary first:text-white")}>
+                    <span>{day}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 gap-y-2 mt-3 text-[10px] rounded-md bg-muted">
+                {[8, 9, 10, 11, 12, 13, 14].map((day) => (
+                  <div
+                    key={day}
+                    className={cn("px-2 py-1.5 flex justify-center items-center last:rounded-md last:bg-primary last:text-white")}>
+                    <span>{day}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence mode="wait" initial={false}>
+          {chartHover && (
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: .6, type: "spring", delay: .5 }}
+              exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
+              className="min-w-40 px-4 py-3 absolute top-[15%] z-20 right-[3%] rounded-lg border border-input bg-white"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 flex justify-center items-center rounded-lg bg-primary/10 text-primary">
+                  <CurrencyDollarIcon className="size-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Total vendido</p>
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-lg">$15,825.20</span>
+                    <TrendUpIcon className="size-4 text-lime-500" />
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -564,7 +647,7 @@ export default function FeaturesIlustration() {
                   damping: 20,
 
                 }}
-                className={cn("flex-1 rounded-t-sm", i === 13 ? "bg-primary" : "bg-[#e9dfcf]")}
+                className={cn("flex-1 rounded-t-sm", i === 12 ? "bg-primary" : "bg-[#e9dfcf]")}
               />
             ))}
           </div>
