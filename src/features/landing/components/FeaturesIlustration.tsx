@@ -14,7 +14,7 @@ import {
   TruckTrailerIcon,
 } from "@phosphor-icons/react";
 import { ArrowRight, Check, TrendingUp, User2 } from "lucide-react";
-import { AnimatePresence, motion, scale } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -23,6 +23,7 @@ export default function FeaturesIlustration() {
   const [productHover, setProductHover] = useState(false);
   const [rolesHover, setRolesHover] = useState(false);
   const [supplierHover, setSupplierHover] = useState(false);
+  const [salesHover, setSalesHover] = useState(false);
   const [chartHover, setChartHover] = useState(false);
 
   const checks = {
@@ -105,6 +106,11 @@ export default function FeaturesIlustration() {
       }
     }
   }
+
+  const saleSkeletonWidth = [30, 60, 70, 45, 90];
+  const saleWidthChanges = [15, -20, 10, 25, -30];
+  const secondSaleWidthChanges = [-10, 15, -25, 20, -15];
+
   const chartValues = [36, 44, 40, 53, 49, 63, 70, 55, 74, 80, 76, 71, 81, 100, 94];
 
   return (
@@ -412,10 +418,12 @@ export default function FeaturesIlustration() {
         initial="rest"
         whileHover="hover"
         className="h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand group"
+        onHoverStart={() => setSalesHover(true)}
+        onHoverEnd={() => setSalesHover(false)}
       >
         <motion.div
           variants={sales.backgroundVariants}
-          transition={{ type: "spring" }}
+          transition={{ duration: .3, type: "spring" }}
           className="w-[70%] h-[40%] absolute top-1/2 -translate-y-1/2 right-0 rounded-l-lg pointer-events-none bg-primary blur-3xl"
         />
 
@@ -423,14 +431,28 @@ export default function FeaturesIlustration() {
           className="w-[80%] absolute top-1/2 -translate-y-1/2 -right-0.5 rounded-l-lg border border-input border-r-0 overflow-hidden pointer-events-none bg-white"
         >
           <div className="flex">
-            <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-b-2 border-primary-light bg-muted">
-              <FileTextIcon weight="bold" className="size-3 text-primary-light" />
+            <motion.div
+              className={cn("flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-b-2 transition-colors duration-400",
+                salesHover ? 'border-transparent text-muted-foreground' : 'border-primary-light bg-muted'
+              )}
+            >
+              <FileTextIcon weight="bold" className={cn("size-3 transition-colors duration-400",
+                !salesHover && 'text-primary-light'
+              )}
+              />
               Venta #01
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-r border-muted text-muted-foreground">
-              <InvoiceIcon weight="bold" className="size-3" />
+            </motion.div>
+            <motion.div
+              className={cn("flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-r border-b-2 border-muted transition-colors duration-400",
+                salesHover ? 'border-b-primary-light bg-muted' : 'border-transparent text-muted-foreground'
+              )}
+            >
+              <InvoiceIcon weight="bold" className={cn("size-3 transition-colors duration-400",
+                salesHover && 'text-primary-light'
+              )}
+              />
               Venta #01
-            </div>
+            </motion.div>
             <div className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-medium border-r border-muted text-muted-foreground">
               <InvoiceIcon weight="bold" className="size-3" />
               Venta #02
@@ -439,19 +461,38 @@ export default function FeaturesIlustration() {
           <div className="p-5 pt-1 space-y-2">
             <div className="space-y-2">
               <span className="text-neutral-200 dark:text-neutral-800">- - -</span>
-              <Skeleton className="w-[30%] h-2 bg-primary-light" />
-              <Skeleton className="w-[60%] h-2" />
-              <Skeleton className="w-[70%] h-2" />
-              <Skeleton className="w-[45%] h-2" />
-              <Skeleton className="w-[90%] h-2" />
+              {saleSkeletonWidth.map((width, i) => (
+                <div key={i} className="w-full">
+                  <Skeleton
+                    style={{
+                      width: salesHover
+                        ? `${width + saleWidthChanges[i]}%`
+                        : `${width}%`
+                    }}
+                    className={cn(
+                      "h-2 transition-[width] duration-400 ease-in-out motion-reduce:transition-none",
+                      i === 0 && 'bg-primary-light'
+                    )}
+                  />
+                </div>
+              ))}
             </div>
             <div className="space-y-2">
               <span className="text-neutral-200 dark:text-neutral-800">- - -</span>
-              <Skeleton className="w-[30%] h-2 bg-primary-light" />
-              <Skeleton className="w-[60%] h-2" />
-              <Skeleton className="w-[70%] h-2" />
-              <Skeleton className="w-[45%] h-2" />
-              <Skeleton className="w-[90%] h-2" />
+              {saleSkeletonWidth.map((width, i) => (
+                <div key={i} className="w-full">
+                  <Skeleton
+                    style={{
+                      width: salesHover
+                        ? `${width + secondSaleWidthChanges[i]}%`
+                        : `${width}%`
+                    }}
+                    className={cn("h-2 transition-[width] duration-400 ease-in-out motion-reduce:transition-none",
+                      i === 0 && 'bg-primary-light'
+                    )}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -474,7 +515,7 @@ export default function FeaturesIlustration() {
               className="w-40 h-10 p-4 absolute bottom-[20%] z-20 left-[5%] rounded-lg border border-input bg-white"
             >
               <div>
-                
+
               </div>
             </motion.div>
           )}
