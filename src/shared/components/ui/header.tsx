@@ -10,7 +10,7 @@ export default function Header() {
 
   ]
   return (
-    <header className="sticky top-0 z-20">
+    <header className="sticky top-0 z-999">
       <div className="block w-full border-b border-input lg:hidden bg-[#FEFDFB]">
         <div className="h-16 px-6 flex justify-between items-center">
           <div className="w-30">
