@@ -115,12 +115,13 @@ export default function FeaturesIlustration() {
   const secondSaleWidthChanges = [-10, 15, -25, 20, -15];
 
   const chartValues = [36, 44, 40, 53, 49, 63, 70, 55, 74, 80, 76, 71, 100, 81];
+  const chartMobileValues = [74, 80, 71, 100, 81];
   const currentDate = new Date();
   const month = currentDate.toLocaleDateString('es-ES', { month: 'short' });
   return (
-    <div className="grid grid-cols-3 gap-3 px-4 mt-10">
+    <div className="grid xl:grid-cols-3 gap-3 px-4 mt-10">
       <motion.div
-        className="h-100 p-10 col-span-2 relative rounded-xl border border-input/60 bg-sand group"
+        className="h-100 p-10 xl:col-span-2 relative rounded-xl border border-input/60 bg-sand group"
         onHoverStart={() => setProductHover(true)}
         onHoverEnd={() => setProductHover(false)}
       >
@@ -505,7 +506,7 @@ export default function FeaturesIlustration() {
         </div>
       </motion.div>
       <motion.div
-        className="col-span-3 h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand"
+        className="xl:col-span-3 h-100 p-8 relative rounded-xl border border-input/60 overflow-hidden bg-sand"
         onHoverStart={() => setChartHover(true)}
         onHoverEnd={() => setChartHover(false)}
       >
@@ -520,7 +521,7 @@ export default function FeaturesIlustration() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: .6, type: "spring", delay: .5 }}
               exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
-              className="min-w-40 px-4 py-3 absolute bottom-[20%] z-20 left-[5%] rounded-lg border border-input bg-white"
+              className="min-w-40 px-4 py-3 absolute bottom-[15%] z-20 left-[3%] rounded-lg border border-input bg-white"
             >
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 flex justify-center items-center rounded-lg bg-primary/10 text-primary">
@@ -544,7 +545,7 @@ export default function FeaturesIlustration() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: .6, type: "spring", delay: .5 }}
               exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
-              className="min-w-30  px-4 py-3 absolute top-[3%] z-20 right-[30%] rounded-lg border border-input bg-white"
+              className="hidden xl:block min-w-30 px-4 py-3 absolute top-[3%] z-20 right-[30%] rounded-lg border border-input bg-white"
             >
               <div className="flex justify-between">
                 <div>
@@ -586,7 +587,7 @@ export default function FeaturesIlustration() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: .6, type: "spring", delay: .5 }}
               exit={{ scale: 0, opacity: 0, transition: { delay: 0 } }}
-              className="min-w-40 px-4 py-3 absolute top-[15%] z-20 right-[3%] rounded-lg border border-input bg-white"
+              className="min-w-40 px-4 py-3 absolute top-[30%] xl:top-[15%] z-20 right-[3%] rounded-lg border border-input bg-white"
             >
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 flex justify-center items-center rounded-lg bg-primary/10 text-primary">
@@ -630,11 +631,11 @@ export default function FeaturesIlustration() {
           )}
         </AnimatePresence>
         <motion.div
-          className="w-[70%] h-[80%] px-10 pb-14 pt-10 absolute -bottom-2 right-1/2 translate-x-1/2 rounded-t-lg border border-b-0 border-input/60 bg-white"
+          className="w-[70%] h-[60%] xl:h-[80%] px-10 pb-14 pt-10 absolute -bottom-2 right-1/2 translate-x-1/2 rounded-t-lg border border-b-0 border-input/60 bg-white"
           animate={{ scale: chartHover ? 1.05 : 1 }}
           transition={{ duration: .5 }}
         >
-          <div className="h-full mx-auto flex items-end gap-3 border-b border-input px-1">
+          <div className="hidden h-full mx-auto xl:flex items-end gap-3 border-b border-input px-1">
             {chartValues.map((height, i) => (
               <motion.div
                 key={i}
@@ -651,8 +652,32 @@ export default function FeaturesIlustration() {
               />
             ))}
           </div>
-          <div className="mt-2 flex shrink-0 justify-around text-[9px] text-neutral-400">
+          <div className="flex h-full mx-auto xl:hidden items-end gap-3 border-b border-input px-1">
+            {chartMobileValues.map((height, i) => (
+              <motion.div
+                key={i}
+                initial={{ height: 0 }}
+                animate={{ height: chartHover ? `${height}%` : `${height / 3}%` }}
+                transition={{
+                  duration: .8,
+                  type: "spring", delay: .01 * i,
+                  stiffness: 200,
+                  damping: 20,
+
+                }}
+                className={cn("flex-1 rounded-t-sm", i === 3 ? "bg-primary" : "bg-[#e9dfcf]")}
+              />
+            ))}
+          </div>
+          <div className="hidden mt-2 xl:flex shrink-0 justify-around text-[9px] text-neutral-400">
             {chartValues.map((value, index) => (
+              <span key={value}>
+                {index + 1}
+              </span>
+            ))}
+          </div>
+          <div className="flex mt-2 xl:hidden shrink-0 justify-around text-[9px] text-neutral-400">
+            {chartMobileValues.map((value, index) => (
               <span key={value}>
                 {index + 1}
               </span>
